@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#053D37"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="736dp"
+        android:layout_height="65dp"
+        android:background="#032420"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="-2dp">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="20dp"
+            android:text="Opponent"
+            android:textColor="#F1F3F3" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="410dp"
+            android:layout_marginTop="20dp"
+            android:text="My Team"
+            android:textColor="#F1F3F3" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="435dp"
+            android:layout_marginTop="40dp"
+            android:text="0"
+            android:textColor="#F1F3F3" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="185dp"
+            android:layout_marginTop="40dp"
+            android:text="0"
+            android:textColor="#F1F3F3" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView43"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView42"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView41"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView41"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView40"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView40"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView39"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView39"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="false"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView38"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView38"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView37"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView37"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="false"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView36"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView36"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="false"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView35"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView35"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView34"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView34"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView33"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView33"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="10dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView32"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView32"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginTop="0dp"
+        android:rotation="-90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/card_behind" />
+
+
+    <ImageView
+        android:id="@+id/playerCard1"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/hearts_a" />
+
+    <ImageView
+        android:id="@+id/playerCard2"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard1"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/diamonds6" />
+
+    <ImageView
+        android:id="@+id/playerCard3"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard2"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/spades8" />
+
+    <ImageView
+        android:id="@+id/playerCard4"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard3"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/clubs10" />
+
+    <ImageView
+        android:id="@+id/playerCard5"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard4"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/clubs6" />
+
+    <ImageView
+        android:id="@+id/playerCard6"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard5"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/diamonds9" />
+
+    <ImageView
+        android:id="@+id/playerCard7"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard6"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/diamonds_j" />
+
+    <ImageView
+        android:id="@+id/playerCard8"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard7"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/clubs_k" />
+
+    <ImageView
+        android:id="@+id/playerCard9"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard8"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/diamonds10" />
+
+    <ImageView
+        android:id="@+id/playerCard10"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard9"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/hearts8" />
+
+    <ImageView
+        android:id="@+id/playerCard11"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard10"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/spades_a" />
+
+    <ImageView
+        android:id="@+id/playerCard12"
+        android:layout_width="132dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="235dp"
+        android:clickable="true"
+        android:onClick="cardSelected"
+        app:layout_constraintStart_toStartOf="@+id/playerCard11"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/spades_q" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="321dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:adjustViewBounds="false"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView21"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:adjustViewBounds="false"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView7"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView22"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView23"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView25"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:adjustViewBounds="false"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView24"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/imageView31"
+        android:layout_width="92dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="560dp"
+        android:layout_marginRight="560dp"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView25"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/playCard1"
+        android:layout_width="215dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="70dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/frameLayout"
+        app:srcCompat="@drawable/card_behind" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
