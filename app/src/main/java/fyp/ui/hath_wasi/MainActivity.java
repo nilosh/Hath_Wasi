@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void view_scores(View view){
-        //Intent intent = new Intent(this, scores_page.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, score_page.class);
+        startActivity(intent);
     }
 
     public void view_instructions(View view) {
-        //Intent intent = new Intent(this, instructions_page.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, instructions_page.class);
+        startActivity(intent);
     }
 
 
