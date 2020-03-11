@@ -39,6 +39,7 @@ public class Card implements Comparable<Card> {
         this.cardId = cardId;
     }
 
+    // Constructor for Card Class.
     public Card (int cardId, boolean trump, String category, int imageSource){
         this.cardId =cardId;
         this.trump = trump;
@@ -47,13 +48,15 @@ public class Card implements Comparable<Card> {
     }
 
 
+    // This method is automatically called when you sort an array list.
+    // Done using implementing Comparable that allows to implement a custom compareTo method.
+
     public int compareTo(Card card){
         if(this.cardId > card.getCardId()){
             return 1;
         }
 
-        else if(this
-        .cardId < card.getCardId()){
+        else if(this.cardId < card.getCardId()){
             return -1;
         }
 
