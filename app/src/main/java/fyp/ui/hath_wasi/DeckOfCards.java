@@ -10,11 +10,13 @@ public class DeckOfCards {
     static private Random randomCardGenerator;
     final int handSize = 12;
 
+    // declare 36 cards of type Card
     Card card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
             card11, card12, card13, card14, card15,card16, card17, card18, card19, card20,
             card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
             card31, card32, card33, card34, card35, card36;
 
+    //Assignment of attribute values to 36 cards
     public DeckOfCards() {
         card1 = new Card(1, false, "spades", R.drawable.spades_a);
         card2 = new Card(2, false, "spades", R.drawable.spades_k);
@@ -56,6 +58,7 @@ public class DeckOfCards {
         card35 = new Card(35, false, "hearts", R.drawable.hearts9);
         card36 = new Card(36, false, "hearts", R.drawable.hearts10);
 
+        //Add all 36 cards to the CardDeck one by one
         cardDeck.add(card1);
         cardDeck.add(card2);
         cardDeck.add(card3);
@@ -96,6 +99,8 @@ public class DeckOfCards {
         cardDeck.add(card35);
         cardDeck.add(card36);
     }
+
+    //generate an ArrayList of hand size number of cards randomly and remove the relative index from the cardDeck
     public ArrayList<Card>DealingCards(){
         ArrayList<Card>hand = new ArrayList<Card>();
         randomCardGenerator = new Random();
