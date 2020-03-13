@@ -12,7 +12,7 @@ public class Player {
     ArrayList <Card> CardDeck = new ArrayList();
 
 
-    //instance of a Player
+    //Constructor of the player class
     public Player(String name, DeckOfCards cardDeck ) {
         this.name = name;
         this.score = 0;
