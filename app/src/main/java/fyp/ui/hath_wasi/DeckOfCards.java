@@ -16,7 +16,7 @@ public class DeckOfCards {
             card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
             card31, card32, card33, card34, card35, card36;
 
-    //Assignment of attribute values to 36 cards
+    //Constructor of the DeckOfCards
     public DeckOfCards() {
         card1 = new Card(1, false, "spades", R.drawable.spades_a);
         card2 = new Card(2, false, "spades", R.drawable.spades_k);
