@@ -513,15 +513,40 @@
         app:srcCompat="@drawable/card_behind" />
 
     <ImageView
-        android:id="@+id/playCard1"
-        android:layout_width="215dp"
-        android:layout_height="103dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="70dp"
+        android:id="@+id/comPlayer1selectedCard"
+        android:layout_width="247dp"
+        android:layout_height="151dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        app:layout_constraintEnd_toEndOf="@+id/userSelectedCard"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/card_behind"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/comPlayer2selectedCard"
+        android:layout_width="247dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/userSelectedCard"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:srcCompat="@drawable/card_behind"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/userSelectedCard"
+        android:layout_width="247dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="40dp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@id/frameLayout"
-        app:srcCompat="@drawable/card_behind" />
+        app:srcCompat="@drawable/card_behind"
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
