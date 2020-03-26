@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".score_page"
+        <activity android:name=".Screens.score_page"
             android:screenOrientation="landscape"></activity>
         <activity
-            android:name=".instructions_page"
+            android:name=".Screens.instructions_page"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".game_page"
+            android:name=".Screens.game_page"
             android:screenOrientation="userLandscape" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Screens.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
