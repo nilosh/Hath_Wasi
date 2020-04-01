@@ -1,5 +1,6 @@
 package fyp.ui.hath_wasi.Game;
 
+import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -179,14 +180,14 @@ public class Game {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //updateScore(winner);
+                        updateScore(winner);
                     }
                 }, 2500);
 
 
                 if(this.playedRounds[numberOfRoundsPlayed-1].getWinner() instanceof AbComputerPlayer){
 
-                    //moveForwardWithCpuWin();
+                    moveForwardWithCpuWin();
                 }
 
                 else{
@@ -314,8 +315,6 @@ public class Game {
             } catch (Exception e){
                 Log.d("TAG", "on the second catch block");
 
-                //numberOfRoundsPlayed--;
-
                 //popUpDialog("Invalid Card type!", "Card Selection");
                 this.invalidCardByHuman = true;
                 game_page.cardTouch(true);
@@ -336,7 +335,7 @@ public class Game {
 
                 this.playedRounds[this.numberOfRoundsPlayed++] = gameRound;
 
-                //setComputerCardsToImageView(c1, c2, com1, com2);
+                setComputerCardsToImageView(c1, c2, com1, com2);
 
                 this.cpu1.getCardDeck().remove(c1);
                 this.cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining()-1);
@@ -369,7 +368,7 @@ public class Game {
 
                 if(this.playedRounds[numberOfRoundsPlayed-1].getWinner() instanceof AbComputerPlayer){
 
-                    //moveForwardWithCpuWin();
+                    moveForwardWithCpuWin();
                 }
 
                 else{
@@ -405,6 +404,135 @@ public class Game {
     }
 
 
+    public void moveForwardWithCpuWin() {
+        final AnimatorSet animatorSet = new AnimatorSet();
+
+        final ImageView com1 = this.activity.findViewById(R.id.com1Card);
+        final ImageView com2 = this.activity.findViewById(R.id.com2Card);
+        final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
+
+        Log.println(Log.ERROR, "TAG", "Late night testing2 ");
+
+        final GameRound pr = this.playedRounds[numberOfRoundsPlayed - 1];
+
+        if (this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() == cpu1.getName()) {
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    playerPlaceholder.setVisibility(View.INVISIBLE);
+                    com2.setVisibility(View.INVISIBLE);
+
+                    c1 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
+                    com1.setImageResource(c1.getImageSource());
+                    com1.setVisibility(View.VISIBLE);
+
+                    Animation animation = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+
+                    com1.startAnimation(animation);
+                    animation.setAnimationListener(new Animation.AnimationListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            com1.setImageAlpha(1000);
+                        }
+
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                }
+            }, 6000);
+
+            game_page.cardTouch(true);
+        } else {
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    playerPlaceholder.setVisibility(View.INVISIBLE);
+
+                    c2 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
+                    c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
+
+                    com2.setImageResource(c2.getImageSource());
+                    com1.setImageResource(c1.getImageSource());
+                    com2.setVisibility(View.INVISIBLE);
+                    com1.setVisibility(View.INVISIBLE);
+
+                    final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+                    final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
+
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            com2.startAnimation(animationRl);
+                            animationRl.setAnimationListener(new Animation.AnimationListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                    com2.setVisibility(View.VISIBLE);
+                                    com2.setImageAlpha(1000);
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    //com2.setScaleX(com2.getScaleX());
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+                            });
+                        }
+                    }, 1500);
+
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            com1.startAnimation(animationLr);
+                            animationLr.setAnimationListener(new Animation.AnimationListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                    com1.setVisibility(View.VISIBLE);
+                                    com1.setImageAlpha(1000);
+                                }
+
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+                            });
+                        }
+                    }, 3000);
+
+                    game_page.cardTouch(true);
+                }
+            }, 5000);
+        }
+    }
 
 
     public static Game getOurInstance() {
