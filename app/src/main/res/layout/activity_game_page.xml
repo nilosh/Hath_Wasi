@@ -18,25 +18,25 @@
 
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewMyTeam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="160dp"
-            android:layout_marginTop="20dp"
-            android:text="Opponent"
-            android:textColor="#F1F3F3" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="410dp"
             android:layout_marginTop="20dp"
             android:text="My Team"
             android:textColor="#F1F3F3" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewOpponent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="410dp"
+            android:layout_marginTop="20dp"
+            android:text="Opponent"
+            android:textColor="#F1F3F3" />
+
+        <TextView
+            android:id="@+id/textViewOpponentScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="435dp"
@@ -45,13 +45,25 @@
             android:textColor="#F1F3F3" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textViewMyScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="185dp"
             android:layout_marginTop="40dp"
             android:text="0"
             android:textColor="#F1F3F3" />
+
+        <TextView
+            android:id="@+id/trumpSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="20dp"
+            android:text="No Trump"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
     </FrameLayout>
 
     <ImageView
@@ -208,7 +220,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="parent"
@@ -221,7 +233,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard1"
@@ -234,7 +246,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard2"
@@ -247,7 +259,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard3"
@@ -260,7 +272,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard4"
@@ -269,11 +281,11 @@
 
     <ImageView
         android:id="@+id/playerCard6"
-        android:layout_width="132dp"
+        android:layout_width="128dp"
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard5"
@@ -286,7 +298,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard6"
@@ -299,7 +311,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard7"
@@ -312,7 +324,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard8"
@@ -325,7 +337,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard9"
@@ -338,7 +350,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard10"
@@ -351,7 +363,7 @@
         android:layout_height="190dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="200dp"
         android:clickable="true"
         android:onClick="cardSelected"
         app:layout_constraintStart_toStartOf="@+id/playerCard11"
@@ -512,41 +524,39 @@
         app:layout_constraintTop_toTopOf="@+id/imageView25"
         app:srcCompat="@drawable/card_behind" />
 
-    <ImageView
-        android:id="@+id/comPlayer1selectedCard"
-        android:layout_width="247dp"
-        android:layout_height="151dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
-        app:layout_constraintEnd_toEndOf="@+id/userSelectedCard"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:srcCompat="@drawable/card_behind"
-        tools:visibility="visible" />
 
     <ImageView
-        android:id="@+id/comPlayer2selectedCard"
-        android:layout_width="247dp"
-        android:layout_height="151dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="@+id/userSelectedCard"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:srcCompat="@drawable/card_behind"
-        tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/userSelectedCard"
-        android:layout_width="247dp"
-        android:layout_height="151dp"
-        android:layout_marginStart="115dp"
-        android:layout_marginLeft="115dp"
-        android:layout_marginTop="40dp"
-        android:visibility="invisible"
+        android:id="@+id/playCard"
+        android:layout_width="215dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="70dp"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@id/frameLayout"
-        app:srcCompat="@drawable/card_behind"
-        tools:visibility="invisible" />
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/com1Card"
+        android:layout_width="215dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="72dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/frameLayout"
+        app:srcCompat="@drawable/card_behind" />
+
+    <ImageView
+        android:id="@+id/com2Card"
+        android:layout_width="215dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginLeft="204dp"
+        android:layout_marginTop="76dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/frameLayout"
+        app:srcCompat="@drawable/card_behind" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
