@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import com.airbnb.lottie.LottieAnimationView;
+
 
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
@@ -553,6 +556,28 @@ public class Game {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
+    }
+
+
+    public void updateScore(Player winningPlayer ){
+        if(this.singlePlayer.getName() == winningPlayer.getName()){
+            final TextView playerScorePlaceHolder =  this.activity.findViewById(R.id.textViewMyScore);
+            int previousScore = Integer.parseInt((String) playerScorePlaceHolder.getText());
+            previousScore++;
+            this.singlePlayerScore++;
+            String score =  Integer.toString(previousScore);
+            playerScorePlaceHolder.setText(score);
+
+
+        }else {
+            final TextView playerScorePlaceHolder =  this.activity.findViewById(R.id.textViewOpponentScore);
+            int previousScore = Integer.parseInt((String) playerScorePlaceHolder.getText());
+            previousScore++;
+            this.teamScore++;
+            String score =  Integer.toString(previousScore);
+            playerScorePlaceHolder.setText(score);
+
+        }
     }
 
 
