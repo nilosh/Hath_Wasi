@@ -17,6 +17,9 @@ import java.util.HashMap;
 
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
+import fyp.ui.hath_wasi.Game.Game;
+import fyp.ui.hath_wasi.Players.AbComputerPlayer;
+import fyp.ui.hath_wasi.Players.ComputerPlayerAggressive;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 
@@ -25,7 +28,12 @@ public class game_page extends AppCompatActivity {
     // Variable declaration.
     HashMap<Integer, Card> imageToCardMap;
     private static ImageView[] cardArray =new ImageView[12];
-    String trump;
+    String trump = null;
+
+    AbComputerPlayer comPlayer1;
+    AbComputerPlayer comPlayer2;
+    Player human;
+    boolean playerAsking = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,9 @@ public class game_page extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_game_page);
+
+        //Open dialog box to select the trump.
+        openDialog();
 
         // Add the player card Image View to an array (to initialize).
         cardArray[0] = findViewById(R.id.playerCard1);
@@ -58,8 +69,13 @@ public class game_page extends AppCompatActivity {
         Player human = new Player("Human Player", card);
 
         // Create two instances of players (for Computer Players).
-        Player comPlayer1 = new Player("Computer Player 1", card);
-        Player comPlayer2 = new Player("Computer Player 2", card);
+        comPlayer1 = new ComputerPlayerAggressive("Computer Player 1", card);
+        comPlayer2 = new ComputerPlayerAggressive("Computer Player 2", card);
+
+        comPlayer1.displayDetails();
+        comPlayer2.displayDetails();
+
+
 
         // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
         // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the game_page.
@@ -70,8 +86,13 @@ public class game_page extends AppCompatActivity {
         //Map the correct card image to the human player's card deck.
         imageToCardMap = imageViewToCardMap(human, cardArray);
 
-        //Open dialog box to select the trump.
-        openDialog();
+
+        //create the game with the starting player set as human
+        Game game =  Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
+
+
+
+
 
 
     }
@@ -101,7 +122,7 @@ public class game_page extends AppCompatActivity {
         // and doesn't allow the cards to be pressed when one card has been already placed.
 
         Log.println(Log.ERROR, "TAG", "Selected Image View ID: " + v.getId());
-        Card selectedCard = imageToCardMap.get(v.getId());
+        final Card selectedCard = imageToCardMap.get(v.getId());
 
         // remove the card from the user card deck.
         v.setVisibility(View.INVISIBLE);
@@ -110,10 +131,27 @@ public class game_page extends AppCompatActivity {
 //        Log.println(Log.ERROR, "TAG", "Should come after this " + selectedCard.getCategory() + "ko error eka?");
 //        Log.println(Log.ERROR, "TAG", "Should come after this" + selectedCard.getImageSource() + "path????");
 
-        // Place the card on the playing set.
-        ImageView image =findViewById(R.id.userSelectedCard);
-        image.setImageResource(selectedCard.getImageSource());
-        image.setVisibility(View.VISIBLE);
+
+        final Game game = Game.getInstance();
+
+        game.setTrumps();
+        game.playNextMove(selectedCard);
+
+        if(game.getInvalidCardByHuman() == false){
+
+            final ImageView image = findViewById(R.id.playCard);
+            image.setImageResource(selectedCard.getImageSource());
+            image.setVisibility(View.VISIBLE);
+
+
+
+            human.getPlayerCards().remove(selectedCard);
+            human.setNumberOfCardsRemaining(human.getNumberOfCardsRemaining()-1);
+
+            //remove the card from the user card deck
+            v.setVisibility(View.INVISIBLE);
+
+        }
 
         cardTouch(false);
 

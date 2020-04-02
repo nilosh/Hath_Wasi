@@ -631,7 +631,7 @@ public class Game {
         Game.startPlayer = startPlayer;
     }
 
-    public static boolean isInvalidCardByHuman() {
+    public static boolean getInvalidCardByHuman() {
         return invalidCardByHuman;
     }
 
