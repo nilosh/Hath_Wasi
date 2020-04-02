@@ -2,6 +2,8 @@ package fyp.ui.hath_wasi.Game;
 
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
@@ -532,6 +534,25 @@ public class Game {
                 }
             }, 5000);
         }
+    }
+
+    // Pop up dialog box 
+    public void popUpDialog(String message, String title){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.activity,R.style.AlertDialogStyle);
+        builder.setMessage(message)
+                .setTitle(title)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
     }
 
 
