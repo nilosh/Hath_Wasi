@@ -15,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import com.airbnb.lottie.LottieAnimationView;
-
 
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
@@ -46,6 +44,7 @@ public class Game {
     public Activity activity;
 
 
+    // Game constructors.
     private Game(Activity _activity, Player singlePlayer, Player teamPlayer1, Player teamPlayer2, Player humanPlayer,
     AbComputerPlayer cpu1, AbComputerPlayer cpu2, Player startPlayer, String trumps){
         this.singlePlayer = singlePlayer;
@@ -66,6 +65,8 @@ public class Game {
 
     private Game(){}
 
+    // this getter method for our instance checks if there is already a game loaded (playing a game)
+    // returns a new game if the instance is null
     public static Game getInstance(Activity _activity, Player singlePlayer, Player teamPlayer1, Player teamPlayer2, Player humanPlayer, AbComputerPlayer cpu1, AbComputerPlayer cpu2, Player startPlayer, String trumps){
 
         if(ourInstance == null){
@@ -75,19 +76,25 @@ public class Game {
         return ourInstance;
     }
 
+
     public static Game getInstance(){
         return ourInstance;
     }
 
     Card c1, c2;
 
+
     public void playNextMove(Card selectedCard){
 
+        // declare three variables to hold the imageViews of the playing cards
+        // of the three players.
         final ImageView com1 = this.activity.findViewById(R.id.com1Card);
         final ImageView com2 = this.activity.findViewById(R.id.com2Card);
         final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
 
 
+        // If it is the first round of the game and the start player is not an abstract com player
+        // Or the last round winner is not Com Player 1 and last round player is not Com Player 2.
         if( (this.numberOfRoundsPlayed == 0 && !(startPlayer instanceof AbComputerPlayer )) ||((this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() != "Computer Player 1" &&
                 this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() != "Computer Player 2")) ) {
 
@@ -101,32 +108,38 @@ public class Game {
                         this.cpu2, this.cpu2.selectSmallestCardFromCategory(selectedCard.getCategory()),
                         this.humanPlayer, selectedCard, selectedCard.getCategory(), trumps);
 
+                // increment the number of rounds played.
                 this.playedRounds[this.numberOfRoundsPlayed++] = gameRound;
 
                 invalidCardByHuman =false;
 
+                // Store the round winner in a variable.
                 final Player winner = this.playedRounds[numberOfRoundsPlayed-1].getWinner();
 
                 Log.println(Log.ERROR, "TAG", "print after");
 
+                // Set the image resource of the selected cards to the cards that are being played and make them invisible.
                 com1.setImageResource(this.playedRounds[numberOfRoundsPlayed-1].getCompPlayer1Card().getImageSource());
                 com2.setImageResource(this.playedRounds[numberOfRoundsPlayed-1].getCompPlayer1Card().getImageSource());
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);
 
-
+                // remove the Computer player 1 and Computer Player 2 selected cards from the card decks of the computer player 1 and Computer Player 2.
+                // And update the number of cards remaining for Com Player 1 and Com Player 2.
                 this.cpu1.getCardDeck().remove(this.cpu1.selectSmallestCardFromCategory(selectedCard.getCategory()));
                 this.cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
 
                 this.cpu2.getCardDeck().remove(this.cpu2.selectSmallestCardFromCategory(selectedCard.getCategory()));
                 this.cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
 
-                cpu1.displayDetails();
-                cpu2.displayDetails();
+                //cpu1.displayDetails();
+                //cpu2.displayDetails();
 
+                // Set animations.
                 final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
+                // Allows to delay the animations associated with the particular card.
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -136,6 +149,7 @@ public class Game {
                             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                             @Override
                             public void onAnimationStart(Animation animation) {
+                                // Make ComPlayer2 card visible.
                                 com2.setVisibility(View.VISIBLE);
                                 com2.setImageAlpha(1000);
                             }
@@ -163,6 +177,7 @@ public class Game {
                             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                             @Override
                             public void onAnimationStart(Animation animation) {
+                                // Make ComPlayer1 Card visibile.
                                 com1.setVisibility(View.VISIBLE);
                                 com1.setImageAlpha(1000);
                             }
@@ -182,6 +197,7 @@ public class Game {
                 }, 3000);
 
 
+                // Update score on the score bar with a delay.
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -190,11 +206,14 @@ public class Game {
                 }, 2500);
 
 
+                // if this round's winner is a Computer Player.
                 if(this.playedRounds[numberOfRoundsPlayed-1].getWinner() instanceof AbComputerPlayer){
 
                     moveForwardWithCpuWin();
                 }
 
+                // Else, make all the played cards invisible (from the last round)
+                // and set cardTouch true.
                 else{
 
                     handler.postDelayed(new Runnable() {
@@ -213,23 +232,29 @@ public class Game {
 
             } catch (Exception e){
 
+                // decrement the added number of played.
                 numberOfRoundsPlayed--;
 
                 Log.println( Log.ERROR, "TAG", "on the first catch block" );
                 //popUpDialog("Invalid Card type!", "Card Selection");
+                // human player played an invalid card, so allow to play again.
                 this.invalidCardByHuman = true;
                 game_page.cardTouch(true);
 
             }
         }
 
-
+        // Else if the first round of the game and the start player is ComPlayer 1
+        // Or the last round's winner is ComPlayer 1.
         else if(( (this.numberOfRoundsPlayed == 0 && (startPlayer.getName() == "Computer Player 1") ) || ((this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() == "Computer Player 1")))){
 
             try{
                 Log.println(Log.ERROR, "TAG", "inside the second condition");
 
+                // If human player card is valid.
                 if(this.invalidCardByHuman == false){
+                    // Com Player 2 (right side)
+                    // Play the smallest card from the category
                     com2Card = this.cpu2.selectSmallestCardFromCategory(selectedCard.getCategory());
                     Log.println(Log.ERROR, "TAG", "inside the if condition of the second condition");
 
@@ -238,6 +263,8 @@ public class Game {
                 Log.println(Log.ERROR, "TAG", "outside if condition inside second condition");
 
 
+                // Start game round from Com Player 2.
+                // Creates new game round object.
                 GameRound gameRound = new GameRound(this.cpu1, c1,
                         this.cpu2, com2Card,
                         this.humanPlayer, selectedCard, c1.getCategory(), trumps);
@@ -248,9 +275,11 @@ public class Game {
 
                 this.playedRounds[this.numberOfRoundsPlayed++] = gameRound;
 
+                // Get image source for Card played by Com Player 2 and set to Image Resource.
                 com2.setImageResource(com2Card.getImageSource());
                 com2.setVisibility(View.INVISIBLE);
 
+                // Set Animations.
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
                 Handler handler = new Handler();
@@ -263,6 +292,7 @@ public class Game {
                             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                             @Override
                             public void onAnimationStart(Animation animation) {
+                                // Com Player 2 card make visibile.
                                 com2.setVisibility(View.VISIBLE);
                                 com2.setImageAlpha(1000);
                             }
@@ -282,12 +312,15 @@ public class Game {
                 }, 2500);
 
 
+                // remove the played cards from the card decks of computer player 1 & 2.
+                // update the number of remaining card for both players.
                 this.cpu1.getCardDeck().remove(c1);
                 this.cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining()-1);
 
                 this.cpu2.getCardDeck().remove(com2Card);
                 this.cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining()-1);
 
+                // get winner of the round.
                 final Player winner = this.playedRounds[numberOfRoundsPlayed-1].getWinner();
 
                 handler.postDelayed(new Runnable() {
@@ -299,7 +332,7 @@ public class Game {
 
                 Log.println( Log.ERROR, "TAG", "inside try block 2" );
 
-
+                // If this round's winner is a CPU player.
                 if(this.playedRounds[numberOfRoundsPlayed-1].getWinner() instanceof AbComputerPlayer){
                     moveForwardWithCpuWin();
                 }
@@ -327,11 +360,13 @@ public class Game {
 
 
         }
-
+        // If neither the start of the game and the start player is neither Com Player 1 or Com Player 2
+        // Or neither the last round winner is Com Player 1 or Com Player 2.
         else{
             try{
                 Log.println(Log.ERROR, "TAG", "Try block 3..");
 
+                // Create new game round object.
                 GameRound gameRound = new GameRound(this.cpu1, c1,
                         this.cpu2, c2,
                         this.humanPlayer, selectedCard, c2.getCategory(), trumps);
@@ -340,6 +375,7 @@ public class Game {
 
                 this.playedRounds[this.numberOfRoundsPlayed++] = gameRound;
 
+                // calls method to set the image views of the playing cards for com players 1 & 2.
                 setComputerCardsToImageView(c1, c2, com1, com2);
 
                 this.cpu1.getCardDeck().remove(c1);
@@ -348,6 +384,7 @@ public class Game {
                 this.cpu2.getCardDeck().remove(c2);
                 this.cpu2.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining()-1);
 
+                // Get winner of this round.
                 final Player winner = this.playedRounds[numberOfRoundsPlayed-1].getWinner();
 
                 Handler handler = new Handler();
@@ -371,6 +408,7 @@ public class Game {
 
                 Log.println( Log.ERROR, "TAG", "inside try block 3" );
 
+                // If this round's winner is a Computer Player.
                 if(this.playedRounds[numberOfRoundsPlayed-1].getWinner() instanceof AbComputerPlayer){
 
                     moveForwardWithCpuWin();
@@ -400,6 +438,7 @@ public class Game {
         }
     }
 
+    // This method sets the images to the image views and makes them visible.
     public void setComputerCardsToImageView(Card cardLeft, Card cardRight, final ImageView leftView, final ImageView rightView){
 
         leftView.setImageResource(cardLeft.getImageSource());
@@ -409,6 +448,7 @@ public class Game {
     }
 
 
+    // This method plays the game for CPU players.
     public void moveForwardWithCpuWin() {
         final AnimatorSet animatorSet = new AnimatorSet();
 
@@ -418,21 +458,25 @@ public class Game {
 
         Log.println(Log.ERROR, "TAG", "Late night testing2 ");
 
+        // Get the last game round to a variable.
         final GameRound pr = this.playedRounds[numberOfRoundsPlayed - 1];
 
+        // If the last game round winner is the CPU Player 1.
         if (this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() == cpu1.getName()) {
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    // set the image views of com player 2 and human player to invisible.
                     playerPlaceholder.setVisibility(View.INVISIBLE);
                     com2.setVisibility(View.INVISIBLE);
-
+                    // Play the card for this round, map it to the image view and make it visible.
                     c1 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
                     com1.setImageResource(c1.getImageSource());
                     com1.setVisibility(View.VISIBLE);
 
+                    // Set animations.
                     Animation animation = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
 
                     com1.startAnimation(animation);
@@ -457,7 +501,11 @@ public class Game {
                 }
             }, 6000);
 
+            // Next player is Human Player.
+            // Set cardTouch to true.
             game_page.cardTouch(true);
+
+            // Else if the player is Com Player 2.
         } else {
 
             Handler handler = new Handler();
@@ -467,14 +515,18 @@ public class Game {
 
                     playerPlaceholder.setVisibility(View.INVISIBLE);
 
+                    // Play the card for com player 2.
                     c2 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
+                    // Play the card for com player 1.
                     c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
 
+                    // Set image resources of the cards played and make them invisible.
                     com2.setImageResource(c2.getImageSource());
                     com1.setImageResource(c1.getImageSource());
                     com2.setVisibility(View.INVISIBLE);
                     com1.setVisibility(View.INVISIBLE);
 
+                    // Set animations for the played cards.
                     final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
                     final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
@@ -533,6 +585,7 @@ public class Game {
                         }
                     }, 3000);
 
+                    // Let Human player play.
                     game_page.cardTouch(true);
                 }
             }, 5000);
@@ -559,7 +612,9 @@ public class Game {
     }
 
 
+    // This method updates the score on the score bar of the page.
     public void updateScore(Player winningPlayer ){
+
         if(this.singlePlayer.getName() == winningPlayer.getName()){
             final TextView playerScorePlaceHolder =  this.activity.findViewById(R.id.textViewMyScore);
             int previousScore = Integer.parseInt((String) playerScorePlaceHolder.getText());
