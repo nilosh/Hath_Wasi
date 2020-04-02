@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -175,12 +176,13 @@ public class game_page extends AppCompatActivity {
 
     public void openDialog(){
         // This method creates and allows the user to choose allow or decline selecting the trump.
-        AlertDialog.Builder getChances = new AlertDialog.Builder(this);
+        AlertDialog.Builder getChances = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         getChances.setMessage("Can you win 7 chances?")
-                .setTitle("7 Chances?")
+                .setTitle("♠ ♥ ♣ ♦")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        playerAsking = true;
                         selectTrump();
                     }
                 })
@@ -188,6 +190,24 @@ public class game_page extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        if(trump == null){
+                            if(SelectingTrumpComPlayer.getChances(comPlayer2))
+                            {
+                                trump = SelectingTrumpComPlayer.getTrump(comPlayer2);
+                                Toast.makeText(getApplicationContext(), "Computer Player 2 Selected Trump" +
+                                        trump, Toast.LENGTH_LONG).show();
+                            }
+                            else
+                                if(SelectingTrumpComPlayer.getChances(comPlayer1))
+                                {
+                                    trump = SelectingTrumpComPlayer.getTrump(comPlayer1);
+                                    Toast.makeText(getApplicationContext(), "Computer Player 1 Selected the Trump" +
+                                            trump, Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    openDialog();
+                                }
+                        }
                     }
                 });
 
@@ -200,8 +220,9 @@ public class game_page extends AppCompatActivity {
     }
 
     public void selectTrump(){
+        final TextView textViewTrump = (TextView) findViewById(R.id.trumpSelected);
         // This method allows the user to select the trump when they choose to select the trump.
-        AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this);
+        AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this, R.style.AlertDialogStyle);
 //        LayoutInflater inflater = getLayoutInflater();
 //        View dialogLayout = inflater.inflate(R.layout.activity_popUpWindow, null);
         String[] items = {"♠ Spades", "♥ Hearts", "♣ Clubs", "♦ Diamonds"};
@@ -209,22 +230,27 @@ public class game_page extends AppCompatActivity {
                 .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        textViewTrump.setVisibility(View.VISIBLE);
                         switch (which){
                             case 0:
                                 trump = "Spades";
-                                Log.d("TAG", "Spades selected: " + trump);
+                                Log.d("TAG", "Spades Selected: " + trump);
+                                textViewTrump.setText("♠");
                                 break;
                             case 1:
                                 trump = "Hearts";
                                 Log.d("TAG", "Hearts Selected: " + trump);
+                                textViewTrump.setText("♥");
                                 break;
                             case 2:
                                 trump = "Clubs";
-                                Log.d("TAG", "Clubs selected" + trump);
+                                Log.d("TAG", "Clubs Selected" + trump);
+                                textViewTrump.setText("♣");
                                 break;
                             case 3:
                                 trump = "Diamonds";
-                                Log.d("TAG", "Diamonds selected" + trump);
+                                Log.d("TAG", "Diamonds Selected" + trump);
+                                textViewTrump.setText("♦");
                                 break;
                         }
                     }
@@ -233,7 +259,17 @@ public class game_page extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                        Log.d("TAG", "Inside on click : " + trump);
+                        if(trump == null || trump.isEmpty()){
+                            Toast.makeText(getApplicationContext(), "Please select a trump to continue!",
+                                    Toast.LENGTH_SHORT).show();
+                            Log.d("TAG", "the trump selected: " + trump);
+                            selectTrump();
+                        }
+                        else{
+                            dialog.dismiss();
+                        }
+
                     }
                 });
 
