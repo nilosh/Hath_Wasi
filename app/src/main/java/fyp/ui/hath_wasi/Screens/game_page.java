@@ -1,20 +1,31 @@
 package fyp.ui.hath_wasi.Screens;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import fyp.ui.hath_wasi.Cards.Card;
@@ -31,6 +42,7 @@ public class game_page extends AppCompatActivity {
     // Variable declaration.
     HashMap<Integer, Card> imageToCardMap;
     private static ImageView[] cardArray = new ImageView[12];
+
     String trump = null;
 
     AbComputerPlayer comPlayer1;
@@ -69,7 +81,7 @@ public class game_page extends AppCompatActivity {
 
         // Create an instance of card and an instance of Player(for human player).
         DeckOfCards card = new DeckOfCards();
-        Player human = new Player("Human Player", card);
+        human = new Player("Human Player", card);
 
         // Create two instances of players (for Computer Players).
         comPlayer1 = new ComputerPlayerAggressive("Computer Player 1", card);
@@ -79,12 +91,13 @@ public class game_page extends AppCompatActivity {
         comPlayer2.displayDetails();
 
 
-
         // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
         // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the game_page.
         for (int i = 0; i < 12; i++){
             cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
+
         }
+
 
         //Map the correct card image to the human player's card deck.
         imageToCardMap = imageViewToCardMap(human, cardArray);
@@ -121,6 +134,8 @@ public class game_page extends AppCompatActivity {
 
     public void cardSelected(View v){
 
+        cardTouch(false);
+
         // This method removes the user selected card from the user's card view
         // and doesn't allow the cards to be pressed when one card has been already placed.
 
@@ -128,7 +143,7 @@ public class game_page extends AppCompatActivity {
         final Card selectedCard = imageToCardMap.get(v.getId());
 
         // remove the card from the user card deck.
-        v.setVisibility(View.INVISIBLE);
+        //v.setVisibility(View.INVISIBLE);
 
 //        Log.println(Log.ERROR, "TAG", "Should come here");
 //        Log.println(Log.ERROR, "TAG", "Should come after this " + selectedCard.getCategory() + "ko error eka?");
@@ -137,16 +152,46 @@ public class game_page extends AppCompatActivity {
 
         final Game game = Game.getInstance();
 
-        game.setTrumps();
+        game.setTrumps(trump);
         game.playNextMove(selectedCard);
 
+        // If player selects a valid card.
         if(game.getInvalidCardByHuman() == false){
 
             final ImageView image = findViewById(R.id.playCard);
             image.setImageResource(selectedCard.getImageSource());
             image.setVisibility(View.VISIBLE);
 
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.sample_anim);
 
+            image.startAnimation(animation);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    image.setImageAlpha(1000);
+                }
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            image.setImageAlpha(0);
+                        }
+                    }, 5700);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+//            final int topPosition = image.getHeight();
+//            int leftPosition = image.getLeft();
+//            int rightPosition = image.getRight();
 
             human.getPlayerCards().remove(selectedCard);
             human.setNumberOfCardsRemaining(human.getNumberOfCardsRemaining()-1);
@@ -156,9 +201,9 @@ public class game_page extends AppCompatActivity {
 
         }
 
-        cardTouch(false);
-
     }
+
+
 
     public static void cardTouch(boolean onOrOff){
 
@@ -177,7 +222,7 @@ public class game_page extends AppCompatActivity {
 
 
     public void openDialog(){
-        // This method creates and allows the user to choose allow or decline selecting the trump.
+        // This method creates and allows the players to choose allow or decline selecting the trump.
         AlertDialog.Builder getChances = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         getChances.setMessage("Can you win 7 chances?")
                 .setTitle("♠ ♥ ♣ ♦")
@@ -188,6 +233,8 @@ public class game_page extends AppCompatActivity {
                         selectTrump();
                     }
                 })
+
+                // If human player selects no, then the bidding chance is passed to the computer players.
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -104,6 +104,15 @@ public class Player {
         }
     }
 
+//    public void removeCardFromID(int id){
+//        for(int i = 0; i < this.numberOfCardsRemaining; i++){
+//            if(this.CardDeck.get(i).getCardId() == id){
+//                CardDeck.remove(i);
+//                break;
+//            }
+//        }
+//    }
+
 }
 
 

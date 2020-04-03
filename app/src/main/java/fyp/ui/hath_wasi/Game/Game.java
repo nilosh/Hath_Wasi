@@ -4,7 +4,6 @@ import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
@@ -95,8 +94,9 @@ public class Game {
 
         // If it is the first round of the game and the start player is not an abstract com player
         // Or the last round winner is not Com Player 1 and last round player is not Com Player 2.
-        if( (this.numberOfRoundsPlayed == 0 && !(startPlayer instanceof AbComputerPlayer )) ||((this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() != "Computer Player 1" &&
-                this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() != "Computer Player 2")) ) {
+        if( (this.numberOfRoundsPlayed == 0 &&  ! (startPlayer instanceof AbComputerPlayer) )||
+                ((this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() != "Computer Player 1" &&
+                this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() != "Computer Player 2") ) ) {
 
 
             try{
@@ -236,7 +236,7 @@ public class Game {
                 numberOfRoundsPlayed--;
 
                 Log.println( Log.ERROR, "TAG", "on the first catch block" );
-                //popUpDialog("Invalid Card type!", "Card Selection");
+                popUpDialog("Invalid Card type!", "Card Selection");
                 // human player played an invalid card, so allow to play again.
                 this.invalidCardByHuman = true;
                 game_page.cardTouch(true);
@@ -353,7 +353,7 @@ public class Game {
             } catch (Exception e){
                 Log.d("TAG", "on the second catch block");
 
-                //popUpDialog("Invalid Card type!", "Card Selection");
+                popUpDialog("Invalid Card type!", "Card Selection");
                 this.invalidCardByHuman = true;
                 game_page.cardTouch(true);
             }
@@ -391,7 +391,7 @@ public class Game {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //updateScore(winner);
+                        updateScore(winner);
                     }
                 }, 2500);
 
@@ -430,7 +430,7 @@ public class Game {
                 Log.println( Log.ERROR, "TAG", "inside the try 3, at the very end" );
             } catch (Exception e){
                 Log.d("TAG", "on the third catch block");
-                //popUpDialog("Invalid Card type!", "Card Selection");
+                popUpDialog("Invalid Card type!", "Card Selection");
 
                 this.invalidCardByHuman = true;
                 game_page.cardTouch(true);
