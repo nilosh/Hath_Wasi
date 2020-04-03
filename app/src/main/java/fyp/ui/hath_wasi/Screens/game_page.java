@@ -20,6 +20,7 @@ import java.util.HashMap;
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
 import fyp.ui.hath_wasi.Game.Game;
+import fyp.ui.hath_wasi.Game.SelectingTrumpComPlayer;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.ComputerPlayerAggressive;
 import fyp.ui.hath_wasi.Players.Player;
@@ -29,7 +30,7 @@ public class game_page extends AppCompatActivity {
 
     // Variable declaration.
     HashMap<Integer, Card> imageToCardMap;
-    private static ImageView[] cardArray =new ImageView[12];
+    private static ImageView[] cardArray = new ImageView[12];
     String trump = null;
 
     AbComputerPlayer comPlayer1;
@@ -264,7 +265,7 @@ public class game_page extends AppCompatActivity {
                         if(trump == null || trump.isEmpty()){
                             Toast.makeText(getApplicationContext(), "Please select a trump to continue!",
                                     Toast.LENGTH_SHORT).show();
-                            Log.d("TAG", "the trump selected: " + trump);
+                            Log.d("TAG", "The Trump Selected: " + trump);
                             selectTrump();
                         }
                         else{
