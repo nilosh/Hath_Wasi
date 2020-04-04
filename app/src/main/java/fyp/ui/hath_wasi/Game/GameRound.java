@@ -63,7 +63,24 @@ public class GameRound {
                 cardNo3 = humanSelectedCard.getNumber();
             }
 
-            // select the winnner for that round.
+            chooseWinner(cardNo1, cardNo2, cardNo3, cpuPlayer1, cpuPlayer2, human);
+        }
+
+        // if the card played is not a trump.
+        // check if the card category is of play type.
+        else{
+            if(cpu1.getCategory() == playType){
+                cardNo1 = cpu1.getNumber();
+            }
+
+            if(cpu2.getCategory() == playType){
+                cardNo2 = cpu2.getNumber();
+            }
+
+            if(humanSelectedCard.getCategory() == playType){
+                cardNo3 = humanSelectedCard.getNumber();
+            }
+
             chooseWinner(cardNo1, cardNo2, cardNo3, cpuPlayer1, cpuPlayer2, human);
         }
 
@@ -74,6 +91,9 @@ public class GameRound {
     // this method chooses the winner depending on the cards played.
     // the player who has played the highest card wins the round.
     public void chooseWinner(int card1, int card2, int card3, Player cpuPlayer1, Player cpuPlayer2, Player human) {
+
+        Log.println(Log.ERROR, "TAG", "card1: " + card1 + " card2: " + card2 + " card3: " + card3);
+
 
         if(card1 > card2 && card1 > card3){
             this.winner = cpuPlayer1;

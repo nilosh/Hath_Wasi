@@ -116,11 +116,14 @@ public class Game {
                 // Store the round winner in a variable.
                 final Player winner = this.playedRounds[numberOfRoundsPlayed-1].getWinner();
 
+                Log.println(Log.ERROR, "TAG", "first if condition" + winner.getName());
+
+
                 Log.println(Log.ERROR, "TAG", "print after");
 
                 // Set the image resource of the selected cards to the cards that are being played and make them invisible.
                 com1.setImageResource(this.playedRounds[numberOfRoundsPlayed-1].getCompPlayer1Card().getImageSource());
-                com2.setImageResource(this.playedRounds[numberOfRoundsPlayed-1].getCompPlayer1Card().getImageSource());
+                com2.setImageResource(this.playedRounds[numberOfRoundsPlayed-1].getCompPlayer2Card().getImageSource());
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);
 
@@ -246,7 +249,8 @@ public class Game {
 
         // Else if the first round of the game and the start player is ComPlayer 1
         // Or the last round's winner is ComPlayer 1.
-        else if(( (this.numberOfRoundsPlayed == 0 && (startPlayer.getName() == "Computer Player 1") ) || ((this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() == "Computer Player 1")))){
+        else if(( (this.numberOfRoundsPlayed == 0 && (startPlayer.getName() == "Computer Player 1") ) ||
+                ((this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() == "Computer Player 1")))){
 
             try{
                 Log.println(Log.ERROR, "TAG", "inside the second condition");
@@ -323,6 +327,8 @@ public class Game {
                 // get winner of the round.
                 final Player winner = this.playedRounds[numberOfRoundsPlayed-1].getWinner();
 
+                Log.println(Log.ERROR, "TAG", "second if condition" + winner.getName());
+
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -386,6 +392,8 @@ public class Game {
 
                 // Get winner of this round.
                 final Player winner = this.playedRounds[numberOfRoundsPlayed-1].getWinner();
+
+                Log.println(Log.ERROR, "TAG", "third if condition" + winner.getName());
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
