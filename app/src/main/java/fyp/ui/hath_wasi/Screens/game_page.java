@@ -90,14 +90,27 @@ public class game_page extends AppCompatActivity {
         comPlayer1.displayDetails();
         comPlayer2.displayDetails();
 
+        AnimatorSet s = new AnimatorSet();
+        ArrayList<Animator> animations = new ArrayList<Animator>();
+
 
         // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
         // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the game_page.
         for (int i = 0; i < 12; i++){
+
             cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
+
+            final int j = i;
+
+            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
+            animations.add(animator);
 
         }
 
+        s.setDuration(200);
+        s.playSequentially(animations);
+
+        s.start();
 
         //Map the correct card image to the human player's card deck.
         imageToCardMap = imageViewToCardMap(human, cardArray);
@@ -105,9 +118,6 @@ public class game_page extends AppCompatActivity {
 
         //create the game with the starting player set as human
         Game game =  Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
-
-
-
 
 
 
@@ -246,16 +256,15 @@ public class game_page extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Computer Player 2 Selected Trump" +
                                         trump, Toast.LENGTH_LONG).show();
                             }
-                            else
-                                if(SelectingTrumpComPlayer.getChances(comPlayer1))
+                            else if(SelectingTrumpComPlayer.getChances(comPlayer1))
                                 {
                                     trump = SelectingTrumpComPlayer.getTrump(comPlayer1);
                                     Toast.makeText(getApplicationContext(), "Computer Player 1 Selected the Trump" +
                                             trump, Toast.LENGTH_LONG).show();
                                 }
-                                else{
-                                    openDialog();
-                                }
+                            else{
+                                openDialog();
+                            }
                         }
                     }
                 });
@@ -272,8 +281,6 @@ public class game_page extends AppCompatActivity {
         final TextView textViewTrump = (TextView) findViewById(R.id.trumpSelected);
         // This method allows the user to select the trump when they choose to select the trump.
         AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this, R.style.AlertDialogStyle);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogLayout = inflater.inflate(R.layout.activity_popUpWindow, null);
         String[] items = {"♠ Spades", "♥ Hearts", "♣ Clubs", "♦ Diamonds"};
         chooseTrump.setTitle("Select your trump")
                 .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {

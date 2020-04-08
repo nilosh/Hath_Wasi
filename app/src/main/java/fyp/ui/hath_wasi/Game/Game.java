@@ -121,7 +121,7 @@ public class Game {
 
                 Log.println(Log.ERROR, "TAG", "print after");
 
-                // Set the image resource of the selected cards to the cards that are being played and make them invisible.
+                // Set the image resource of the selected cards to the cards that are being played and make them invisible
                 com1.setImageResource(this.playedRounds[numberOfRoundsPlayed-1].getCompPlayer1Card().getImageSource());
                 com2.setImageResource(this.playedRounds[numberOfRoundsPlayed-1].getCompPlayer2Card().getImageSource());
                 com1.setVisibility(View.INVISIBLE);
