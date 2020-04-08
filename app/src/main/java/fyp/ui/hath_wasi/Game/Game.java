@@ -1,17 +1,21 @@
 package fyp.ui.hath_wasi.Game;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.media.MediaPlayer;
 
 import androidx.annotation.RequiresApi;
 
@@ -346,6 +350,9 @@ public class Game {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            final MediaPlayer player = MediaPlayer.create(activity, R.raw.card_collectt);
+                            player.start();
+
                             com1.setVisibility(View.INVISIBLE);
                             com2.setVisibility(View.INVISIBLE);
                             playerPlaceholder.setVisibility(View.INVISIBLE);
@@ -407,6 +414,9 @@ public class Game {
                     @Override
                     public void run() {
 
+                        final MediaPlayer player = MediaPlayer.create(activity, R.raw.card_collectt);
+                        player.start();
+
                         com1.setVisibility(View.INVISIBLE);
                         com2.setVisibility(View.INVISIBLE);
                         playerPlaceholder.setVisibility(View.INVISIBLE);
@@ -426,6 +436,8 @@ public class Game {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            final MediaPlayer player = MediaPlayer.create(activity, R.raw.card_collectt);
+                            player.start();
 
                             com1.setVisibility(View.INVISIBLE);
                             com2.setVisibility(View.INVISIBLE);
