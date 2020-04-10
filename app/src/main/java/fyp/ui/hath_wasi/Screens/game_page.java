@@ -96,6 +96,8 @@ public class game_page extends AppCompatActivity {
 
         // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
         // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the game_page.
+
+        // uses Animations to sequentially send the
         for (int i = 0; i < 12; i++){
 
             cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
@@ -109,7 +111,6 @@ public class game_page extends AppCompatActivity {
 
         s.setDuration(200);
         s.playSequentially(animations);
-
         s.start();
 
         //Map the correct card image to the human player's card deck.
@@ -118,7 +119,6 @@ public class game_page extends AppCompatActivity {
 
         //create the game with the starting player set as human
         Game game =  Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
-
 
 
     }
@@ -249,23 +249,37 @@ public class game_page extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        if(trump == null){
-                            if(SelectingTrumpComPlayer.getChances(comPlayer2))
-                            {
+                        Toast.makeText(getApplicationContext(), "Yoohooo" + trump, Toast.LENGTH_SHORT).show();
+
+                        Game game =Game.getInstance();
+                        if(playerAsking == false){
+
+                            if(SelectingTrumpComPlayer.getChances(comPlayer2)){
                                 trump = SelectingTrumpComPlayer.getTrump(comPlayer2);
-                                Toast.makeText(getApplicationContext(), "Computer Player 2 Selected Trump" +
-                                        trump, Toast.LENGTH_LONG).show();
+                                passTrumpToTheInterface(trump);
+                                playerAsking = true;
+
+                                Toast.makeText(getApplicationContext(), "Computer player 2 selected trump as " + trump, Toast.LENGTH_LONG).show();
+                                game.alterInstance( comPlayer2, human, comPlayer1, human, comPlayer1, comPlayer2, comPlayer2, trump);
+                                game.moveForwardWithCpuWin(comPlayer2);
                             }
-                            else if(SelectingTrumpComPlayer.getChances(comPlayer1))
-                                {
-                                    trump = SelectingTrumpComPlayer.getTrump(comPlayer1);
-                                    Toast.makeText(getApplicationContext(), "Computer Player 1 Selected the Trump" +
-                                            trump, Toast.LENGTH_LONG).show();
-                                }
+
+                            else if(SelectingTrumpComPlayer.getChances(comPlayer1)){
+                                trump = SelectingTrumpComPlayer.getTrump(comPlayer1);
+                                passTrumpToTheInterface(trump);
+                                playerAsking = true;
+
+                                Toast.makeText(getApplicationContext(), "Computer player 1 selected trump as " + trump, Toast.LENGTH_LONG).show();
+                                game.alterInstance( comPlayer1, human, comPlayer2, human, comPlayer1, comPlayer2, comPlayer1, trump);
+                                game.moveForwardWithCpuWin(comPlayer1);
+                            }
+
                             else{
+                                Toast.makeText(getApplicationContext(), "yoohooooo at else part " + trump, Toast.LENGTH_LONG).show();
                                 openDialog();
                             }
                         }
+
                     }
                 });
 
@@ -278,37 +292,17 @@ public class game_page extends AppCompatActivity {
     }
 
     public void selectTrump(){
-        final TextView textViewTrump = (TextView) findViewById(R.id.trumpSelected);
+
         // This method allows the user to select the trump when they choose to select the trump.
         AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this, R.style.AlertDialogStyle);
         String[] items = {"♠ Spades", "♥ Hearts", "♣ Clubs", "♦ Diamonds"};
-        chooseTrump.setTitle("Select your trump")
+        chooseTrump.setTitle("Select your Trump")
                 .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        textViewTrump.setVisibility(View.VISIBLE);
-                        switch (which){
-                            case 0:
-                                trump = "Spades";
-                                Log.d("TAG", "Spades Selected: " + trump);
-                                textViewTrump.setText("♠");
-                                break;
-                            case 1:
-                                trump = "Hearts";
-                                Log.d("TAG", "Hearts Selected: " + trump);
-                                textViewTrump.setText("♥");
-                                break;
-                            case 2:
-                                trump = "Clubs";
-                                Log.d("TAG", "Clubs Selected" + trump);
-                                textViewTrump.setText("♣");
-                                break;
-                            case 3:
-                                trump = "Diamonds";
-                                Log.d("TAG", "Diamonds Selected" + trump);
-                                textViewTrump.setText("♦");
-                                break;
-                        }
+
+                        passTrumpToTheInterface(which);
+
                     }
                 })
 
@@ -335,6 +329,65 @@ public class game_page extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
+    }
+
+    public void passTrumpToTheInterface(int which){
+
+        final TextView textViewTrump = (TextView) findViewById(R.id.trumpSelected);
+        textViewTrump.setVisibility(View.VISIBLE);
+
+        switch (which){
+            case 0:
+                trump = "Spades";
+                Log.d("TAG", "Spades Selected: " + trump);
+                textViewTrump.setText("♠");
+                break;
+            case 1:
+                trump = "Hearts";
+                Log.d("TAG", "Hearts Selected: " + trump);
+                textViewTrump.setText("♥");
+                break;
+            case 2:
+                trump = "Clubs";
+                Log.d("TAG", "Clubs Selected" + trump);
+                textViewTrump.setText("♣");
+                break;
+            case 3:
+                trump = "Diamonds";
+                Log.d("TAG", "Diamonds Selected" + trump);
+                textViewTrump.setText("♦");
+                break;
+        }
+    }
+
+
+    public void passTrumpToTheInterface(String which){
+
+        final TextView textViewTrump = (TextView) findViewById(R.id.trumpSelected);
+        textViewTrump.setVisibility(View.VISIBLE);
+
+        switch (which){
+            case "spades":
+                trump = "Spades";
+                Log.d("TAG", "Spades Selected: " + trump);
+                textViewTrump.setText("♠");
+                break;
+            case "hearts":
+                trump = "Hearts";
+                Log.d("TAG", "Hearts Selected: " + trump);
+                textViewTrump.setText("♥");
+                break;
+            case "clubs":
+                trump = "Clubs";
+                Log.d("TAG", "Clubs Selected" + trump);
+                textViewTrump.setText("♣");
+                break;
+            case "diamonds":
+                trump = "Diamonds";
+                Log.d("TAG", "Diamonds Selected" + trump);
+                textViewTrump.setText("♦");
+                break;
+        }
     }
 
 }

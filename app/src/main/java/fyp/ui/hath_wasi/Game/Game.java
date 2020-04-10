@@ -24,6 +24,7 @@ import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 import fyp.ui.hath_wasi.Screens.game_page;
+import com.airbnb.lottie.LottieAnimationView;
 
 public class Game {
 
@@ -87,6 +88,25 @@ public class Game {
     Card c1, c2;
 
 
+    public void alterInstance(AbComputerPlayer singlePlayer, Player teamPlayer1, AbComputerPlayer teamPlayer2, Player humanPlayer, AbComputerPlayer cpu1,
+        AbComputerPlayer cpu2, AbComputerPlayer startPlayer, String trump){
+
+        this.singlePlayer = singlePlayer;
+        this.teamPlayer1 = teamPlayer1;
+        this.teamPlayer2 = teamPlayer2;
+        this.singlePlayerScore = 0;
+        this.teamScore = 0;
+        this.playedRounds = new GameRound[12];
+        this.numberOfRoundsPlayed = 0;
+        this.cpu1 = cpu1;
+        this.cpu2 = cpu2;
+        this.startPlayer = startPlayer;
+        this.trumps = trump;
+        this.humanPlayer = humanPlayer;
+        this.invalidCardByHuman = false;
+
+    }
+
     public void playNextMove(Card selectedCard){
 
         // declare three variables to hold the imageViews of the playing cards
@@ -96,10 +116,14 @@ public class Game {
         final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
 
 
+        Log.println( Log.ERROR, "TAG", "startPlayer.getName() :" + startPlayer.getName()  );
+        Log.println( Log.ERROR, "TAG", "this.numberOfRoundsPlayed :" + this.numberOfRoundsPlayed);
+
+
         // If it is the first round of the game and the start player is not an abstract com player
         // Or the last round winner is not Com Player 1 and last round player is not Com Player 2.
-        if( (this.numberOfRoundsPlayed == 0 &&  ! (startPlayer instanceof AbComputerPlayer) )||
-                ((this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() != "Computer Player 1" &&
+        if( (this.numberOfRoundsPlayed == 0 && startPlayer.getName() != "Computer Player 1" && startPlayer.getName() != "Computer Player 2") ||
+                ((this.numberOfRoundsPlayed > 0 && this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() != "Computer Player 1" &&
                 this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() != "Computer Player 2") ) ) {
 
 
@@ -121,8 +145,6 @@ public class Game {
                 final Player winner = this.playedRounds[numberOfRoundsPlayed-1].getWinner();
 
                 Log.println(Log.ERROR, "TAG", "first if condition" + winner.getName());
-
-
                 Log.println(Log.ERROR, "TAG", "print after");
 
                 // Set the image resource of the selected cards to the cards that are being played and make them invisible
@@ -254,7 +276,7 @@ public class Game {
         // Else if the first round of the game and the start player is ComPlayer 1
         // Or the last round's winner is ComPlayer 1.
         else if(( (this.numberOfRoundsPlayed == 0 && (startPlayer.getName() == "Computer Player 1") ) ||
-                ((this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() == "Computer Player 1")))){
+                ((this.numberOfRoundsPlayed > 0 && this.playedRounds[numberOfRoundsPlayed-1].getWinner().getName() == "Computer Player 1")))){
 
             try{
                 Log.println(Log.ERROR, "TAG", "inside the second condition");
@@ -612,6 +634,137 @@ public class Game {
         }
     }
 
+
+    public void moveForwardWithCpuWin(Player player) {
+
+        final AnimatorSet animatorSet = new AnimatorSet();
+
+        final ImageView com1 = this.activity.findViewById(R.id.com1Card);
+        final ImageView com2 = this.activity.findViewById(R.id.com2Card);
+        final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
+
+
+        if (player.getName() == cpu1.getName()) {
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    playerPlaceholder.setVisibility(View.INVISIBLE);
+                    com2.setVisibility(View.INVISIBLE);
+
+                    c1 = cpu1.selectHighestCard();
+                    com1.setImageResource(c1.getImageSource());
+                    com1.setVisibility(View.VISIBLE);
+
+                    Animation animation = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+
+                    com1.startAnimation(animation);
+                    animation.setAnimationListener(new Animation.AnimationListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            com1.setImageAlpha(1000);
+                        }
+
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                }
+            }, 6000);
+
+            game_page.cardTouch(true);
+
+        } else {
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    playerPlaceholder.setVisibility(View.INVISIBLE);
+
+                    c2 = cpu2.selectHighestCard();
+                    c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
+
+                    com2.setImageResource(c2.getImageSource());
+                    com1.setImageResource(c1.getImageSource());
+                    com2.setVisibility(View.INVISIBLE);
+                    com1.setVisibility(View.INVISIBLE);
+
+                    final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+                    final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            com2.startAnimation(animationRl);
+                            animationRl.setAnimationListener(new Animation.AnimationListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                    com2.setVisibility(View.VISIBLE);
+                                    com2.setImageAlpha(1000);
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+                            });
+                        }
+                    }, 1500);
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            com1.startAnimation(animationLr);
+                            animationLr.setAnimationListener(new Animation.AnimationListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                    com1.setVisibility(View.VISIBLE);
+                                    com1.setImageAlpha(1000);
+                                }
+
+                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+                            });
+                        }
+                    }, 3000);
+
+                    game_page.cardTouch(true);
+
+                }
+            }, 5000);
+        }
+    }
+
+
+
+
+
     // Pop up dialog box 
     public void popUpDialog(String message, String title){
         AlertDialog.Builder builder = new AlertDialog.Builder(this.activity,R.style.AlertDialogStyle);
@@ -632,8 +785,10 @@ public class Game {
     }
 
 
-    // This method updates the score on the score bar of the page.
+    // This method updates the score on the score bar of the game page during the game.
+    //Also if a team wins the game, or if the game is draw, an animation will be displayed in the perspective of the human player.
     public void updateScore(Player winningPlayer ){
+
 
         if(this.singlePlayer.getName() == winningPlayer.getName()){
             final TextView playerScorePlaceHolder =  this.activity.findViewById(R.id.textViewMyScore);
@@ -643,6 +798,13 @@ public class Game {
             String score =  Integer.toString(previousScore);
             playerScorePlaceHolder.setText(score);
 
+            //An animation will be displayed when the human player wins
+            if (this.singlePlayerScore == 7){
+                LottieAnimationView anim1 = this.activity.findViewById(R.id.confetti1);
+                anim1.setVisibility(LottieAnimationView.VISIBLE);
+                LottieAnimationView anim2 = this.activity.findViewById(R.id.confetti2);
+                anim2.setVisibility(LottieAnimationView.VISIBLE);
+            }
 
         }else {
             final TextView playerScorePlaceHolder =  this.activity.findViewById(R.id.textViewOpponentScore);
@@ -652,8 +814,20 @@ public class Game {
             String score =  Integer.toString(previousScore);
             playerScorePlaceHolder.setText(score);
 
+            //An animation will be displayed when the human player looses
+            if (this.teamScore == 7){
+                LottieAnimationView anim1 = this.activity.findViewById(R.id.sadface);
+                anim1.setVisibility(LottieAnimationView.VISIBLE);
+            }
+        }
+
+        //An animation will be displayed when the game is draw
+        if (this.teamScore == 6 && this.singlePlayerScore == 6){
+            LottieAnimationView anim = this.activity.findViewById(R.id.draw);
+            anim.setVisibility(LottieAnimationView.VISIBLE);
         }
     }
+
 
 
     public static Game getOurInstance() {
