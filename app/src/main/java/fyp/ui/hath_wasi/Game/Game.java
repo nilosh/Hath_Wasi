@@ -24,6 +24,7 @@ import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 import fyp.ui.hath_wasi.Screens.game_page;
+import com.airbnb.lottie.LottieAnimationView;
 
 public class Game {
 
@@ -784,8 +785,10 @@ public class Game {
     }
 
 
-    // This method updates the score on the score bar of the page.
+    // This method updates the score on the score bar of the game page during the game.
+    //Also if a team wins the game, or if the game is draw, an animation will be displayed in the perspective of the human player.
     public void updateScore(Player winningPlayer ){
+
 
         if(this.singlePlayer.getName() == winningPlayer.getName()){
             final TextView playerScorePlaceHolder =  this.activity.findViewById(R.id.textViewMyScore);
@@ -795,6 +798,13 @@ public class Game {
             String score =  Integer.toString(previousScore);
             playerScorePlaceHolder.setText(score);
 
+            //An animation will be displayed when the human player wins
+            if (this.singlePlayerScore == 7){
+                LottieAnimationView anim1 = this.activity.findViewById(R.id.confetti1);
+                anim1.setVisibility(LottieAnimationView.VISIBLE);
+                LottieAnimationView anim2 = this.activity.findViewById(R.id.confetti2);
+                anim2.setVisibility(LottieAnimationView.VISIBLE);
+            }
 
         }else {
             final TextView playerScorePlaceHolder =  this.activity.findViewById(R.id.textViewOpponentScore);
@@ -804,8 +814,20 @@ public class Game {
             String score =  Integer.toString(previousScore);
             playerScorePlaceHolder.setText(score);
 
+            //An animation will be displayed when the human player looses
+            if (this.teamScore == 7){
+                LottieAnimationView anim1 = this.activity.findViewById(R.id.sadface);
+                anim1.setVisibility(LottieAnimationView.VISIBLE);
+            }
+        }
+
+        //An animation will be displayed when the game is draw
+        if (this.teamScore == 6 && this.singlePlayerScore == 6){
+            LottieAnimationView anim = this.activity.findViewById(R.id.draw);
+            anim.setVisibility(LottieAnimationView.VISIBLE);
         }
     }
+
 
 
     public static Game getOurInstance() {
