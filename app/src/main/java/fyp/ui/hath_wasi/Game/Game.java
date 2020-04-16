@@ -20,6 +20,8 @@ import android.media.MediaPlayer;
 import androidx.annotation.RequiresApi;
 
 import fyp.ui.hath_wasi.Cards.Card;
+import fyp.ui.hath_wasi.Game.GameScores.GameScore;
+import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
@@ -799,12 +801,21 @@ public class Game {
             String score =  Integer.toString(previousScore);
             playerScorePlaceHolder.setText(score);
 
-            //An animation will be displayed when the human player wins
             if (this.singlePlayerScore == 7){
-                LottieAnimationView anim1 = this.activity.findViewById(R.id.confetti1);
-                anim1.setVisibility(LottieAnimationView.VISIBLE);
-                LottieAnimationView anim2 = this.activity.findViewById(R.id.confetti2);
-                anim2.setVisibility(LottieAnimationView.VISIBLE);
+
+                if(this.singlePlayer.getName() == "Computer Player 1"){
+                    ScoreBoard.getInstance().setScores(new GameScore(0,2,0));
+                    losingAnimation();
+                }
+                else if(this.singlePlayer.getName() == "Computer Player 2"){
+                    ScoreBoard.getInstance().setScores(new GameScore(0,0,2));
+                    losingAnimation();
+                }
+                else {
+                    ScoreBoard.getInstance().setScores(new GameScore(2,0,0));
+                    winningAnimation();
+                }
+
             }
 
         }else {
@@ -815,19 +826,44 @@ public class Game {
             String score =  Integer.toString(previousScore);
             playerScorePlaceHolder.setText(score);
 
-            //An animation will be displayed when the human player looses
             if (this.teamScore == 7){
-                LottieAnimationView anim1 = this.activity.findViewById(R.id.sadface);
-                anim1.setVisibility(LottieAnimationView.VISIBLE);
+
+                if(this.singlePlayer.getName() == "Computer Player 1"){
+                    ScoreBoard.getInstance().setScores(new GameScore(1,0,1));
+                    winningAnimation();
+                }
+                else if(this.singlePlayer.getName() == "Computer Player 2"){
+                    ScoreBoard.getInstance().setScores(new GameScore(1,1,2));
+                    winningAnimation();
+                }
+                else {
+                    ScoreBoard.getInstance().setScores(new GameScore(0,1,1));
+                    losingAnimation();
+                }
             }
         }
 
-        //An animation will be displayed when the game is draw
         if (this.teamScore == 6 && this.singlePlayerScore == 6){
             LottieAnimationView anim = this.activity.findViewById(R.id.draw);
             anim.setVisibility(LottieAnimationView.VISIBLE);
+            ScoreBoard.getInstance().setScores(new GameScore(0,0,0));
         }
     }
+
+    public void winningAnimation(){
+        LottieAnimationView anim1 = this.activity.findViewById(R.id.confetti1);
+        anim1.setVisibility(LottieAnimationView.VISIBLE);
+
+        LottieAnimationView anim2 = this.activity.findViewById(R.id.confetti2);
+        anim2.setVisibility(LottieAnimationView.VISIBLE);
+    }
+
+    public void losingAnimation(){
+        LottieAnimationView anim1 = this.activity.findViewById(R.id.sadface);
+        anim1.setVisibility(LottieAnimationView.VISIBLE);
+    }
+
+
 
 
 
