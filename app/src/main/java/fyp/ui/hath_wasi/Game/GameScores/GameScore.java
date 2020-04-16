@@ -1,4 +1,4 @@
-package fyp.ui.hath_wasi.Game;
+package fyp.ui.hath_wasi.Game.GameScores;
 
 public class GameScore {
 
