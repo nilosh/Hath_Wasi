@@ -239,6 +239,7 @@ public class game_page extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // set player asking to true (human player chose to select the trump)
                         playerAsking = true;
                         selectTrump();
                     }
@@ -249,8 +250,9 @@ public class game_page extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Yoohooo" + trump, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Yoohooo" + trump, Toast.LENGTH_SHORT).show();
 
+                        // if human player passed the trump selection to a computer player, let the com player 2 select the trump.
                         Game game =Game.getInstance();
                         if(playerAsking == false){
 
@@ -260,22 +262,27 @@ public class game_page extends AppCompatActivity {
                                 playerAsking = true;
 
                                 Toast.makeText(getApplicationContext(), "Computer player 2 selected trump as " + trump, Toast.LENGTH_LONG).show();
+
+                                // If com player 2 selects the trump, alter the game instance and let com player 2 start the game.
                                 game.alterInstance( comPlayer2, human, comPlayer1, human, comPlayer1, comPlayer2, comPlayer2, trump);
                                 game.moveForwardWithCpuWin(comPlayer2);
                             }
 
+                            // else check if com player 1 an select the trump, if yes let com player 1 start the game.
                             else if(SelectingTrumpComPlayer.getChances(comPlayer1)){
                                 trump = SelectingTrumpComPlayer.getTrump(comPlayer1);
                                 passTrumpToTheInterface(trump);
                                 playerAsking = true;
 
                                 Toast.makeText(getApplicationContext(), "Computer player 1 selected trump as " + trump, Toast.LENGTH_LONG).show();
+
                                 game.alterInstance( comPlayer1, human, comPlayer2, human, comPlayer1, comPlayer2, comPlayer1, trump);
                                 game.moveForwardWithCpuWin(comPlayer1);
                             }
 
+                            // else ask the human player again.
                             else{
-                                Toast.makeText(getApplicationContext(), "yoohooooo at else part " + trump, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(), "yoohooooo at else part " + trump, Toast.LENGTH_LONG).show();
                                 openDialog();
                             }
                         }
@@ -330,6 +337,7 @@ public class game_page extends AppCompatActivity {
         dialog.show();
 
     }
+
 
     public void passTrumpToTheInterface(int which){
 

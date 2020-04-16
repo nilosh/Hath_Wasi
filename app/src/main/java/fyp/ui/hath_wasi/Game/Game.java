@@ -88,6 +88,7 @@ public class Game {
     Card c1, c2;
 
 
+    // this method alters the game instance for the game to be played if the computer players select the trump.
     public void alterInstance(AbComputerPlayer singlePlayer, Player teamPlayer1, AbComputerPlayer teamPlayer2, Player humanPlayer, AbComputerPlayer cpu1,
         AbComputerPlayer cpu2, AbComputerPlayer startPlayer, String trump){
 
