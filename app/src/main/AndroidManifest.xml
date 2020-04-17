@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Screens.score_page"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".splash">
+        </activity>
+        <activity
+            android:name=".Screens.score_page"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Screens.instructions_page"
             android:screenOrientation="portrait" />
@@ -19,7 +23,13 @@
             android:screenOrientation="userLandscape" />
         <activity
             android:name=".Screens.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.Main"/>
+                <category  android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
