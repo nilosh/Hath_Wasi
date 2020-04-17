@@ -7,6 +7,7 @@
     android:background="#053D37"
     tools:context=".Screens.score_page">
 
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="171dp"
@@ -25,11 +26,9 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="30dp"
         android:gravity="center"
         android:stretchColumns="0,1,2,3"
@@ -58,7 +57,7 @@
             <TextView
 
                 android:id="@+id/simpleTextView1"
-                android:layout_width="match_parent"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="18dip"
@@ -75,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="18dip"
-                android:text="Mathew"
+                android:text="Computer Player 1"
                 android:textColor="#F1F3F3"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -87,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="18dip"
-                android:text="Kabilin"
+                android:text="Computer Player 2"
                 android:textColor="#F1F3F3"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -103,7 +102,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView4"
+                android:id="@+id/game_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -113,6 +112,39 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+
+                android:id="@+id/game1_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game1_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game1_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
 
         </TableRow>
 
@@ -124,7 +156,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView5"
+                android:id="@+id/game_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -134,6 +166,39 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+
+                android:id="@+id/game2_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game2_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game2_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -144,7 +209,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView6"
+                android:id="@+id/game_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -154,6 +219,39 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+
+                android:id="@+id/game3_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game3_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game3_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -164,7 +262,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView7"
+                android:id="@+id/game_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -174,6 +272,39 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+
+                android:id="@+id/game4_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game4_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game4_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -184,7 +315,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView8"
+                android:id="@+id/game_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -194,6 +325,39 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+
+                android:id="@+id/game5_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game5_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game5_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -204,7 +368,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView9"
+                android:id="@+id/game_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -214,6 +378,39 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+
+                android:id="@+id/game6_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game6_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game6_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -224,7 +421,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView10"
+                android:id="@+id/game_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -234,6 +431,39 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+
+                android:id="@+id/game7_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game7_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game7_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -244,7 +474,7 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView11"
+                android:id="@+id/game_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -254,22 +484,35 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="1dp"
-            android:layout_weight="1">
-
             <TextView
 
-                android:id="@+id/simpleTextView12"
+                android:id="@+id/game8_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="0dip"
-                android:text="Game 09"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game8_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game8_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
                 android:textColor="#F1F3F3"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -284,12 +527,98 @@
 
             <TextView
 
-                android:id="@+id/simpleTextView13"
+                android:id="@+id/game_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:text="Game 09"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game9_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game9_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game9_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1">
+
+            <TextView
+
+                android:id="@+id/game_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="0dip"
                 android:text="Game 10"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game10_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game10_cpu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
+                android:textColor="#F1F3F3"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/game10_cpu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="0dip"
                 android:textColor="#F1F3F3"
                 android:textSize="16dp"
                 android:textStyle="bold" />
