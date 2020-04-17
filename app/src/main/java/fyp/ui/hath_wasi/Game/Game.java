@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.media.MediaPlayer;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -806,14 +807,17 @@ public class Game {
                 if(this.singlePlayer.getName() == "Computer Player 1"){
                     ScoreBoard.getInstance().setScores(new GameScore(0,2,0));
                     losingAnimation();
+                    getToastMessage(false);
                 }
                 else if(this.singlePlayer.getName() == "Computer Player 2"){
                     ScoreBoard.getInstance().setScores(new GameScore(0,0,2));
                     losingAnimation();
+                    getToastMessage(false);
                 }
                 else {
                     ScoreBoard.getInstance().setScores(new GameScore(2,0,0));
                     winningAnimation();
+                    getToastMessage(true);
                 }
 
             }
@@ -831,20 +835,24 @@ public class Game {
                 if(this.singlePlayer.getName() == "Computer Player 1"){
                     ScoreBoard.getInstance().setScores(new GameScore(1,0,1));
                     winningAnimation();
+                    getToastMessage(true);
                 }
                 else if(this.singlePlayer.getName() == "Computer Player 2"){
                     ScoreBoard.getInstance().setScores(new GameScore(1,1,2));
                     winningAnimation();
+                    getToastMessage(true);
                 }
                 else {
                     ScoreBoard.getInstance().setScores(new GameScore(0,1,1));
                     losingAnimation();
+                    getToastMessage(false);
                 }
             }
         }
 
         if (this.teamScore == 6 && this.singlePlayerScore == 6){
             LottieAnimationView anim = this.activity.findViewById(R.id.draw);
+            Toast.makeText(activity.getApplicationContext(), "Game: Draw", Toast.LENGTH_LONG).show();
             anim.setVisibility(LottieAnimationView.VISIBLE);
             ScoreBoard.getInstance().setScores(new GameScore(0,0,0));
         }
@@ -856,6 +864,17 @@ public class Game {
 
         LottieAnimationView anim2 = this.activity.findViewById(R.id.confetti2);
         anim2.setVisibility(LottieAnimationView.VISIBLE);
+
+    }
+
+    public void getToastMessage(boolean result){
+        if(result == true){
+            Toast.makeText(activity.getApplicationContext(), "Your team won the Game!", Toast.LENGTH_LONG).show();
+        }
+
+        else{
+            Toast.makeText(activity.getApplicationContext(), "Your team lost the Game!", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void losingAnimation(){
