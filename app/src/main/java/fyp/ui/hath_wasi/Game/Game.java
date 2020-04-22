@@ -46,6 +46,9 @@ public class Game {
     private static Player startPlayer;
     private static boolean invalidCardByHuman;
     private static Card com2Card;
+    private static Player[] players;
+    private static int playerTurnIndex;
+    private static boolean gameFinish;
 
     private static String trumps;
     public Activity activity;
@@ -68,6 +71,9 @@ public class Game {
         this.humanPlayer = humanPlayer;
         this.activity = _activity;
         this.invalidCardByHuman = false;
+        this.players = new Player[]{humanPlayer, cpu1, cpu2};
+        this.playerTurnIndex = 0;
+        this.gameFinish = false;
     }
 
     private Game(){}
@@ -92,8 +98,8 @@ public class Game {
 
 
     // this method alters the game instance for the game to be played if the computer players select the trump.
-    public void alterInstance(AbComputerPlayer singlePlayer, Player teamPlayer1, AbComputerPlayer teamPlayer2, Player humanPlayer, AbComputerPlayer cpu1,
-        AbComputerPlayer cpu2, AbComputerPlayer startPlayer, String trump){
+    public void alterInstance(Player singlePlayer, Player teamPlayer1, AbComputerPlayer teamPlayer2, Player humanPlayer, AbComputerPlayer cpu1,
+        AbComputerPlayer cpu2, Player startPlayer, String trumps){
 
         this.singlePlayer = singlePlayer;
         this.teamPlayer1 = teamPlayer1;
@@ -105,9 +111,10 @@ public class Game {
         this.cpu1 = cpu1;
         this.cpu2 = cpu2;
         this.startPlayer = startPlayer;
-        this.trumps = trump;
+        this.trumps = trumps;
         this.humanPlayer = humanPlayer;
         this.invalidCardByHuman = false;
+        this.gameFinish = false;
 
     }
 
@@ -138,7 +145,7 @@ public class Game {
 
                 GameRound gameRound = new GameRound(this.cpu1, this.cpu1.selectSmallestCardFromCategory(selectedCard.getCategory()),
                         this.cpu2, this.cpu2.selectSmallestCardFromCategory(selectedCard.getCategory()),
-                        this.humanPlayer, selectedCard, selectedCard.getCategory(), trumps);
+                        this.humanPlayer, selectedCard, selectedCard.getCategory(), this.trumps);
 
                 // increment the number of rounds played.
                 this.playedRounds[this.numberOfRoundsPlayed++] = gameRound;
@@ -301,7 +308,7 @@ public class Game {
                 // Creates new game round object.
                 GameRound gameRound = new GameRound(this.cpu1, c1,
                         this.cpu2, com2Card,
-                        this.humanPlayer, selectedCard, c1.getCategory(), trumps);
+                        this.humanPlayer, selectedCard, c1.getCategory(), this.trumps);
 
                 Log.println(Log.ERROR, "TAG", "after game round object");
 
@@ -408,7 +415,7 @@ public class Game {
                 // Create new game round object.
                 GameRound gameRound = new GameRound(this.cpu1, c1,
                         this.cpu2, c2,
-                        this.humanPlayer, selectedCard, c2.getCategory(), trumps);
+                        this.humanPlayer, selectedCard, c2.getCategory(), this.trumps);
 
                 invalidCardByHuman = false;
 
@@ -496,277 +503,286 @@ public class Game {
 
     // This method plays the game for CPU players.
     public void moveForwardWithCpuWin() {
-        final AnimatorSet animatorSet = new AnimatorSet();
 
-        final ImageView com1 = this.activity.findViewById(R.id.com1Card);
-        final ImageView com2 = this.activity.findViewById(R.id.com2Card);
-        final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
+        // Move forward only if the current game is not finished.
+        if(numberOfRoundsPlayed < 12){
 
-        Log.println(Log.ERROR, "TAG", "Late night testing2 ");
+            final AnimatorSet animatorSet = new AnimatorSet();
 
-        // Get the last game round to a variable.
-        final GameRound pr = this.playedRounds[numberOfRoundsPlayed - 1];
+            final ImageView com1 = this.activity.findViewById(R.id.com1Card);
+            final ImageView com2 = this.activity.findViewById(R.id.com2Card);
+            final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
 
-        // If the last game round winner is the CPU Player 1.
-        if (this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() == cpu1.getName()) {
+            Log.println(Log.ERROR, "TAG", "Late night testing2 ");
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // set the image views of com player 2 and human player to invisible.
-                    playerPlaceholder.setVisibility(View.INVISIBLE);
-                    com2.setVisibility(View.INVISIBLE);
-                    // Play the card for this round, map it to the image view and make it visible.
-                    c1 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
-                    com1.setImageResource(c1.getImageSource());
-                    com1.setVisibility(View.VISIBLE);
+            // Get the last game round to a variable.
+            final GameRound pr = this.playedRounds[numberOfRoundsPlayed - 1];
 
-                    // Set animations.
-                    Animation animation = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+            // If the last game round winner is the CPU Player 1.
+            if (this.playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() == cpu1.getName()) {
 
-                    com1.startAnimation(animation);
-                    animation.setAnimationListener(new Animation.AnimationListener() {
-                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-                            com1.setImageAlpha(1000);
-                        }
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // set the image views of com player 2 and human player to invisible.
+                        playerPlaceholder.setVisibility(View.INVISIBLE);
+                        com2.setVisibility(View.INVISIBLE);
+                        // Play the card for this round, map it to the image view and make it visible.
+                        c1 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
+                        com1.setImageResource(c1.getImageSource());
+                        com1.setVisibility(View.VISIBLE);
 
-                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
+                        // Set animations.
+                        Animation animation = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
 
-                        }
+                        com1.startAnimation(animation);
+                        animation.setAnimationListener(new Animation.AnimationListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                                com1.setImageAlpha(1000);
+                            }
 
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
 
-                        }
-                    });
-                }
-            }, 6000);
+                            }
 
-            // Next player is Human Player.
-            // Set cardTouch to true.
-            game_page.cardTouch(true);
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
 
-            // Else if the player is Com Player 2.
-        } else {
+                            }
+                        });
+                    }
+                }, 6000);
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
+                // Next player is Human Player.
+                // Set cardTouch to true.
+                game_page.cardTouch(true);
 
-                    playerPlaceholder.setVisibility(View.INVISIBLE);
+                // Else if the player is Com Player 2.
+            } else {
 
-                    // Play the card for com player 2.
-                    c2 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
-                    // Play the card for com player 1.
-                    c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                    // Set image resources of the cards played and make them invisible.
-                    com2.setImageResource(c2.getImageSource());
-                    com1.setImageResource(c1.getImageSource());
-                    com2.setVisibility(View.INVISIBLE);
-                    com1.setVisibility(View.INVISIBLE);
+                        playerPlaceholder.setVisibility(View.INVISIBLE);
 
-                    // Set animations for the played cards.
-                    final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
-                    final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
+                        // Play the card for com player 2.
+                        c2 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
+                        // Play the card for com player 1.
+                        c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
 
+                        // Set image resources of the cards played and make them invisible.
+                        com2.setImageResource(c2.getImageSource());
+                        com1.setImageResource(c1.getImageSource());
+                        com2.setVisibility(View.INVISIBLE);
+                        com1.setVisibility(View.INVISIBLE);
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            com2.startAnimation(animationRl);
-                            animationRl.setAnimationListener(new Animation.AnimationListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                @Override
-                                public void onAnimationStart(Animation animation) {
-                                    com2.setVisibility(View.VISIBLE);
-                                    com2.setImageAlpha(1000);
-                                }
-
-                                @Override
-                                public void onAnimationEnd(Animation animation) {
-                                    //com2.setScaleX(com2.getScaleX());
-
-                                }
-
-                                @Override
-                                public void onAnimationRepeat(Animation animation) {
-
-                                }
-                            });
-                        }
-                    }, 1500);
+                        // Set animations for the played cards.
+                        final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+                        final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
 
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            com1.startAnimation(animationLr);
-                            animationLr.setAnimationListener(new Animation.AnimationListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                @Override
-                                public void onAnimationStart(Animation animation) {
-                                    com1.setVisibility(View.VISIBLE);
-                                    com1.setImageAlpha(1000);
-                                }
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                com2.startAnimation(animationRl);
+                                animationRl.setAnimationListener(new Animation.AnimationListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+                                        com2.setVisibility(View.VISIBLE);
+                                        com2.setImageAlpha(1000);
+                                    }
 
-                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                @Override
-                                public void onAnimationEnd(Animation animation) {
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        //com2.setScaleX(com2.getScaleX());
 
-                                }
+                                    }
 
-                                @Override
-                                public void onAnimationRepeat(Animation animation) {
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
 
-                                }
-                            });
-                        }
-                    }, 3000);
+                                    }
+                                });
+                            }
+                        }, 1500);
 
-                    // Let Human player play.
-                    game_page.cardTouch(true);
-                }
-            }, 5000);
+
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                com1.startAnimation(animationLr);
+                                animationLr.setAnimationListener(new Animation.AnimationListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+                                        com1.setVisibility(View.VISIBLE);
+                                        com1.setImageAlpha(1000);
+                                    }
+
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                            }
+                        }, 3000);
+
+                        // Let Human player play.
+                        game_page.cardTouch(true);
+                    }
+                }, 5000);
+            }
+
         }
+
     }
 
 
     public void moveForwardWithCpuWin(Player player) {
 
-        final AnimatorSet animatorSet = new AnimatorSet();
 
-        final ImageView com1 = this.activity.findViewById(R.id.com1Card);
-        final ImageView com2 = this.activity.findViewById(R.id.com2Card);
-        final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
+        if(this.numberOfRoundsPlayed < 12){
+
+            final AnimatorSet animatorSet = new AnimatorSet();
+
+            final ImageView com1 = this.activity.findViewById(R.id.com1Card);
+            final ImageView com2 = this.activity.findViewById(R.id.com2Card);
+            final ImageView playerPlaceholder = this.activity.findViewById(R.id.playCard);
 
 
-        if (player.getName() == cpu1.getName()) {
+            if (player.getName() == cpu1.getName()) {
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    playerPlaceholder.setVisibility(View.INVISIBLE);
-                    com2.setVisibility(View.INVISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        playerPlaceholder.setVisibility(View.INVISIBLE);
+                        com2.setVisibility(View.INVISIBLE);
 
-                    c1 = cpu1.selectHighestCard();
-                    com1.setImageResource(c1.getImageSource());
-                    com1.setVisibility(View.VISIBLE);
+                        c1 = cpu1.selectHighestCard();
+                        com1.setImageResource(c1.getImageSource());
+                        com1.setVisibility(View.VISIBLE);
 
-                    Animation animation = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+                        Animation animation = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
 
-                    com1.startAnimation(animation);
-                    animation.setAnimationListener(new Animation.AnimationListener() {
-                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-                            com1.setImageAlpha(1000);
-                        }
+                        com1.startAnimation(animation);
+                        animation.setAnimationListener(new Animation.AnimationListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                                com1.setImageAlpha(1000);
+                            }
 
-                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
 
-                        }
+                            }
 
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
 
-                        }
-                    });
-                }
-            }, 6000);
+                            }
+                        });
+                    }
+                }, 6000);
 
-            game_page.cardTouch(true);
+                game_page.cardTouch(true);
 
-        } else {
+            } else {
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    playerPlaceholder.setVisibility(View.INVISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        playerPlaceholder.setVisibility(View.INVISIBLE);
 
-                    c2 = cpu2.selectHighestCard();
-                    c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
+                        c2 = cpu2.selectHighestCard();
+                        c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
 
-                    com2.setImageResource(c2.getImageSource());
-                    com1.setImageResource(c1.getImageSource());
-                    com2.setVisibility(View.INVISIBLE);
-                    com1.setVisibility(View.INVISIBLE);
+                        com2.setImageResource(c2.getImageSource());
+                        com1.setImageResource(c1.getImageSource());
+                        com2.setVisibility(View.INVISIBLE);
+                        com1.setVisibility(View.INVISIBLE);
 
-                    final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
-                    final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
+                        final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
+                        final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            com2.startAnimation(animationRl);
-                            animationRl.setAnimationListener(new Animation.AnimationListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                @Override
-                                public void onAnimationStart(Animation animation) {
-                                    com2.setVisibility(View.VISIBLE);
-                                    com2.setImageAlpha(1000);
-                                }
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                com2.startAnimation(animationRl);
+                                animationRl.setAnimationListener(new Animation.AnimationListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+                                        com2.setVisibility(View.VISIBLE);
+                                        com2.setImageAlpha(1000);
+                                    }
 
-                                @Override
-                                public void onAnimationEnd(Animation animation) {
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
 
-                                }
+                                    }
 
-                                @Override
-                                public void onAnimationRepeat(Animation animation) {
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
 
-                                }
-                            });
-                        }
-                    }, 1500);
+                                    }
+                                });
+                            }
+                        }, 1500);
 
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            com1.startAnimation(animationLr);
-                            animationLr.setAnimationListener(new Animation.AnimationListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                @Override
-                                public void onAnimationStart(Animation animation) {
-                                    com1.setVisibility(View.VISIBLE);
-                                    com1.setImageAlpha(1000);
-                                }
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                com1.startAnimation(animationLr);
+                                animationLr.setAnimationListener(new Animation.AnimationListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+                                        com1.setVisibility(View.VISIBLE);
+                                        com1.setImageAlpha(1000);
+                                    }
 
-                                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                @Override
-                                public void onAnimationEnd(Animation animation) {
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
 
-                                }
+                                    }
 
-                                @Override
-                                public void onAnimationRepeat(Animation animation) {
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
 
-                                }
-                            });
-                        }
-                    }, 3000);
+                                    }
+                                });
+                            }
+                        }, 3000);
 
-                    game_page.cardTouch(true);
+                        game_page.cardTouch(true);
 
-                }
-            }, 5000);
+                    }
+                }, 5000);
+            }
+
         }
     }
-
-
-
 
 
     // Pop up dialog box 
@@ -808,16 +824,19 @@ public class Game {
                     ScoreBoard.getInstance().setScores(new GameScore(0,2,0));
                     losingAnimation();
                     getToastMessage(false);
+                    openDialog();
                 }
                 else if(this.singlePlayer.getName() == "Computer Player 2"){
                     ScoreBoard.getInstance().setScores(new GameScore(0,0,2));
                     losingAnimation();
                     getToastMessage(false);
+                    openDialog();
                 }
                 else {
                     ScoreBoard.getInstance().setScores(new GameScore(2,0,0));
                     winningAnimation();
                     getToastMessage(true);
+                    openDialog();
                 }
 
             }
@@ -836,29 +855,52 @@ public class Game {
                     ScoreBoard.getInstance().setScores(new GameScore(1,0,1));
                     winningAnimation();
                     getToastMessage(true);
+                    openDialog();
                 }
                 else if(this.singlePlayer.getName() == "Computer Player 2"){
                     ScoreBoard.getInstance().setScores(new GameScore(1,1,2));
                     winningAnimation();
                     getToastMessage(true);
+                    openDialog();
                 }
                 else {
                     ScoreBoard.getInstance().setScores(new GameScore(0,1,1));
                     losingAnimation();
                     getToastMessage(false);
+                    openDialog();
                 }
             }
         }
 
         if (this.teamScore == 6 && this.singlePlayerScore == 6){
+            this.gameFinish = true;
             LottieAnimationView anim = this.activity.findViewById(R.id.draw);
             Toast.makeText(activity.getApplicationContext(), "Game: Draw", Toast.LENGTH_LONG).show();
             anim.setVisibility(LottieAnimationView.VISIBLE);
             ScoreBoard.getInstance().setScores(new GameScore(0,0,0));
+            openDialog();
         }
     }
 
+    // This method is used to switch on animations and off animations as required.
+    public void winningOrLoosingAnimationOff(){
+
+        LottieAnimationView anim1 = this.activity.findViewById(R.id.confetti1);
+        anim1.setVisibility(LottieAnimationView.INVISIBLE);
+
+        LottieAnimationView anim2 = this.activity.findViewById(R.id.confetti2);
+        anim2.setVisibility(LottieAnimationView.INVISIBLE);
+
+        LottieAnimationView anim3 = this.activity.findViewById(R.id.sadface);
+        anim3.setVisibility(LottieAnimationView.INVISIBLE);
+
+        LottieAnimationView anim = this.activity.findViewById(R.id.draw);
+        anim.setVisibility(LottieAnimationView.INVISIBLE);
+    }
+
     public void winningAnimation(){
+
+        this.gameFinish = true;
         LottieAnimationView anim1 = this.activity.findViewById(R.id.confetti1);
         anim1.setVisibility(LottieAnimationView.VISIBLE);
 
@@ -878,11 +920,265 @@ public class Game {
     }
 
     public void losingAnimation(){
+
+        this.gameFinish = true;
         LottieAnimationView anim1 = this.activity.findViewById(R.id.sadface);
         anim1.setVisibility(LottieAnimationView.VISIBLE);
     }
 
 
+    public void createNewGame(Player human, AbComputerPlayer comPlayer1, AbComputerPlayer comPlayer2){
+
+        //first turn off any winning or loosing animations
+        //then set the score labels to 0
+        winningOrLoosingAnimationOff();
+
+        final TextView scorelabel1 =  this.activity.findViewById(R.id.textViewMyScore);
+        final TextView scorelabel2 =  this.activity.findViewById(R.id.textViewOpponentScore);
+        scorelabel1.setText("0");
+        scorelabel2.setText("0");
+
+        final TextView scoreLabel = (TextView) activity.findViewById(R.id.textViewMyTeam);
+        final TextView myLabel = (TextView) activity.findViewById(R.id.textViewOpponent);
+
+
+        // Increment the playerTurnIndex and set it to checkIndex.
+        int checkIndex = ++playerTurnIndex;
+
+        //create new card-deck and player instances for the new game.
+        game_page.startGame();
+
+        Game game = new Game();
+
+        //for player two (CPU) given the chance first.
+        if(checkIndex % 3 == 1){
+            if(SelectingTrumpComPlayer.getChances(cpu2)){
+
+                Log.println(Log.ERROR, "TAG", "Before selecting trumps" + this.trumps);
+
+                this.trumps = SelectingTrumpComPlayer.getTrump(cpu2);
+
+                // pass trump to the interface as string.
+                passTrumpToTheInterface(this.trumps);
+
+                Toast.makeText(activity.getApplicationContext(), "Computer Player 2 selected trump as " + this.trumps, Toast.LENGTH_LONG).show();
+                scoreLabel.setText(comPlayer2.getName());
+                myLabel.setText("My Team");
+
+                //alter game instance and move forward with cpu2 player as the start player.
+                game.alterInstance( cpu2, humanPlayer, cpu1, humanPlayer, cpu1, cpu2, cpu2, this.trumps);
+                moveForwardWithCpuWin(cpu2);
+            }
+            else{
+                // increment the variable checkIndex.
+                checkIndex ++;
+            }
+
+        }
+
+        //for player one (CPU) given the chance
+        if(checkIndex % 3 == 2){
+
+            // if com player 1 selects the trump, get the trump selected.
+            if(SelectingTrumpComPlayer.getChances(cpu1)){
+
+                this.trumps = SelectingTrumpComPlayer.getTrump(cpu1);
+                //Log.println( Log.ERROR, "TAG", "Player 1 Selected trump as : " + this.trumps);
+                passTrumpToTheInterface(this.trumps);
+
+                //Log.println(Log.ERROR, "TAG", "After selecting trumps: " + this.trumps);
+
+                Toast.makeText(activity.getApplicationContext(), "Computer Player 1 selected trump as " + this.trumps, Toast.LENGTH_LONG).show();
+                scoreLabel.setText(comPlayer1.getName());
+                myLabel.setText("My Team");
+
+                game.alterInstance( cpu1, humanPlayer, cpu2, humanPlayer, cpu1, cpu2, cpu1, this.trumps);
+                moveForwardWithCpuWin(cpu1);
+
+            }
+            else {
+                checkIndex++;
+            }
+
+        }
+
+        // for human player given the chance.
+        if(checkIndex % 3 == 0){
+
+            // let player choose if he/she can win trumps.
+            chooseWinningPossibilityDialog( human,  comPlayer1,  comPlayer2);
+            scoreLabel.setText("My Team");
+            myLabel.setText("Opponent");
+
+            game.alterInstance( humanPlayer, cpu1, cpu2, humanPlayer, cpu1, cpu2, humanPlayer, this.trumps);
+
+        }
+
+    }
+
+
+    // This methods allows the player to check if he/she can win 7 chances from this game.
+    public void chooseWinningPossibilityDialog(final Player human, final AbComputerPlayer comPlayer1, final AbComputerPlayer comPlayer2){
+        AlertDialog.Builder getChances = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
+        getChances.setMessage("Can you win 7 chances?")
+                .setTitle("♠ ♥ ♣ ♦")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectTrump();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        createNewGame( human,  comPlayer1,  comPlayer2);
+                    }
+                });
+
+        AlertDialog dialog = getChances.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+
+    // This methods allows the user to select the trump category.
+    private void selectTrump(){
+
+        this.trumps = null;
+        AlertDialog.Builder chooseTrump = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
+
+        String[] items = {"♠ Spades", "♥ Hearts", "♣ Clubs", "♦ Diamonds"};
+        chooseTrump.setTitle("Select your Trump.")
+                .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        passTrumpToTheInterface(which);
+                    }
+                })
+
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d( "TAG", "Inside on click : " + trumps);
+                        if (trumps == null || trumps.isEmpty()) {
+                            Toast.makeText(activity.getApplicationContext(), "Please select a trump to continue!", Toast.LENGTH_SHORT).show();
+                            Log.d("TAG", "the trump selected: " + trumps);
+                            selectTrump();
+                        }
+                        else{
+                            dialog.dismiss();
+                        }
+
+                    }
+                });
+
+        AlertDialog dialog = chooseTrump.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+
+
+    // This dialog box allows user to select the user to select if he/she wants to play the next round of the game.
+    public void openDialog(){
+
+        Log.println( Log.ERROR, "TAG", "Inside openDialog" );
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder getChances = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
+                getChances.setMessage("Would you like to play the next round?")
+                        .setTitle("♠ ♥ ♣ ♦")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // creates a new game with the players.
+                                createNewGame(humanPlayer, cpu1, cpu2);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+
+                        });
+
+                AlertDialog dialog = getChances.create();
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.setCancelable(false);
+                dialog.show();
+            }
+        }, 3000);
+
+        Log.println( Log.ERROR, "TAG", "Exiting openDialog" );
+
+    }
+
+
+    // This method will pass the selected trump to the game interface (using string).
+    public void passTrumpToTheInterface(String which){
+
+        final TextView textViewTrump = (TextView) activity.findViewById(R.id.trumpSelected);
+        textViewTrump.setVisibility(View.VISIBLE);
+        switch (which){
+            case "spades":
+                this.trumps = "spades";
+                Log.d( "TAG", "Spades Selected: " + trumps);
+                textViewTrump.setText("♠");
+                break;
+            case "hearts":
+                this.trumps = "hearts";
+                Log.d( "TAG", "Hearts Selected: " + trumps);
+                textViewTrump.setText("♥");
+                break;
+            case "clubs":
+                this.trumps = "clubs";
+                Log.d( "TAG", "Clubs Selected: " + trumps);
+                textViewTrump.setText("♣");
+                break;
+            case "diamonds":
+                this.trumps = "diamonds";
+                Log.d( "TAG", "Diamonds Selected: " + trumps);
+                textViewTrump.setText("♦");
+                break;
+        }
+    }
+
+
+    // This method will pass the selected trump to the game interface (using int).
+    public void passTrumpToTheInterface(int which){
+
+        final TextView textViewTrump = (TextView) activity.findViewById(R.id.trumpSelected);
+        textViewTrump.setVisibility(View.VISIBLE);
+        switch (which){
+            case 0:
+                this.trumps = "spades";
+                Log.d( "TAG", "Spades Selected: " + this.trumps);
+                textViewTrump.setText("♠");
+                break;
+            case 1:
+                this.trumps = "hearts";
+                Log.d( "TAG", "Hearts Selected: " + this.trumps);
+                textViewTrump.setText("♥");
+                break;
+            case 2:
+                this.trumps = "clubs";
+                Log.d( "TAG", "Clubs Selected: " + this.trumps);
+                textViewTrump.setText("♣");
+                break;
+            case 3:
+                this.trumps = "diamonds";
+                Log.d( "TAG", "Diamonds Selected: " + this.trumps);
+                textViewTrump.setText("♦");
+                break;
+        }
+    }
 
 
 
