@@ -33,6 +33,7 @@ import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
 import fyp.ui.hath_wasi.Game.Game;
 import fyp.ui.hath_wasi.Game.SelectingTrumpComPlayer;
+import fyp.ui.hath_wasi.Messages.Messages;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.ComputerPlayerAggressive;
 import fyp.ui.hath_wasi.Players.Player;
@@ -226,10 +227,6 @@ public class game_page extends AppCompatActivity {
                 }
             });
 
-//            final int topPosition = image.getHeight();
-//            int leftPosition = image.getLeft();
-//            int rightPosition = image.getRight();
-
             human.getPlayerCards().remove(selectedCard);
             human.setNumberOfCardsRemaining(human.getNumberOfCardsRemaining()-1);
 
@@ -261,7 +258,7 @@ public class game_page extends AppCompatActivity {
     public void openDialog(){
         // This method creates and allows the players to choose allow or decline selecting the trump.
         AlertDialog.Builder getChances = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
-        getChances.setMessage("Can you win 7 chances?")
+        getChances.setMessage(Messages.getMessageWinSevenChances())
                 .setTitle("♠ ♥ ♣ ♦")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -288,7 +285,7 @@ public class game_page extends AppCompatActivity {
                                 passTrumpToTheInterface(trump);
                                 playerAsking = true;
 
-                                Toast.makeText(getApplicationContext(), "Computer player 2 selected trump as " + trump, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), Messages.getToastComPlayer2SelectedTrump() + trump, Toast.LENGTH_LONG).show();
 
                                 // If com player 2 selects the trump, alter the game instance and let com player 2 start the game.
                                 game.alterInstance( comPlayer2, human, comPlayer1, human, comPlayer1, comPlayer2, comPlayer2, trump);
@@ -301,7 +298,7 @@ public class game_page extends AppCompatActivity {
                                 passTrumpToTheInterface(trump);
                                 playerAsking = true;
 
-                                Toast.makeText(getApplicationContext(), "Computer player 1 selected trump as " + trump, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), Messages.getToastComPlayer1SelectedTrump() + trump, Toast.LENGTH_LONG).show();
 
                                 game.alterInstance( comPlayer1, human, comPlayer2, human, comPlayer1, comPlayer2, comPlayer1, trump);
                                 game.moveForwardWithCpuWin(comPlayer1);
@@ -330,7 +327,7 @@ public class game_page extends AppCompatActivity {
         // This method allows the user to select the trump when they choose to select the trump.
         AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this, R.style.AlertDialogStyle);
         String[] items = {"♠ Spades", "♥ Hearts", "♣ Clubs", "♦ Diamonds"};
-        chooseTrump.setTitle("Select your Trump")
+        chooseTrump.setTitle(Messages.getMessageSelectTrump())
                 .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -345,7 +342,7 @@ public class game_page extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("TAG", "Inside on click : " + trump);
                         if(trump == null || trump.isEmpty()){
-                            Toast.makeText(getApplicationContext(), "Please select a trump to continue!",
+                            Toast.makeText(getApplicationContext(), Messages.getToastChooseTrump(),
                                     Toast.LENGTH_SHORT).show();
                             Log.d("TAG", "The Trump Selected: " + trump);
                             selectTrump();
