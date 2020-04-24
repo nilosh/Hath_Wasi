@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
             android:id="@+id/sub-topic1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Introduction"
+            android:text="Hath Wasi Game Rules"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="#F1F3F3"
@@ -37,7 +36,7 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="•	Hath Wasi is a traditional Sri Lankan card game which is played by only three players.
+            android:text="•Hath Wasi is a traditional Sri Lankan card game which is played by ONLY 3 PLAYERS.
 "/>
 
         <TextView
@@ -52,7 +51,7 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="•	To play this game, it uses only cards greater than 5 of all suits. Therefore the selected 36 cards will be dealt among the three players equally (12 each) and dealing of cards will happen anticlockwise.
+            android:text="•This game is played only using cards greater than 5 of all suits (Order of play – A>K>Q>10>9>8>7>6). Therefore, the selected 36 cards will be dealt among the three players EQUALLY (12 each) and dealing of cards will happen anticlockwise.
 "/>
 
         <TextView
@@ -67,7 +66,7 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="•	In the first round the human player will get the chance to bid for the game which means, the human player should check for 7 possible chances to win the game. If not the player should pass the bidding chance to the other player (This happens anticlockwise).
+            android:text="•In the FIRST ROUND the HUMAN PLAYER will get a chance to BID the trump for the game, which means the human player should check for 7 possible chances to win the game. If 7 possible chances cannot be found, the player will have the OPTION TO PASS the bidding chance to the next player (This happens anticlockwise).
 
 "/>
 
@@ -83,7 +82,7 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="• In case, when all the players pass the chance, the round will be cancelled and the shuffling and dealing of cards will happen again and again till a player bids.
+            android:text="•In case, if all the players pass the chance, the round will be cancelled and the shuffling and dealing of cards will happen continuously until a player bid.
 
 
 "/>
@@ -100,7 +99,7 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="• The suit which was selected will be the trump for the round and it will be indicated in the middle of the status bar.
+            android:text="•The PLAYER WHO BIDS will be the INDIVIDUAL TEAM and the OTHER 2 PLAYERS will be the OPPOSITION TEAM.
 
 
 "/>
@@ -117,23 +116,10 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="• The player who bids will be the individual team and the other players will be the opposition team.
+            android:text="•The player who bids will start the game by playing the first card and the playing of cards will happen in the anticlockwise direction.
 
 
 "/>
-        <TextView
-            android:id="@+id/sub-topic2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="How to play "
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:textColor="#F1F3F3"
-            android:textSize="25dp"
-            android:layout_marginTop="25dp"
-            tools:layout_editor_absoluteX="151dp"
-            tools:layout_editor_absoluteY="19dp" />
-
         <TextView
             android:id="@+id/TextView7"
             android:layout_width="match_parent"
@@ -146,9 +132,9 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="
-•	The objective of Hath Wasi is to score the highest number of points from 10 games.
+            android:text="•The team which played the card with the HIGHEST value will receive 2 POINTS and if it's the team with 2 PLAYERS, EACH player will receive 1 POINT.
 "/>
+
         <TextView
             android:id="@+id/TextView8"
             android:layout_width="match_parent"
@@ -161,7 +147,7 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="•	The first team to win seven chances will win the game and once a team wins a game and the game will no longer be played."/>
+            android:text="•The first team to WIN 7 CHANCES will WIN the game and once a team wins (7 chances), the game will NO LONGER be CONTINUED even if there are more cards left in hand. "/>
 
         <TextView
             android:id="@+id/TextView9"
@@ -175,7 +161,7 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="•	The team which bids will start the game by playing the first card and the playing of card will happen anticlockwise."/>
+            android:text="•The score of each player will be updated in the SCORE BOARD at the end of each game which can be viewed under the Score Board option in the Main page."/>
 
         <TextView
             android:id="@+id/TextView10"
@@ -189,7 +175,20 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="•	The team who played the card with the highest value will get 2 points and the team with 2 players will get 1 point each."/>
+            android:text="•Instructions on how to play the game Hath Wasi and other special features available in the application are mentioned in the INSTRUCTIONS page on the Main page."/>
+
+        <TextView
+            android:id="@+id/sub-topic2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Special Features"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25dp"
+            android:layout_marginTop="25dp"
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="19dp" />
 
 
         <TextView
@@ -204,9 +203,35 @@
             android:textColor="#FFFF"
             android:inputType="textMultiLine"
             android:justificationMode="inter_word"
-            android:text="•	The game will end after playing 10 games and the player who has scored the highest number of points will be the winner."/>
+            android:text="•The trump which was selected at bidding for the round will be indicated in the middle of the score bar throughout the game. "/>
 
+        <TextView
+            android:id="@+id/TextView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:gravity="fill_horizontal|center"
+            android:textColor="#FFFF"
+            android:inputType="textMultiLine"
+            android:justificationMode="inter_word"
+            android:text="•All 12 cards dealt for the human player will be organized according to the category and in ascending order of each category. "/>
 
+        <TextView
+            android:id="@+id/TextView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:gravity="fill_horizontal|center"
+            android:textColor="#FFFF"
+            android:inputType="textMultiLine"
+            android:justificationMode="inter_word"
+            android:text="•The scores of each team will be updated at the end of each round of play accordingly on the score bar throughout the game."/>
 
 
     </LinearLayout>
