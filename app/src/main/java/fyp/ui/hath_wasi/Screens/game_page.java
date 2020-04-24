@@ -7,14 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,8 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,7 +28,7 @@ import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
 import fyp.ui.hath_wasi.Game.Game;
 import fyp.ui.hath_wasi.Game.SelectingTrumpComPlayer;
-import fyp.ui.hath_wasi.Messages.Messages;
+import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.ComputerPlayerAggressive;
 import fyp.ui.hath_wasi.Players.Player;
@@ -258,7 +253,7 @@ public class game_page extends AppCompatActivity {
     public void openDialog(){
         // This method creates and allows the players to choose allow or decline selecting the trump.
         AlertDialog.Builder getChances = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
-        getChances.setMessage(Messages.getMessageWinSevenChances())
+        getChances.setMessage(Message.getMessageWinSevenChances())
                 .setTitle("♠ ♥ ♣ ♦")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -285,7 +280,7 @@ public class game_page extends AppCompatActivity {
                                 passTrumpToTheInterface(trump);
                                 playerAsking = true;
 
-                                Toast.makeText(getApplicationContext(), Messages.getToastComPlayer2SelectedTrump() + trump, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), Message.getToastComPlayer2SelectedTrump() + trump, Toast.LENGTH_LONG).show();
 
                                 // If com player 2 selects the trump, alter the game instance and let com player 2 start the game.
                                 game.alterInstance( comPlayer2, human, comPlayer1, human, comPlayer1, comPlayer2, comPlayer2, trump);
@@ -298,7 +293,7 @@ public class game_page extends AppCompatActivity {
                                 passTrumpToTheInterface(trump);
                                 playerAsking = true;
 
-                                Toast.makeText(getApplicationContext(), Messages.getToastComPlayer1SelectedTrump() + trump, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), Message.getToastComPlayer1SelectedTrump() + trump, Toast.LENGTH_LONG).show();
 
                                 game.alterInstance( comPlayer1, human, comPlayer2, human, comPlayer1, comPlayer2, comPlayer1, trump);
                                 game.moveForwardWithCpuWin(comPlayer1);
@@ -327,7 +322,7 @@ public class game_page extends AppCompatActivity {
         // This method allows the user to select the trump when they choose to select the trump.
         AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this, R.style.AlertDialogStyle);
         String[] items = {"♠ Spades", "♥ Hearts", "♣ Clubs", "♦ Diamonds"};
-        chooseTrump.setTitle(Messages.getMessageSelectTrump())
+        chooseTrump.setTitle(Message.getMessageSelectTrump())
                 .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -342,7 +337,7 @@ public class game_page extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("TAG", "Inside on click : " + trump);
                         if(trump == null || trump.isEmpty()){
-                            Toast.makeText(getApplicationContext(), Messages.getToastChooseTrump(),
+                            Toast.makeText(getApplicationContext(), Message.getToastChooseTrump(),
                                     Toast.LENGTH_SHORT).show();
                             Log.d("TAG", "The Trump Selected: " + trump);
                             selectTrump();

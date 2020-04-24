@@ -1,15 +1,11 @@
 package fyp.ui.hath_wasi.Game;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Message;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,7 +20,7 @@ import androidx.annotation.RequiresApi;
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
-import fyp.ui.hath_wasi.Messages.Messages;
+import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
@@ -278,7 +274,7 @@ public class Game {
                 numberOfRoundsPlayed--;
 
                 Log.println( Log.ERROR, "TAG", "on the first catch block" );
-                popUpDialog(Messages.getMessageSelectValidCard(), "Invalid Card type!");
+                popUpDialog(Message.getMessageSelectValidCard(), "Invalid Card type!");
                 //popUpDialog("Invalid Card type!", "Card Selection");
 
                 // human player played an invalid card, so allow to play again.
@@ -403,7 +399,7 @@ public class Game {
             } catch (Exception e){
                 Log.d("TAG", "on the second catch block");
                 //popUpDialog("Invalid Card type!", "Card Selection");
-                popUpDialog(Messages.getMessageSelectValidCard(), "Invalid Card type!");
+                popUpDialog(Message.getMessageSelectValidCard(), "Invalid Card type!");
                 this.invalidCardByHuman = true;
                 game_page.cardTouch(true);
             }
@@ -488,7 +484,7 @@ public class Game {
             } catch (Exception e){
                 Log.d("TAG", "on the third catch block");
                 //popUpDialog("Invalid Card type!", "Card Selection");
-                popUpDialog(Messages.getMessageSelectValidCard(), "Invalid Card type!");
+                popUpDialog(Message.getMessageSelectValidCard(), "Invalid Card type!");
                 this.invalidCardByHuman = true;
                 game_page.cardTouch(true);
             }
@@ -879,7 +875,7 @@ public class Game {
         if (this.teamScore == 6 && this.singlePlayerScore == 6){
             this.gameFinish = true;
             LottieAnimationView anim = this.activity.findViewById(R.id.draw);
-            Toast.makeText(activity.getApplicationContext(), Messages.getToastDrawGame(), Toast.LENGTH_LONG).show();
+            Toast.makeText(activity.getApplicationContext(), Message.getToastDrawGame(), Toast.LENGTH_LONG).show();
             anim.setVisibility(LottieAnimationView.VISIBLE);
             ScoreBoard.getInstance().setScores(new GameScore(0,0,0));
             openDialog();
@@ -915,11 +911,11 @@ public class Game {
 
     public void getToastMessage(boolean result){
         if(result == true){
-            Toast.makeText(activity.getApplicationContext(), Messages.getToastWinGame(), Toast.LENGTH_LONG).show();
+            Toast.makeText(activity.getApplicationContext(), Message.getToastWinGame(), Toast.LENGTH_LONG).show();
         }
 
         else{
-            Toast.makeText(activity.getApplicationContext(), Messages.getToastLostGame(), Toast.LENGTH_LONG).show();
+            Toast.makeText(activity.getApplicationContext(), Message.getToastLostGame(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -965,7 +961,7 @@ public class Game {
                 // pass trump to the interface as string.
                 passTrumpToTheInterface(this.trumps);
 
-                Toast.makeText(activity.getApplicationContext(), Messages.getToastComPlayer2SelectedTrump() + this.trumps, Toast.LENGTH_LONG).show();
+                Toast.makeText(activity.getApplicationContext(), Message.getToastComPlayer2SelectedTrump() + this.trumps, Toast.LENGTH_LONG).show();
                 scoreLabel.setText(comPlayer2.getName());
                 myLabel.setText("My Team");
 
@@ -992,7 +988,7 @@ public class Game {
 
                 //Log.println(Log.ERROR, "TAG", "After selecting trumps: " + this.trumps);
 
-                Toast.makeText(activity.getApplicationContext(), Messages.getToastComPlayer1SelectedTrump() + this.trumps, Toast.LENGTH_LONG).show();
+                Toast.makeText(activity.getApplicationContext(), Message.getToastComPlayer1SelectedTrump() + this.trumps, Toast.LENGTH_LONG).show();
                 scoreLabel.setText(comPlayer1.getName());
                 myLabel.setText("My Team");
 
@@ -1024,7 +1020,7 @@ public class Game {
     // This methods allows the player to check if he/she can win 7 chances from this game.
     public void chooseWinningPossibilityDialog(final Player human, final AbComputerPlayer comPlayer1, final AbComputerPlayer comPlayer2){
         AlertDialog.Builder getChances = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
-        getChances.setMessage(Messages.getMessageWinSevenChances())
+        getChances.setMessage(Message.getMessageWinSevenChances())
                 .setTitle("♠ ♥ ♣ ♦")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -1067,7 +1063,7 @@ public class Game {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d( "TAG", "Inside on click : " + trumps);
                         if (trumps == null || trumps.isEmpty()) {
-                            Toast.makeText(activity.getApplicationContext(), Messages.getToastChooseTrump(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity.getApplicationContext(), Message.getToastChooseTrump(), Toast.LENGTH_SHORT).show();
                             Log.d("TAG", "the trump selected: " + trumps);
                             selectTrump();
                         }
@@ -1096,7 +1092,7 @@ public class Game {
             @Override
             public void run() {
                 AlertDialog.Builder getChances = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
-                getChances.setMessage(Messages.getMessagePlayNextRound())
+                getChances.setMessage(Message.getMessagePlayNextRound())
                         .setTitle("♠ ♥ ♣ ♦")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
