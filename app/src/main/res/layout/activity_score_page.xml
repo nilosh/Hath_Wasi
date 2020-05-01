@@ -12,14 +12,13 @@
         android:id="@+id/textView3"
         android:layout_width="171dp"
         android:layout_height="0dp"
-        android:layout_marginStart="280dp"
-        android:layout_marginLeft="280dp"
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="Score Board"
         android:textColor="#F1F3F3"
         android:textSize="30dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

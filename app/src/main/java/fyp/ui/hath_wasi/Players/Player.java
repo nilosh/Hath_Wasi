@@ -14,6 +14,8 @@ public class Player {
     private int score;
     protected int numberOfCardsRemaining;
 
+    private boolean trumpCalled;
+
     ArrayList <Card> CardDeck = new ArrayList();
 
 
@@ -21,6 +23,7 @@ public class Player {
     public Player(String name, DeckOfCards cardDeck ) {
         this.name = name;
         this.score = 0;
+        this.trumpCalled = false;
         this.numberOfCardsRemaining = 12;
         this.CardDeck = cardDeck.DealingCards();
         //Sort the card deck in hand
@@ -50,6 +53,14 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public boolean isTrumpCalled() {
+        return trumpCalled;
+    }
+
+    public void setTrumpCalled(boolean trumpCalled) {
+        this.trumpCalled = trumpCalled;
     }
 
     // returns an arrayList of 12 cards
