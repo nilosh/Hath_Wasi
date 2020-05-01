@@ -1,5 +1,7 @@
 package fyp.ui.hath_wasi.Cards;
 
+import java.util.Comparator;
+
 public class Card implements Comparable<Card> {
 
     private int cardId;
@@ -74,6 +76,28 @@ public class Card implements Comparable<Card> {
             return 0;
         }
     }
+
+    // The following two methods are called when you sort an array list of cards in the ascending and descending order according to the card number.
+    //Done using importing Comparator that allows to implement a custom Comparator method.
+    public static Comparator<Card> cardNumberSorterAscending = new Comparator<Card>() {
+        @Override
+        public int compare(Card o1, Card o2) {
+            int cardNumber1 = o1.getNumber();
+            int cardNumber2 = o2.getNumber();
+            // ascending order
+            return cardNumber1-cardNumber2;
+        }
+    };
+
+    public static Comparator <Card> cardNumberSorterDescending = new Comparator<Card>() {
+        @Override
+        public int compare(Card o1, Card o2) {
+            int cardNumber1 = o1.getNumber();
+            int cardNumber2 = o2.getNumber();
+            // descending order
+            return cardNumber2-cardNumber1;
+        }
+    };
 
 
 }

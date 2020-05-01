@@ -162,7 +162,7 @@ public class Game {
                 Log.println( Log.ERROR, "TAG", "Try block 1.." );
                 Log.println(Log.ERROR, "TAG", "passing trumps in block 1 : " + this.trumps);
 
-                Card card1 = this.cpu1.SelectTheHigHighestCardFromCategory(selectedCard.getCategory());
+                Card card1 = this.cpu1.SelectTheHighestCardFromCategory(selectedCard.getCategory());
                 Card card2 = this.cpu2.selectSmallestCardFromCategory(selectedCard.getCategory());
 
                 GameRound gameRound = new GameRound( this.cpu1,card1,
@@ -312,7 +312,7 @@ public class Game {
                 if(this.invalidCardByHuman == false) {
                     // Com Player 2 (right side)
                     // Play the smallest card from the category
-                    com2Card = this.cpu2.SelectTheHigHighestCardFromCategory(selectedCard.getCategory());
+                    com2Card = this.cpu2.SelectTheHighestCardFromCategory(selectedCard.getCategory());
                     Log.println(Log.ERROR, "TAG", "inside the if condition");
                 }
 
@@ -443,7 +443,7 @@ public class Game {
                 this.cpu1.getCardDeck().remove(c1);
                 this.cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining()-1);
 
-                this.cpu1.getCardDeck().remove(c2);
+                this.cpu2.getCardDeck().remove(c2);
                 this.cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining()-1);
 
                 // Get winner of this round.
