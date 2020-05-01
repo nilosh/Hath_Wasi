@@ -443,7 +443,7 @@ public class Game {
                 this.cpu1.getCardDeck().remove(c1);
                 this.cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining()-1);
 
-                this.cpu1.getCardDeck().remove(c2);
+                this.cpu2.getCardDeck().remove(c2);
                 this.cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining()-1);
 
                 // Get winner of this round.
