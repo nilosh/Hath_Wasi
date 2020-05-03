@@ -16,6 +16,7 @@ public class GameRound {
 
     }
 
+    private String trump;
 
     // throws an exception if the human selected card is not a card from the play type
     // when the human player have cards of the play type in the deck.
@@ -26,6 +27,7 @@ public class GameRound {
         this.compPlayer2Card = cpu2;
         this.playerCard = humanSelectedCard;
 
+        trump = trumps.toLowerCase();
         Log.println( Log.ERROR, "TAG", "inside the constructor game round" );
 
         //String playType = cpu1.getCategory();
@@ -49,17 +51,19 @@ public class GameRound {
         // Get the number of the card played if the category of the card is of play type.
         int cardNo1 = 0, cardNo2 = 0, cardNo3 = 0;
 
-        if(cpu1.getCategory() == trumps || cpu2.getCategory() == trumps || humanSelectedCard.getCategory() == trumps){
+        Log.println( Log.ERROR, "TAG", "-----------------------------      human card category " + humanSelectedCard.getCategory()+ "     trump category ------"+ trump);
 
-            if(cpu1.getCategory() == trumps){
+        if(cpu1.getCategory() == trump || cpu2.getCategory() == trump || humanSelectedCard.getCategory() == trump){
+
+            if(cpu1.getCategory() == trump){
                 cardNo1 = cpu1.getNumber();
             }
 
-            if(cpu2.getCategory() == trumps){
+            if(cpu2.getCategory() == trump){
                 cardNo2 = cpu2.getNumber();
             }
 
-            if(humanSelectedCard.getCategory() == trumps){
+            if(humanSelectedCard.getCategory() == trump){
                 cardNo3 = humanSelectedCard.getNumber();
             }
 
@@ -96,14 +100,17 @@ public class GameRound {
 
 
         if(card1 > card2 && card1 > card3){
+            Log.println(Log.ERROR,"Tag","CPU1 ============================> winner");
             this.winner = cpuPlayer1;
         }
 
         else if(card2 > card1 && card2 > card3){
+            Log.println(Log.ERROR,"Tag","CPU1 ============================> winner");
             this.winner = cpuPlayer2;
         }
 
         else if( card3 > card1 && card3 > card2){
+            Log.println(Log.ERROR,"Tag","CPU1 ============================> winner");
             this.winner = human;
         }
     }
