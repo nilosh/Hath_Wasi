@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import java.util.ArrayList;

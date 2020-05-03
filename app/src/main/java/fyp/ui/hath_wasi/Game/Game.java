@@ -21,11 +21,10 @@ import com.airbnb.lottie.LottieAnimationView;
 
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.ComputerPlayerCardViews;
-import fyp.ui.hath_wasi.Game.GameRound;
 import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
 import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
-import fyp.ui.hath_wasi.Game.SelectingTrumpComPlayer;
+
 import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.Player;
@@ -55,7 +54,6 @@ public class Game {
     private static int playerTurnIndex;
     private static boolean gameFinish;
     private static Sounds sounds;
-
 
     private static String trumps;
 
@@ -198,59 +196,64 @@ public class Game {
                 final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
+
+
                 // Allows to delay the animations associated with the particular card.
+                GameHandlers gameHandler = new GameHandlers("com2", com2, animationRl, sounds, 1000, 1500);
+
+
                 Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        com2.startAnimation(animationRl);
-                        animationRl.setAnimationListener(new Animation.AnimationListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                                sounds.cardClick();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        com2.startAnimation(animationRl);
+//                        animationRl.setAnimationListener(new Animation.AnimationListener() {
+//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                            @Override
+//                            public void onAnimationStart(Animation animation) {
+//                                sounds.cardClick();
+//
+//                                ComputerPlayerCardViews.hideCardFromPlayer2();
+//
+//                                com2.setVisibility(View.VISIBLE);
+//                                com2.setImageAlpha(1000);
+//                            }
+//
+//                            @Override
+//                            public void onAnimationEnd(Animation animation) { }
+//
+//                            @Override
+//                            public void onAnimationRepeat(Animation animation) { }
+//                        });
+//                    }
+//                }, 1500);
 
-                                ComputerPlayerCardViews.hideCardFromPlayer2();
+                gameHandler = new GameHandlers("com1", com1, animationLr, sounds, 1000, 3000);
 
-                                com2.setVisibility(View.VISIBLE);
-                                com2.setImageAlpha(1000);
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) { }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) { }
-                        });
-                    }
-                }, 1500);
-
-
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        com1.startAnimation(animationLr);
-                        animationLr.setAnimationListener(new Animation.AnimationListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                                sounds.cardClick();
-                                ComputerPlayerCardViews.hideCardFromPlayer1();
-
-                                com1.setVisibility(View.VISIBLE);
-                                com1.setImageAlpha(1000);
-                            }
-
-                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                            @Override
-                            public void onAnimationEnd(Animation animation) { }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) { }
-                        });
-                    }
-                }, 3000);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        com1.startAnimation(animationLr);
+//                        animationLr.setAnimationListener(new Animation.AnimationListener() {
+//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                            @Override
+//                            public void onAnimationStart(Animation animation) {
+//                                sounds.cardClick();
+//                                ComputerPlayerCardViews.hideCardFromPlayer1();
+//
+//                                com1.setVisibility(View.VISIBLE);
+//                                com1.setImageAlpha(1000);
+//                            }
+//
+//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                            @Override
+//                            public void onAnimationEnd(Animation animation) { }
+//
+//                            @Override
+//                            public void onAnimationRepeat(Animation animation) { }
+//                        });
+//                    }
+//                }, 3000);
 
                 // Update score on the score bar with a delay.
                 handler.postDelayed(new Runnable() {
@@ -270,18 +273,20 @@ public class Game {
                 // and set cardTouch true.
                 else {
 
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            sounds.cardCollect();
+                    GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
 
-                            com1.setVisibility(View.INVISIBLE);
-                            com2.setVisibility(View.INVISIBLE);
-                            playerPlaceholder.setVisibility(View.INVISIBLE);
-                            game_page.cardTouch(true);
-
-                        }
-                    }, 6000);
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            sounds.cardCollect();
+//
+//                            com1.setVisibility(View.INVISIBLE);
+//                            com2.setVisibility(View.INVISIBLE);
+//                            playerPlaceholder.setVisibility(View.INVISIBLE);
+//                            game_page.cardTouch(true);
+//
+//                        }
+//                    }, 6000);
                 }
 
                 Log.println( Log.ERROR, "TAG", "inside the try 1, at the very end" );
@@ -337,32 +342,34 @@ public class Game {
                 // Set Animations.
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
+                GameHandlers gameHandler = new GameHandlers("com2", com2, animationRl, sounds, 1000, 2500);
+
                 Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        com2.startAnimation(animationRl);
-                        animationRl.setAnimationListener(new Animation.AnimationListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-
-                                sounds.cardClick();
-                                ComputerPlayerCardViews.hideCardFromPlayer2();
-                                // Com Player 2 card make visible.
-                                com2.setVisibility(View.VISIBLE);
-                                com2.setImageAlpha(1000);
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) { }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) { }
-                        });
-                    }
-                }, 2500);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        com2.startAnimation(animationRl);
+//                        animationRl.setAnimationListener(new Animation.AnimationListener() {
+//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                            @Override
+//                            public void onAnimationStart(Animation animation) {
+//
+//                                sounds.cardClick();
+//                                ComputerPlayerCardViews.hideCardFromPlayer2();
+//                                // Com Player 2 card make visible.
+//                                com2.setVisibility(View.VISIBLE);
+//                                com2.setImageAlpha(1000);
+//                            }
+//
+//                            @Override
+//                            public void onAnimationEnd(Animation animation) { }
+//
+//                            @Override
+//                            public void onAnimationRepeat(Animation animation) { }
+//                        });
+//                    }
+//                }, 2500);
 
 
                 // remove the played cards from the card decks of computer player 1 & 2.
@@ -392,16 +399,19 @@ public class Game {
 
                 }
                 else {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            sounds.cardCollect();
-                            com1.setVisibility(View.INVISIBLE);
-                            com2.setVisibility(View.INVISIBLE);
-                            playerPlaceholder.setVisibility(View.INVISIBLE);
-                            game_page.cardTouch(true);
-                        }
-                    }, 6000);
+
+                    GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
+
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            sounds.cardCollect();
+//                            com1.setVisibility(View.INVISIBLE);
+//                            com2.setVisibility(View.INVISIBLE);
+//                            playerPlaceholder.setVisibility(View.INVISIBLE);
+//                            game_page.cardTouch(true);
+//                        }
+//                    }, 6000);
                 }
 
                 Log.println( Log.ERROR, "TAG", "inside the try 2, at the very end" );
@@ -484,18 +494,18 @@ public class Game {
                 }
                 else {
 
-                    //Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            com1.setVisibility(View.INVISIBLE);
-                            com2.setVisibility(View.INVISIBLE);
-                            playerPlaceholder.setVisibility(View.INVISIBLE);
-                            game_page.cardTouch(true);
-
-                        }
-                    }, 6000);
+                    GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            com1.setVisibility(View.INVISIBLE);
+//                            com2.setVisibility(View.INVISIBLE);
+//                            playerPlaceholder.setVisibility(View.INVISIBLE);
+//                            game_page.cardTouch(true);
+//
+//                        }
+//                    }, 6000);
                 }
 
                 Log.println( Log.ERROR, "TAG", "inside the try 3, at the very end" );

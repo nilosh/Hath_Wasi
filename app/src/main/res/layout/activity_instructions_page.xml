@@ -168,14 +168,14 @@
             android:id="@+id/scoreBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_constraintTop_toBottomOf="@+id/TextView9"
-            android:layout_constraintStart_toStartOf="parent"
+
             android:layout_marginStart="20dp"
             android:layout_marginTop="-60dp"
             android:gravity="center"
             android:scaleType="fitCenter"
             android:src="@drawable/scoreboard"
             android:visibility="visible" />
+
         <TextView
             android:id="@+id/TextView10"
             android:layout_width="match_parent"
@@ -195,8 +195,7 @@
             android:id="@+id/infoBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_constraintTop_toBottomOf="@+id/TextView10"
-            android:layout_constraintStart_toStartOf="parent"
+
             android:layout_marginStart="20dp"
             android:layout_marginTop="-60dp"
             android:gravity="center"
