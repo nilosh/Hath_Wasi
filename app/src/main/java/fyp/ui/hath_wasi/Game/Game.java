@@ -199,7 +199,7 @@ public class Game {
 
 
                 // Allows to delay the animations associated with the particular card.
-                GameHandlers gameHandler = new GameHandlers("com2", com2, animationRl, sounds, 1000, 1500);
+                GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, sounds, 1000, 1500);
 
 
                 Handler handler = new Handler();
@@ -228,7 +228,7 @@ public class Game {
 //                    }
 //                }, 1500);
 
-                gameHandler = new GameHandlers("com1", com1, animationLr, sounds, 1000, 3000);
+                gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, sounds, 1000, 3000);
 
 //                handler.postDelayed(new Runnable() {
 //                    @Override
@@ -342,7 +342,7 @@ public class Game {
                 // Set Animations.
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
-                GameHandlers gameHandler = new GameHandlers("com2", com2, animationRl, sounds, 1000, 2500);
+                GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, sounds, 1000, 2500);
 
                 Handler handler = new Handler();
 //                handler.postDelayed(new Runnable() {

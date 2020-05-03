@@ -420,25 +420,25 @@ public class game_page extends AppCompatActivity {
 
         switch (which){
             case 0:
-                trump = "Spades";
+                trump = "spades".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Spades Selected: " + trump);
                 textViewTrump.setText("♠");
                 break;
             case 1:
-                trump = "Hearts";
+                trump = "hearts".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Hearts Selected: " + trump);
                 textViewTrump.setText("♥");
                 break;
             case 2:
-                trump = "Clubs";
+                trump = "clubs".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Clubs Selected" + trump);
                 textViewTrump.setText("♣");
                 break;
             case 3:
-                trump = "Diamonds";
+                trump = "diamonds".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Diamonds Selected" + trump);
                 textViewTrump.setText("♦");
@@ -456,25 +456,25 @@ public class game_page extends AppCompatActivity {
 
         switch (which){
             case "spades":
-                trump = "Spades";
+                trump = "spades".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Spades Selected: " + trump);
                 textViewTrump.setText("♠");
                 break;
             case "hearts":
-                trump = "Hearts";
+                trump = "hearts".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Hearts Selected: " + trump);
                 textViewTrump.setText("♥");
                 break;
             case "clubs":
-                trump = "Clubs";
+                trump = "clubs".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Clubs Selected" + trump);
                 textViewTrump.setText("♣");
                 break;
             case "diamonds":
-                trump = "Diamonds";
+                trump = "diamonds".toLowerCase();
                 game.setTrumps(trump);
                 Log.d("TAG", "Diamonds Selected" + trump);
                 textViewTrump.setText("♦");
