@@ -16,8 +16,6 @@ import fyp.ui.hath_wasi.Screens.game_page;
 public class GameHandlers {
     private String player;
     private ImageView cardImage;
-    private Animation animation;
-    private Sounds soundPlayed;
     private Integer imageAlpha;
     private Integer delayMilliseconds;
 
@@ -90,22 +88,6 @@ public class GameHandlers {
 
     public void setCardImage(ImageView cardImage) {
         this.cardImage = cardImage;
-    }
-
-    public Animation getAnimation() {
-        return animation;
-    }
-
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
-    }
-
-    public Sounds getSoundPlayed() {
-        return soundPlayed;
-    }
-
-    public void setSoundPlayed(Sounds soundPlayed) {
-        this.soundPlayed = soundPlayed;
     }
 
     public Integer getImageAlpha() {
