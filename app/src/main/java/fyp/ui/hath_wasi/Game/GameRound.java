@@ -19,8 +19,8 @@ public class GameRound {
 
     // throws an exception if the human selected card is not a card from the play type
     // when the human player have cards of the play type in the deck.
-    public GameRound(Player cpuPlayer1, Card cpu1, Player cpuPlayer2, Card cpu2, Player human, Card humanSelectedCard, String playType, String trumps)
-        throws GameExceptions{
+    public GameRound(Player cpuPlayer1, Card cpu1, Player cpuPlayer2, Card cpu2, Player human, Card humanSelectedCard,
+                     String playType, String trumps) throws GameExceptions{
 
         this.compPlayer1Card = cpu1;
         this.compPlayer2Card = cpu2;
