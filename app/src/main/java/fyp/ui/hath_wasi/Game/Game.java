@@ -67,6 +67,7 @@ public class Game {
         this.teamPlayer1 = teamPlayer1;
         this.teamPlayer2 = teamPlayer2;
         this.singlePlayerScore = 0;
+        this.teamScore = 0;
         this.playedRounds = new GameRound[12];
         this.numberOfRoundsPlayed = 0;
         this.cpu1 = cpu1;
