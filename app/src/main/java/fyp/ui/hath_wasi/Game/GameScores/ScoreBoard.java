@@ -4,7 +4,7 @@ public class ScoreBoard {
 
     private static ScoreBoard ourInstance;
     private static int numberOfScores;
-    private GameScore scores[];
+    private static GameScore scores[];
 
     private ScoreBoard(){
         this.scores = new GameScore[10];
@@ -40,6 +40,19 @@ public class ScoreBoard {
         }
 
     }
+
+    public static int[] getTotals() {
+        int[] totals = new int[]{0, 0, 0};
+
+        for (int i = 0; i < ScoreBoard.getNumberOfScores(); i++){
+            totals[0] += scores[i].getHuman();
+            totals[1] += scores[i].getComputerPlayer1();
+            totals[2] += scores[i].getComputerPlayer2();
+        }
+
+        return totals;
+    }
+
 
     public static int getNumberOfScores() {
         return numberOfScores;

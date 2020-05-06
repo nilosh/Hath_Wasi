@@ -3,9 +3,12 @@ package fyp.ui.hath_wasi.Screens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
@@ -81,5 +84,38 @@ public class score_page extends AppCompatActivity {
                 score[i][2].setText(String.valueOf(scores[i].getComputerPlayer2()));
             }
         }
+
+        setMedal();
+    }
+
+
+    public void setMedal() {
+        int[] scores = ScoreBoard.getTotals();
+
+
+        LottieAnimationView[] medals = new LottieAnimationView[]{this.findViewById(R.id.playerMedal),
+                this.findViewById(R.id.cpu1Medal), this.findViewById(R.id.cpu2Medal)};
+
+        LottieAnimationView playerMedal = this.findViewById(R.id.playerMedal);
+        playerMedal.setVisibility(LottieAnimationView.VISIBLE);
+
+        LottieAnimationView cpu1Medal = this.findViewById(R.id.cpu1Medal);
+        cpu1Medal.setVisibility(LottieAnimationView.VISIBLE);
+
+        LottieAnimationView cpu2Medal = this.findViewById(R.id.cpu2Medal);
+        cpu2Medal.setVisibility(LottieAnimationView.VISIBLE);
+
+        int max = scores[0];
+
+        for (int i = 1; i < scores.length; i++){
+            if(scores[i] > max){
+                max = scores[i];
+                medals[i-1].setVisibility(View.INVISIBLE);
+            }
+            else if(scores[i] < max){
+                medals[i].setVisibility(View.INVISIBLE);
+            }
+        }
+
     }
 }

@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="fyp.ui.hath_wasi.Screens.splash"
-            android:noHistory="true"/>
+        <activity android:name=".Screens.ChooseLevel"></activity>
+        <activity
+            android:name=".Screens.splash"
+            android:noHistory="true" />
         <activity
             android:name=".Screens.score_page"
             android:screenOrientation="landscape" />

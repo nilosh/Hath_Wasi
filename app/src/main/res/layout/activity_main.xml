@@ -23,7 +23,7 @@
         android:id="@+id/playBtn"
         android:layout_width="92dp"
         android:layout_height="92dp"
-        android:onClick="play_game"
+        android:onClick="choose_level"
         android:src="@drawable/playy"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/infoBtn"

@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,9 @@ public class game_page extends AppCompatActivity {
     static HashMap<Integer, Card> imageToCardMap;
     private static ImageView[] cardArray = new ImageView[12];
     private static ComputerPlayerCardViews comPlayerCardViews;
+
+    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    Switch expertSwitch = ChooseLevel.getExpertLevel();
 
     String trump;
 
@@ -98,7 +102,8 @@ public class game_page extends AppCompatActivity {
         //create the game with the starting player set as human
         Game game =  Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
 
-
+        Log.println(Log.ERROR, "TAG", "Beginner Level: " + beginnerSwitch.isChecked());
+        Log.println(Log.ERROR, "TAG", "Expert Level: " + expertSwitch.isChecked());
 
     }
 

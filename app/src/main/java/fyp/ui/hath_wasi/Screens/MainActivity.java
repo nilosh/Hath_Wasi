@@ -28,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void play_game(View view){
-        Intent intent = new Intent(this, splash.class);
+    public void choose_level(View view){
+        Intent intent = new Intent(this, ChooseLevel.class);
+        //Intent intent = new Intent(this, splash.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
