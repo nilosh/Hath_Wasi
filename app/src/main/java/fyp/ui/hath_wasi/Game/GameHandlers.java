@@ -10,10 +10,10 @@ import androidx.annotation.RequiresApi;
 
 import fyp.ui.hath_wasi.Cards.ComputerPlayerCardViews;
 import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
-import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.Screens.game_page;
 
 public class GameHandlers {
+
     private String player;
     private ImageView cardImage;
     private Integer imageAlpha;
@@ -34,11 +34,11 @@ public class GameHandlers {
 
                         soundPlayed.cardClick();
 
-                        if(player == "com2"){
+                        if(player.toLowerCase() == "com2"){
                             ComputerPlayerCardViews.hideCardFromPlayer2();
                         }
 
-                        else if(player == "com1"){
+                        else if(player.toLowerCase() == "com1"){
                             ComputerPlayerCardViews.hideCardFromPlayer1();
                         }
 
