@@ -67,6 +67,9 @@ public class ComputerPlayerHard extends AbComputerPlayer {
     //get the current instance of the game and attributes of it
     Game game = getInstance();
     String trumpCategory = game.getTrumps();
+    Player SinglePlayer = game.getSinglePlayer();
+    Player cpu2Player = game.getCpu2();
+    Player humanPlayer = game.getHumanPlayer();
 
     //this method is used to select the best card when you're the first player in the game round
     @Override
@@ -117,13 +120,71 @@ public class ComputerPlayerHard extends AbComputerPlayer {
     //this method is used to select the best card when you're the second player in the game round
     @Override
     public Card selectCard(Card Player1Card){
-        return null;
+
+        //get the playing type of the round using the first player's card type
+        String Category = Player1Card.getCategory();
+
+        //check if this player has bid the trump for the game
+        if (this.isTrumpCalled() == true) {
+            final Integer opponentCard = Player1Card.getCardId();
+            //check if this player has the play type
+            if (CheckForCardType(Category) == true) {
+                final Card myCard = SelectTheHighestCardFromCategory(Category);
+                //check if my highest card is lower than the opponent's card
+                if (myCard.getCardId() > opponentCard) {
+                    return selectSmallestCardFromCategory(Category);
+                } else { return myCard; }
+            } else {
+                //check if the play type is same as the trump
+                if (Category == trumpCategory) {
+                    return selectSmallestCard();
+                } else {
+                    return selectSmallestCardFromCategory(trumpCategory);
+                }
+            }
+            // when this player has not bid for the game
+        } else {
+            final Integer teamMemberCard = Player1Card.getCardId();
+            //check if this player has the play type
+            if (CheckForCardType(Category) == true) {
+                final Card myCard = SelectTheHighestCardFromCategory(Category);
+                //check if this player's highest card is lower than player 1's card
+                if (myCard.getCardId() > teamMemberCard) {
+                    return selectSmallestCardFromCategory(Category);
+                } else {
+                    return myCard;
+                }
+            } else {
+                return selectSmallestCard();
+            }
+        }
     }
 
-    //this method is used to select the best card when you're the Third player in the game round
+    //this method is used to select which method to select when you're the third player to choose the card according to the player type
     @Override
     public Card selectCard(Card player1Card, Card player2Card){
-        return null;
+
+        //get the playing type of the round using the first player's card type
+        String Category = player1Card.getCategory();
+        //check if this player is the single player
+        if (this.getName()== SinglePlayer.getName()){
+            return selectBestCardSinglePlayer(Category,player1Card,player2Card);
+
+        }
+        //if this player is not the single player
+        else{
+            //check if either this player is cpu1 player and cpu2 player is the single player
+            //or if the this player is the cpu2 player and human player is the single player
+            if ((((this.getName() == game.getCpu1().getName()) && (cpu2Player == SinglePlayer)) || ((this.getName()== cpu2Player.getName()) && (humanPlayer == SinglePlayer)))){
+                return selectBestCardTeamPlayer(Category,player1Card,player2Card); }
+            else{
+                return selectBestCardTeamPlayer(Category,player2Card,player1Card) ;
+            }
+        }
     }
+
+    public Card selectBestCardSinglePlayer(String Category, Card opponent1Card, Card opponent2Card){return null;}
+
+    public Card selectBestCardTeamPlayer(String Category, Card myTeamCard, Card opponentCard){return null;}
 
 }
