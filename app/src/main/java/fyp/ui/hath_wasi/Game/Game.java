@@ -845,7 +845,7 @@ public class Game {
                 public void run() {
                     playerScorePlaceHolder.setText(score);
                 }
-            }, 4000);
+            }, 3000);
 
 
 
@@ -884,7 +884,7 @@ public class Game {
                 public void run() {
                     playerScorePlaceHolder.setText(score);
                 }
-            }, 4000);
+            }, 3000);
 
             if (this.teamScore == 7){
 
