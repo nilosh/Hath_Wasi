@@ -107,6 +107,7 @@ public class score_page extends AppCompatActivity {
 
         int max = scores[0];
 
+
         for (int i = 1; i < scores.length; i++){
             if(scores[i] > max){
                 max = scores[i];
