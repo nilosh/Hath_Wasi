@@ -27,7 +27,7 @@ public class score_page extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_score_page);
+        setContentView(R.layout.activity_score_page_copy);
 
         //get the game scores into score variable.
         //this variable consists of gameScore objects that each old marks of every player for an entire game round.
