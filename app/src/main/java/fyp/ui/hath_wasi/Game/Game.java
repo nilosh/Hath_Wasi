@@ -29,7 +29,8 @@ import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
-import fyp.ui.hath_wasi.Screens.game_page;
+import fyp.ui.hath_wasi.Screens.GamePage;
+import fyp.ui.hath_wasi.Screens.ScoresPage;
 
 public class Game {
 
@@ -137,7 +138,7 @@ public class Game {
 
     public void  playNextMove(Card selectedCard){
 
-        game_page.cardTouch(false);
+        GamePage.cardTouch(false);
 
         // declare three variables to hold the imageViews of the playing cards
         // of the three players.
@@ -156,7 +157,7 @@ public class Game {
 
             try {
 
-                game_page.cardTouch(false);
+                GamePage.cardTouch(false);
 
                 Log.println( Log.ERROR, "TAG", "Try block 1.." );
                 Log.println(Log.ERROR, "TAG", "passing trumps in block 1 : " + this.trumps);
@@ -284,7 +285,7 @@ public class Game {
 //                            com1.setVisibility(View.INVISIBLE);
 //                            com2.setVisibility(View.INVISIBLE);
 //                            playerPlaceholder.setVisibility(View.INVISIBLE);
-//                            game_page.cardTouch(true);
+//                            GamePage.cardTouch(true);
 //
 //                        }
 //                    }, 6000);
@@ -302,7 +303,7 @@ public class Game {
 
                 // human player played an invalid card, so allow to play again.
                 this.invalidCardByHuman = true;
-                game_page.cardTouch(true);
+                GamePage.cardTouch(true);
 
             }
         }
@@ -410,7 +411,7 @@ public class Game {
 //                            com1.setVisibility(View.INVISIBLE);
 //                            com2.setVisibility(View.INVISIBLE);
 //                            playerPlaceholder.setVisibility(View.INVISIBLE);
-//                            game_page.cardTouch(true);
+//                            GamePage.cardTouch(true);
 //                        }
 //                    }, 6000);
                 }
@@ -423,7 +424,7 @@ public class Game {
 
                 popUpDialog(Message.getMessageSelectValidCard(), "Card Selection");
                 this.invalidCardByHuman = true;
-                game_page.cardTouch(true);
+                GamePage.cardTouch(true);
             }
 
 
@@ -479,7 +480,7 @@ public class Game {
                         playerPlaceholder.setVisibility(View.INVISIBLE);
 
                         if(winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
-                            game_page.cardTouch(true);
+                            GamePage.cardTouch(true);
                         }
 
                     }
@@ -503,7 +504,7 @@ public class Game {
 //                            com1.setVisibility(View.INVISIBLE);
 //                            com2.setVisibility(View.INVISIBLE);
 //                            playerPlaceholder.setVisibility(View.INVISIBLE);
-//                            game_page.cardTouch(true);
+//                            GamePage.cardTouch(true);
 //
 //                        }
 //                    }, 6000);
@@ -517,7 +518,7 @@ public class Game {
                 popUpDialog(Message.getMessageSelectValidCard(), "Card Selection");
 
                 this.invalidCardByHuman = true;
-                game_page.cardTouch(true);
+                GamePage.cardTouch(true);
             }
 
         }
@@ -543,7 +544,7 @@ public class Game {
     // This method plays the game for CPU players.
     public void moveForwardWithCpuWin(){
 
-        game_page.cardTouch(false);
+        GamePage.cardTouch(false);
 
         //move forward only if the current game is not finished
         if(numberOfRoundsPlayed < 12 && gameFinish == false) {
@@ -605,7 +606,7 @@ public class Game {
 
                         // Next player is Human Player.
                         // Set cardTouch to true.
-                        game_page.cardTouch(true);
+                        GamePage.cardTouch(true);
                     }
 
                 }, 6000);
@@ -687,7 +688,7 @@ public class Game {
                                     });
 
                                     // Let Human player play.
-                                    game_page.cardTouch(true);
+                                    GamePage.cardTouch(true);
 
                                 }
                             }, 3000);
@@ -744,7 +745,7 @@ public class Game {
                             public void onAnimationRepeat(Animation animation) { }
                         });
 
-                        game_page.cardTouch(true);
+                        GamePage.cardTouch(true);
 
                     }
                 }, 2000);
@@ -815,7 +816,7 @@ public class Game {
                                     @Override
                                     public void onAnimationRepeat(Animation animation) { }
                                 });
-                                game_page.cardTouch(true);
+                                GamePage.cardTouch(true);
 
                             }
                         }, 3000);
@@ -1008,7 +1009,7 @@ public class Game {
         ComputerPlayerCardViews.makeAllCardsVisible();
 
         //create new card-deck and player instances for the new game.
-        game_page.startGame();
+        GamePage.startGame();
 
         Game game = new Game();
 
@@ -1034,7 +1035,7 @@ public class Game {
 
                 Log.println(Log.ERROR, "TAG", "in the new instance trumps: " + this.trumps);
 
-                game_page.cardTouch(true);
+                GamePage.cardTouch(true);
 
                 moveForwardWithCpuWin(cpu2);
             }
@@ -1067,7 +1068,7 @@ public class Game {
 
                 Log.println(Log.ERROR, "TAG", "in the new instance trumps: " + this.trumps);
 
-                game_page.cardTouch(false);
+                GamePage.cardTouch(false);
                 moveForwardWithCpuWin(cpu1);
 
             }
@@ -1127,7 +1128,7 @@ public class Game {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         passTrumpToTheInterface(which);
-                        game_page.cardTouch(true);
+                        GamePage.cardTouch(true);
                     }
                 })
 
@@ -1176,7 +1177,7 @@ public class Game {
 
         if(ScoreBoard.getInstance().gameFinish()){
             ourInstance = null;
-            Intent intent = new Intent(activity, fyp.ui.hath_wasi.Screens.score_page.class);
+            Intent intent = new Intent(activity, ScoresPage.class);
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }

@@ -64,7 +64,7 @@ public class ChooseLevel extends AppCompatActivity {
     public void play_game(View view){
 
         finish();
-        Intent intent = new Intent(this, splash.class);
+        Intent intent = new Intent(this, SplashScreen.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 

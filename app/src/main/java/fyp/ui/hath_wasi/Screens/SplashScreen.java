@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import fyp.ui.hath_wasi.R;
 
 
-public class splash extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
 
     // define variables
     private Handler mHandler;
@@ -34,7 +34,7 @@ public class splash extends AppCompatActivity {
         mRunnable = new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext(), fyp.ui.hath_wasi.Screens.game_page.class));
+                startActivity(new Intent(getApplicationContext(), GamePage.class));
             }
         };
 
@@ -44,7 +44,7 @@ public class splash extends AppCompatActivity {
     }
 
 
-    // Destroys the instance of splash created.
+    // Destroys the instance of SplashScreen created.
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -14,7 +14,7 @@ import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
 import fyp.ui.hath_wasi.R;
 
-public class score_page extends AppCompatActivity {
+public class ScoresPage extends AppCompatActivity {
 
     private static TextView[][] score = new TextView[10][3];
 
@@ -27,12 +27,13 @@ public class score_page extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_score_page_copy);
+        setContentView(R.layout.activity_score_page);
 
         //get the game scores into score variable.
         //this variable consists of gameScore objects that each old marks of every player for an entire game round.
         ScoreBoard scoreBoard = ScoreBoard.getInstance();
         GameScore scores[] = scoreBoard.getScores();
+
 
         //find the textviews and map them to the array values.
         score[0][0] = findViewById(R.id.game1_player);
@@ -85,7 +86,10 @@ public class score_page extends AppCompatActivity {
             }
         }
 
-        setMedal();
+        if (scoreBoard.getNumberOfScores() > 0){
+            setMedal();
+        }
+
     }
 
 

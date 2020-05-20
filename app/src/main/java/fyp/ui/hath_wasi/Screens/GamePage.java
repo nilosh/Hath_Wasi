@@ -37,7 +37,7 @@ import fyp.ui.hath_wasi.Players.ComputerPlayerAggressive;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 
-public class game_page extends AppCompatActivity {
+public class GamePage extends AppCompatActivity {
 
     // Variable declaration.
     static HashMap<Integer, Card> imageToCardMap;
@@ -135,7 +135,7 @@ public class game_page extends AppCompatActivity {
         ComputerPlayerCardViews.openAnimation();
 
         // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
-        // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the game_page.
+        // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the GamePage.
 
         // uses Animations to sequentially send the cards.
         for (int i = 0; i < 12; i++){
@@ -379,7 +379,7 @@ public class game_page extends AppCompatActivity {
     public void selectTrump(){
 
         // This method allows the user to select the trump when they choose to select the trump.
-        AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this, R.style.AlertDialogStyle);
+        AlertDialog.Builder chooseTrump = new AlertDialog.Builder(GamePage.this, R.style.AlertDialogStyle);
         String[] items = {"♠ Spades", "♥ Hearts", "♣ Clubs", "♦ Diamonds"};
         chooseTrump.setTitle(Message.getMessageSelectTrump())
                 .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {

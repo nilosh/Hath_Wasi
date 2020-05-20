@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -30,18 +29,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void choose_level(View view){
         Intent intent = new Intent(this, ChooseLevel.class);
-        //Intent intent = new Intent(this, splash.class);
+        //Intent intent = new Intent(this, SplashScreen.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
     public void view_scores(View view){
-        Intent intent = new Intent(this, score_page.class);
+        Intent intent = new Intent(this, ScoresPage.class);
         startActivity(intent);
     }
 
     public void view_instructions(View view) {
-        Intent intent = new Intent(this, instructions_page.class);
+        //Intent intent = new Intent(this, instructions_page.class);
+        Intent intent = new Intent(this, InstructionsPage.class);
         startActivity(intent);
     }
 
