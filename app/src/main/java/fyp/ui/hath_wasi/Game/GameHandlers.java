@@ -20,7 +20,7 @@ public class GameHandlers {
     private Integer delayMilliseconds;
 
     public GameHandlers(final String player, final ImageView cardImage, final Animation animation,
-                        final Sounds soundPlayed, final Integer imageAlpha, Integer delayMilliseconds){
+                        final Sounds soundPlayed, final Integer imageAlpha, Integer delayMilliseconds) {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -32,13 +32,11 @@ public class GameHandlers {
                     @Override
                     public void onAnimationStart(Animation animation) {
 
-                        soundPlayed.cardClick();
+                        Sounds.cardClick();
 
-                        if(player.toLowerCase() == "com2"){
+                        if (player.toLowerCase() == "com2") {
                             ComputerPlayerCardViews.hideCardFromPlayer2();
-                        }
-
-                        else if(player.toLowerCase() == "com1"){
+                        } else if (player.toLowerCase() == "com1") {
                             ComputerPlayerCardViews.hideCardFromPlayer1();
                         }
 
@@ -47,23 +45,25 @@ public class GameHandlers {
                     }
 
                     @Override
-                    public void onAnimationEnd(Animation animation) { }
+                    public void onAnimationEnd(Animation animation) {
+                    }
 
                     @Override
-                    public void onAnimationRepeat(Animation animation) { }
+                    public void onAnimationRepeat(Animation animation) {
+                    }
                 });
             }
         }, delayMilliseconds);
     }
 
     public static void collectCards(final Sounds sound, final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
-                             Integer delayMilliseconds){
+                                    Integer delayMilliseconds) {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sound.cardCollect();
+                Sounds.cardCollect();
 
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);

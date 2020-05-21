@@ -9,18 +9,16 @@ import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
 
 public class Player {
+    protected int numberOfCardsRemaining;
+    ArrayList<Card> CardDeck = new ArrayList();
     //Attributes of Player
     private String name;
     private int score;
-    protected int numberOfCardsRemaining;
-
     private boolean trumpCalled;
-
-    ArrayList <Card> CardDeck = new ArrayList();
 
 
     //Constructor of the player class
-    public Player(String name, DeckOfCards cardDeck ) {
+    public Player(String name, DeckOfCards cardDeck) {
         this.name = name;
         this.score = 0;
         this.trumpCalled = false;
@@ -31,11 +29,11 @@ public class Player {
 
     }
 
-    public Card getCardFromIndex(int index){
+    public Card getCardFromIndex(int index) {
         return CardDeck.get(index);
     }
 
-    public int getCardImagePathFromIndex(int index){
+    public int getCardImagePathFromIndex(int index) {
         return getCardFromIndex(index).getImageSource();
     }
 
@@ -64,19 +62,19 @@ public class Player {
     }
 
     // returns an arrayList of 12 cards
-    public ArrayList<Card> getPlayerCards(){
+    public ArrayList<Card> getPlayerCards() {
         return CardDeck;
     }
 
-    public int getNoOfCards(){
+    public int getNoOfCards() {
         return this.CardDeck.size();
     }
 
 
     //take a card type as an input and return true if the given card type exist within the players cards
-    public boolean CheckForCardType(String checkType){
-        for (int i = 0; i < this.numberOfCardsRemaining; i++){
-            if(CardDeck.get(i).getCategory() == checkType){
+    public boolean CheckForCardType(String checkType) {
+        for (int i = 0; i < this.numberOfCardsRemaining; i++) {
+            if (CardDeck.get(i).getCategory() == checkType) {
                 return true;
             }
         }
@@ -84,7 +82,7 @@ public class Player {
     }
 
 
-    public void setNewCards(DeckOfCards cardDeck){
+    public void setNewCards(DeckOfCards cardDeck) {
         this.CardDeck = cardDeck.DealingCards();
         Collections.sort(this.CardDeck);
     }
@@ -107,23 +105,13 @@ public class Player {
 
 
     //for debugging purposes
-    public void displayDetails(){
+    public void displayDetails() {
 
-        for(int i = 0; i < this.numberOfCardsRemaining; i++){
-            Log.println(Log.ERROR,"TAG", "Player Name: " + this.name + " Card info - Category: " + this.CardDeck.get(i).getCategory()
+        for (int i = 0; i < this.numberOfCardsRemaining; i++) {
+            Log.println(Log.ERROR, "TAG", "Player Name: " + this.name + " Card info - Category: " + this.CardDeck.get(i).getCategory()
                     + " | Number: " + CardDeck.get(i).getNumber());
         }
     }
-
-//    public void removeCardFromID(int id){
-//        for(int i = 0; i < this.numberOfCardsRemaining; i++){
-//            if(this.CardDeck.get(i).getCardId() == id){
-//                CardDeck.remove(i);
-//                break;
-//            }
-//        }
-//    }
-
 }
 
 

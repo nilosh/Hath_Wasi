@@ -4,47 +4,29 @@ public class ScoreBoard {
 
     private static ScoreBoard ourInstance;
     private static int numberOfScores;
-    private static GameScore scores[];
+    private static GameScore[] scores;
 
-    private ScoreBoard(){
-        this.scores = new GameScore[10];
-        this.numberOfScores = 0;
+    private ScoreBoard() {
+        scores = new GameScore[10];
+        numberOfScores = 0;
     }
 
-    public static ScoreBoard getInstance(){
-        if(ourInstance == null){
+    public static ScoreBoard getInstance() {
+        if (ourInstance == null) {
             ourInstance = new ScoreBoard();
         }
 
         return ourInstance;
     }
 
-    public static boolean gameFinish(){
-        if(numberOfScores >= 10){
-            return true;
-        }
-
-        else{
-            return false;
-        }
-    }
-
-
-    public GameScore[] getScores() {
-        return scores;
-    }
-
-    public void setScores(GameScore score) {
-        if(this.numberOfScores < 10){
-            this.scores[this.numberOfScores++] = score;
-        }
-
+    public static boolean gameFinish() {
+        return numberOfScores >= 10;
     }
 
     public static int[] getTotals() {
         int[] totals = new int[]{0, 0, 0};
 
-        for (int i = 0; i < ScoreBoard.getNumberOfScores(); i++){
+        for (int i = 0; i < ScoreBoard.getNumberOfScores(); i++) {
             totals[0] += scores[i].getHuman();
             totals[1] += scores[i].getComputerPlayer1();
             totals[2] += scores[i].getComputerPlayer2();
@@ -53,12 +35,22 @@ public class ScoreBoard {
         return totals;
     }
 
-
     public static int getNumberOfScores() {
         return numberOfScores;
     }
 
     public static void setNumberOfScores(int numberOfScores) {
         ScoreBoard.numberOfScores = numberOfScores;
+    }
+
+    public GameScore[] getScores() {
+        return scores;
+    }
+
+    public void setScores(GameScore score) {
+        if (numberOfScores < 10) {
+            scores[numberOfScores++] = score;
+        }
+
     }
 }

@@ -4,13 +4,20 @@ import fyp.ui.hath_wasi.Cards.Card;
 
 public interface SelectingCard {
 
-    public Card selectSmallestCardFromCategory(String category);
-    public Card SelectTheHighestCardFromCategory(String category);
-    public Card SelectRandomCardFromCategory(String category);
-    public Card selectHighestCard();
-    public Card selectSmallestCard();
-    public Card selectCard();
-    public Card selectCard(Card card);
-    public Card selectCard(Card card1,Card card2);
+    Card selectSmallestCardFromCategory(String category);
+
+    Card SelectTheHighestCardFromCategory(String category);
+
+    Card SelectRandomCardFromCategory(String category);
+
+    Card selectHighestCard();
+
+    Card selectSmallestCard();
+
+    Card selectCard();
+
+    Card selectCard(Card card);
+
+    Card selectCard(Card card1, Card card2);
 
 }

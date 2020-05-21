@@ -12,7 +12,7 @@ import fyp.ui.hath_wasi.Players.Player;
 public class SelectingTrumpComPlayer {
 
     //This method will check whether the com player can bid the trump.
-    public static Boolean getChances(Player computerPlayer){
+    public static Boolean getChances(Player computerPlayer) {
 
         Integer definiteChances = 0, number = 0, mediumChances = 0;
         String category;
@@ -21,27 +21,21 @@ public class SelectingTrumpComPlayer {
         ArrayList<Card> cardSet = computerPlayer.getCardDeck();
 
         //Check if the card is a definite chance or a medium chance.
-        for(int i = 0; i < cardSet.size(); i++){
+        for (int i = 0; i < cardSet.size(); i++) {
             category = cardSet.get(i).getCategory();
             number = cardSet.get(i).getNumber();
 
-            if(number > 10){
+            if (number > 10) {
                 definiteChances += 1;
-            }
-            else if(number >= 8 && number <= 10) {
+            } else if (number >= 8 && number <= 10) {
                 mediumChances += 1;
             }
         }
-        if(definiteChances >= 5 || (definiteChances >= 5 && mediumChances >= 2)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return definiteChances >= 5 || (definiteChances >= 5 && mediumChances >= 2);
     }
 
     //Computer Player Selecting the trump.
-    public static String getTrump(Player player){
+    public static String getTrump(Player player) {
         Integer countSpades = 0, countHeart = 0, countClubs = 0, countDiamonds = 0;
         String trump = "";
         ArrayList<Card> cards = player.getCardDeck();
@@ -52,23 +46,17 @@ public class SelectingTrumpComPlayer {
         HashMap<String, Integer> maximumSuit = new HashMap<String, Integer>();
 
 
-        for(int i = 0; i < cards.size(); i++){
+        for (int i = 0; i < cards.size(); i++) {
             String category = cards.get(i).getCategory();
             Integer number = cards.get(i).getNumber();
 
-            if(category.toLowerCase() == "spades"){
+            if (category.toLowerCase() == "spades") {
                 countSpades += 1;
-            }
-
-            else if(category.toLowerCase() == "heart"){
+            } else if (category.toLowerCase() == "heart") {
                 countHeart += 1;
-            }
-
-            else if(category.toLowerCase() == "clubs"){
+            } else if (category.toLowerCase() == "clubs") {
                 countClubs += 1;
-            }
-
-            else if(category.toLowerCase() == "diamonds"){
+            } else if (category.toLowerCase() == "diamonds") {
                 countDiamonds += 1;
             }
 
@@ -82,8 +70,8 @@ public class SelectingTrumpComPlayer {
         //Get the largest suit
         Integer maximum = Collections.max(chances.values());
         //Returns the number of key values maps. (for Loop)
-        for(Map.Entry<String, Integer> entry : chances.entrySet()){
-            if(entry.getValue() == maximum){
+        for (Map.Entry<String, Integer> entry : chances.entrySet()) {
+            if (entry.getValue() == maximum) {
                 String key = entry.getKey().toLowerCase();
                 Integer value = entry.getValue();
 
@@ -92,13 +80,13 @@ public class SelectingTrumpComPlayer {
         }
 
         //if there is more than 1 suit with same number of cards.
-        if(maximumSuit.size() == 1){
-            for(Map.Entry<String, Integer> entry: maximumSuit.entrySet()){
+        if (maximumSuit.size() == 1) {
+            for (Map.Entry<String, Integer> entry : maximumSuit.entrySet()) {
                 trump = entry.getKey();
             }
         }
         //else randomly select a trump
-        else{
+        else {
             Object[] crunchOfKeys = maximumSuit.keySet().toArray();
             Object key = crunchOfKeys[new Random().nextInt(crunchOfKeys.length)];
             trump = key.toString();

@@ -1,7 +1,5 @@
 package fyp.ui.hath_wasi.Screens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +8,30 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import fyp.ui.hath_wasi.R;
 
 public class ChooseLevel extends AppCompatActivity {
 
     private static Switch beginnerLevel;
     private static Switch expertLevel;
+
+    public static Switch getBeginnerLevel() {
+        return beginnerLevel;
+    }
+
+    public void setBeginnerLevel(Switch beginnerLevel) {
+        ChooseLevel.beginnerLevel = beginnerLevel;
+    }
+
+    public static Switch getExpertLevel() {
+        return expertLevel;
+    }
+
+    public void setExpertLevel(Switch expertLevel) {
+        ChooseLevel.expertLevel = expertLevel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +43,17 @@ public class ChooseLevel extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_choose_level);
 
-        beginnerLevel = (Switch) findViewById(R.id.switchBeginner);
+        beginnerLevel = findViewById(R.id.switchBeginner);
 
-        expertLevel = (Switch) findViewById(R.id.switchExpert);
+        expertLevel = findViewById(R.id.switchExpert);
 
         beginnerLevel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(isChecked){
+                if (isChecked) {
                     expertLevel.setChecked(false);
-                }
-                else{
+                } else {
                     expertLevel.setChecked(true);
                 }
             }
@@ -48,11 +63,9 @@ public class ChooseLevel extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(isChecked){
+                if (isChecked) {
                     beginnerLevel.setChecked(false);
-                }
-
-                else{
+                } else {
                     beginnerLevel.setChecked(true);
                 }
             }
@@ -61,28 +74,12 @@ public class ChooseLevel extends AppCompatActivity {
 
     }
 
-    public void play_game(View view){
+    public void play_game(View view) {
 
         finish();
         Intent intent = new Intent(this, splash.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
-    }
-
-    public static Switch getBeginnerLevel() {
-        return beginnerLevel;
-    }
-
-    public void setBeginnerLevel(Switch beginnerLevel) {
-        this.beginnerLevel = beginnerLevel;
-    }
-
-    public static Switch getExpertLevel() {
-        return expertLevel;
-    }
-
-    public void setExpertLevel(Switch expertLevel) {
-        this.expertLevel = expertLevel;
     }
 }

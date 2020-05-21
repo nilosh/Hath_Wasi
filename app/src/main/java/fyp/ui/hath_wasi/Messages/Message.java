@@ -2,7 +2,7 @@ package fyp.ui.hath_wasi.Messages;
 
 public class Message {
 
-    private static final String messagePlayNextRound = "Would you like to play the next round?" ;
+    private static final String messagePlayNextRound = "Would you like to play the next round?";
     private static final String messageSelectValidCard = "Please select a valid card from your card deck!";
     private static final String toastLostGame = "Oops! Your team lost the Game!";
     private static final String toastWinGame = "Congratulations! Your team won the Game";

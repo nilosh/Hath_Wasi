@@ -1,12 +1,12 @@
 package fyp.ui.hath_wasi.Screens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -32,7 +32,7 @@ public class score_page extends AppCompatActivity {
         //get the game scores into score variable.
         //this variable consists of gameScore objects that each old marks of every player for an entire game round.
         ScoreBoard scoreBoard = ScoreBoard.getInstance();
-        GameScore scores[] = scoreBoard.getScores();
+        GameScore[] scores = scoreBoard.getScores();
 
         //find the textviews and map them to the array values.
         score[0][0] = findViewById(R.id.game1_player);
@@ -68,17 +68,17 @@ public class score_page extends AppCompatActivity {
 
 
         //iterate through the text view objects and add the marks.
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
 
             //If the game is not yet played.
-            if(i >= scoreBoard.getNumberOfScores()){
+            if (i >= ScoreBoard.getNumberOfScores()) {
                 score[i][0].setText(" - ");
                 score[i][1].setText(" - ");
                 score[i][2].setText(" - ");
             }
 
             // if the game is played already.
-            else{
+            else {
                 score[i][0].setText(String.valueOf(scores[i].getHuman()));
                 score[i][1].setText(String.valueOf(scores[i].getComputerPlayer1()));
                 score[i][2].setText(String.valueOf(scores[i].getComputerPlayer2()));
@@ -108,12 +108,11 @@ public class score_page extends AppCompatActivity {
         int max = scores[0];
 
 
-        for (int i = 1; i < scores.length; i++){
-            if(scores[i] > max){
+        for (int i = 1; i < scores.length; i++) {
+            if (scores[i] > max) {
                 max = scores[i];
-                medals[i-1].setVisibility(View.INVISIBLE);
-            }
-            else if(scores[i] < max){
+                medals[i - 1].setVisibility(View.INVISIBLE);
+            } else if (scores[i] < max) {
                 medals[i].setVisibility(View.INVISIBLE);
             }
         }

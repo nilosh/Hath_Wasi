@@ -1,11 +1,12 @@
 package fyp.ui.hath_wasi.Screens;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import fyp.ui.hath_wasi.R;
 
@@ -30,7 +31,7 @@ public class splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         // Set the activity to a handler and start the handler with a delay.
-        // This will load the page and leave it for a given number of miliseconds on the screen and automatically destroys.
+        // This will load the page and leave it for a given number of milliseconds on the screen and automatically destroys.
         mRunnable = new Runnable() {
             @Override
             public void run() {
@@ -39,7 +40,7 @@ public class splash extends AppCompatActivity {
         };
 
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 2200 );
+        mHandler.postDelayed(mRunnable, 2200);
 
     }
 

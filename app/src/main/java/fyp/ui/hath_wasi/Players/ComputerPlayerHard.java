@@ -1,7 +1,5 @@
 package fyp.ui.hath_wasi.Players;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -15,6 +13,13 @@ import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterDescending;
 import static fyp.ui.hath_wasi.Game.Game.getInstance;
 
 public class ComputerPlayerHard extends AbComputerPlayer {
+
+    //get the current instance of the game and attributes of it
+    Game game = getInstance();
+    String trumpCategory = Game.getTrumps();
+    Player SinglePlayer = Game.getSinglePlayer();
+    Player cpu2Player = Game.getCpu2();
+    Player humanPlayer = Game.getHumanPlayer();
 
     public ComputerPlayerHard(String name, DeckOfCards cardDeck) {
         super(name, cardDeck);
@@ -53,63 +58,66 @@ public class ComputerPlayerHard extends AbComputerPlayer {
     //this method returns the highest card from the hand irrespective of the category
     @Override
     public Card selectHighestCard() {
-        Collections.sort(CardDeck,cardNumberSorterDescending);
+        Collections.sort(CardDeck, cardNumberSorterDescending);
         return CardDeck.get(0);
     }
 
     //this method returns the smallest card from the hand irrespective of the category
     @Override
     public Card selectSmallestCard() {
-        Collections.sort(CardDeck,cardNumberSorterAscending);
+        Collections.sort(CardDeck, cardNumberSorterAscending);
         return CardDeck.get(0);
     }
 
-    //get the current instance of the game and attributes of it
-    Game game = getInstance();
-    String trumpCategory = game.getTrumps();
-    Player SinglePlayer = game.getSinglePlayer();
-    Player cpu2Player = game.getCpu2();
-    Player humanPlayer = game.getHumanPlayer();
-
     //this method is used to select the best card when you're the first player in the game round
     @Override
-    public Card selectCard(){
+    public Card selectCard() {
 
         //gets all cards of trump category to an array list
         ArrayList<Card> trumpCards = getCategoryOfCards(trumpCategory);
 
         //check if this player has bid the trump for the game
-        if(this.isTrumpCalled()){
+        if (this.isTrumpCalled()) {
             //check if the number of cards in hand is more than 3
-            if(CardDeck.size() > 3) {
-                if (trumpCards.size() > 2) { return SelectTheHighestCardFromCategory(trumpCategory); }
-                else {
+            if (CardDeck.size() > 3) {
+                if (trumpCards.size() > 2) {
+                    return SelectTheHighestCardFromCategory(trumpCategory);
+                } else {
                     final Card bestCard = selectHighestCard();
                     //check if the best card selected is not from trump category
-                    if (bestCard.getCategory() != trumpCategory) { return bestCard;}
-                    else {
+                    if (bestCard.getCategory() != trumpCategory) {
+                        return bestCard;
+                    } else {
                         while (bestCard.getCategory() == trumpCategory) {
                             Card newBestCard = selectHighestCard();
-                            if (newBestCard.getCategory() != trumpCategory) { return newBestCard; }
-                            else {
+                            if (newBestCard.getCategory() != trumpCategory) {
+                                return newBestCard;
+                            } else {
                                 continue;
                             }
                         }
                     }
                 }
-            } else {return selectHighestCard();}
-        } else{
+            } else {
+                return selectHighestCard();
+            }
+        } else {
             //check if the number of cards in hand is less than 3
-            if(CardDeck.size()< 3){return selectHighestCard(); }
-            else{
+            if (CardDeck.size() < 3) {
+                return selectHighestCard();
+            } else {
                 final Card bestCard = selectHighestCard();
                 //check if the best card selected is not from trump category
-                if (bestCard.getCategory() != trumpCategory) { return bestCard;}
-                else {
+                if (bestCard.getCategory() != trumpCategory) {
+                    return bestCard;
+                } else {
                     while (bestCard.getCategory() == trumpCategory) {
                         Card newBestCard = selectHighestCard();
-                        if (newBestCard.getCategory() != trumpCategory) { return newBestCard; }
-                        else { continue; }
+                        if (newBestCard.getCategory() != trumpCategory) {
+                            return newBestCard;
+                        } else {
+                            continue;
+                        }
                     }
                 }
             }
@@ -119,7 +127,7 @@ public class ComputerPlayerHard extends AbComputerPlayer {
 
     //this method is used to select the best card when you're the second player in the game round
     @Override
-    public Card selectCard(Card Player1Card){
+    public Card selectCard(Card Player1Card) {
 
         //get the playing type of the round using the first player's card type
         String Category = Player1Card.getCategory();
@@ -133,7 +141,9 @@ public class ComputerPlayerHard extends AbComputerPlayer {
                 //check if my highest card is lower than the opponent's card
                 if (myCard.getCardId() > opponentCard) {
                     return selectSmallestCardFromCategory(Category);
-                } else { return myCard; }
+                } else {
+                    return myCard;
+                }
             } else {
                 //check if the play type is same as the trump
                 if (Category == trumpCategory) {
@@ -162,30 +172,29 @@ public class ComputerPlayerHard extends AbComputerPlayer {
 
     //this method is used to select which method to select when you're the third player to choose the card according to the player type
     @Override
-    public Card selectCard(Card player1Card, Card player2Card){
+    public Card selectCard(Card player1Card, Card player2Card) {
 
         //get the playing type of the round using the first player's card type
         String Category = player1Card.getCategory();
         //check if this player is the single player
-        if (this.getName()== SinglePlayer.getName()){
-            return selectBestCardSinglePlayer(Category,player1Card,player2Card);
+        if (this.getName() == SinglePlayer.getName()) {
+            return selectBestCardSinglePlayer(Category, player1Card, player2Card);
 
         }
         //if this player is not the single player
-        else{
+        else {
             //check if either this player is cpu1 player and cpu2 player is the single player
             //or if the this player is the cpu2 player and human player is the single player
-            if ((((this.getName() == game.getCpu1().getName()) && (cpu2Player == SinglePlayer)) || ((this.getName()== cpu2Player.getName()) && (humanPlayer == SinglePlayer)))){
-                return selectBestCardTeamPlayer(Category,player1Card,player2Card); }
-            else{
-                return selectBestCardTeamPlayer(Category,player2Card,player1Card) ;
+            if ((((this.getName() == Game.getCpu1().getName()) && (cpu2Player == SinglePlayer)) || ((this.getName() == cpu2Player.getName()) && (humanPlayer == SinglePlayer)))) {
+                return selectBestCardTeamPlayer(Category, player1Card, player2Card);
+            } else {
+                return selectBestCardTeamPlayer(Category, player2Card, player1Card);
             }
         }
     }
 
     //select best card when you're the single player and the third player
-    public Card selectBestCardSinglePlayer(String Category, Card opponent1Card, Card opponent2Card)
-    {
+    public Card selectBestCardSinglePlayer(String Category, Card opponent1Card, Card opponent2Card) {
 
         final Integer opponent1 = opponent1Card.getCardId();
         final Integer opponent2 = opponent2Card.getCardId();
@@ -195,69 +204,89 @@ public class ComputerPlayerHard extends AbComputerPlayer {
         final Integer difference = opponent1.compareTo(opponent2);
 
         //check if both cards played are of the same type
-        if (categoryMatch){
+        if (categoryMatch) {
             //check if opponent1 has a bigger card than opponent2
-            if(difference < 0){
+            if (difference < 0) {
                 // check if this user has the calling card type
-                if(CheckForCardType(Category)){
+                if (CheckForCardType(Category)) {
                     final Card myCard = SelectTheHighestCardFromCategory(Category);
                     //check if my highest card is lower than the opponents' highest card
-                    if(myCard.getCardId() > opponent1) { return selectSmallestCardFromCategory(Category); }
+                    if (myCard.getCardId() > opponent1) {
+                        return selectSmallestCardFromCategory(Category);
+                    }
                     //if my highest card is greater than the opponents' highest card
-                    else{ return myCard; }
-                }
-                else {
+                    else {
+                        return myCard;
+                    }
+                } else {
                     //calling category type is not available
                     //check if this player has cards of trump category
-                    if (CheckForCardType(trumpCategory)) { return selectSmallestCardFromCategory(trumpCategory); }
+                    if (CheckForCardType(trumpCategory)) {
+                        return selectSmallestCardFromCategory(trumpCategory);
+                    }
                     //if trump category is not available
-                    else { return selectSmallestCard(); }
+                    else {
+                        return selectSmallestCard();
+                    }
                 }
-            }
-            else if (difference > 0) {
+            } else if (difference > 0) {
                 //opponent1 has a smaller card than opponent2
                 // check if this user has the calling card type
                 if (CheckForCardType(Category)) {
                     final Card myCard = SelectTheHighestCardFromCategory(Category);
                     //if my highest card is lower than the opponent2's card
-                    if (myCard.getCardId() > opponent2) { return selectSmallestCardFromCategory(Category); }
-                    else { return myCard; }
-                }
-
-                else {
+                    if (myCard.getCardId() > opponent2) {
+                        return selectSmallestCardFromCategory(Category);
+                    } else {
+                        return myCard;
+                    }
+                } else {
                     //calling category type is not available
                     //check if this player has cards of trump category
-                    if (CheckForCardType(trumpCategory)) { return selectSmallestCardFromCategory(trumpCategory); }
+                    if (CheckForCardType(trumpCategory)) {
+                        return selectSmallestCardFromCategory(trumpCategory);
+                    }
                     //if trump category is not available
-                    else { return selectSmallestCard(); } }
+                    else {
+                        return selectSmallestCard();
+                    }
+                }
             }
-        }
-        else {
+        } else {
             //Category of both opponents don't match
             // check if this user has the calling card type
-            if (CheckForCardType(Category)){
+            if (CheckForCardType(Category)) {
                 final Card myCard = SelectTheHighestCardFromCategory(Category);
                 //if my highest card is lower than the opponent1's card
-                if (myCard.getCardId() > opponent1) { return selectSmallestCardFromCategory(Category); }
-                else { return myCard; }
-            }
-            else{
+                if (myCard.getCardId() > opponent1) {
+                    return selectSmallestCardFromCategory(Category);
+                } else {
+                    return myCard;
+                }
+            } else {
                 //calling category type is not available
                 //check if opponent2's card is of trump category
-                if (opponent1Cat == trumpCategory){
+                if (opponent1Cat == trumpCategory) {
                     //check if this player has cards of trump category
-                    if(CheckForCardType(trumpCategory)) {
+                    if (CheckForCardType(trumpCategory)) {
                         final Card myNewCard = SelectTheHighestCardFromCategory(trumpCategory);
                         //if my highest card is lower than the opponent2's card
-                        if(myNewCard.getCardId()>opponent2){return selectSmallestCard();}
-                        else{return myNewCard;}
+                        if (myNewCard.getCardId() > opponent2) {
+                            return selectSmallestCard();
+                        } else {
+                            return myNewCard;
+                        }
                     }
                 }
                 //when opponent2's card is not of trump category
-                else{
-                    if (CheckForCardType(trumpCategory)) { return selectSmallestCardFromCategory(trumpCategory); }
+                else {
+                    if (CheckForCardType(trumpCategory)) {
+                        return selectSmallestCardFromCategory(trumpCategory);
+                    }
                     //if trump category is not available
-                    else { return selectSmallestCard(); }
+                    else {
+                        return selectSmallestCard();
+                    }
                 }
             }
         }
@@ -265,6 +294,8 @@ public class ComputerPlayerHard extends AbComputerPlayer {
         return null;
     }
 
-    public Card selectBestCardTeamPlayer(String Category, Card myTeamCard, Card opponentCard){return null;}
+    public Card selectBestCardTeamPlayer(String Category, Card myTeamCard, Card opponentCard) {
+        return null;
+    }
 
 }

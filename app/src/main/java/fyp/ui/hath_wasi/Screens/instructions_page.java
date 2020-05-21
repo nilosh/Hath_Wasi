@@ -1,20 +1,16 @@
 package fyp.ui.hath_wasi.Screens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.SearchManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import fyp.ui.hath_wasi.R;
 
@@ -28,7 +24,7 @@ public class instructions_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.println(Log.ERROR,"Tag","on create");
+        Log.println(Log.ERROR, "Tag", "on create");
 
 
         // hides the title bar
@@ -77,18 +73,15 @@ public class instructions_page extends AppCompatActivity {
                     textToHighlight = etText.getText().toString();
                     replaceWith = "<span style= 'background-color: #ffc107'>" + textToHighlight + "</span>";
                     originalText = tvText.getText().toString();
-                    modifiedText = originalText.replaceAll(textToHighlight,replaceWith);
-                    tvText.setText(Html.fromHtml(modifiedText,1));
+                    modifiedText = originalText.replaceAll(textToHighlight, replaceWith);
+                    tvText.setText(Html.fromHtml(modifiedText, 1));
                 }
             }
         });
 
 
-
-
-
-        }
     }
+}
 
 
 

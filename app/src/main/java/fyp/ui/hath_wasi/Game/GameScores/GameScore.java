@@ -6,7 +6,7 @@ public class GameScore {
     int computerPlayer1;
     int computerPlayer2;
 
-    public GameScore(int human, int cpu1, int cpu2){
+    public GameScore(int human, int cpu1, int cpu2) {
         this.human = human;
         this.computerPlayer1 = cpu1;
         this.computerPlayer2 = cpu2;

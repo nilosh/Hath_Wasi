@@ -3,19 +3,16 @@ package fyp.ui.hath_wasi.Cards;
 import java.util.ArrayList;
 import java.util.Random;
 
-import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.R;
 
 public class DeckOfCards {
 
-    ArrayList<Card> cardDeck = new ArrayList<>();
-
     static private Random randomCardGenerator;
     final int handSize = 12;
-
+    ArrayList<Card> cardDeck = new ArrayList<>();
     // declare 36 cards of type Card
     Card card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
-            card11, card12, card13, card14, card15,card16, card17, card18, card19, card20,
+            card11, card12, card13, card14, card15, card16, card17, card18, card19, card20,
             card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
             card31, card32, card33, card34, card35, card36;
 
@@ -101,14 +98,14 @@ public class DeckOfCards {
     }
 
     //generate an ArrayList of hand size number of cards randomly and remove the relative index from the cardDeck
-    public ArrayList<Card>DealingCards(){
-        ArrayList<Card>hand = new ArrayList<Card>();
+    public ArrayList<Card> DealingCards() {
+        ArrayList<Card> hand = new ArrayList<Card>();
         randomCardGenerator = new Random();
 
-        for(int i = 0; i < handSize; i++) {
+        for (int i = 0; i < handSize; i++) {
             int index = randomCardGenerator.nextInt(cardDeck.size());
             hand.add(cardDeck.remove(index));
         }
         return hand;
-        }
+    }
 }

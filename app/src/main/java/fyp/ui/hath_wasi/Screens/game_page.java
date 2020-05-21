@@ -1,9 +1,5 @@
 package fyp.ui.hath_wasi.Screens;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -21,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,20 +41,101 @@ public class game_page extends AppCompatActivity {
 
     // Variable declaration.
     static HashMap<Integer, Card> imageToCardMap;
-    private static ImageView[] cardArray = new ImageView[12];
-    private static ComputerPlayerCardViews comPlayerCardViews;
-
-    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    Switch expertSwitch = ChooseLevel.getExpertLevel();
-
-    String trump;
-
     static AbComputerPlayer comPlayer1;
     static AbComputerPlayer comPlayer2;
     static Player human;
-    private boolean playerAsking = false;
+    private static ImageView[] cardArray = new ImageView[12];
+    private static ComputerPlayerCardViews comPlayerCardViews;
     private static int roundNumber = 0;
     private static Sounds sounds;
+    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    Switch expertSwitch = ChooseLevel.getExpertLevel();
+    String trump;
+    private boolean playerAsking = false;
+
+    public static void moveUpPlayerCards() {
+
+        for (int i = 0; i < 12; i++) {
+            cardArray[i].setY(cardArray[i].getY() - 100f);
+        }
+    }
+
+    public static void startGame() {
+
+        // Create an instance of card and an instance of Player(for human player).
+        DeckOfCards card = new DeckOfCards();
+        human = new Player("Human Player", card);
+
+        // Create two instances of players (for Computer Players).
+        comPlayer1 = new ComputerPlayerAggressive("Computer Player 1", card);
+        comPlayer2 = new ComputerPlayerAggressive("Computer Player 2", card);
+
+        comPlayer1.displayDetails();
+        comPlayer2.displayDetails();
+
+        AnimatorSet s = new AnimatorSet();
+        ArrayList<Animator> animations = new ArrayList<Animator>();
+
+        moveUpPlayerCards();
+        ComputerPlayerCardViews.openAnimation();
+
+        // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
+        // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the game_page.
+
+        // uses Animations to sequentially send the cards.
+        for (int i = 0; i < 12; i++) {
+
+            cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
+            cardArray[i].setVisibility(View.VISIBLE);
+            final int j = i;
+
+            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
+            animations.add(animator);
+
+        }
+
+        s.setDuration(200);
+        s.playSequentially(animations);
+        s.start();
+
+        // Set round number to zero.
+        roundNumber = 0;
+
+        //Map the correct card image to the human player's card deck.
+        imageToCardMap = imageViewToCardMap(human, cardArray);
+
+        // Get Game Instance and set cards.
+        Game game = Game.getInstance();
+        Game.setCpu1(comPlayer1);
+        Game.setCpu2(comPlayer2);
+        Game.setHumanPlayer(human);
+    }
+
+    private static HashMap<Integer, Card> imageViewToCardMap(Player player, ImageView[] views) {
+
+        // This method maps the image views of the player to the playing cards of that particular player.
+        // A HashMap is used for this purpose. The HashMap contains the ID of the imageView and the player's card using the index
+        // in the sorted array of cards.
+
+        int numOfCards = player.getNoOfCards();
+        HashMap<Integer, Card> imageToCardMap = new HashMap<>();
+
+        for (int i = 0; i < numOfCards; i++) {
+            imageToCardMap.put(views[i].getId(), player.getCardFromIndex(i));
+            Log.println(Log.ERROR, "TAG", "Adding Cards - " + views[i].getId() + " Card type and details - " + player.getCardFromIndex(i).getCategory() + " " + player.getCardFromIndex(i).getCardId());
+
+        }
+
+        return imageToCardMap;
+    }
+
+    public static void cardTouch(boolean onOrOff) {
+
+        //This method sets the cards of the user un-clickable.
+        for (int i = 0; i < 12; i++) {
+            cardArray[i].setClickable(onOrOff);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,94 +181,14 @@ public class game_page extends AppCompatActivity {
 
 
         //create the game with the starting player set as human
-        Game game =  Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
+        Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
 
         Log.println(Log.ERROR, "TAG", "Beginner Level: " + beginnerSwitch.isChecked());
         Log.println(Log.ERROR, "TAG", "Expert Level: " + expertSwitch.isChecked());
 
     }
 
-    public static void moveUpPlayerCards(){
-
-        for(int i = 0; i < 12; i++){
-            cardArray[i].setY(cardArray[i].getY() - 100f);
-        }
-    }
-
-
-    public static void startGame(){
-
-        // Create an instance of card and an instance of Player(for human player).
-        DeckOfCards card = new DeckOfCards();
-        human = new Player("Human Player", card);
-
-        // Create two instances of players (for Computer Players).
-        comPlayer1 = new ComputerPlayerAggressive("Computer Player 1", card);
-        comPlayer2 = new ComputerPlayerAggressive("Computer Player 2", card);
-
-        comPlayer1.displayDetails();
-        comPlayer2.displayDetails();
-
-        AnimatorSet s = new AnimatorSet();
-        ArrayList<Animator> animations = new ArrayList<Animator>();
-
-        moveUpPlayerCards();
-        ComputerPlayerCardViews.openAnimation();
-
-        // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
-        // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the game_page.
-
-        // uses Animations to sequentially send the cards.
-        for (int i = 0; i < 12; i++){
-
-            cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
-            cardArray[i].setVisibility(View.VISIBLE);
-            final int j = i;
-
-            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
-            animations.add(animator);
-
-        }
-
-        s.setDuration(200);
-        s.playSequentially(animations);
-        s.start();
-
-        // Set round number to zero.
-        roundNumber = 0;
-
-        //Map the correct card image to the human player's card deck.
-        imageToCardMap = imageViewToCardMap(human, cardArray);
-
-        // Get Game Instance and set cards.
-        Game game = Game.getInstance();
-        game.setCpu1(comPlayer1);
-        game.setCpu2(comPlayer2);
-        game.setHumanPlayer(human);
-    }
-
-
-
-    private static HashMap<Integer, Card>imageViewToCardMap(Player player, ImageView[] views){
-
-        // This method maps the image views of the player to the playing cards of that particular player.
-        // A HashMap is used for this purpose. The HashMap contains the ID of the imageView and the player's card using the index
-        // in the sorted array of cards.
-
-        int numOfCards =player.getNoOfCards();
-        HashMap<Integer, Card> imageToCardMap = new HashMap<>();
-
-        for(int i = 0; i < numOfCards; i++){
-            imageToCardMap.put(views[i].getId(), player.getCardFromIndex(i));
-            Log.println(Log.ERROR, "TAG", "Adding Cards - " + views[i].getId() + " Card type and details - " + player.getCardFromIndex(i).getCategory() + " " + player.getCardFromIndex(i).getCardId());
-
-        }
-
-        return imageToCardMap;
-    }
-
-
-    public void cardSelected(View v){
+    public void cardSelected(View v) {
 
         cardTouch(false);
 
@@ -203,7 +204,7 @@ public class game_page extends AppCompatActivity {
         game.playNextMove(selectedCard);
 
         // If player selects a valid card.
-        if(game.isInvalidCardByHuman() == false){
+        if (Game.isInvalidCardByHuman() == false) {
 
             final ImageView image = findViewById(R.id.playCard);
             image.setImageResource(selectedCard.getImageSource());
@@ -219,6 +220,7 @@ public class game_page extends AppCompatActivity {
                     image.setImageAlpha(1000);
                     Sounds.cardClick();
                 }
+
                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                 @Override
                 public void onAnimationEnd(Animation animation) {
@@ -232,11 +234,12 @@ public class game_page extends AppCompatActivity {
                 }
 
                 @Override
-                public void onAnimationRepeat(Animation animation) { }
+                public void onAnimationRepeat(Animation animation) {
+                }
             });
 
             human.getPlayerCards().remove(selectedCard);
-            human.setNumberOfCardsRemaining(human.getNumberOfCardsRemaining()-1);
+            human.setNumberOfCardsRemaining(human.getNumberOfCardsRemaining() - 1);
 
             //remove the card from the user card deck
             v.setVisibility(View.INVISIBLE);
@@ -245,25 +248,14 @@ public class game_page extends AppCompatActivity {
 
     }
 
-
-
-    public static void cardTouch(boolean onOrOff){
-
-        //This method sets the cards of the user un-clickable.
-        for(int i = 0; i < 12; i++){
-            cardArray[i].setClickable(onOrOff);
-        }
-    }
-
-
     @Override
-    public void onBackPressed(){
-    Game.setOurInstance(null);
-    finish();
+    public void onBackPressed() {
+        Game.setOurInstance(null);
+        finish();
     }
 
 
-    public void openDialog(){
+    public void openDialog() {
 
         Game game = Game.getInstance();
 
@@ -287,17 +279,17 @@ public class game_page extends AppCompatActivity {
                         dialog.dismiss();
                         //Toast.makeText(getApplicationContext(), "Yoohooo" + trump, Toast.LENGTH_SHORT).show();
 
-                        final TextView scoreLabel1 = (TextView) findViewById(R.id.textViewMyTeam);
-                        final TextView scoreLabel2 = (TextView) findViewById(R.id.textViewOpponent);
+                        final TextView scoreLabel1 = findViewById(R.id.textViewMyTeam);
+                        final TextView scoreLabel2 = findViewById(R.id.textViewOpponent);
 
 
                         // if human player passed the trump selection to a computer player, let the com player 2 select the trump.
-                        Game game =Game.getInstance();
-                        if(playerAsking == false){
+                        Game game = Game.getInstance();
+                        if (playerAsking == false) {
 
-                            if(SelectingTrumpComPlayer.getChances(comPlayer2)){
+                            if (SelectingTrumpComPlayer.getChances(comPlayer2)) {
                                 trump = SelectingTrumpComPlayer.getTrump(comPlayer2);
-                                game.setTrumps(trump);
+                                Game.setTrumps(trump);
                                 passTrumpToTheInterface(trump);
                                 playerAsking = true;
 
@@ -308,14 +300,14 @@ public class game_page extends AppCompatActivity {
                                 scoreLabel2.setText("My Team");
 
                                 // If com player 2 selects the trump, alter the game instance and let com player 2 start the game.
-                                game.alterInstance( comPlayer2, human, comPlayer1, human, comPlayer1, comPlayer2, comPlayer2, trump);
+                                game.alterInstance(comPlayer2, human, comPlayer1, human, comPlayer1, comPlayer2, comPlayer2, trump);
                                 game.moveForwardWithCpuWin(comPlayer2);
                             }
 
                             // else check if com player 1 an select the trump, if yes let com player 1 start the game.
-                            else if(SelectingTrumpComPlayer.getChances(comPlayer1)){
+                            else if (SelectingTrumpComPlayer.getChances(comPlayer1)) {
                                 trump = SelectingTrumpComPlayer.getTrump(comPlayer1);
-                                game.setTrumps(trump);
+                                Game.setTrumps(trump);
                                 passTrumpToTheInterface(trump);
                                 playerAsking = true;
 
@@ -325,13 +317,13 @@ public class game_page extends AppCompatActivity {
                                 cardTouch(false);
                                 scoreLabel2.setText("My Team");
 
-                                game.alterInstance( comPlayer1, human, comPlayer2, human, comPlayer1, comPlayer2, comPlayer1, trump);
+                                game.alterInstance(comPlayer1, human, comPlayer2, human, comPlayer1, comPlayer2, comPlayer1, trump);
                                 game.moveForwardWithCpuWin(comPlayer1);
                             }
 
                             // else ask the human player again.
-                            else{
-                                Toast.makeText(getApplicationContext(), Message.getToastReshufflingCards() , Toast.LENGTH_LONG).show();
+                            else {
+                                Toast.makeText(getApplicationContext(), Message.getToastReshufflingCards(), Toast.LENGTH_LONG).show();
                                 openDialog();
 
                                 DeckOfCards card = new DeckOfCards();
@@ -344,11 +336,11 @@ public class game_page extends AppCompatActivity {
                                 ArrayList<Animator> animations = new ArrayList<Animator>();
 
 
-                                for(int i = 0; i < 12; i++){
+                                for (int i = 0; i < 12; i++) {
                                     cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
 
                                     final int j = i;
-                                    ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f );
+                                    ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
                                     animations.add(animator);
                                 }
 
@@ -357,10 +349,10 @@ public class game_page extends AppCompatActivity {
                                 animatorSet.start();
 
 
-                                imageToCardMap = imageViewToCardMap(human,cardArray);
+                                imageToCardMap = imageViewToCardMap(human, cardArray);
 
                                 //create the game with the starting player set as human
-                                game.alterInstance( human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
+                                game.alterInstance(human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
                             }
                         }
 
@@ -376,7 +368,7 @@ public class game_page extends AppCompatActivity {
         dialog.show();
     }
 
-    public void selectTrump(){
+    public void selectTrump() {
 
         // This method allows the user to select the trump when they choose to select the trump.
         AlertDialog.Builder chooseTrump = new AlertDialog.Builder(game_page.this, R.style.AlertDialogStyle);
@@ -394,13 +386,12 @@ public class game_page extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("TAG", "Inside on click : " + trump);
-                        if(trump == null || trump.isEmpty()){
+                        if (trump == null || trump.isEmpty()) {
                             Toast.makeText(getApplicationContext(), Message.getToastChooseTrump(),
                                     Toast.LENGTH_SHORT).show();
                             Log.d("TAG", "The Trump Selected: " + trump);
                             selectTrump();
-                        }
-                        else{
+                        } else {
                             dialog.dismiss();
                         }
 
@@ -416,35 +407,35 @@ public class game_page extends AppCompatActivity {
     }
 
 
-    public void passTrumpToTheInterface(int which){
+    public void passTrumpToTheInterface(int which) {
 
         Game game = Game.getInstance();
 
-        final TextView textViewTrump = (TextView) findViewById(R.id.trumpSelected);
+        final TextView textViewTrump = findViewById(R.id.trumpSelected);
         textViewTrump.setVisibility(View.VISIBLE);
 
-        switch (which){
+        switch (which) {
             case 0:
                 trump = "spades".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Spades Selected: " + trump);
                 textViewTrump.setText("♠");
                 break;
             case 1:
                 trump = "hearts".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Hearts Selected: " + trump);
                 textViewTrump.setText("♥");
                 break;
             case 2:
                 trump = "clubs".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Clubs Selected" + trump);
                 textViewTrump.setText("♣");
                 break;
             case 3:
                 trump = "diamonds".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Diamonds Selected" + trump);
                 textViewTrump.setText("♦");
                 break;
@@ -452,35 +443,35 @@ public class game_page extends AppCompatActivity {
     }
 
 
-    public void passTrumpToTheInterface(String which){
+    public void passTrumpToTheInterface(String which) {
 
         Game game = Game.getInstance();
 
-        final TextView textViewTrump = (TextView) findViewById(R.id.trumpSelected);
+        final TextView textViewTrump = findViewById(R.id.trumpSelected);
         textViewTrump.setVisibility(View.VISIBLE);
 
-        switch (which){
+        switch (which) {
             case "spades":
                 trump = "spades".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Spades Selected: " + trump);
                 textViewTrump.setText("♠");
                 break;
             case "hearts":
                 trump = "hearts".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Hearts Selected: " + trump);
                 textViewTrump.setText("♥");
                 break;
             case "clubs":
                 trump = "clubs".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Clubs Selected" + trump);
                 textViewTrump.setText("♣");
                 break;
             case "diamonds":
                 trump = "diamonds".toLowerCase();
-                game.setTrumps(trump);
+                Game.setTrumps(trump);
                 Log.d("TAG", "Diamonds Selected" + trump);
                 textViewTrump.setText("♦");
                 break;
