@@ -10,7 +10,7 @@ import androidx.annotation.RequiresApi;
 
 import fyp.ui.hath_wasi.Cards.ComputerPlayerCardViews;
 import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
-import fyp.ui.hath_wasi.Screens.game_page;
+import fyp.ui.hath_wasi.Screens.GamePage;
 
 public class GameHandlers {
 
@@ -68,7 +68,7 @@ public class GameHandlers {
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);
                 playerPlaceholder.setVisibility(View.INVISIBLE);
-                game_page.cardTouch(true);
+                GamePage.cardTouch(true);
 
             }
         }, delayMilliseconds);
