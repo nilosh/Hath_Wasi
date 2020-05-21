@@ -1,8 +1,5 @@
 package fyp.ui.hath_wasi.Screens;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import fyp.ui.hath_wasi.R;
 
@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void choose_level(View view){
+    public void choose_level(View view) {
         Intent intent = new Intent(this, ChooseLevel.class);
         //Intent intent = new Intent(this, SplashScreen.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
-    public void view_scores(View view){
+    public void view_scores(View view) {
         Intent intent = new Intent(this, ScoresPage.class);
         startActivity(intent);
     }
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Use an alert dialog box to confirm exit game.
 
-        final AlertDialog.Builder exitGame = new AlertDialog.Builder( this, R.style.AlertDialogStyle);
+        final AlertDialog.Builder exitGame = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         exitGame.setMessage("Are you sure you want to Exit?")
                 .setTitle("♠ ♥ ♣ ♦")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogSlide;
         dialog.show();
 
-        Log.println( Log.ERROR, "TAG", "Inside openDialog exit game in the end" );
+        Log.println(Log.ERROR, "TAG", "Inside openDialog exit game in the end");
     }
 
 }

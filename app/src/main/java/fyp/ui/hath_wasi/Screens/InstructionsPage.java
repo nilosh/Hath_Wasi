@@ -1,12 +1,11 @@
 package fyp.ui.hath_wasi.Screens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import fyp.ui.hath_wasi.R;
 
@@ -26,7 +25,7 @@ public class InstructionsPage extends AppCompatActivity {
 
         String url = "file:///android_asset/instructions.html";
 
-        WebView view = (WebView) this.findViewById(R.id.webView);
+        WebView view = this.findViewById(R.id.webView);
         view.setBackgroundColor(0);
         view.getSettings().setJavaScriptEnabled(true);
         view.loadUrl(url);

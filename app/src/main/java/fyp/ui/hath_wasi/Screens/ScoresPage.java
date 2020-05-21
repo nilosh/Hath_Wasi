@@ -86,7 +86,7 @@ public class ScoresPage extends AppCompatActivity {
             }
         }
 
-        if (scoreBoard.getNumberOfScores() > 0){
+        if (ScoreBoard.getNumberOfScores() > 0) {
             setMedal();
         }
 
