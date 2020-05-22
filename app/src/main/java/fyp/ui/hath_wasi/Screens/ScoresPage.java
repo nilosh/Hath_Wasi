@@ -123,5 +123,11 @@ public class ScoresPage extends AppCompatActivity {
             }
         }
 
+        if (max == scores[2]) {
+            if (max > scores[0]) {
+                medals[0].setVisibility(View.INVISIBLE);
+            }
+        }
+
     }
 }
