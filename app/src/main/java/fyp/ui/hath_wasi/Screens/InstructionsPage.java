@@ -1,6 +1,9 @@
 package fyp.ui.hath_wasi.Screens;
 
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
@@ -20,8 +23,9 @@ public class InstructionsPage extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-
         setContentView(R.layout.activity_instructions);
+
+
 
         String url = "file:///android_asset/instructions.html";
 
@@ -29,5 +33,20 @@ public class InstructionsPage extends AppCompatActivity {
         view.setBackgroundColor(0);
         view.getSettings().setJavaScriptEnabled(true);
         view.loadUrl(url);
+    }
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_ENTER)
+        {
+            Log.i("Go Pressed","Clicked");
+        }
+        if(keyCode==KeyEvent.KEYCODE_BACK)
+        {
+            finish();
+        }
+        return false;
     }
 }
