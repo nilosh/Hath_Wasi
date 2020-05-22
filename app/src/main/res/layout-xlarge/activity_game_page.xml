@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:background="#032420"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:text="My Team"
             android:textAlignment="center"
@@ -37,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="20dp"
             android:text="0"
             android:textColor="#F1F3F3"
             app:layout_constraintEnd_toEndOf="@+id/textViewMyTeam"
@@ -45,12 +47,12 @@
 
         <TextView
             android:id="@+id/trumpSelected"
-            android:layout_width="135dp"
-            android:layout_height="70dp"
+            android:layout_width="140dp"
+            android:layout_height="75dp"
             android:gravity="center|center_horizontal|center_vertical"
             android:text="No Trump"
             android:textColor="#FFFFFF"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:text="Opponent"
             android:textAlignment="center"
@@ -76,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="20dp"
             android:text="0"
             android:textColor="#F1F3F3"
             app:layout_constraintEnd_toEndOf="@+id/textViewOpponent"
@@ -86,8 +90,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card1"
-        android:layout_width="100dp"
-        android:layout_height="135dp"
+        android:layout_width="150dp"
+        android:layout_height="185dp"
         android:layout_marginTop="15dp"
         android:rotation="-90"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,8 +101,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card2"
-        android:layout_width="100dp"
-        android:layout_height="135dp"
+        android:layout_width="150dp"
+        android:layout_height="185dp"
         android:layout_marginTop="15dp"
         android:rotation="-90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer2Card1"
@@ -108,8 +112,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card3"
-        android:layout_width="100dp"
-        android:layout_height="135dp"
+        android:layout_width="150dp"
+        android:layout_height="185dp"
         android:layout_marginTop="15dp"
         android:rotation="-90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer2Card2"
@@ -594,19 +598,19 @@
         android:layout_marginTop="5dp"
         android:text="CPU 1"
         android:textColor="#F5F2F2"
-        android:textSize="12sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame" />
 
     <TextView
         android:id="@+id/textViewComPlayer2"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="15dp"
         android:text="CPU 2"
         android:textColor="#F5F2F2"
-        android:textSize="12sp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/confetti2" />
 
@@ -618,7 +622,7 @@
         android:layout_marginBottom="5dp"
         android:text="1/10 Rounds"
         android:textColor="#F1EDED"
-        android:textSize="12sp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
