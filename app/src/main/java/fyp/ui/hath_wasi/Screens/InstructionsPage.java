@@ -25,8 +25,6 @@ public class InstructionsPage extends AppCompatActivity {
 
         setContentView(R.layout.activity_instructions);
 
-
-
         String url = "file:///android_asset/instructions.html";
 
         WebView view = this.findViewById(R.id.webView);

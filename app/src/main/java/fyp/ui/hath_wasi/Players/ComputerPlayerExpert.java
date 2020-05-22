@@ -12,7 +12,7 @@ import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterAscending;
 import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterDescending;
 import static fyp.ui.hath_wasi.Game.Game.getInstance;
 
-public class ComputerPlayerHard extends AbComputerPlayer {
+public class ComputerPlayerExpert extends AbComputerPlayer {
 
     //get the current instance of the game and attributes of it
     Game game = getInstance();
@@ -21,7 +21,7 @@ public class ComputerPlayerHard extends AbComputerPlayer {
     Player cpu2Player = Game.getCpu2();
     Player humanPlayer = Game.getHumanPlayer();
 
-    public ComputerPlayerHard(String name, DeckOfCards cardDeck) {
+    public ComputerPlayerExpert(String name, DeckOfCards cardDeck) {
         super(name, cardDeck);
     }
 
