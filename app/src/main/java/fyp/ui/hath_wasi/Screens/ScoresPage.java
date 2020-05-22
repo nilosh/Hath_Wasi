@@ -93,6 +93,8 @@ public class ScoresPage extends AppCompatActivity {
     }
 
 
+
+
     public void setMedal() {
         int[] scores = ScoreBoard.getTotals();
 
