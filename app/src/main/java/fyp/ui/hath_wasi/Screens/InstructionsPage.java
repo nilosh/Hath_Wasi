@@ -35,18 +35,4 @@ public class InstructionsPage extends AppCompatActivity {
         view.loadUrl(url);
     }
 
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_ENTER)
-        {
-            Log.i("Go Pressed","Clicked");
-        }
-        if(keyCode==KeyEvent.KEYCODE_BACK)
-        {
-            finish();
-        }
-        return false;
-    }
 }

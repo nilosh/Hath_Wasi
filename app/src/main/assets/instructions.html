@@ -94,6 +94,13 @@
     });
 
 </script>
+    <script type="text/javascript">
+        function disable(){
+            document.onkeypress = function (e){
+                return false;
+            }
+        }
+    </script>
 </head>
 <br>
 <h1 align="center"><font color="#b0b5b2"> Hath Wasi Game Rules </font></h1>
@@ -105,7 +112,7 @@
 
             <td style="padding-right:0px;"><img src="file:///android_asset/Images/search_icon.png" height="30px" width="auto" style="border-radius:1px;"/></td>
             <td style="padding-left:0px;">
-                <input type="text" id="text-search" placeholder="  Search.." align="center"
+                <input type="text" id="text-search" placeholder="  Search.." align="center" onkeypress="disable()"
                        style="font-size:16px; color:#FFFFFF; border-radius:25px; border-width:0px; height:30px; width: 100%;
                        background-color: #032420; outline:none;">
             </td>
