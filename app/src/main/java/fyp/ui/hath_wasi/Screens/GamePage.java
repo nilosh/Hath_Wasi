@@ -33,7 +33,7 @@ import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
 import fyp.ui.hath_wasi.Game.SelectingTrumpComPlayer;
 import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
-import fyp.ui.hath_wasi.Players.ComputerPlayerAggressive;
+import fyp.ui.hath_wasi.Players.ComputerPlayerBeginner;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 
@@ -67,8 +67,8 @@ public class GamePage extends AppCompatActivity {
         human = new Player("Human Player", card);
 
         // Create two instances of players (for Computer Players).
-        comPlayer1 = new ComputerPlayerAggressive("Computer Player 1", card);
-        comPlayer2 = new ComputerPlayerAggressive("Computer Player 2", card);
+        comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
+        comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
 
         comPlayer1.displayDetails();
         comPlayer2.displayDetails();
@@ -329,8 +329,8 @@ public class GamePage extends AppCompatActivity {
                                 DeckOfCards card = new DeckOfCards();
                                 human = new Player("Human Player", card);
 
-                                comPlayer1 = new ComputerPlayerAggressive("Computer Player 1", card);
-                                comPlayer2 = new ComputerPlayerAggressive("Computer Player 2", card);
+                                comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
+                                comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
 
                                 AnimatorSet animatorSet = new AnimatorSet();
                                 ArrayList<Animator> animations = new ArrayList<Animator>();

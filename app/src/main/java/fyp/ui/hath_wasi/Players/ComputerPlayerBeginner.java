@@ -8,10 +8,10 @@ import java.util.Random;
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
 
-public class ComputerPlayerAggressive extends AbComputerPlayer {
+public class ComputerPlayerBeginner extends AbComputerPlayer {
 
 
-    public ComputerPlayerAggressive(String name, DeckOfCards cardDeck) {
+    public ComputerPlayerBeginner(String name, DeckOfCards cardDeck) {
         super(name, cardDeck);
     }
 
