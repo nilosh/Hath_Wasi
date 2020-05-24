@@ -6,9 +6,9 @@ public interface SelectingCard {
 
     Card selectSmallestCardFromCategory(String category);
 
-    Card SelectTheHighestCardFromCategory(String category);
+    Card selectTheHighestCardFromCategory(String category);
 
-    Card SelectRandomCardFromCategory(String category);
+    Card selectRandomCardFromCategory(String category);
 
     Card selectHighestCard();
 

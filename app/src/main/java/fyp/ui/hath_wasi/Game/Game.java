@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
+import fyp.ui.hath_wasi.Screens.ChooseLevel;
 import fyp.ui.hath_wasi.Screens.GamePage;
 import fyp.ui.hath_wasi.Screens.ScoresPage;
 
@@ -54,10 +56,10 @@ public class Game {
     private static int playerTurnIndex;
     private static boolean gameFinish;
     private static Sounds sounds;
-
     private static String trumps;
-
     private static Activity activity;
+    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    Switch expertSwitch = ChooseLevel.getExpertLevel();
     Card c1, c2;
 
     // Game constructors.
@@ -319,8 +321,8 @@ public class Game {
                 Log.println(Log.ERROR, "TAG", "Try block 1..");
                 Log.println(Log.ERROR, "TAG", "passing trumps in block 1 : " + trumps);
 
-                Card card1 = cpu1.SelectTheHighestCardFromCategory(selectedCard.getCategory());
-                Card card2 = cpu2.selectSmallestCardFromCategory(selectedCard.getCategory());
+                Card card1 = cpu1.selectTheHighestCardFromCategory(selectedCard.getCategory()); //Card card1 = this.cpu1.selectCard(selectedCard,card2);
+                Card card2 = cpu2.selectSmallestCardFromCategory(selectedCard.getCategory()); //Card card2 = this.cpu2.selectCard(selectedCard)
 
                 GameRound gameRound = new GameRound(cpu1, card1,
                         cpu2, card2,
@@ -361,57 +363,10 @@ public class Game {
 
 
                 Handler handler = new Handler();
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        com2.startAnimation(animationRl);
-//                        animationRl.setAnimationListener(new Animation.AnimationListener() {
-//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//                            @Override
-//                            public void onAnimationStart(Animation animation) {
-//                                sounds.cardClick();
-//
-//                                ComputerPlayerCardViews.hideCardFromPlayer2();
-//
-//                                com2.setVisibility(View.VISIBLE);
-//                                com2.setImageAlpha(1000);
-//                            }
-//
-//                            @Override
-//                            public void onAnimationEnd(Animation animation) { }
-//
-//                            @Override
-//                            public void onAnimationRepeat(Animation animation) { }
-//                        });
-//                    }
-//                }, 1500);
+
 
                 gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, sounds, 1000, 3000);
 
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        com1.startAnimation(animationLr);
-//                        animationLr.setAnimationListener(new Animation.AnimationListener() {
-//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//                            @Override
-//                            public void onAnimationStart(Animation animation) {
-//                                sounds.cardClick();
-//                                ComputerPlayerCardViews.hideCardFromPlayer1();
-//
-//                                com1.setVisibility(View.VISIBLE);
-//                                com1.setImageAlpha(1000);
-//                            }
-//
-//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//                            @Override
-//                            public void onAnimationEnd(Animation animation) { }
-//
-//                            @Override
-//                            public void onAnimationRepeat(Animation animation) { }
-//                        });
-//                    }
-//                }, 3000);
 
                 // Update score on the score bar with a delay.
                 handler.postDelayed(new Runnable() {
@@ -475,7 +430,7 @@ public class Game {
                 if (invalidCardByHuman == false) {
                     // Com Player 2 (right side)
                     // Play the smallest card from the category
-                    com2Card = cpu2.SelectTheHighestCardFromCategory(selectedCard.getCategory());
+                    com2Card = cpu2.selectTheHighestCardFromCategory(selectedCard.getCategory()); //com2Card = this.cpu2.selectCard(c1,selectedCard);
                     Log.println(Log.ERROR, "TAG", "inside the if condition");
                 }
 
@@ -503,31 +458,6 @@ public class Game {
                 GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, sounds, 1000, 2500);
 
                 Handler handler = new Handler();
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        com2.startAnimation(animationRl);
-//                        animationRl.setAnimationListener(new Animation.AnimationListener() {
-//                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//                            @Override
-//                            public void onAnimationStart(Animation animation) {
-//
-//                                sounds.cardClick();
-//                                ComputerPlayerCardViews.hideCardFromPlayer2();
-//                                // Com Player 2 card make visible.
-//                                com2.setVisibility(View.VISIBLE);
-//                                com2.setImageAlpha(1000);
-//                            }
-//
-//                            @Override
-//                            public void onAnimationEnd(Animation animation) { }
-//
-//                            @Override
-//                            public void onAnimationRepeat(Animation animation) { }
-//                        });
-//                    }
-//                }, 2500);
 
 
                 // remove the played cards from the card decks of computer player 1 & 2.
@@ -559,16 +489,6 @@ public class Game {
 
                     GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
 
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            sounds.cardCollect();
-//                            com1.setVisibility(View.INVISIBLE);
-//                            com2.setVisibility(View.INVISIBLE);
-//                            playerPlaceholder.setVisibility(View.INVISIBLE);
-//                            GamePage.cardTouch(true);
-//                        }
-//                    }, 6000);
                 }
 
                 Log.println(Log.ERROR, "TAG", "inside the try 2, at the very end");
@@ -651,17 +571,7 @@ public class Game {
                 } else {
 
                     GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//
-//                            com1.setVisibility(View.INVISIBLE);
-//                            com2.setVisibility(View.INVISIBLE);
-//                            playerPlaceholder.setVisibility(View.INVISIBLE);
-//                            GamePage.cardTouch(true);
-//
-//                        }
-//                    }, 6000);
+
                 }
 
                 Log.println(Log.ERROR, "TAG", "inside the try 3, at the very end");
@@ -729,7 +639,7 @@ public class Game {
                             Sounds.cardCollect();
 
                             // Play the card for this round, map it to the image view and make it visible.
-                            c1 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
+                            c1 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard(); //c1 = ((HimashaPlayer) pr.getWinner()).selectCard()
                             com1.setImageResource(c1.getImageSource());
                             com1.setVisibility(View.VISIBLE);
 
@@ -778,9 +688,9 @@ public class Game {
 
                             playerPlaceholder.setVisibility(View.INVISIBLE);
                             // Play the card for com player 2.
-                            c2 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard();
+                            c2 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard(); //c2 = ((HimashaPlayer) pr.getWinner()).selectCard();
                             // Play the card for com player 1.
-                            c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
+                            c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory()); //c1 =  cpu1.selectCard(c2);
 
                             // Set image resources of the cards played and make them invisible. Play sounds.
                             com2.setImageResource(c2.getImageSource());
@@ -879,7 +789,7 @@ public class Game {
                         playerPlaceholder.setVisibility(View.INVISIBLE);
                         com2.setVisibility(View.INVISIBLE);
 
-                        c1 = cpu1.selectHighestCard();
+                        c1 = cpu1.selectHighestCard(); //c1 = cpu1.selectCard();
                         com1.setImageResource(c1.getImageSource());
                         com1.setVisibility(View.VISIBLE);
 
@@ -918,8 +828,8 @@ public class Game {
                     public void run() {
                         playerPlaceholder.setVisibility(View.INVISIBLE);
 
-                        c2 = cpu2.selectHighestCard();
-                        c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory());
+                        c2 = cpu2.selectHighestCard(); //c2 = cpu2.selectCard();
+                        c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory()); //c1 = cpu1.selectCard(c2);
 
                         com2.setImageResource(c2.getImageSource());
                         com1.setImageResource(c1.getImageSource());
@@ -1080,7 +990,7 @@ public class Game {
     }
 
     // This method is used to switch on animations and off animations as required.
-    public void winnigOrLoosingAnimationOff() {
+    public void winningOrLoosingAnimationOff() {
         LottieAnimationView anim1 = activity.findViewById(R.id.confetti1);
         anim1.setVisibility(LottieAnimationView.INVISIBLE);
 
@@ -1143,7 +1053,7 @@ public class Game {
 
         //first turn off any winning or loosing animations
         //then set the score labels to 0
-        winnigOrLoosingAnimationOff();
+        winningOrLoosingAnimationOff();
 
         final TextView scoreLabel1 = activity.findViewById(R.id.textViewMyScore);
         final TextView scoreLabel2 = activity.findViewById(R.id.textViewOpponentScore);
@@ -1164,7 +1074,7 @@ public class Game {
         ComputerPlayerCardViews.makeAllCardsVisible();
 
         //create new card-deck and player instances for the new game.
-        GamePage.startGame();
+        GamePage.startGame(beginnerSwitch, expertSwitch);
 
         Game game = new Game();
 

@@ -34,6 +34,7 @@ import fyp.ui.hath_wasi.Game.SelectingTrumpComPlayer;
 import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.ComputerPlayerBeginner;
+import fyp.ui.hath_wasi.Players.ComputerPlayerExpert;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 
@@ -60,15 +61,14 @@ public class GamePage extends AppCompatActivity {
         }
     }
 
-    public static void startGame() {
+    public static void startGame(Switch beginnerSwitch, Switch expertSwitch) {
 
         // Create an instance of card and an instance of Player(for human player).
         DeckOfCards card = new DeckOfCards();
         human = new Player("Human Player", card);
 
         // Create two instances of players (for Computer Players).
-        comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
-        comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
+        createComputerPlayer(card, beginnerSwitch, expertSwitch);
 
         comPlayer1.displayDetails();
         comPlayer2.displayDetails();
@@ -137,6 +137,17 @@ public class GamePage extends AppCompatActivity {
         }
     }
 
+    // Create two instances of players according to the player type(for Computer Players).
+    public static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch expertSwitch) {
+        if (beginnerSwitch.isChecked()) {
+            comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
+            comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
+        } else if (expertSwitch.isChecked()) {
+            comPlayer1 = new ComputerPlayerExpert("Computer Player 1", card);
+            comPlayer2 = new ComputerPlayerExpert("Computer Player 2", card);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,7 +179,7 @@ public class GamePage extends AppCompatActivity {
         comPlayerCardViews = new ComputerPlayerCardViews(this);
 
         // Start the Game.
-        startGame();
+        startGame(beginnerSwitch,expertSwitch);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -253,7 +264,6 @@ public class GamePage extends AppCompatActivity {
         Game.setOurInstance(null);
         finish();
     }
-
 
     public void openDialog() {
 
@@ -406,7 +416,6 @@ public class GamePage extends AppCompatActivity {
 
     }
 
-
     public void passTrumpToTheInterface(int which) {
 
         Game game = Game.getInstance();
@@ -442,7 +451,6 @@ public class GamePage extends AppCompatActivity {
         }
     }
 
-
     public void passTrumpToTheInterface(String which) {
 
         Game game = Game.getInstance();
@@ -477,5 +485,6 @@ public class GamePage extends AppCompatActivity {
                 break;
         }
     }
+
 
 }
