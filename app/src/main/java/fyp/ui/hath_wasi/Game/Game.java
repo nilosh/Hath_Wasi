@@ -116,7 +116,7 @@ public class Game {
     }
 
     public static Player getSinglePlayer() {
-        return singlePlayer;
+        return Game.singlePlayer;
     }
 
     public static void setSinglePlayer(Player singlePlayer) {
@@ -305,7 +305,8 @@ public class Game {
         final ImageView com2 = activity.findViewById(R.id.com2Card);
         final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
 
-        Log.println(Log.ERROR, "TAG", "startPlayer.getName() :" + startPlayer.getName());
+        Log.println(Log.ERROR, "TAG", "startPlayer.getName() -------------------------------------------->>>>>>>>>>>> :" + startPlayer.getName());
+        Log.println(Log.ERROR, "TAG", "Human selected card -------------------------------------------->>>>>>>>>>>> :" + selectedCard.getCategory()+ selectedCard.getNumber());
         Log.println(Log.ERROR, "TAG", "this.numberOfRoundsPlayed :" + numberOfRoundsPlayed);
 
         // If it is the first round of the game and the start player is not an abstract com player
@@ -321,8 +322,10 @@ public class Game {
                 Log.println(Log.ERROR, "TAG", "Try block 1..");
                 Log.println(Log.ERROR, "TAG", "passing trumps in block 1 : " + trumps);
 
-                Card card1 = cpu1.selectTheHighestCardFromCategory(selectedCard.getCategory()); //Card card1 = this.cpu1.selectCard(selectedCard,card2);
-                Card card2 = cpu2.selectSmallestCardFromCategory(selectedCard.getCategory()); //Card card2 = this.cpu2.selectCard(selectedCard)
+                Card card2 = cpu2.selectCard(selectedCard); //Card card2 = this.cpu2.selectCard(selectedCard) //changed
+                Card card1 = cpu1.selectCard(selectedCard,card2); //Card card1 = this.cpu1.selectCard(selectedCard,card2); //changed
+
+                Log.println(Log.ERROR, "TAG", "right after selecting card 1 and 2 -------------------------------------------->>>>>>>>>>>> :");
 
                 GameRound gameRound = new GameRound(cpu1, card1,
                         cpu2, card2,
@@ -350,8 +353,8 @@ public class Game {
                 cpu2.getCardDeck().remove(card2);
                 cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
 
-                cpu1.displayDetails();
-                cpu2.displayDetails();
+                //cpu1.displayDetails();
+                //cpu2.displayDetails();
 
                 // Set animations.
                 final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
@@ -424,13 +427,14 @@ public class Game {
         else if (((numberOfRoundsPlayed == 0 && (startPlayer.getName() == "Computer Player 1")) ||
                 ((numberOfRoundsPlayed > 0 && playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() == "Computer Player 1")))) {
 
+            Log.println(Log.ERROR, "TAG", "LAST ROUND'S WINNER IS -------------------------------------------->>>>>>>>>>>>  COMPUTER 1");
             try {
 
                 // If human player card is valid.
                 if (invalidCardByHuman == false) {
                     // Com Player 2 (right side)
                     // Play the smallest card from the category
-                    com2Card = cpu2.selectTheHighestCardFromCategory(selectedCard.getCategory()); //com2Card = this.cpu2.selectCard(c1,selectedCard);
+                    com2Card = cpu2.selectCard(c1,selectedCard); //com2Card = this.cpu2.selectCard(c1,selectedCard); //changed
                     Log.println(Log.ERROR, "TAG", "inside the if condition");
                 }
 
@@ -508,6 +512,8 @@ public class Game {
         // Or neither the last round winner is Com Player 1 or Com Player 2.
         else {
 
+            //Log.println(Log.ERROR, "TAG", "LAST ROUND'S WINNER IS -------------------------REAL WINNER------------------->>>>>>>>>>>>  " + playedRounds[numberOfRoundsPlayed - 1].getWinner().getName());
+            Log.println(Log.ERROR, "TAG", "LAST ROUND'S WINNER IS -------------------------------------------->>>>>>>>>>>>  COMPUTER 2");
             try {
 
                 Log.println(Log.ERROR, "TAG", "Try block 3..");
@@ -639,7 +645,10 @@ public class Game {
                             Sounds.cardCollect();
 
                             // Play the card for this round, map it to the image view and make it visible.
-                            c1 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard(); //c1 = ((HimashaPlayer) pr.getWinner()).selectCard()
+                            Log.println(Log.ERROR, "TAG", "--------------- just before c1 --------------------------------------------------------------------");
+                            c1 = ((AbComputerPlayer) pr.getWinner()).selectCard(); //c1 = ((HimashaPlayer) pr.getWinner()).selectCard() //method changed, change the string
+                            Log.println(Log.ERROR,"Tag","------ c1 selected card is -------" +c1.getNumber()+c1.getCategory());
+                            Log.println(Log.ERROR, "TAG", "--------------- just AFTER c1 --------------------------------------------------------------------");
                             com1.setImageResource(c1.getImageSource());
                             com1.setVisibility(View.VISIBLE);
 
@@ -688,9 +697,11 @@ public class Game {
 
                             playerPlaceholder.setVisibility(View.INVISIBLE);
                             // Play the card for com player 2.
-                            c2 = ((AbComputerPlayer) pr.getWinner()).selectHighestCard(); //c2 = ((HimashaPlayer) pr.getWinner()).selectCard();
+                            Log.println(Log.ERROR, "TAG", "--------------- just before c2 --------------------------------------------------------------------");
+                            c2 = ((AbComputerPlayer) pr.getWinner()).selectCard(); //c2 = ((HimashaPlayer) pr.getWinner()).selectCard(); //method changed, change the string
+                            Log.println(Log.ERROR,"Tag","------ c2 selected card is -------" +c2.getNumber()+c2.getCategory());
                             // Play the card for com player 1.
-                            c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory()); //c1 =  cpu1.selectCard(c2);
+                            c1 = cpu1.selectCard(c2); //c1 =  cpu1.selectCard(c2); //method changed
 
                             // Set image resources of the cards played and make them invisible. Play sounds.
                             com2.setImageResource(c2.getImageSource());
@@ -789,7 +800,7 @@ public class Game {
                         playerPlaceholder.setVisibility(View.INVISIBLE);
                         com2.setVisibility(View.INVISIBLE);
 
-                        c1 = cpu1.selectHighestCard(); //c1 = cpu1.selectCard();
+                        c1 = cpu1.selectCard(); //c1 = cpu1.selectCard(); //method changed
                         com1.setImageResource(c1.getImageSource());
                         com1.setVisibility(View.VISIBLE);
 
@@ -828,8 +839,8 @@ public class Game {
                     public void run() {
                         playerPlaceholder.setVisibility(View.INVISIBLE);
 
-                        c2 = cpu2.selectHighestCard(); //c2 = cpu2.selectCard();
-                        c1 = cpu1.selectSmallestCardFromCategory(c2.getCategory()); //c1 = cpu1.selectCard(c2);
+                        c2 = cpu2.selectCard(); //c2 = cpu2.selectCard(); //method changed
+                        c1 = cpu1.selectCard(c2); //c1 = cpu1.selectCard(c2); //method changed
 
                         com2.setImageResource(c2.getImageSource());
                         com1.setImageResource(c1.getImageSource());

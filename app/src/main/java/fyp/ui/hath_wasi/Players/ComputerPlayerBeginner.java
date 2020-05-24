@@ -1,6 +1,8 @@
 package fyp.ui.hath_wasi.Players;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -70,19 +72,25 @@ public class ComputerPlayerBeginner extends AbComputerPlayer {
         return null;
     }
 
+    //this method is used to select a card when you're the first player in the game round
     @Override
     public Card selectCard() {
         return selectHighestCard();
     }
 
+    //this method is used to select a card when you're the second player in the game round
     @Override
     public Card selectCard(Card card) {
+        Log.println(Log.ERROR,"Tag","------- inside selectCard(card) of Beginner PLAYER -------");
+        //derive the play type of the round
         String category = card.getCategory();
         return selectSmallestCardFromCategory(category) ;
     }
 
+    //this method is used to select a card when you're the third player in the game round
     @Override
     public Card selectCard(Card card1, Card card2) {
+        //derive the play type of the round
         String category = card1.getCategory();
         return selectTheHighestCardFromCategory(category);
     }

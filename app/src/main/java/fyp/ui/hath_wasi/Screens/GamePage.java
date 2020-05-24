@@ -70,8 +70,8 @@ public class GamePage extends AppCompatActivity {
         // Create two instances of players (for Computer Players).
         createComputerPlayer(card, beginnerSwitch, expertSwitch);
 
-        comPlayer1.displayDetails();
-        comPlayer2.displayDetails();
+        //comPlayer1.displayDetails();
+        //comPlayer2.displayDetails();
 
         AnimatorSet s = new AnimatorSet();
         ArrayList<Animator> animations = new ArrayList<Animator>();
@@ -143,6 +143,7 @@ public class GamePage extends AppCompatActivity {
             comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
         } else if (expertSwitch.isChecked()) {
+            Log.println(Log.ERROR, "TAG", "------------------------------- inside create computer player expert switch if ----------------------------------------------------- " );
             comPlayer1 = new ComputerPlayerExpert("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerExpert("Computer Player 2", card);
         }
@@ -194,8 +195,8 @@ public class GamePage extends AppCompatActivity {
         //create the game with the starting player set as human
         Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
 
-        Log.println(Log.ERROR, "TAG", "Beginner Level: " + beginnerSwitch.isChecked());
-        Log.println(Log.ERROR, "TAG", "Expert Level: " + expertSwitch.isChecked());
+        Log.println(Log.ERROR, "TAG", "Beginner Level: -------------------------------------- " + beginnerSwitch.isChecked());
+        Log.println(Log.ERROR, "TAG", "Expert Level: ---------------------------------------- " + expertSwitch.isChecked());
 
     }
 
@@ -209,6 +210,7 @@ public class GamePage extends AppCompatActivity {
         Log.println(Log.ERROR, "TAG", "Selected Image View ID: " + v.getId());
         final Card selectedCard = imageToCardMap.get(v.getId());
 
+        Log.println(Log.ERROR,"Tag","---------------------------------- selected card by human is ------------ " + selectedCard.getNumber() );
 
         final Game game = Game.getInstance();
 
@@ -339,8 +341,10 @@ public class GamePage extends AppCompatActivity {
                                 DeckOfCards card = new DeckOfCards();
                                 human = new Player("Human Player", card);
 
-                                comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
-                                comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
+                                createComputerPlayer(card, beginnerSwitch, expertSwitch);
+                                Log.println(Log.ERROR, "TAG", "--------------- just AFTER CREATING INSTANCE OF PLAYERS --------------------------------------------------------------------");
+/*                                comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
+                                comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);*/
 
                                 AnimatorSet animatorSet = new AnimatorSet();
                                 ArrayList<Animator> animations = new ArrayList<Animator>();

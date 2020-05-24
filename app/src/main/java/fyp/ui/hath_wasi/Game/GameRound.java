@@ -101,10 +101,10 @@ public class GameRound {
             Log.println(Log.ERROR, "Tag", "CPU1 ============================> winner");
             this.winner = cpuPlayer1;
         } else if (card2 > card1 && card2 > card3) {
-            Log.println(Log.ERROR, "Tag", "CPU1 ============================> winner");
+            Log.println(Log.ERROR, "Tag", "CPU2 ============================> winner");
             this.winner = cpuPlayer2;
         } else if (card3 > card1 && card3 > card2) {
-            Log.println(Log.ERROR, "Tag", "CPU1 ============================> winner");
+            Log.println(Log.ERROR, "Tag", "human ============================> winner");
             this.winner = human;
         }
     }

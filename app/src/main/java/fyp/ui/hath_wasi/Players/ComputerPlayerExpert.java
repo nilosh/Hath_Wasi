@@ -1,5 +1,7 @@
 package fyp.ui.hath_wasi.Players;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -30,9 +32,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     public Card selectRandomCardFromCategory(String category) {
         ArrayList<Card> categoryOfCards = getCategoryOfCards(category);
         Random rand = new Random();
-        if (categoryOfCards.size() != 0) {
-            return categoryOfCards.get(rand.nextInt(categoryOfCards.size()));
-        } else return null;
+        return categoryOfCards.get(rand.nextInt(categoryOfCards.size()));
     }
 
     //this method returns the highest card from the Card Deck given the category of the card
@@ -40,9 +40,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     public Card selectTheHighestCardFromCategory(String category) {
 
         ArrayList<Card> categoryOfCards = getCategoryOfCards(category);
-        if (categoryOfCards.size() != 0) {
-            return Collections.min(categoryOfCards);
-        } else return null;
+        return Collections.min(categoryOfCards);
     }
 
     //this method returns the smallest card from the Card Deck given the category of the card
@@ -50,9 +48,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     public Card selectSmallestCardFromCategory(String category) {
 
         ArrayList<Card> categoryOfCards = getCategoryOfCards(category);
-        if (categoryOfCards.size() != 0) {
-            return Collections.max(categoryOfCards);
-        } else return null;
+        return Collections.max(categoryOfCards);
     }
 
     //this method returns the highest card from the hand irrespective of the category
@@ -61,6 +57,13 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         Collections.sort(CardDeck, cardNumberSorterDescending);
         return CardDeck.get(0);
     }
+
+    //this method returns the highest card from the hand irrespective of the category
+    public Card selectNextHighestCard() {
+        Collections.sort(CardDeck, cardNumberSorterDescending);
+        return CardDeck.get(1);
+    }
+
 
     //this method returns the smallest card from the hand irrespective of the category
     @Override
@@ -80,7 +83,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         if (this.isTrumpCalled()) {
             //check if the number of cards in hand is more than 3
             if (CardDeck.size() > 3) {
-                if (trumpCards.size() > 2) {
+                if ((trumpCards.size() > 2) || (trumpCards.size() == 2)) {
                     return selectTheHighestCardFromCategory(trumpCategory);
                 } else {
                     final Card bestCard = selectHighestCard();
@@ -88,14 +91,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
                     if (bestCard.getCategory() != trumpCategory) {
                         return bestCard;
                     } else {
-                        while (bestCard.getCategory() == trumpCategory) {
-                            Card newBestCard = selectHighestCard();
-                            if (newBestCard.getCategory() != trumpCategory) {
-                                return newBestCard;
-                            } else {
-                                continue;
-                            }
-                        }
+                        return selectNextHighestCard();
                     }
                 }
             } else {
@@ -111,24 +107,17 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
                 if (bestCard.getCategory() != trumpCategory) {
                     return bestCard;
                 } else {
-                    while (bestCard.getCategory() == trumpCategory) {
-                        Card newBestCard = selectHighestCard();
-                        if (newBestCard.getCategory() != trumpCategory) {
-                            return newBestCard;
-                        } else {
-                            continue;
-                        }
-                    }
+                    return selectNextHighestCard();
                 }
             }
         }
-        return null;
     }
 
     //this method is used to select the best card when you're the second player in the game round
     @Override
     public Card selectCard(Card Player1Card) {
 
+        Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER -------");
         //get the playing type of the round using the first player's card type
         String Category = Player1Card.getCategory();
 
@@ -174,15 +163,21 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     @Override
     public Card selectCard(Card player1Card, Card player2Card) {
 
+        Log.println(Log.ERROR, "Tag", "------- inside selectCard(card, card) of EXPERT PLAYER -------");
         //get the playing type of the round using the first player's card type
+
         String Category = player1Card.getCategory();
+        Log.println(Log.ERROR, "Tag", "------- category is " + Category);
+        Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + SinglePlayer);
         //check if this player is the single player
         if (this.getName() == SinglePlayer.getName()) {
+            Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER ------- inside single player if");
             return selectBestCardSinglePlayer(Category, player1Card, player2Card);
 
         }
         //if this player is not the single player
         else {
+            Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER ------- inside single player else");
             //check if either this player is cpu1 player and cpu2 player is the single player
             //or if the this player is the cpu2 player and human player is the single player
             if ((((this.getName() == Game.getCpu1().getName()) && (cpu2Player == SinglePlayer)) || ((this.getName() == cpu2Player.getName()) && (humanPlayer == SinglePlayer)))) {
@@ -201,55 +196,29 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         final String opponent1Cat = opponent1Card.getCategory();
         final String opponent2Cat = opponent2Card.getCategory();
         final boolean categoryMatch = opponent1Cat.equals(opponent2Cat);
-        final Integer difference = opponent1.compareTo(opponent2);
 
         //check if both cards played are of the same type
         if (categoryMatch) {
-            //check if opponent1 has a bigger card than opponent2
-            if (difference < 0) {
-                // check if this user has the calling card type
-                if (CheckForCardType(Category)) {
-                    final Card myCard = selectTheHighestCardFromCategory(Category);
-                    //check if my highest card is lower than the opponents' highest card
-                    if (myCard.getCardId() > opponent1) {
-                        return selectSmallestCardFromCategory(Category);
-                    }
-                    //if my highest card is greater than the opponents' highest card
-                    else {
-                        return myCard;
-                    }
-                } else {
-                    //calling category type is not available
-                    //check if this player has cards of trump category
-                    if (CheckForCardType(trumpCategory)) {
-                        return selectSmallestCardFromCategory(trumpCategory);
-                    }
-                    //if trump category is not available
-                    else {
-                        return selectSmallestCard();
-                    }
+            // check if this user has the calling card type
+            if (CheckForCardType(Category)) {
+                final Card myCard = selectTheHighestCardFromCategory(Category);
+                //check if my highest card is lower than the opponents' cards
+                if ((myCard.getCardId() > opponent1) || (myCard.getCardId() > opponent2)) {
+                    return selectSmallestCardFromCategory(Category);
                 }
-            } else if (difference > 0) {
-                //opponent1 has a smaller card than opponent2
-                // check if this user has the calling card type
-                if (CheckForCardType(Category)) {
-                    final Card myCard = selectTheHighestCardFromCategory(Category);
-                    //if my highest card is lower than the opponent2's card
-                    if (myCard.getCardId() > opponent2) {
-                        return selectSmallestCardFromCategory(Category);
-                    } else {
-                        return myCard;
-                    }
-                } else {
-                    //calling category type is not available
-                    //check if this player has cards of trump category
-                    if (CheckForCardType(trumpCategory)) {
-                        return selectSmallestCardFromCategory(trumpCategory);
-                    }
-                    //if trump category is not available
-                    else {
-                        return selectSmallestCard();
-                    }
+                //if my highest card is greater than the opponents' cards
+                else {
+                    return myCard;
+                }
+            } else {
+                //calling category type is not available
+                //check if this player has cards of trump category
+                if (CheckForCardType(trumpCategory)) {
+                    return selectSmallestCardFromCategory(trumpCategory);
+                }
+                //if trump category is not available
+                else {
+                    return selectSmallestCard();
                 }
             }
         } else {
@@ -266,7 +235,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
             } else {
                 //calling category type is not available
                 //check if opponent2's card is of trump category
-                if (opponent1Cat == trumpCategory) {
+                if (opponent2Cat == trumpCategory) {
                     //check if this player has cards of trump category
                     if (CheckForCardType(trumpCategory)) {
                         final Card myNewCard = selectTheHighestCardFromCategory(trumpCategory);
@@ -276,6 +245,8 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
                         } else {
                             return myNewCard;
                         }
+                    } else {
+                        return selectSmallestCard();
                     }
                 }
                 //when opponent2's card is not of trump category
@@ -290,8 +261,6 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
                 }
             }
         }
-
-        return null;
     }
 
     public Card selectBestCardTeamPlayer(String Category, Card myTeamCard, Card opponentCard) {
@@ -314,8 +283,8 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
                     return selectSmallestCard();
                 }
             }
-            //my player has a smaller card than opponent
-            else if (difference > 0) {
+            //my team player has a smaller card than opponent
+            else {
                 // check if this user has the calling card type
                 if (CheckForCardType(Category)) {
                     final Card myCard = selectTheHighestCardFromCategory(Category);
@@ -340,12 +309,17 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
             //category of both players don't match
             // check if this user has the calling card type
             if (CheckForCardType(Category)) {
-                final Card myCard = selectTheHighestCardFromCategory(Category);
-                //if my highest card is lower than the opponent's card
-                if (myCard.getCardId() > opponent) {
-                    return selectSmallestCardFromCategory(Category);
+                //check if opponent's card is of calling type
+                if (opponentCat == Category) {
+                    final Card myCard = selectTheHighestCardFromCategory(Category);
+                    //if my highest card is lower than the opponent's card
+                    if (myCard.getCardId() > opponent) {
+                        return selectSmallestCardFromCategory(Category);
+                    } else {
+                        return myCard;
+                    }
                 } else {
-                    return myCard;
+                    return selectSmallestCardFromCategory(Category);
                 }
             } else {
                 //calling category type is not available
@@ -360,6 +334,8 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
                         } else {
                             return myNewCard;
                         }
+                    } else {
+                        return selectSmallestCard();
                     }
                 }
                 //when opponent's card is not of trump category
@@ -374,6 +350,5 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
                 }
             }
         }
-        return null;
     }
 }
