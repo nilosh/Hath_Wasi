@@ -104,6 +104,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Switch
+        android:id="@+id/switchIntermediate"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:checked="false"
+        android:text="Intermediate"
+        android:textAlignment="textStart"
+        android:textColorHighlight="#00EEF5EF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchBeginner" />
+
+    <Switch
         android:id="@+id/switchExpert"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
@@ -116,7 +131,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchBeginner" />
+        app:layout_constraintTop_toBottomOf="@+id/switchIntermediate" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/doneAnim"

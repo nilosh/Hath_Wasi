@@ -10,14 +10,12 @@ import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import fyp.ui.hath_wasi.Players.AbComputerPlayer;
-import fyp.ui.hath_wasi.Players.ComputerPlayerBeginner;
-import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 
 public class ChooseLevel extends AppCompatActivity {
 
     private static Switch beginnerLevel;
+    private static Switch intermediateLevel;
     private static Switch expertLevel;
 
     public static Switch getBeginnerLevel() {
@@ -26,6 +24,14 @@ public class ChooseLevel extends AppCompatActivity {
 
     public void setBeginnerLevel(Switch beginnerLevel) {
         ChooseLevel.beginnerLevel = beginnerLevel;
+    }
+
+    public static Switch getIntermediateLevel() {
+        return intermediateLevel;
+    }
+
+    public void setIntermediateLevel(Switch intermediateLevel) {
+        ChooseLevel.intermediateLevel = intermediateLevel;
     }
 
     public static Switch getExpertLevel() {
@@ -48,6 +54,8 @@ public class ChooseLevel extends AppCompatActivity {
 
         beginnerLevel = findViewById(R.id.switchBeginner);
 
+        intermediateLevel = findViewById(R.id.switchIntermediate);
+
         expertLevel = findViewById(R.id.switchExpert);
 
         beginnerLevel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -55,10 +63,11 @@ public class ChooseLevel extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (isChecked) {
+                    intermediateLevel.setChecked(false);
                     expertLevel.setChecked(false);
-                } else {
-                    expertLevel.setChecked(true);
-                }
+                } //else {
+                   // expertLevel.setChecked(true);
+                //}
             }
         });
 
@@ -68,9 +77,24 @@ public class ChooseLevel extends AppCompatActivity {
 
                 if (isChecked) {
                     beginnerLevel.setChecked(false);
-                } else {
-                    beginnerLevel.setChecked(true);
+                    intermediateLevel.setChecked(false);
+                } //else {
+                   // beginnerLevel.setChecked(true);
+                //}
+            }
+        });
+
+        intermediateLevel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked){
+                    beginnerLevel.setChecked(false);
+                    expertLevel.setChecked(false);
                 }
+                //else{
+
+                //}
             }
         });
 
