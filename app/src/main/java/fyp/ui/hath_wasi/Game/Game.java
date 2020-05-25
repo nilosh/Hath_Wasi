@@ -59,6 +59,7 @@ public class Game {
     private static String trumps;
     private static Activity activity;
     Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
     Switch expertSwitch = ChooseLevel.getExpertLevel();
     Card c1, c2;
 
@@ -306,7 +307,7 @@ public class Game {
         final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
 
         Log.println(Log.ERROR, "TAG", "startPlayer.getName() -------------------------------------------->>>>>>>>>>>> :" + startPlayer.getName());
-        Log.println(Log.ERROR, "TAG", "Human selected card -------------------------------------------->>>>>>>>>>>> :" + selectedCard.getCategory()+ selectedCard.getNumber());
+        Log.println(Log.ERROR, "TAG", "Human selected card -------------------------------------------->>>>>>>>>>>> :" + selectedCard.getCategory() + selectedCard.getNumber());
         Log.println(Log.ERROR, "TAG", "this.numberOfRoundsPlayed :" + numberOfRoundsPlayed);
 
         // If it is the first round of the game and the start player is not an abstract com player
@@ -323,7 +324,7 @@ public class Game {
                 Log.println(Log.ERROR, "TAG", "passing trumps in block 1 : " + trumps);
 
                 Card card2 = cpu2.selectCard(selectedCard); //Card card2 = this.cpu2.selectCard(selectedCard) //changed
-                Card card1 = cpu1.selectCard(selectedCard,card2); //Card card1 = this.cpu1.selectCard(selectedCard,card2); //changed
+                Card card1 = cpu1.selectCard(selectedCard, card2); //Card card1 = this.cpu1.selectCard(selectedCard,card2); //changed
 
                 Log.println(Log.ERROR, "TAG", "right after selecting card 1 and 2 -------------------------------------------->>>>>>>>>>>> :");
 
@@ -434,7 +435,7 @@ public class Game {
                 if (invalidCardByHuman == false) {
                     // Com Player 2 (right side)
                     // Play the smallest card from the category
-                    com2Card = cpu2.selectCard(c1,selectedCard); //com2Card = this.cpu2.selectCard(c1,selectedCard); //changed
+                    com2Card = cpu2.selectCard(c1, selectedCard); //com2Card = this.cpu2.selectCard(c1,selectedCard); //changed
                     Log.println(Log.ERROR, "TAG", "inside the if condition");
                 }
 
@@ -647,7 +648,7 @@ public class Game {
                             // Play the card for this round, map it to the image view and make it visible.
                             Log.println(Log.ERROR, "TAG", "--------------- just before c1 --------------------------------------------------------------------");
                             c1 = ((AbComputerPlayer) pr.getWinner()).selectCard(); //c1 = ((HimashaPlayer) pr.getWinner()).selectCard() //method changed, change the string
-                            Log.println(Log.ERROR,"Tag","------ c1 selected card is -------" +c1.getNumber()+c1.getCategory());
+                            Log.println(Log.ERROR, "Tag", "------ c1 selected card is -------" + c1.getNumber() + c1.getCategory());
                             Log.println(Log.ERROR, "TAG", "--------------- just AFTER c1 --------------------------------------------------------------------");
                             com1.setImageResource(c1.getImageSource());
                             com1.setVisibility(View.VISIBLE);
@@ -699,7 +700,7 @@ public class Game {
                             // Play the card for com player 2.
                             Log.println(Log.ERROR, "TAG", "--------------- just before c2 --------------------------------------------------------------------");
                             c2 = ((AbComputerPlayer) pr.getWinner()).selectCard(); //c2 = ((HimashaPlayer) pr.getWinner()).selectCard(); //method changed, change the string
-                            Log.println(Log.ERROR,"Tag","------ c2 selected card is -------" +c2.getNumber()+c2.getCategory());
+                            Log.println(Log.ERROR, "Tag", "------ c2 selected card is -------" + c2.getNumber() + c2.getCategory());
                             // Play the card for com player 1.
                             c1 = cpu1.selectCard(c2); //c1 =  cpu1.selectCard(c2); //method changed
 
@@ -1085,7 +1086,7 @@ public class Game {
         ComputerPlayerCardViews.makeAllCardsVisible();
 
         //create new card-deck and player instances for the new game.
-        GamePage.startGame(beginnerSwitch, expertSwitch);
+        GamePage.startGame(beginnerSwitch, intermediateSwitch, expertSwitch);
 
         Game game = new Game();
 

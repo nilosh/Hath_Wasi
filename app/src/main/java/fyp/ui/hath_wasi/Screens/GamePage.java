@@ -35,6 +35,7 @@ import fyp.ui.hath_wasi.Messages.Message;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
 import fyp.ui.hath_wasi.Players.ComputerPlayerBeginner;
 import fyp.ui.hath_wasi.Players.ComputerPlayerExpert;
+import fyp.ui.hath_wasi.Players.ComputerPlayerIntermediate;
 import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 
@@ -50,6 +51,7 @@ public class GamePage extends AppCompatActivity {
     private static int roundNumber = 0;
     private static Sounds sounds;
     Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
     Switch expertSwitch = ChooseLevel.getExpertLevel();
     String trump;
     private boolean playerAsking = false;
@@ -61,14 +63,14 @@ public class GamePage extends AppCompatActivity {
         }
     }
 
-    public static void startGame(Switch beginnerSwitch, Switch expertSwitch) {
+    public static void startGame(Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
 
         // Create an instance of card and an instance of Player(for human player).
         DeckOfCards card = new DeckOfCards();
         human = new Player("Human Player", card);
 
         // Create two instances of players (for Computer Players).
-        createComputerPlayer(card, beginnerSwitch, expertSwitch);
+        createComputerPlayer(card, beginnerSwitch, intermediateSwitch, expertSwitch);
 
         //comPlayer1.displayDetails();
         //comPlayer2.displayDetails();
@@ -138,14 +140,18 @@ public class GamePage extends AppCompatActivity {
     }
 
     // Create two instances of players according to the player type(for Computer Players).
-    public static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch expertSwitch) {
+    public static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
         if (beginnerSwitch.isChecked()) {
             comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
         } else if (expertSwitch.isChecked()) {
-            Log.println(Log.ERROR, "TAG", "------------------------------- inside create computer player expert switch if ----------------------------------------------------- " );
+            Log.println(Log.ERROR, "TAG", "------------------------------- inside create computer player expert switch if ----------------------------------------------------- ");
             comPlayer1 = new ComputerPlayerExpert("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerExpert("Computer Player 2", card);
+        } else if (intermediateSwitch.isChecked()) {
+            Log.println(Log.ERROR, "TAG", "------------------------------- inside create computer player intermediate switch if ----------------------------------------------------- ");
+            comPlayer1 = new ComputerPlayerIntermediate("Computer Player 1", card);
+            comPlayer2 = new ComputerPlayerIntermediate("Computer Player 2", card);
         }
     }
 
@@ -180,7 +186,7 @@ public class GamePage extends AppCompatActivity {
         comPlayerCardViews = new ComputerPlayerCardViews(this);
 
         // Start the Game.
-        startGame(beginnerSwitch,expertSwitch);
+        startGame(beginnerSwitch, intermediateSwitch, expertSwitch);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -210,7 +216,7 @@ public class GamePage extends AppCompatActivity {
         Log.println(Log.ERROR, "TAG", "Selected Image View ID: " + v.getId());
         final Card selectedCard = imageToCardMap.get(v.getId());
 
-        Log.println(Log.ERROR,"Tag","---------------------------------- selected card by human is ------------ " + selectedCard.getNumber() );
+        Log.println(Log.ERROR, "Tag", "---------------------------------- selected card by human is ------------ " + selectedCard.getNumber());
 
         final Game game = Game.getInstance();
 
@@ -341,7 +347,7 @@ public class GamePage extends AppCompatActivity {
                                 DeckOfCards card = new DeckOfCards();
                                 human = new Player("Human Player", card);
 
-                                createComputerPlayer(card, beginnerSwitch, expertSwitch);
+                                createComputerPlayer(card, beginnerSwitch, intermediateSwitch, expertSwitch);
                                 Log.println(Log.ERROR, "TAG", "--------------- just AFTER CREATING INSTANCE OF PLAYERS --------------------------------------------------------------------");
 /*                                comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
                                 comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);*/
