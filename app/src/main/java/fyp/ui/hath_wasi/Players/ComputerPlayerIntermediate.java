@@ -1,8 +1,5 @@
 package fyp.ui.hath_wasi.Players;
 
-
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -10,10 +7,10 @@ import java.util.Random;
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
 
-public class ComputerPlayerBeginner extends AbComputerPlayer {
+import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterDescending;
 
-
-    public ComputerPlayerBeginner(String name, DeckOfCards cardDeck) {
+public class ComputerPlayerIntermediate extends AbComputerPlayer {
+    public ComputerPlayerIntermediate(String name, DeckOfCards cardDeck) {
         super(name, cardDeck);
     }
 
@@ -41,7 +38,6 @@ public class ComputerPlayerBeginner extends AbComputerPlayer {
             return this.getCardDeck().get(rand.nextInt(numberOfCardsRemaining));
         }
 
-
     }
 
     //this method returns the smallest card from the Card Deck given the category of the card
@@ -63,8 +59,8 @@ public class ComputerPlayerBeginner extends AbComputerPlayer {
     @Override
     public Card selectHighestCard() {
 
-        return Collections.min(CardDeck);
-
+        Collections.sort(CardDeck, cardNumberSorterDescending);
+        return CardDeck.get(0);
     }
 
     @Override
@@ -81,7 +77,6 @@ public class ComputerPlayerBeginner extends AbComputerPlayer {
     //this method is used to select a card when you're the second player in the game round
     @Override
     public Card selectCard(Card card) {
-        Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of Beginner PLAYER -------");
         //derive the play type of the round
         String category = card.getCategory();
         return selectSmallestCardFromCategory(category);
