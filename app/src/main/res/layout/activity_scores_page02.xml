@@ -24,7 +24,7 @@
         android:layout_width="516dp"
         android:layout_height="47dp"
         android:gravity="center"
-        android:text="Score Board : Beginner Level "
+        android:text="Score Board : Expert Level "
         android:textColor="#F1F3F3"
         android:textSize="30dp"
         android:textStyle="bold"

@@ -65,6 +65,7 @@ public class ChooseLevel extends AppCompatActivity {
                 if (isChecked) {
                     intermediateLevel.setChecked(false);
                     expertLevel.setChecked(false);
+
                 } //else {
                    // expertLevel.setChecked(true);
                 //}
@@ -97,6 +98,7 @@ public class ChooseLevel extends AppCompatActivity {
                 //}
             }
         });
+
 
 
     }

@@ -56,6 +56,8 @@ public class GamePage extends AppCompatActivity {
     String trump;
     private boolean playerAsking = false;
 
+
+
     public static void moveUpPlayerCards() {
 
         for (int i = 0; i < 12; i++) {
