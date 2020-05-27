@@ -920,11 +920,15 @@ public class Game {
 
         if (singlePlayer.getName() == winningPlayer.getName()) {
             final TextView playerScorePlaceHolder = activity.findViewById(R.id.textViewMyScore);
+
+            //converting string into an integer.
             int previousScore = Integer.parseInt((String) playerScorePlaceHolder.getText());
             previousScore++;
             singlePlayerScore++;
+            // converting an integer to string.
             final String score = Integer.toString(previousScore);
 
+            // handler to delay the time of setting the score on the score bar
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -936,11 +940,17 @@ public class Game {
 
             if (singlePlayerScore == 7) {
 
+                // if single player is computer player 1.
                 if (singlePlayer.getName() == "Computer Player 1") {
                     ScoreBoard.getInstance().setScores(new GameScore(0, 2, 0));
+                    // human player lost.
                     losingAnimation();
+                    // losing toast message.
                     getToastMessage(false);
+                    // asking the user if the user wants to play the next round.
                     openDialog();
+
+                    // if single player is computer player 2.
                 } else if (singlePlayer.getName() == "Computer Player 2") {
                     ScoreBoard.getInstance().setScores(new GameScore(0, 0, 2));
                     losingAnimation();
@@ -957,10 +967,15 @@ public class Game {
 
         } else {
             final TextView playerScorePlaceHolder = activity.findViewById(R.id.textViewOpponentScore);
+            //converting string into an integer.
             int previousScore = Integer.parseInt((String) playerScorePlaceHolder.getText());
             previousScore++;
             teamScore++;
+
+            // converting an integer to string.
             final String score = Integer.toString(previousScore);
+
+            // handler to delay the time of setting the score on the score bar
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override

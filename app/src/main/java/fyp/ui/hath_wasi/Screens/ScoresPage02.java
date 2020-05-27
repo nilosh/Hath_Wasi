@@ -1,33 +1,22 @@
 package fyp.ui.hath_wasi.Screens;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Switch;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import fyp.ui.hath_wasi.Cards.DeckOfCards;
 import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
-import fyp.ui.hath_wasi.Screens.ChooseLevel;
 import fyp.ui.hath_wasi.R;
 
-public class ScoresPage extends AppCompatActivity {
+public class ScoresPage02 extends AppCompatActivity {
 
     private static TextView[][] score = new TextView[10][3];
-    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-    Switch expertSwitch = ChooseLevel.getExpertLevel();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +27,13 @@ public class ScoresPage extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_score_page);
+        setContentView(R.layout.activity_scores_page02);
 
         //get the game scores into score variable.
         //this variable consists of gameScore objects that each old marks of every player for an entire game round.
         ScoreBoard scoreBoard = ScoreBoard.getInstance();
         GameScore[] scores = scoreBoard.getScores();
 
-        //selectScorePage(beginnerSwitch, intermediateSwitch, expertSwitch);
 
         //find the textviews and map them to the array values.
         score[0][0] = findViewById(R.id.game1_player);
@@ -102,30 +90,8 @@ public class ScoresPage extends AppCompatActivity {
             setMedal();
         }
 
-
     }
 
-
-    public void selectScorePage(Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch)
-    {
-        if(beginnerSwitch.isChecked())
-        {
-            Intent intent = new Intent(ScoresPage.this, ScoresPage.class);
-            startActivity(intent);
-        }
-
-        else if(intermediateSwitch.isChecked())
-        {
-            Intent intent = new Intent(ScoresPage.this, ScoresPage01.class);
-            startActivity(intent);
-        }
-
-        else if(expertSwitch.isChecked())
-        {
-            Intent intent = new Intent(ScoresPage.this, ScoresPage02.class);
-            startActivity(intent);
-        }
-    }
 
     public void setMedal() {
         int[] scores = ScoreBoard.getTotals();
@@ -162,5 +128,4 @@ public class ScoresPage extends AppCompatActivity {
         }
 
     }
-
 }

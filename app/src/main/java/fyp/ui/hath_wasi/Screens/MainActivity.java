@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import fyp.ui.hath_wasi.R;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void view_scores(View view) {
+
         Intent intent = new Intent(this, ScoresPage.class);
         startActivity(intent);
     }
@@ -76,5 +77,4 @@ public class MainActivity extends AppCompatActivity {
 
         Log.println(Log.ERROR, "TAG", "Inside openDialog exit game in the end");
     }
-
 }
