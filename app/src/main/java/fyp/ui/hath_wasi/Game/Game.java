@@ -117,7 +117,7 @@ public class Game {
     }
 
     public static Player getSinglePlayer() {
-        return Game.singlePlayer;
+        return singlePlayer;
     }
 
     public static void setSinglePlayer(Player singlePlayer) {

@@ -202,6 +202,7 @@ public class GamePage extends AppCompatActivity {
         Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
 
         Log.println(Log.ERROR, "TAG", "Beginner Level: -------------------------------------- " + beginnerSwitch.isChecked());
+        Log.println(Log.ERROR, "TAG", "Intermediate Level: -------------------------------------- " + intermediateSwitch.isChecked());
         Log.println(Log.ERROR, "TAG", "Expert Level: ---------------------------------------- " + expertSwitch.isChecked());
 
     }

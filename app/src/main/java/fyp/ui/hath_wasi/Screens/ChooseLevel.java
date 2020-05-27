@@ -65,9 +65,9 @@ public class ChooseLevel extends AppCompatActivity {
                 if (isChecked) {
                     intermediateLevel.setChecked(false);
                     expertLevel.setChecked(false);
-                } //else {
-                   // expertLevel.setChecked(true);
-                //}
+                } else {
+                    intermediateLevel.setChecked(true);
+                }
             }
         });
 
@@ -78,9 +78,9 @@ public class ChooseLevel extends AppCompatActivity {
                 if (isChecked) {
                     beginnerLevel.setChecked(false);
                     intermediateLevel.setChecked(false);
-                } //else {
-                   // beginnerLevel.setChecked(true);
-                //}
+                } else {
+                    beginnerLevel.setChecked(true);
+                }
             }
         });
 
@@ -92,9 +92,9 @@ public class ChooseLevel extends AppCompatActivity {
                     beginnerLevel.setChecked(false);
                     expertLevel.setChecked(false);
                 }
-                //else{
-
-                //}
+                else{
+                        expertLevel.setChecked(true);
+                }
             }
         });
 
