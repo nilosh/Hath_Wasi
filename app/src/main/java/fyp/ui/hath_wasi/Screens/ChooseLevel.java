@@ -52,12 +52,14 @@ public class ChooseLevel extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_choose_level);
 
+        // Map the switches in the XML to the switch objects created.
         beginnerLevel = findViewById(R.id.switchBeginner);
 
         intermediateLevel = findViewById(R.id.switchIntermediate);
 
         expertLevel = findViewById(R.id.switchExpert);
 
+        // Sets listeners to the switches to check which one is checked.
         beginnerLevel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -68,6 +70,8 @@ public class ChooseLevel extends AppCompatActivity {
                 } else {
                     intermediateLevel.setChecked(true);
                 }
+
+
             }
         });
 
@@ -93,7 +97,7 @@ public class ChooseLevel extends AppCompatActivity {
                     expertLevel.setChecked(false);
                 }
                 else{
-                        expertLevel.setChecked(true);
+                    expertLevel.setChecked(true);
                 }
             }
         });
@@ -101,6 +105,7 @@ public class ChooseLevel extends AppCompatActivity {
 
     }
 
+    // This method is called when the button to play the game is pressed.
     public void play_game(View view) {
 
         finish();
@@ -110,6 +115,8 @@ public class ChooseLevel extends AppCompatActivity {
 
     }
 
+    // Gets the chosen level and returns a string pertaining to that level
+    // Returns "b" for Beginner, "i" for Intermediate, "e" for Expert levels.
     public static String getLevel(){
 
         String levelString = null;
