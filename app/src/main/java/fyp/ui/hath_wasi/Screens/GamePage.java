@@ -57,7 +57,7 @@ public class GamePage extends AppCompatActivity {
     private boolean playerAsking = false;
 
 
-
+    // This method moves the position of player's cards at the start of the game.
     public static void moveUpPlayerCards() {
 
         for (int i = 0; i < 12; i++) {
@@ -206,6 +206,7 @@ public class GamePage extends AppCompatActivity {
         Log.println(Log.ERROR, "TAG", "Beginner Level: -------------------------------------- " + beginnerSwitch.isChecked());
         Log.println(Log.ERROR, "TAG", "Intermediate Level: -------------------------------------- " + intermediateSwitch.isChecked());
         Log.println(Log.ERROR, "TAG", "Expert Level: ---------------------------------------- " + expertSwitch.isChecked());
+        Log.println(Log.ERROR, "TAG", "Intermediate Level: ---------------------------------------- " + intermediateSwitch.isChecked());
 
     }
 

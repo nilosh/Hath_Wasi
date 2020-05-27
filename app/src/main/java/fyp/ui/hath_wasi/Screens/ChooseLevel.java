@@ -110,4 +110,22 @@ public class ChooseLevel extends AppCompatActivity {
 
     }
 
+    public static String getLevel(){
+
+        String levelString = null;
+
+        if(beginnerLevel.isChecked()){
+            levelString = "b".toUpperCase();
+        }
+        else if(intermediateLevel.isChecked()){
+            levelString = "i".toUpperCase();
+        }
+
+        else if(expertLevel.isChecked()){
+            levelString = "e".toUpperCase();
+        }
+
+        return levelString;
+    }
+
 }
