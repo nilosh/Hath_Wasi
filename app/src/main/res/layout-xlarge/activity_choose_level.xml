@@ -7,6 +7,7 @@
     android:background="#053D37"
     android:orientation="vertical">
 
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation"
         android:layout_width="match_parent"
@@ -17,8 +18,8 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/background"
-        tools:layout_editor_absoluteY="-286dp" />
-
+        tools:layout_editor_absoluteX="310dp"
+        tools:layout_editor_absoluteY="-391dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -104,6 +105,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Switch
+        android:id="@+id/switchIntermediate2"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:checked="false"
+        android:text="Intermediate"
+        android:textAlignment="textStart"
+        android:textColorHighlight="#00EEF5EF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/switchBeginner"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/switchBeginner" />
+
+    <Switch
         android:id="@+id/switchExpert"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
@@ -114,9 +130,9 @@
         android:textColorHighlight="#00EEF5EF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchBeginner" />
+        app:layout_constraintEnd_toEndOf="@+id/switchIntermediate2"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/switchIntermediate2" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/doneAnim"
