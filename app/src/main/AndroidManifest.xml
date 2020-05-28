@@ -9,12 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Screens.ScoresPage01"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".Screens.ScoresPage02"
-            android:screenOrientation="landscape" />
+        <activity android:name=".Screens.Fragments.ScoreProblem" />
         <activity android:name=".Screens.InstructionsPage" />
         <activity android:name=".Screens.ChooseLevel" />
         <activity

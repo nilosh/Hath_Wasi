@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,7 +58,7 @@ public class GamePage extends AppCompatActivity {
     private boolean playerAsking = false;
 
 
-
+    // This method moves the position of player's cards at the start of the game.
     public static void moveUpPlayerCards() {
 
         for (int i = 0; i < 12; i++) {
@@ -204,7 +205,9 @@ public class GamePage extends AppCompatActivity {
         Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
 
         Log.println(Log.ERROR, "TAG", "Beginner Level: -------------------------------------- " + beginnerSwitch.isChecked());
+        Log.println(Log.ERROR, "TAG", "Intermediate Level: -------------------------------------- " + intermediateSwitch.isChecked());
         Log.println(Log.ERROR, "TAG", "Expert Level: ---------------------------------------- " + expertSwitch.isChecked());
+        Log.println(Log.ERROR, "TAG", "Intermediate Level: ---------------------------------------- " + intermediateSwitch.isChecked());
 
     }
 
@@ -308,6 +311,7 @@ public class GamePage extends AppCompatActivity {
                         if (playerAsking == false) {
 
                             if (SelectingTrumpComPlayer.getChances(comPlayer2)) {
+
                                 trump = SelectingTrumpComPlayer.getTrump(comPlayer2);
                                 Game.setTrumps(trump);
                                 passTrumpToTheInterface(trump);
@@ -389,6 +393,8 @@ public class GamePage extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogSlide;
         dialog.show();
     }
+
+
 
     public void selectTrump() {
 

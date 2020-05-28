@@ -117,7 +117,7 @@ public class Game {
     }
 
     public static Player getSinglePlayer() {
-        return Game.singlePlayer;
+        return singlePlayer;
     }
 
     public static void setSinglePlayer(Player singlePlayer) {
@@ -715,63 +715,71 @@ public class Game {
                             final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
                             final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    com2.startAnimation(animationRl);
-                                    animationRl.setAnimationListener(new Animation.AnimationListener() {
-                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                        @Override
-                                        public void onAnimationStart(Animation animation) {
-                                            Sounds.cardClick();
-                                            ComputerPlayerCardViews.hideCardFromPlayer2();
 
-                                            com2.setVisibility(View.VISIBLE);
-                                            com2.setImageAlpha(1000);
-                                        }
+                            GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, sounds, 1000, 1500);
 
-                                        @Override
-                                        public void onAnimationEnd(Animation animation) {
-                                        }
+//                            Handler handler = new Handler();
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    com2.startAnimation(animationRl);
+//                                    animationRl.setAnimationListener(new Animation.AnimationListener() {
+//                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                                        @Override
+//                                        public void onAnimationStart(Animation animation) {
+//                                            Sounds.cardClick();
+//                                            ComputerPlayerCardViews.hideCardFromPlayer2();
+//
+//                                            com2.setVisibility(View.VISIBLE);
+//                                            com2.setImageAlpha(1000);
+//                                        }
+//
+//                                        @Override
+//                                        public void onAnimationEnd(Animation animation) {
+//                                        }
+//
+//                                        @Override
+//                                        public void onAnimationRepeat(Animation animation) {
+//                                        }
+//                                    });
+//                                }
+//                            }, 1500);
 
-                                        @Override
-                                        public void onAnimationRepeat(Animation animation) {
-                                        }
-                                    });
-                                }
-                            }, 1500);
+                            gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, sounds, 1000, 3000);
 
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    com1.startAnimation(animationLr);
-                                    animationLr.setAnimationListener(new Animation.AnimationListener() {
-                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                        @Override
-                                        public void onAnimationStart(Animation animation) {
-                                            Sounds.cardClick();
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    com1.startAnimation(animationLr);
+//                                    animationLr.setAnimationListener(new Animation.AnimationListener() {
+//                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                                        @Override
+//                                        public void onAnimationStart(Animation animation) {
+//                                            Sounds.cardClick();
+//
+//                                            com1.setVisibility(View.VISIBLE);
+//                                            com1.setImageAlpha(1000);
+//                                            ComputerPlayerCardViews.hideCardFromPlayer1();
+//                                        }
+//
+//                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                                        @Override
+//                                        public void onAnimationEnd(Animation animation) {
+//                                        }
+//
+//                                        @Override
+//                                        public void onAnimationRepeat(Animation animation) {
+//                                        }
+//                                    });
+//
+//                                    // Let Human player play.
+//                                    GamePage.cardTouch(true);
+//
+//                                }
+//                            }, 3000);
 
-                                            com1.setVisibility(View.VISIBLE);
-                                            com1.setImageAlpha(1000);
-                                            ComputerPlayerCardViews.hideCardFromPlayer1();
-                                        }
-
-                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                                        @Override
-                                        public void onAnimationEnd(Animation animation) {
-                                        }
-
-                                        @Override
-                                        public void onAnimationRepeat(Animation animation) {
-                                        }
-                                    });
-
-                                    // Let Human player play.
-                                    GamePage.cardTouch(true);
-
-                                }
-                            }, 3000);
+                            // Let Human player play.
+                            GamePage.cardTouch(true);
 
                         }
                     }
@@ -780,6 +788,7 @@ public class Game {
             }
         }
     }
+
 
     public void moveForwardWithCpuWin(Player player) {
 
@@ -1379,4 +1388,5 @@ public class Game {
     public void setC2(Card c2) {
         this.c2 = c2;
     }
+
 }

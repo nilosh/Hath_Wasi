@@ -12,16 +12,20 @@ import fyp.ui.hath_wasi.Game.Game;
 
 import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterAscending;
 import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterDescending;
+import static fyp.ui.hath_wasi.Game.Game.getCpu2;
+import static fyp.ui.hath_wasi.Game.Game.getHumanPlayer;
 import static fyp.ui.hath_wasi.Game.Game.getInstance;
+import static fyp.ui.hath_wasi.Game.Game.getSinglePlayer;
+import static fyp.ui.hath_wasi.Game.Game.getTrumps;
 
 public class ComputerPlayerExpert extends AbComputerPlayer {
 
     //get the current instance of the game and attributes of it
-    Game game = getInstance();
-    String trumpCategory = Game.getTrumps();
-    Player SinglePlayer = Game.getSinglePlayer();
-    Player cpu2Player = Game.getCpu2();
-    Player humanPlayer = Game.getHumanPlayer();
+    Game game = Game.getInstance();
+    //String trumpCategory = game.getTrumps();
+    //Player SinglePlayer = game.getSinglePlayer();
+    //Player cpu2Player = game.getCpu2();
+    //Player humanPlayer = game.getHumanPlayer();
 
     public ComputerPlayerExpert(String name, DeckOfCards cardDeck) {
         super(name, cardDeck);
@@ -76,6 +80,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     @Override
     public Card selectCard() {
 
+        String trumpCategory = getTrumps();
         //gets all cards of trump category to an array list
         ArrayList<Card> trumpCards = getCategoryOfCards(trumpCategory);
 
@@ -120,6 +125,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER -------");
         //get the playing type of the round using the first player's card type
         String Category = Player1Card.getCategory();
+        String trumpCategory = getTrumps();
 
         //check if this player has bid the trump for the game
         if (this.isTrumpCalled()) {
@@ -166,11 +172,18 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         Log.println(Log.ERROR, "Tag", "------- inside selectCard(card, card) of EXPERT PLAYER -------");
         //get the playing type of the round using the first player's card type
 
+        Player singlePlayer = getSinglePlayer();
+        String trumpCategory = getTrumps();
+        Player cpu2Player = getCpu2();
+        Player humanPlayer = getHumanPlayer();
         String Category = player1Card.getCategory();
         Log.println(Log.ERROR, "Tag", "------- category is " + Category);
-        Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + SinglePlayer);
+        Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + singlePlayer.getName());
+        Log.println(Log.ERROR, "Tag", " ------- get Trumps in this round --> trump category =  " + trumpCategory);
+        //Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + SinglePlayer);
+        //Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + SinglePlayer);
         //check if this player is the single player
-        if (this.getName() == SinglePlayer.getName()) {
+        if (this.getName() == singlePlayer.getName()) {
             Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER ------- inside single player if");
             return selectBestCardSinglePlayer(Category, player1Card, player2Card);
 
@@ -180,7 +193,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
             Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER ------- inside single player else");
             //check if either this player is cpu1 player and cpu2 player is the single player
             //or if the this player is the cpu2 player and human player is the single player
-            if ((((this.getName() == Game.getCpu1().getName()) && (cpu2Player == SinglePlayer)) || ((this.getName() == cpu2Player.getName()) && (humanPlayer == SinglePlayer)))) {
+            if ((((this.getName() == Game.getCpu1().getName()) && (cpu2Player == singlePlayer)) || ((this.getName() == cpu2Player.getName()) && (humanPlayer == singlePlayer)))) {
                 return selectBestCardTeamPlayer(Category, player1Card, player2Card);
             } else {
                 return selectBestCardTeamPlayer(Category, player2Card, player1Card);
@@ -196,6 +209,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         final String opponent1Cat = opponent1Card.getCategory();
         final String opponent2Cat = opponent2Card.getCategory();
         final boolean categoryMatch = opponent1Cat.equals(opponent2Cat);
+        String trumpCategory = getTrumps();
 
         //check if both cards played are of the same type
         if (categoryMatch) {
@@ -271,6 +285,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         final String opponentCat = opponentCard.getCategory();
         final boolean categoryMatch = myTeamCat.equals(opponentCat);
         final Integer difference = myTeam.compareTo(opponent);
+        String trumpCategory = getTrumps();
 
         //check if both cards played are of the same type
         if (categoryMatch) {

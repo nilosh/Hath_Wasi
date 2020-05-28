@@ -1,15 +1,19 @@
 package fyp.ui.hath_wasi.Game.GameScores;
 
+import fyp.ui.hath_wasi.Screens.ChooseLevel;
+
 public class GameScore {
 
     int human;
     int computerPlayer1;
     int computerPlayer2;
+    String level;
 
     public GameScore(int human, int cpu1, int cpu2) {
         this.human = human;
         this.computerPlayer1 = cpu1;
         this.computerPlayer2 = cpu2;
+        this.level = ChooseLevel.getLevel();
     }
 
 
@@ -36,4 +40,7 @@ public class GameScore {
     public void setComputerPlayer2(int computerPlayer2) {
         this.computerPlayer2 = computerPlayer2;
     }
+
+    public String getLevel() { return level; }
+
 }
