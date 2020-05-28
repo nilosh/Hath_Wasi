@@ -126,28 +126,6 @@ public class ScoresPage extends AppCompatActivity {
 
     }
 
-
-    public void selectScorePage(Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch)
-    {
-        if(beginnerSwitch.isChecked())
-        {
-            Intent intent = new Intent(ScoresPage.this, ScoresPage.class);
-            startActivity(intent);
-        }
-
-        else if(intermediateSwitch.isChecked())
-        {
-            Intent intent = new Intent(ScoresPage.this, ScoresPage01.class);
-            startActivity(intent);
-        }
-
-        else if(expertSwitch.isChecked())
-        {
-            Intent intent = new Intent(ScoresPage.this, ScoresPage02.class);
-            startActivity(intent);
-        }
-    }
-
     public void setMedal() {
         int[] scores = ScoreBoard.getTotals();
 

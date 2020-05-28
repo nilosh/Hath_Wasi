@@ -1,15 +1,21 @@
 package fyp.ui.hath_wasi.Game;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 
+import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.ComputerPlayerCardViews;
 import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
+import fyp.ui.hath_wasi.Players.AbComputerPlayer;
+import fyp.ui.hath_wasi.R;
 import fyp.ui.hath_wasi.Screens.GamePage;
 
 public class GameHandlers {
@@ -56,6 +62,8 @@ public class GameHandlers {
         }, delayMilliseconds);
     }
 
+
+
     public static void collectCards(final Sounds sound, final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
                                     Integer delayMilliseconds) {
 
@@ -73,6 +81,7 @@ public class GameHandlers {
             }
         }, delayMilliseconds);
     }
+
 
     public String getPlayer() {
         return player;

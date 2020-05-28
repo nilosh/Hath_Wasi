@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -310,6 +311,7 @@ public class GamePage extends AppCompatActivity {
                         if (playerAsking == false) {
 
                             if (SelectingTrumpComPlayer.getChances(comPlayer2)) {
+
                                 trump = SelectingTrumpComPlayer.getTrump(comPlayer2);
                                 Game.setTrumps(trump);
                                 passTrumpToTheInterface(trump);
@@ -391,6 +393,8 @@ public class GamePage extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogSlide;
         dialog.show();
     }
+
+
 
     public void selectTrump() {
 

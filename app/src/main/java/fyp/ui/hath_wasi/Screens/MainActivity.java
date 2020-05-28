@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void choose_level(View view) {
         Intent intent = new Intent(this, ChooseLevel.class);
-        //Intent intent = new Intent(this, SplashScreen.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void view_instructions(View view) {
-        //Intent intent = new Intent(this, instructions_page.class);
         Intent intent = new Intent(this, InstructionsPage.class);
         startActivity(intent);
     }
