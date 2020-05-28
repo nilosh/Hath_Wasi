@@ -186,6 +186,8 @@ public class GamePage extends AppCompatActivity {
 
         sounds = new Sounds(this);
 
+        cardTouch(false);
+
         comPlayerCardViews = new ComputerPlayerCardViews(this);
 
         // Start the Game.
@@ -200,6 +202,7 @@ public class GamePage extends AppCompatActivity {
             }
         }, 3000);
 
+        cardTouch(true);
 
         //create the game with the starting player set as human
         Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
@@ -278,11 +281,11 @@ public class GamePage extends AppCompatActivity {
         finish();
     }
 
+    // This method creates and allows the players to choose allow or decline selecting the trump.
     public void openDialog() {
 
         Game game = Game.getInstance();
 
-        // This method creates and allows the players to choose allow or decline selecting the trump.
         AlertDialog.Builder getChances = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         getChances.setMessage(Message.getMessageWinSevenChances())
                 .setTitle("♠ ♥ ♣ ♦")
@@ -355,12 +358,11 @@ public class GamePage extends AppCompatActivity {
 
                                 createComputerPlayer(card, beginnerSwitch, intermediateSwitch, expertSwitch);
                                 Log.println(Log.ERROR, "TAG", "--------------- just AFTER CREATING INSTANCE OF PLAYERS --------------------------------------------------------------------");
-/*                                comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
-                                comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);*/
+
+                                // create animation for player cards.
 
                                 AnimatorSet animatorSet = new AnimatorSet();
                                 ArrayList<Animator> animations = new ArrayList<Animator>();
-
 
                                 for (int i = 0; i < 12; i++) {
                                     cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
@@ -373,7 +375,6 @@ public class GamePage extends AppCompatActivity {
                                 animatorSet.setDuration(200);
                                 animatorSet.playSequentially(animations);
                                 animatorSet.start();
-
 
                                 imageToCardMap = imageViewToCardMap(human, cardArray);
 
@@ -434,6 +435,7 @@ public class GamePage extends AppCompatActivity {
 
     }
 
+    //Passes an int because of on checked item.
     public void passTrumpToTheInterface(int which) {
 
         Game game = Game.getInstance();

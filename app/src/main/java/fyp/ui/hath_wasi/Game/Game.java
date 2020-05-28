@@ -348,11 +348,14 @@ public class Game {
 
                 // remove the Computer player 1 and Computer Player 2 selected cards from the card decks of the computer player 1 and Computer Player 2.
                 // And update the number of cards remaining for Com Player 1 and Com Player 2.
-                cpu1.getCardDeck().remove(card1);
-                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
 
-                cpu2.getCardDeck().remove(card2);
-                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
+                setRemainingAndRemoveComPlayerCards(cpu1, cpu2, card1, card2);
+
+//                cpu1.getCardDeck().remove(card1);
+//                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
+//
+//                cpu2.getCardDeck().remove(card2);
+//                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
 
                 //cpu1.displayDetails();
                 //cpu2.displayDetails();
@@ -467,11 +470,13 @@ public class Game {
 
                 // remove the played cards from the card decks of computer player 1 & 2.
                 // update the number of remaining card for both players.
-                cpu1.getCardDeck().remove(c1);
-                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
+                setRemainingAndRemoveComPlayerCards(cpu1, cpu2, c1, com2Card);
 
-                cpu2.getCardDeck().remove(com2Card);
-                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
+//                cpu1.getCardDeck().remove(c1);
+//                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
+//
+//                cpu2.getCardDeck().remove(com2Card);
+//                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
 
                 // get winner of the round.
                 final Player winner = playedRounds[numberOfRoundsPlayed - 1].getWinner();
@@ -534,11 +539,13 @@ public class Game {
                     setComputerCardsToImageView(c1, c2, com1, com2);
                 }
 
-                cpu1.getCardDeck().remove(c1);
-                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
+                setRemainingAndRemoveComPlayerCards(cpu1, cpu2, c1, c2);
 
-                cpu2.getCardDeck().remove(c2);
-                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
+//                cpu1.getCardDeck().remove(c1);
+//                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
+//
+//                cpu2.getCardDeck().remove(c2);
+//                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
 
                 // Get winner of this round.
                 final Player winner = playedRounds[numberOfRoundsPlayed - 1].getWinner();
@@ -551,22 +558,24 @@ public class Game {
                     }
                 }, 2500);
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                GameHandlers.collectCardsWithWinner(sounds, com1, com2, playerPlaceholder, 3000, winner);
 
-                        Sounds.cardCollect();
-
-                        com1.setVisibility(View.INVISIBLE);
-                        com2.setVisibility(View.INVISIBLE);
-                        playerPlaceholder.setVisibility(View.INVISIBLE);
-
-                        if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
-                            GamePage.cardTouch(true);
-                        }
-
-                    }
-                }, 3000);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        Sounds.cardCollect();
+//
+//                        com1.setVisibility(View.INVISIBLE);
+//                        com2.setVisibility(View.INVISIBLE);
+//                        playerPlaceholder.setVisibility(View.INVISIBLE);
+//
+//                        if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
+//                            GamePage.cardTouch(true);
+//                        }
+//
+//                    }
+//                }, 3000);
 
                 Log.println(Log.ERROR, "TAG", "inside try block 3");
 
@@ -593,6 +602,15 @@ public class Game {
 
         }
 
+    }
+
+    // Set or remove com player cards.
+    public void setRemainingAndRemoveComPlayerCards(AbComputerPlayer cpu1, AbComputerPlayer cpu2, Card card1, Card card2){
+        cpu1.getCardDeck().remove(card1);
+        cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
+
+        cpu2.getCardDeck().remove(card2);
+        cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
     }
 
     // This method sets the images to the image views and makes them visible.
@@ -790,6 +808,7 @@ public class Game {
     }
 
 
+    // This method checks for the player and proceeds playing.
     public void moveForwardWithCpuWin(Player player) {
 
         if (numberOfRoundsPlayed < 12) {
@@ -800,6 +819,7 @@ public class Game {
 
             Log.println(Log.ERROR, "TAG", "Late night testing2 ");
 
+            // If the player is computer player 1.
             if (player.getName() == cpu1.getName()) {
 
                 Handler handler = new Handler();

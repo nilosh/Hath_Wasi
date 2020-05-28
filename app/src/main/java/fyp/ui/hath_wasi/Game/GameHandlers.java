@@ -15,6 +15,7 @@ import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.ComputerPlayerCardViews;
 import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
 import fyp.ui.hath_wasi.Players.AbComputerPlayer;
+import fyp.ui.hath_wasi.Players.Player;
 import fyp.ui.hath_wasi.R;
 import fyp.ui.hath_wasi.Screens.GamePage;
 
@@ -80,6 +81,29 @@ public class GameHandlers {
 
             }
         }, delayMilliseconds);
+    }
+
+
+    public static void collectCardsWithWinner(final Sounds sound, final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
+                                    Integer delayMilliseconds, final Player winner) {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Sounds.cardCollect();
+
+                com1.setVisibility(View.INVISIBLE);
+                com2.setVisibility(View.INVISIBLE);
+                playerPlaceholder.setVisibility(View.INVISIBLE);
+
+                if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
+                    GamePage.cardTouch(true);
+                }
+
+            }
+        }, 3000);
     }
 
 
