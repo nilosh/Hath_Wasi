@@ -27,7 +27,7 @@ public class GameHandlers {
     private Integer delayMilliseconds;
 
     public GameHandlers(final String player, final ImageView cardImage, final Animation animation,
-                        final Sounds soundPlayed, final Integer imageAlpha, Integer delayMilliseconds) {
+                        final Integer imageAlpha, Integer delayMilliseconds) {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -65,13 +65,15 @@ public class GameHandlers {
 
 
 
-    public static void collectCards(final Sounds sound, final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
+    public static void collectCards(final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
                                     Integer delayMilliseconds) {
+
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                Log.println(Log.ERROR, "TAG", "Inside Collect Cards in Handler right before collect sound");
                 Sounds.cardCollect();
 
                 com1.setVisibility(View.INVISIBLE);
@@ -84,7 +86,7 @@ public class GameHandlers {
     }
 
 
-    public static void collectCardsWithWinner(final Sounds sound, final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
+    public static void collectCardsWithWinner(final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
                                     Integer delayMilliseconds, final Player winner) {
 
         Handler handler = new Handler();
@@ -92,7 +94,7 @@ public class GameHandlers {
             @Override
             public void run() {
 
-                Sounds.cardCollect();
+                //Sounds.cardCollect();
 
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);
@@ -103,7 +105,7 @@ public class GameHandlers {
                 }
 
             }
-        }, 3000);
+        }, delayMilliseconds);
     }
 
 

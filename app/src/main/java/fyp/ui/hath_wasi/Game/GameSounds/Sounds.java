@@ -48,6 +48,12 @@ public class Sounds {
         }
     }
 
+    public static void playDraw(){
+        if(onOff){
+            playSound(R.raw.drawsound);
+        }
+    }
+
 
     // Play the sound.
     private static void playSound(int soundID) {

@@ -2,6 +2,7 @@ package fyp.ui.hath_wasi.Game;
 
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -366,13 +367,13 @@ public class Game {
 
 
                 // Allows to delay the animations associated with the particular card.
-                GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, sounds, 1000, 1500);
+                GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
 
 
                 Handler handler = new Handler();
 
 
-                gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, sounds, 1000, 3000);
+                gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 
 
                 // Update score on the score bar with a delay.
@@ -393,7 +394,8 @@ public class Game {
                 // and set cardTouch true.
                 else {
 
-                    GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
+
+                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
 
 //                    handler.postDelayed(new Runnable() {
 //                        @Override
@@ -463,7 +465,7 @@ public class Game {
                 // Set Animations.
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
-                GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, sounds, 1000, 2500);
+                GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 2500);
 
                 Handler handler = new Handler();
 
@@ -497,7 +499,7 @@ public class Game {
 
                 } else {
 
-                    GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
+                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
 
                 }
 
@@ -558,7 +560,7 @@ public class Game {
                     }
                 }, 2500);
 
-                GameHandlers.collectCardsWithWinner(sounds, com1, com2, playerPlaceholder, 3000, winner);
+                GameHandlers.collectCardsWithWinner(com1, com2, playerPlaceholder, 3000, winner);
 
 //                handler.postDelayed(new Runnable() {
 //                    @Override
@@ -586,7 +588,7 @@ public class Game {
 
                 } else {
 
-                    GameHandlers.collectCards(sounds, com1, com2, playerPlaceholder, 6000);
+                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
 
                 }
 
@@ -655,13 +657,16 @@ public class Game {
                     @Override
                     public void run() {
 
+                        Sounds.cardCollect();
+
                         if (gameFinish == false) {
 
                             // set the image views of com player 2 and human player to invisible.
+
+                            //Sounds.cardCollect();
+
                             playerPlaceholder.setVisibility(View.INVISIBLE);
                             com2.setVisibility(View.INVISIBLE);
-
-                            Sounds.cardCollect();
 
                             // Play the card for this round, map it to the image view and make it visible.
                             Log.println(Log.ERROR, "TAG", "--------------- just before c1 --------------------------------------------------------------------");
@@ -712,7 +717,11 @@ public class Game {
                     @Override
                     public void run() {
 
+                        Sounds.cardCollect();
+
                         if (gameFinish == false) {
+
+                            //Sounds.cardCollect();
 
                             playerPlaceholder.setVisibility(View.INVISIBLE);
                             // Play the card for com player 2.
@@ -727,14 +736,15 @@ public class Game {
                             com1.setImageResource(c1.getImageSource());
                             com2.setVisibility(View.INVISIBLE);
                             com1.setVisibility(View.INVISIBLE);
-                            Sounds.cardCollect();
+
+                            //Sounds.cardCollect();
 
                             // Set animations for the played cards.
                             final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
                             final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
 
-                            GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, sounds, 1000, 1500);
+                            GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
 
 //                            Handler handler = new Handler();
 //                            handler.postDelayed(new Runnable() {
@@ -763,7 +773,7 @@ public class Game {
 //                                }
 //                            }, 1500);
 
-                            gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, sounds, 1000, 3000);
+                            gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 
 //                            handler.postDelayed(new Runnable() {
 //                                @Override
@@ -1038,6 +1048,7 @@ public class Game {
             gameFinish = true;
             LottieAnimationView anim = activity.findViewById(R.id.draw);
             anim.setVisibility(LottieAnimationView.VISIBLE);
+            Sounds.playDraw();
             Toast.makeText(activity.getApplicationContext(), Message.getToastDrawGame(), Toast.LENGTH_LONG).show();
             ScoreBoard.getInstance().setScores(new GameScore(0, 0, 0));
             openDialog();
@@ -1111,6 +1122,7 @@ public class Game {
         //then set the score labels to 0
         winningOrLoosingAnimationOff();
 
+
         final TextView scoreLabel1 = activity.findViewById(R.id.textViewMyScore);
         final TextView scoreLabel2 = activity.findViewById(R.id.textViewOpponentScore);
         scoreLabel1.setText("0");
@@ -1156,7 +1168,8 @@ public class Game {
 
                 Log.println(Log.ERROR, "TAG", "in the new instance trumps: " + trumps);
 
-                GamePage.cardTouch(true);
+                GamePage.cardTouch(false);
+                Log.println(Log.ERROR, "TAG", "right after player card touch false CPU2" + trumps);
 
                 moveForwardWithCpuWin(cpu2);
             } else {
@@ -1189,6 +1202,7 @@ public class Game {
                 Log.println(Log.ERROR, "TAG", "in the new instance trumps: " + trumps);
 
                 GamePage.cardTouch(false);
+                Log.println(Log.ERROR, "TAG", "right after player card touch false CPU2" + trumps);
                 moveForwardWithCpuWin(cpu1);
 
             } else {
@@ -1200,6 +1214,7 @@ public class Game {
         // for human player given the chance.
         if (checkIndex % 3 == 0) {
 
+            Toast.makeText(GamePage.getContext(), Message.getToastReshufflingCards(), Toast.LENGTH_LONG).show();
             // let player choose if he/she can win trumps.
             chooseWinningPossibilityDialog(human, comPlayer1, comPlayer2);
             scoreLabel.setText("My Team");
