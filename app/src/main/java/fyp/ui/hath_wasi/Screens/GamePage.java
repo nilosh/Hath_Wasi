@@ -57,8 +57,6 @@ public class GamePage extends AppCompatActivity {
     String trump;
     private boolean playerAsking = false;
 
-    private static GamePage context;
-
     // This method moves the position of player's cards at the start of the game.
     public static void moveUpPlayerCards() {
 
@@ -508,13 +506,5 @@ public class GamePage extends AppCompatActivity {
                 textViewTrump.setText("♦");
                 break;
         }
-    }
-
-    public static GamePage getContext() {
-        return context;
-    }
-
-    public static void setContext(GamePage context) {
-        GamePage.context = context;
     }
 }

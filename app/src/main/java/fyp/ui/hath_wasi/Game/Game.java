@@ -1214,7 +1214,6 @@ public class Game {
         // for human player given the chance.
         if (checkIndex % 3 == 0) {
 
-            Toast.makeText(GamePage.getContext(), Message.getToastReshufflingCards(), Toast.LENGTH_LONG).show();
             // let player choose if he/she can win trumps.
             chooseWinningPossibilityDialog(human, comPlayer1, comPlayer2);
             scoreLabel.setText("My Team");
