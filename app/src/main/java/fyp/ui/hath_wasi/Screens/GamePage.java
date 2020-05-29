@@ -109,6 +109,7 @@ public class GamePage extends AppCompatActivity {
         //Map the correct card image to the human player's card deck.
         imageToCardMap = imageViewToCardMap(human, cardArray);
 
+
         // Get Game Instance and set cards.
         Game game = Game.getInstance();
         Game.setCpu1(comPlayer1);
@@ -202,10 +203,11 @@ public class GamePage extends AppCompatActivity {
             }
         }, 3000);
 
-        cardTouch(true);
+
 
         //create the game with the starting player set as human
         Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
+
 
         Log.println(Log.ERROR, "TAG", "Beginner Level: -------------------------------------- " + beginnerSwitch.isChecked());
         Log.println(Log.ERROR, "TAG", "Intermediate Level: -------------------------------------- " + intermediateSwitch.isChecked());
@@ -422,6 +424,7 @@ public class GamePage extends AppCompatActivity {
                             selectTrump();
                         } else {
                             dialog.dismiss();
+                            cardTouch(true);
                         }
 
                     }
