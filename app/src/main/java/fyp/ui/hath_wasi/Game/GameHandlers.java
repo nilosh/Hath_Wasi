@@ -29,6 +29,8 @@ public class GameHandlers {
     public GameHandlers(final String player, final ImageView cardImage, final Animation animation,
                         final Integer imageAlpha, Integer delayMilliseconds) {
 
+        GamePage.cardTouch(false);
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -53,6 +55,9 @@ public class GameHandlers {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
+                        if(player.toLowerCase() == "com1"){
+                            GamePage.cardTouch(true);
+                        }
                     }
 
                     @Override
@@ -62,8 +67,6 @@ public class GameHandlers {
             }
         }, delayMilliseconds);
     }
-
-
 
     public static void collectCards(final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
                                     Integer delayMilliseconds) {
@@ -93,7 +96,7 @@ public class GameHandlers {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
+                GamePage.cardTouch(false);
                 //Sounds.cardCollect();
 
                 com1.setVisibility(View.INVISIBLE);

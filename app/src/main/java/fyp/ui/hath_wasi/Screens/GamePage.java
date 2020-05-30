@@ -259,6 +259,7 @@ public class GamePage extends AppCompatActivity {
                             image.setImageAlpha(0);
                         }
                     }, 5700);
+                    Log.println(Log.ERROR, "TAG", "Just got here!! --------->>>?///");
                 }
 
                 @Override

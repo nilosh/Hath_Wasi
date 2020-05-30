@@ -48,6 +48,7 @@ public class Sounds {
         }
     }
 
+    // Plays when the game is draw.
     public static void playDraw(){
         if(onOff){
             playSound(R.raw.drawsound);
