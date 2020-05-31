@@ -118,7 +118,7 @@ public class ScoresPage extends AppCompatActivity {
     }
 
 
-    public void setTotalScore(){
+    private void setTotalScore(){
 
         int[] scores = ScoreBoard.getTotals();
 
