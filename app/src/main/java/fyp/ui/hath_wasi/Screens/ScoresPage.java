@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import org.w3c.dom.Text;
+
 import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
 import fyp.ui.hath_wasi.R;
@@ -112,9 +114,22 @@ public class ScoresPage extends AppCompatActivity {
 
         if (ScoreBoard.getNumberOfScores() > 0) {
             setMedal();
+            setTotalScores();
         }
 
 
+    }
+
+    private void setTotalScores(){
+        int[] scores = ScoreBoard.getTotals();
+
+        TextView[] totalViews = new TextView[]{this.findViewById(R.id.playerTotal), this.findViewById(R.id.comPlayer1Total),
+        this.findViewById(R.id.comPlayer2Total)};
+
+        for(int i = 0; i < ScoreBoard.getNumberOfScores(); i++){
+            totalViews[i].setText(String.valueOf(scores[i]));
+            totalViews[i].setVisibility(View.VISIBLE);
+        }
     }
 
     private void setMedal() {

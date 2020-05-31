@@ -974,26 +974,24 @@ public class Game {
             final String score = Integer.toString(previousScore);
 
             // handler to delay the time of setting the score on the score bar
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    playerScorePlaceHolder.setText(score);
-                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
-
-                    Handler subHandler = new Handler();
-                    subHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
-                        }
-                    }, 2000);
-
-                }
-            }, 3000);
-
-
-
+            GameHandlers.handlerForScoreUpdate(playerScorePlaceHolder, score);
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    playerScorePlaceHolder.setText(score);
+//                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
+//
+//                    Handler subHandler = new Handler();
+//                    subHandler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
+//                        }
+//                    }, 2000);
+//
+//                }
+//            }, 3000);
 
             if (singlePlayerScore == 7) {
 
@@ -1033,22 +1031,23 @@ public class Game {
             final String score = Integer.toString(previousScore);
 
             // handler to delay the time of setting the score on the score bar
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    playerScorePlaceHolder.setText(score);
-                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
-
-                    Handler subHandler = new Handler();
-                    subHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
-                        }
-                    }, 2000);
-                }
-            }, 3000);
+            GameHandlers.handlerForScoreUpdate(playerScorePlaceHolder, score);
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    playerScorePlaceHolder.setText(score);
+//                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
+//
+//                    Handler subHandler = new Handler();
+//                    subHandler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
+//                        }
+//                    }, 2000);
+//                }
+//            }, 3000);
 
             if (teamScore == 7) {
 

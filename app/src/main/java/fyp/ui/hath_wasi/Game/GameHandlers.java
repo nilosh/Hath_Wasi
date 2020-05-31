@@ -1,6 +1,7 @@
 package fyp.ui.hath_wasi.Game;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
@@ -104,6 +106,26 @@ public class GameHandlers {
                 Log.println(Log.ERROR, "TAG", "++++++++++++++++++++++++NOW SWITCHED ON +++++++++++++++++++++++++++++++++++");
             }
         }, delay);
+    }
+
+    public static void handlerForScoreUpdate(final TextView placeholder, final String score){
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                placeholder.setText(score);
+                placeholder.setTypeface(Typeface.DEFAULT_BOLD);
+
+                Handler subHandler = new Handler();
+                subHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        placeholder.setTypeface(Typeface.DEFAULT);
+                    }
+                }, 2000);
+            }
+        }, 3000);
     }
 
 
