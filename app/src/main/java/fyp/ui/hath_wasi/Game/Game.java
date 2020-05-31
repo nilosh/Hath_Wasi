@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
@@ -500,8 +501,8 @@ public class Game {
 
                 } else {
 
-                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
-                    GamePage.cardTouch(true);
+                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 4000);
+                    //GamePage.cardTouch(true);
                 }
 
                 Log.println(Log.ERROR, "TAG", "inside the try 2, at the very end");
@@ -573,9 +574,9 @@ public class Game {
 //                        com2.setVisibility(View.INVISIBLE);
 //                        playerPlaceholder.setVisibility(View.INVISIBLE);
 //
-                        if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
-                            GamePage.cardTouch(true);
-                        }
+//                        if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
+//                            GamePage.cardTouch(true);
+//                        }
 //
 //                    }
 //                }, 3000);
@@ -589,7 +590,7 @@ public class Game {
 
                 } else {
 
-                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 5000);
+                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 4000);
                     //GamePage.cardTouch(true);
 
                 }
@@ -978,8 +979,20 @@ public class Game {
                 @Override
                 public void run() {
                     playerScorePlaceHolder.setText(score);
+                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
+
+                    Handler subHandler = new Handler();
+                    subHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
+                        }
+                    }, 2000);
+
                 }
             }, 3000);
+
+
 
 
             if (singlePlayerScore == 7) {
@@ -1025,6 +1038,15 @@ public class Game {
                 @Override
                 public void run() {
                     playerScorePlaceHolder.setText(score);
+                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
+
+                    Handler subHandler = new Handler();
+                    subHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
+                        }
+                    }, 2000);
                 }
             }, 3000);
 

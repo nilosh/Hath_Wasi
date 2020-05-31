@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="102dp" />
+        app:layout_constraintGuide_begin="89dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -94,13 +94,14 @@
         android:id="@+id/switchBeginner"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:checked="true"
         android:text="Beginner"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Switch
         android:id="@+id/switchIntermediate"
@@ -129,6 +130,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchIntermediate" />
 
@@ -136,9 +138,9 @@
         android:id="@+id/doneAnim"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:onClick="play_game"
+        android:layout_marginTop="35dp"
         android:gravity="center"
+        android:onClick="play_game"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="@+id/switchExpert"
         app:layout_constraintHorizontal_bias="0.53"

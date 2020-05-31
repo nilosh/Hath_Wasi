@@ -56,7 +56,11 @@ public class GameHandlers {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         if(player.toLowerCase() == "com1"){
-                            GamePage.cardTouch(true);
+                            handlerForCardTouch(1500 );
+                            //GamePage.cardTouch(true);
+                        }
+                        else{
+                            GamePage.cardTouch(false);
                         }
                     }
 
@@ -71,8 +75,9 @@ public class GameHandlers {
     public static void collectCards(final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
                                     Integer delayMilliseconds) {
 
+        GamePage.cardTouch(false);
 
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -82,33 +87,23 @@ public class GameHandlers {
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);
                 playerPlaceholder.setVisibility(View.INVISIBLE);
-                GamePage.cardTouch(true);
 
+                handlerForCardTouch(4500);
+                Log.println(Log.ERROR, "TAG", "Inside Collect Cards NOW SWITCHED ONNNNN");
             }
         }, delayMilliseconds);
     }
 
-
-    public static void collectCardsWithWinner(final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
-                                    Integer delayMilliseconds, final Player winner) {
+    public static void handlerForCardTouch(Integer delay){
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                GamePage.cardTouch(false);
-                //Sounds.cardCollect();
-
-                com1.setVisibility(View.INVISIBLE);
-                com2.setVisibility(View.INVISIBLE);
-                playerPlaceholder.setVisibility(View.INVISIBLE);
-
-                if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
-                    GamePage.cardTouch(true);
-                }
-
+                GamePage.cardTouch(true);
+                Log.println(Log.ERROR, "TAG", "++++++++++++++++++++++++NOW SWITCHED ON +++++++++++++++++++++++++++++++++++");
             }
-        }, delayMilliseconds);
+        }, delay);
     }
 
 
