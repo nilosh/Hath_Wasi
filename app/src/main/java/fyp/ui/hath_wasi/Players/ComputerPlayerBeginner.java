@@ -17,18 +17,6 @@ public class ComputerPlayerBeginner extends AbComputerPlayer {
         super(name, cardDeck);
     }
 
-    //this method returns a card selected at random given the category of the card from the Card Deck
-    @Override
-    public Card selectRandomCardFromCategory(String category) {
-        ArrayList<Card> categoryOfCards = getCategoryOfCards(category);
-        Random rand = new Random();
-        if (categoryOfCards.size() != 0) {
-            return categoryOfCards.get(rand.nextInt(categoryOfCards.size()));
-        } else {
-            return this.getCardDeck().get(rand.nextInt(numberOfCardsRemaining));
-        }
-    }
-
     //this method returns the highest card from the Card Deck given the category of the card
     @Override
     public Card selectTheHighestCardFromCategory(String category) {

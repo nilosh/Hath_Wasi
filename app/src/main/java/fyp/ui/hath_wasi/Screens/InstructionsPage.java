@@ -1,9 +1,6 @@
 package fyp.ui.hath_wasi.Screens;
 
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;

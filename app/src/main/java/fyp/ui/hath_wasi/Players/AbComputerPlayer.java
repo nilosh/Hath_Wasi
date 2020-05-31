@@ -16,7 +16,7 @@ public abstract class AbComputerPlayer extends Player implements SelectingCard {
     //useful to get all the cards that can be played depending upon the card that is being played on that specific round
     public ArrayList<Card> getCategoryOfCards(String category) {
 
-        ArrayList<Card> categoryOfCards = new ArrayList<Card>();
+        ArrayList<Card> categoryOfCards = new ArrayList<>();
 
         for (int i = 0; i < this.numberOfCardsRemaining; i++) {
             if (this.CardDeck.get(i).getCategory() == category) {

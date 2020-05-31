@@ -2,32 +2,23 @@ package fyp.ui.hath_wasi.Screens;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import fyp.ui.hath_wasi.Cards.DeckOfCards;
 import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
-import fyp.ui.hath_wasi.Screens.ChooseLevel;
 import fyp.ui.hath_wasi.R;
 
 public class ScoresPage extends AppCompatActivity {
 
-    //private static TextView[][] score = new TextView[10][3];
-    private static TextView[][] score = new TextView[10][4];
-//    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-//    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-//    Switch expertSwitch = ChooseLevel.getExpertLevel();
 
-
+    private static final TextView[][] score = new TextView[10][4];
 
 
     @Override
@@ -48,7 +39,7 @@ public class ScoresPage extends AppCompatActivity {
 
         //selectScorePage(beginnerSwitch, intermediateSwitch, expertSwitch);
 
-        //find the textviews and map them to the array values.
+        //find the text views and map them to the array values.
         score[0][0] = findViewById(R.id.g1_level);
         score[0][1] = findViewById(R.id.game1_player);
         score[0][2] = findViewById(R.id.game1_cpu1);
@@ -126,7 +117,7 @@ public class ScoresPage extends AppCompatActivity {
 
     }
 
-    public void setMedal() {
+    private void setMedal() {
         int[] scores = ScoreBoard.getTotals();
 
 

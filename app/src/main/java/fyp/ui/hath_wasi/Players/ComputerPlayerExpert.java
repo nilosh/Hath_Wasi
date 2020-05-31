@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.DeckOfCards;
@@ -14,29 +13,13 @@ import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterAscending;
 import static fyp.ui.hath_wasi.Cards.Card.cardNumberSorterDescending;
 import static fyp.ui.hath_wasi.Game.Game.getCpu2;
 import static fyp.ui.hath_wasi.Game.Game.getHumanPlayer;
-import static fyp.ui.hath_wasi.Game.Game.getInstance;
 import static fyp.ui.hath_wasi.Game.Game.getSinglePlayer;
 import static fyp.ui.hath_wasi.Game.Game.getTrumps;
 
 public class ComputerPlayerExpert extends AbComputerPlayer {
 
-    //get the current instance of the game and attributes of it
-    Game game = Game.getInstance();
-    //String trumpCategory = game.getTrumps();
-    //Player SinglePlayer = game.getSinglePlayer();
-    //Player cpu2Player = game.getCpu2();
-    //Player humanPlayer = game.getHumanPlayer();
-
     public ComputerPlayerExpert(String name, DeckOfCards cardDeck) {
         super(name, cardDeck);
-    }
-
-    //this method returns a card selected at random given the category of the card from the Card Deck
-    @Override
-    public Card selectRandomCardFromCategory(String category) {
-        ArrayList<Card> categoryOfCards = getCategoryOfCards(category);
-        Random rand = new Random();
-        return categoryOfCards.get(rand.nextInt(categoryOfCards.size()));
     }
 
     //this method returns the highest card from the Card Deck given the category of the card
@@ -63,7 +46,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     }
 
     //this method returns the highest card from the hand irrespective of the category
-    public Card selectNextHighestCard() {
+    private Card selectNextHighestCard() {
         Collections.sort(CardDeck, cardNumberSorterDescending);
         return CardDeck.get(1);
     }
@@ -129,7 +112,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
 
         //check if this player has bid the trump for the game
         if (this.isTrumpCalled()) {
-            final Integer opponentCard = Player1Card.getCardId();
+            final int opponentCard = Player1Card.getCardId();
             //check if this player has the play type
             if (CheckForCardType(Category)) {
                 final Card myCard = selectTheHighestCardFromCategory(Category);
@@ -149,7 +132,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
             }
             // when this player has not bid for the game
         } else {
-            final Integer teamMemberCard = Player1Card.getCardId();
+            final int teamMemberCard = Player1Card.getCardId();
             //check if this player has the play type
             if (CheckForCardType(Category)) {
                 final Card myCard = selectTheHighestCardFromCategory(Category);
@@ -180,8 +163,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         Log.println(Log.ERROR, "Tag", "------- category is " + Category);
         Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + singlePlayer.getName());
         Log.println(Log.ERROR, "Tag", " ------- get Trumps in this round --> trump category =  " + trumpCategory);
-        //Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + SinglePlayer);
-        //Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + SinglePlayer);
+
         //check if this player is the single player
         if (this.getName() == singlePlayer.getName()) {
             Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER ------- inside single player if");
@@ -202,10 +184,10 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     }
 
     //select best card when you're the single player and the third player
-    public Card selectBestCardSinglePlayer(String Category, Card opponent1Card, Card opponent2Card) {
+    private Card selectBestCardSinglePlayer(String Category, Card opponent1Card, Card opponent2Card) {
 
-        final Integer opponent1 = opponent1Card.getCardId();
-        final Integer opponent2 = opponent2Card.getCardId();
+        final int opponent1 = opponent1Card.getCardId();
+        final int opponent2 = opponent2Card.getCardId();
         final String opponent1Cat = opponent1Card.getCategory();
         final String opponent2Cat = opponent2Card.getCategory();
         final boolean categoryMatch = opponent1Cat.equals(opponent2Cat);
@@ -277,14 +259,14 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         }
     }
 
-    public Card selectBestCardTeamPlayer(String Category, Card myTeamCard, Card opponentCard) {
+    private Card selectBestCardTeamPlayer(String Category, Card myTeamCard, Card opponentCard) {
 
         final Integer myTeam = myTeamCard.getCardId();
         final Integer opponent = opponentCard.getCardId();
         final String myTeamCat = myTeamCard.getCategory();
         final String opponentCat = opponentCard.getCategory();
         final boolean categoryMatch = myTeamCat.equals(opponentCat);
-        final Integer difference = myTeam.compareTo(opponent);
+        final int difference = myTeam.compareTo(opponent);
         String trumpCategory = getTrumps();
 
         //check if both cards played are of the same type

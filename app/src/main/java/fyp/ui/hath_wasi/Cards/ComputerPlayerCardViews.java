@@ -75,10 +75,10 @@ public class ComputerPlayerCardViews {
 
         // Create animations for each card and translate it from the original position.
         AnimatorSet animatorSetA = new AnimatorSet();
-        ArrayList<Animator> animationsA = new ArrayList<Animator>();
+        ArrayList<Animator> animationsA = new ArrayList<>();
 
         AnimatorSet animatorSetB = new AnimatorSet();
-        ArrayList<Animator> animationsB = new ArrayList<Animator>();
+        ArrayList<Animator> animationsB = new ArrayList<>();
 
         // translate position of cards of ComPlayer1.
         for (int i = 0; i < cards; i++) {
@@ -128,12 +128,12 @@ public class ComputerPlayerCardViews {
     }
 
 
-    public static void initializeIndexes() {
-        comPlayer1Indexes = new ArrayList<Integer>(
+    private static void initializeIndexes() {
+        comPlayer1Indexes = new ArrayList<>(
                 Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
         );
 
-        comPlayer2Indexes = new ArrayList<Integer>(
+        comPlayer2Indexes = new ArrayList<>(
                 Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
         );
     }

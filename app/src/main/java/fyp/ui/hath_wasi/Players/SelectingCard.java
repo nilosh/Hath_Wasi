@@ -8,8 +8,6 @@ public interface SelectingCard {
 
     Card selectTheHighestCardFromCategory(String category);
 
-    Card selectRandomCardFromCategory(String category);
-
     Card selectHighestCard();
 
     Card selectSmallestCard();

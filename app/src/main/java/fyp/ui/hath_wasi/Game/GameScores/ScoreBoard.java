@@ -39,10 +39,6 @@ public class ScoreBoard {
         return numberOfScores;
     }
 
-    public static void setNumberOfScores(int numberOfScores) {
-        ScoreBoard.numberOfScores = numberOfScores;
-    }
-
     public GameScore[] getScores() {
         return scores;
     }

@@ -9,12 +9,44 @@ public class DeckOfCards {
 
     static private Random randomCardGenerator;
     final int handSize = 12;
-    ArrayList<Card> cardDeck = new ArrayList<>();
+    final ArrayList<Card> cardDeck = new ArrayList<>();
     // declare 36 cards of type Card
-    Card card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
-            card11, card12, card13, card14, card15, card16, card17, card18, card19, card20,
-            card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
-            card31, card32, card33, card34, card35, card36;
+    private final Card card1;
+    private final Card card2;
+    private final Card card3;
+    private final Card card4;
+    private final Card card5;
+    private final Card card6;
+    private final Card card7;
+    private final Card card8;
+    private final Card card9;
+    private final Card card10;
+    private final Card card11;
+    private final Card card12;
+    private final Card card13;
+    private final Card card14;
+    private final Card card15;
+    private final Card card16;
+    private final Card card17;
+    private final Card card18;
+    private final Card card19;
+    private final Card card20;
+    private final Card card21;
+    private final Card card22;
+    private final Card card23;
+    private final Card card24;
+    private final Card card25;
+    private final Card card26;
+    private final Card card27;
+    private final Card card28;
+    private final Card card29;
+    private final Card card30;
+    private final Card card31;
+    private final Card card32;
+    private final Card card33;
+    private final Card card34;
+    private final Card card35;
+    private final Card card36;
 
     //Assignment of attribute values to 36 cards
     public DeckOfCards() {
@@ -99,7 +131,7 @@ public class DeckOfCards {
 
     //generate an ArrayList of hand size number of cards randomly and remove the relative index from the cardDeck
     public ArrayList<Card> DealingCards() {
-        ArrayList<Card> hand = new ArrayList<Card>();
+        ArrayList<Card> hand = new ArrayList<>();
         randomCardGenerator = new Random();
 
         for (int i = 0; i < handSize; i++) {

@@ -22,24 +22,12 @@ public class ChooseLevel extends AppCompatActivity {
         return beginnerLevel;
     }
 
-    public void setBeginnerLevel(Switch beginnerLevel) {
-        ChooseLevel.beginnerLevel = beginnerLevel;
-    }
-
     public static Switch getIntermediateLevel() {
         return intermediateLevel;
     }
 
-    public void setIntermediateLevel(Switch intermediateLevel) {
-        ChooseLevel.intermediateLevel = intermediateLevel;
-    }
-
     public static Switch getExpertLevel() {
         return expertLevel;
-    }
-
-    public void setExpertLevel(Switch expertLevel) {
-        ChooseLevel.expertLevel = expertLevel;
     }
 
     @Override

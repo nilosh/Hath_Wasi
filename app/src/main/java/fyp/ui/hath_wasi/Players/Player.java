@@ -1,7 +1,5 @@
 package fyp.ui.hath_wasi.Players;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,8 +11,8 @@ public class Player {
     ArrayList<Card> CardDeck = new ArrayList();
     //Attributes of Player
     private String name;
-    private int score;
-    private boolean trumpCalled;
+    private final int score;
+    private final boolean trumpCalled;
 
 
     //Constructor of the player class
@@ -45,20 +43,9 @@ public class Player {
         this.name = name;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
 
     public boolean isTrumpCalled() {
         return trumpCalled;
-    }
-
-    public void setTrumpCalled(boolean trumpCalled) {
-        this.trumpCalled = trumpCalled;
     }
 
     // returns an arrayList of 12 cards
@@ -82,11 +69,6 @@ public class Player {
     }
 
 
-    public void setNewCards(DeckOfCards cardDeck) {
-        this.CardDeck = cardDeck.DealingCards();
-        Collections.sort(this.CardDeck);
-    }
-
     public int getNumberOfCardsRemaining() {
         return numberOfCardsRemaining;
     }
@@ -99,19 +81,7 @@ public class Player {
         return CardDeck;
     }
 
-    public void setCardDeck(ArrayList<Card> cardDeck) {
-        CardDeck = cardDeck;
-    }
 
-
-    //for debugging purposes
-    public void displayDetails() {
-
-        for (int i = 0; i < this.numberOfCardsRemaining; i++) {
-            Log.println(Log.ERROR, "TAG", "Player Name: " + this.name + " Card info - Category: " + this.CardDeck.get(i).getCategory()
-                    + " | Number: " + CardDeck.get(i).getNumber());
-        }
-    }
 }
 
 
