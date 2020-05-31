@@ -369,14 +369,11 @@ public class Game {
                 // Allows to delay the animations associated with the particular card.
                 GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
 
-
-                Handler handler = new Handler();
-
-
                 gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 
 
                 // Update score on the score bar with a delay.
+                Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -405,11 +402,14 @@ public class Game {
 //                            com1.setVisibility(View.INVISIBLE);
 //                            com2.setVisibility(View.INVISIBLE);
 //                            playerPlaceholder.setVisibility(View.INVISIBLE);
-//                            GamePage.cardTouch(true);
+                            //GamePage.cardTouch(true);
 //
 //                        }
 //                    }, 6000);
+                    //GamePage.cardTouch(true);
                 }
+
+                //GamePage.cardTouch(true);
 
                 Log.println(Log.ERROR, "TAG", "inside the try 1, at the very end");
 
@@ -451,6 +451,7 @@ public class Game {
                 GameRound gameRound = new GameRound(cpu1, c1,
                         cpu2, com2Card,
                         humanPlayer, selectedCard, c1.getCategory(), trumps);
+
 
                 Log.println(Log.ERROR, "TAG", "after game round object");
 
@@ -500,7 +501,7 @@ public class Game {
                 } else {
 
                     GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
-
+                    GamePage.cardTouch(true);
                 }
 
                 Log.println(Log.ERROR, "TAG", "inside the try 2, at the very end");
@@ -560,7 +561,7 @@ public class Game {
                     }
                 }, 2500);
 
-                GameHandlers.collectCardsWithWinner(com1, com2, playerPlaceholder, 3000, winner);
+                //GameHandlers.collectCardsWithWinner(com1, com2, playerPlaceholder, 3000, winner);
 
 //                handler.postDelayed(new Runnable() {
 //                    @Override
@@ -572,9 +573,9 @@ public class Game {
 //                        com2.setVisibility(View.INVISIBLE);
 //                        playerPlaceholder.setVisibility(View.INVISIBLE);
 //
-//                        if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
-//                            GamePage.cardTouch(true);
-//                        }
+                        if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
+                            GamePage.cardTouch(true);
+                        }
 //
 //                    }
 //                }, 3000);
@@ -588,7 +589,8 @@ public class Game {
 
                 } else {
 
-                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
+                    GameHandlers.collectCards(com1, com2, playerPlaceholder, 5000);
+                    //GamePage.cardTouch(true);
 
                 }
 
@@ -657,6 +659,7 @@ public class Game {
                     @Override
                     public void run() {
 
+                        //GamePage.cardTouch(false);
                         Sounds.cardCollect();
 
                         if (gameFinish == false) {
@@ -703,10 +706,15 @@ public class Game {
 
                         // Next player is Human Player.
                         // Set cardTouch to true.
+                        //GameHandlers.setCardTouchOnDelay();
                         GamePage.cardTouch(true);
                     }
 
                 }, 6000);
+
+                // Next player is Human Player.
+                // Set cardTouch to true.
+                //GamePage.cardTouch(true);
 
 
                 // Else if the player is Com Player 2.
@@ -800,14 +808,11 @@ public class Game {
 //                                        }
 //                                    });
 //
-//                                    // Let Human player play.
-//                                    GamePage.cardTouch(true);
+                                    //Let Human player play. (initial)
+                                    GamePage.cardTouch(true);
 //
 //                                }
 //                            }, 3000);
-
-                            // Let Human player play.
-                            GamePage.cardTouch(true);
 
                         }
                     }

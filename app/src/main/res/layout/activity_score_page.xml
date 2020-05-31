@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="@+id/animation"
         app:layout_constraintStart_toStartOf="@+id/animation"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.19999999">
+        app:layout_constraintVertical_bias="0.24000001">
 
         <TextView
 
