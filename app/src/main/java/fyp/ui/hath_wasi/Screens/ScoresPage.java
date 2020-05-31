@@ -1,6 +1,5 @@
 package fyp.ui.hath_wasi.Screens;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -10,8 +9,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
-
-import org.w3c.dom.Text;
 
 import fyp.ui.hath_wasi.Game.GameScores.GameScore;
 import fyp.ui.hath_wasi.Game.GameScores.ScoreBoard;
@@ -114,25 +111,28 @@ public class ScoresPage extends AppCompatActivity {
 
         if (ScoreBoard.getNumberOfScores() > 0) {
             setMedal();
-            setTotalScores();
+            setTotalScore();
         }
 
 
     }
 
-    private void setTotalScores(){
+
+    public void setTotalScore(){
+
         int[] scores = ScoreBoard.getTotals();
 
-        TextView[] totalViews = new TextView[]{this.findViewById(R.id.playerTotal), this.findViewById(R.id.comPlayer1Total),
-        this.findViewById(R.id.comPlayer2Total)};
+        TextView[] scoreTotals = new TextView[]{this.findViewById(R.id.playerTotal), this.findViewById(R.id.comPlayer1Total),
+                this.findViewById(R.id.comPlayer2Total)};
 
-        for(int i = 0; i < ScoreBoard.getNumberOfScores(); i++){
-            totalViews[i].setText(String.valueOf(scores[i]));
-            totalViews[i].setVisibility(View.VISIBLE);
+        for(int i=0; i < scoreTotals.length; i++ ){
+            scoreTotals[i].setText(String.valueOf(scores[i]));
+            scoreTotals[i].setVisibility(View.VISIBLE);
         }
+
     }
 
-    private void setMedal() {
+    public void setMedal() {
         int[] scores = ScoreBoard.getTotals();
 
 
