@@ -11,6 +11,7 @@ public class ScoreBoard {
         numberOfScores = 0;
     }
 
+    // create a new scoreboard.
     public static ScoreBoard getInstance() {
         if (ourInstance == null) {
             ourInstance = new ScoreBoard();
@@ -23,6 +24,7 @@ public class ScoreBoard {
         return numberOfScores >= 10;
     }
 
+    // get the total of each player.
     public static int[] getTotals() {
         int[] totals = new int[]{0, 0, 0};
 
@@ -43,6 +45,7 @@ public class ScoreBoard {
         return scores;
     }
 
+    // sets the number of scores recorded in the previous round.
     public void setScores(GameScore score) {
         if (numberOfScores < 10) {
             scores[numberOfScores++] = score;

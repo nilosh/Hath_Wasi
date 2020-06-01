@@ -117,14 +117,16 @@ public class ScoresPage extends AppCompatActivity {
 
     }
 
-
+    // setting total score to the scoreboard.
     private void setTotalScore(){
 
+        // array which holds the total marks of each player.
         int[] scores = ScoreBoard.getTotals();
 
         TextView[] scoreTotals = new TextView[]{this.findViewById(R.id.playerTotal), this.findViewById(R.id.comPlayer1Total),
                 this.findViewById(R.id.comPlayer2Total)};
 
+        // set the total to the textviews.
         for(int i=0; i < scoreTotals.length; i++ ){
             scoreTotals[i].setText(String.valueOf(scores[i]));
             scoreTotals[i].setVisibility(View.VISIBLE);
@@ -150,11 +152,15 @@ public class ScoresPage extends AppCompatActivity {
 
         int max = scores[0];
 
-
+        // checks which players score is greater.
         for (int i = 1; i < scores.length; i++) {
+
+            // if computer player score is greater than human player.
             if (scores[i] > max) {
                 max = scores[i];
                 medals[i - 1].setVisibility(View.INVISIBLE);
+
+             // if computer player score is less than human player.
             } else if (scores[i] < max) {
                 medals[i].setVisibility(View.INVISIBLE);
             }
