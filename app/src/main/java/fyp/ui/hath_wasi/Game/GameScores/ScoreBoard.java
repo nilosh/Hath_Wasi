@@ -13,7 +13,7 @@ public class ScoreBoard {
 
     // create a new scoreboard.
     public static ScoreBoard getInstance() {
-        if (ourInstance == null || getNumberOfScores() > 10) {
+        if (ourInstance == null && !(getNumberOfScores() <= 10)) {
             ourInstance = new ScoreBoard();
         }
 
