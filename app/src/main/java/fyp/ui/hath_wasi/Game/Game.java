@@ -296,6 +296,7 @@ public class Game {
         final TextView roundNumber = getActivity().findViewById(R.id.textViewRoundTag);
         roundNumber.setText(ScoreBoard.getNumberOfScores() + 1 + "/10 Rounds");
 
+
     }
 
     public void playNextMove(Card selectedCard) {
@@ -963,6 +964,7 @@ public class Game {
     //Also if a team wins the game, or if the game is draw, an animation will be displayed in the perspective of the human player.
     public void updateScore(Player winningPlayer) {
 
+        //if single player is the winning player.
         if (singlePlayer.getName() == winningPlayer.getName()) {
             final TextView playerScorePlaceHolder = activity.findViewById(R.id.textViewMyScore);
 
@@ -1020,6 +1022,7 @@ public class Game {
 
             }
 
+          // if single player is not the winning player.(opponent winning)
         } else {
             final TextView playerScorePlaceHolder = activity.findViewById(R.id.textViewOpponentScore);
             //converting string into an integer.
@@ -1071,14 +1074,10 @@ public class Game {
         }
 
         if (teamScore == 6 && singlePlayerScore == 6) {
-            gameFinish = true;
-            LottieAnimationView anim = activity.findViewById(R.id.draw);
-            anim.setVisibility(LottieAnimationView.VISIBLE);
-            Sounds.playDraw();
+            drawAnimation();
             Toast.makeText(activity.getApplicationContext(), Message.getToastDrawGame(), Toast.LENGTH_LONG).show();
             ScoreBoard.getInstance().setScores(new GameScore(0, 0, 0));
             openDialog();
-
         }
     }
 
@@ -1112,6 +1111,14 @@ public class Game {
         LottieAnimationView anim1 = activity.findViewById(R.id.sadface);
         anim1.setVisibility(LottieAnimationView.VISIBLE);
         Sounds.playLost();
+    }
+
+    public void drawAnimation()
+    {
+        gameFinish = true;
+        LottieAnimationView anim = activity.findViewById(R.id.draw);
+        anim.setVisibility(LottieAnimationView.VISIBLE);
+        Sounds.playDraw();
     }
 
     public void getToastMessage(boolean result) {

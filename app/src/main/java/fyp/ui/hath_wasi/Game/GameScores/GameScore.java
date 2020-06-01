@@ -4,6 +4,7 @@ import fyp.ui.hath_wasi.Screens.ChooseLevel;
 
 public class GameScore {
 
+    // create the 3 players and the level which the game is played.
     private int human;
     private int computerPlayer1;
     private int computerPlayer2;

@@ -90,7 +90,7 @@ public class GameHandlers {
                 com2.setVisibility(View.INVISIBLE);
                 playerPlaceholder.setVisibility(View.INVISIBLE);
 
-                handlerForCardTouch(4500);
+                handlerForCardTouch(4100);
                 Log.println(Log.ERROR, "TAG", "Inside Collect Cards NOW SWITCHED ONNNNN");
             }
         }, delayMilliseconds);
