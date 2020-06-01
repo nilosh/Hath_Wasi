@@ -296,6 +296,7 @@ public class Game {
         final TextView roundNumber = getActivity().findViewById(R.id.textViewRoundTag);
         roundNumber.setText(ScoreBoard.getNumberOfScores() + 1 + "/10 Rounds");
 
+
     }
 
     public void playNextMove(Card selectedCard) {
