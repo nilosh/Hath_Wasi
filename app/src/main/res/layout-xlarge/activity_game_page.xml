@@ -90,8 +90,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card1"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="-90"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,8 +101,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card2"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="-90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer2Card1"
@@ -112,8 +112,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card3"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="-90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer2Card2"
@@ -123,8 +123,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card4"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="-90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer2Card3"
@@ -134,8 +134,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card5"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:adjustViewBounds="false"
         android:rotation="-90"
@@ -146,8 +146,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card6"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/confetti2"
@@ -157,8 +157,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card7"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="30dp"
         android:adjustViewBounds="false"
         android:rotation="-90"
@@ -169,8 +169,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card8"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="30dp"
         android:adjustViewBounds="false"
         android:rotation="-90"
@@ -181,8 +181,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card9"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="30dp"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="@+id/comPlayer2Card8"
@@ -192,8 +192,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card10"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="30dp"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="@+id/comPlayer2Card9"
@@ -204,8 +204,8 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card11"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="30dp"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="@+id/comPlayer2Card10"
@@ -215,9 +215,9 @@
 
     <ImageView
         android:id="@+id/comPlayer2Card12"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
-        android:layout_marginBottom="15dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
+        android:layout_marginBottom="65dp"
         android:rotation="-90"
         app:layout_constraintBottom_toTopOf="@+id/comPlayer2Card2"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer2Card11"
@@ -362,8 +362,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card1"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="30dp"
         android:adjustViewBounds="false"
         android:rotation="90"
@@ -374,8 +374,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card2"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="30dp"
         android:rotation="90"
         app:layout_constraintBottom_toBottomOf="@+id/comPlayer1Card3"
@@ -385,8 +385,9 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card3"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
+        android:layout_marginBottom="30dp"
         android:rotation="90"
         app:layout_constraintBottom_toTopOf="@+id/comPlayer1Card12"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer1Card4"
@@ -395,9 +396,9 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card4"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
+        android:layout_marginBottom="30dp"
         android:rotation="90"
         app:layout_constraintBottom_toBottomOf="@+id/comPlayer1Card5"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer1Card5"
@@ -406,9 +407,9 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card5"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
+        android:layout_marginBottom="30dp"
         android:rotation="90"
         app:layout_constraintBottom_toBottomOf="@+id/comPlayer1Card6"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer1Card6"
@@ -418,8 +419,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card6"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:rotation="90"
         app:layout_constraintBottom_toBottomOf="@+id/confetti2"
         app:layout_constraintStart_toStartOf="parent"
@@ -429,8 +430,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card7"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:adjustViewBounds="false"
         android:rotation="90"
@@ -442,8 +443,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card8"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer1Card7"
@@ -454,8 +455,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card9"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer1Card8"
@@ -466,8 +467,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card10"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer1Card9"
@@ -478,8 +479,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card11"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:adjustViewBounds="false"
         android:rotation="90"
@@ -491,8 +492,8 @@
 
     <ImageView
         android:id="@+id/comPlayer1Card12"
-        android:layout_width="250dp"
-        android:layout_height="285dp"
+        android:layout_width="200dp"
+        android:layout_height="235dp"
         android:layout_marginTop="30dp"
         android:rotation="90"
         app:layout_constraintEnd_toEndOf="@+id/comPlayer1Card11"
