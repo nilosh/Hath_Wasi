@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,18 +43,18 @@ import fyp.ui.hath_wasi.R;
 public class GamePage extends AppCompatActivity {
 
     // Variable declaration.
-    private static HashMap<Integer, Card> imageToCardMap;
-    private static AbComputerPlayer comPlayer1;
-    private static AbComputerPlayer comPlayer2;
-    private static Player human;
-    private static final ImageView[] cardArray = new ImageView[12];
+    static HashMap<Integer, Card> imageToCardMap;
+    static AbComputerPlayer comPlayer1;
+    static AbComputerPlayer comPlayer2;
+    static Player human;
+    private static ImageView[] cardArray = new ImageView[12];
     private static ComputerPlayerCardViews comPlayerCardViews;
     private static int roundNumber = 0;
     private static Sounds sounds;
-    private final Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    private final Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-    private final Switch expertSwitch = ChooseLevel.getExpertLevel();
-    private String trump;
+    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
+    Switch expertSwitch = ChooseLevel.getExpertLevel();
+    String trump;
     private boolean playerAsking = false;
 
     // This method moves the position of player's cards at the start of the game.
@@ -76,8 +77,8 @@ public class GamePage extends AppCompatActivity {
         //comPlayer1.displayDetails();
         //comPlayer2.displayDetails();
 
-        AnimatorSet s = new AnimatorSet();
-        ArrayList<Animator> animations = new ArrayList<>();
+//        AnimatorSet s = new AnimatorSet();
+//        ArrayList<Animator> animations = new ArrayList<Animator>();
 
         moveUpPlayerCards();
         ComputerPlayerCardViews.openAnimation();
@@ -86,20 +87,20 @@ public class GamePage extends AppCompatActivity {
         // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the GamePage.
 
         // uses Animations to sequentially send the cards.
-        for (int i = 0; i < 12; i++) {
-
-            cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
-            cardArray[i].setVisibility(View.VISIBLE);
-            final int j = i;
-
-            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
-            animations.add(animator);
-
-        }
-
-        s.setDuration(200);
-        s.playSequentially(animations);
-        s.start();
+        translateCardsSequentially();
+//        for (int i = 0; i < 12; i++) {
+//
+//            cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
+//            cardArray[i].setVisibility(View.VISIBLE);
+//            final int j = i;
+//
+//            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
+//            animations.add(animator);
+//        }
+//
+//        s.setDuration(200);
+//        s.playSequentially(animations);
+//        s.start();
 
         // Set round number to zero.
         roundNumber = 0;
@@ -115,6 +116,27 @@ public class GamePage extends AppCompatActivity {
         Game.setHumanPlayer(human);
     }
 
+    private static void translateCardsSequentially(){
+
+        // uses Animations to sequentially send the cards.
+        AnimatorSet s = new AnimatorSet();
+        ArrayList<Animator> animations = new ArrayList<Animator>();
+
+        for (int i = 0; i < 12; i++) {
+
+            cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
+            cardArray[i].setVisibility(View.VISIBLE);
+            final int j = i;
+
+            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
+            animations.add(animator);
+        }
+
+        s.setDuration(200);
+        s.playSequentially(animations);
+        s.start();
+    }
+
     private static HashMap<Integer, Card> imageViewToCardMap(Player player, ImageView[] views) {
 
         // This method maps the image views of the player to the playing cards of that particular player.
@@ -126,8 +148,6 @@ public class GamePage extends AppCompatActivity {
 
         for (int i = 0; i < numOfCards; i++) {
             imageToCardMap.put(views[i].getId(), player.getCardFromIndex(i));
-            Log.println(Log.ERROR, "TAG", "Adding Cards - " + views[i].getId() + " Card type and details - " + player.getCardFromIndex(i).getCategory() + " " + player.getCardFromIndex(i).getCardId());
-
         }
 
         return imageToCardMap;
@@ -142,16 +162,16 @@ public class GamePage extends AppCompatActivity {
     }
 
     // Create two instances of players according to the player type(for Computer Players).
-    private static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
+    public static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
         if (beginnerSwitch.isChecked()) {
             comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
+
         } else if (expertSwitch.isChecked()) {
-            Log.println(Log.ERROR, "TAG", "------------------------------- inside create computer player expert switch if ----------------------------------------------------- ");
             comPlayer1 = new ComputerPlayerExpert("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerExpert("Computer Player 2", card);
+
         } else if (intermediateSwitch.isChecked()) {
-            Log.println(Log.ERROR, "TAG", "------------------------------- inside create computer player intermediate switch if ----------------------------------------------------- ");
             comPlayer1 = new ComputerPlayerIntermediate("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerIntermediate("Computer Player 2", card);
         }
@@ -201,16 +221,8 @@ public class GamePage extends AppCompatActivity {
             }
         }, 3000);
 
-
-
         //create the game with the starting player set as human
         Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
-
-
-        Log.println(Log.ERROR, "TAG", "Beginner Level: -------------------------------------- " + beginnerSwitch.isChecked());
-        Log.println(Log.ERROR, "TAG", "Intermediate Level: -------------------------------------- " + intermediateSwitch.isChecked());
-        Log.println(Log.ERROR, "TAG", "Expert Level: ---------------------------------------- " + expertSwitch.isChecked());
-        Log.println(Log.ERROR, "TAG", "Intermediate Level: ---------------------------------------- " + intermediateSwitch.isChecked());
 
     }
 
@@ -221,10 +233,7 @@ public class GamePage extends AppCompatActivity {
         // This method removes the user selected card from the user's card view
         // and doesn't allow the cards to be pressed when one card has been already placed.
 
-        Log.println(Log.ERROR, "TAG", "Selected Image View ID: " + v.getId());
         final Card selectedCard = imageToCardMap.get(v.getId());
-
-        Log.println(Log.ERROR, "Tag", "---------------------------------- selected card by human is ------------ " + selectedCard.getNumber());
 
         final Game game = Game.getInstance();
 
@@ -258,12 +267,10 @@ public class GamePage extends AppCompatActivity {
                             image.setImageAlpha(0);
                         }
                     }, 5700);
-                    Log.println(Log.ERROR, "TAG", "Just got here!! --------->>>?///");
                 }
 
                 @Override
-                public void onAnimationRepeat(Animation animation) {
-                }
+                public void onAnimationRepeat(Animation animation) { }
             });
 
             human.getPlayerCards().remove(selectedCard);
@@ -276,6 +283,7 @@ public class GamePage extends AppCompatActivity {
 
     }
 
+    // On Device back button pressed.
     @Override
     public void onBackPressed() {
         Game.setOurInstance(null);
@@ -305,10 +313,8 @@ public class GamePage extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
-
                         final TextView scoreLabel1 = findViewById(R.id.textViewMyTeam);
                         final TextView scoreLabel2 = findViewById(R.id.textViewOpponent);
-
 
                         // if human player passed the trump selection to a computer player, let the com player 2 select the trump.
                         Game game = Game.getInstance();
@@ -358,24 +364,24 @@ public class GamePage extends AppCompatActivity {
                                 human = new Player("Human Player", card);
 
                                 createComputerPlayer(card, beginnerSwitch, intermediateSwitch, expertSwitch);
-                                Log.println(Log.ERROR, "TAG", "--------------- just AFTER CREATING INSTANCE OF PLAYERS --------------------------------------------------------------------");
 
                                 // create animation for player cards.
+                                translateCardsSequentially();
 
-                                AnimatorSet animatorSet = new AnimatorSet();
-                                ArrayList<Animator> animations = new ArrayList<>();
-
-                                for (int i = 0; i < 12; i++) {
-                                    cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
-
-                                    final int j = i;
-                                    ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
-                                    animations.add(animator);
-                                }
-
-                                animatorSet.setDuration(200);
-                                animatorSet.playSequentially(animations);
-                                animatorSet.start();
+//                                AnimatorSet animatorSet = new AnimatorSet();
+//                                ArrayList<Animator> animations = new ArrayList<Animator>();
+//
+//                                for (int i = 0; i < 12; i++) {
+//                                    cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
+//
+//                                    final int j = i;
+//                                    ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
+//                                    animations.add(animator);
+//                                }
+//
+//                                animatorSet.setDuration(200);
+//                                animatorSet.playSequentially(animations);
+//                                animatorSet.start();
 
                                 imageToCardMap = imageViewToCardMap(human, cardArray);
 
@@ -383,7 +389,6 @@ public class GamePage extends AppCompatActivity {
                                 game.alterInstance(human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
                             }
                         }
-
                     }
                 });
 
@@ -396,8 +401,7 @@ public class GamePage extends AppCompatActivity {
         dialog.show();
     }
 
-
-
+    // Asks the user to select the trump.
     private void selectTrump() {
 
         // This method allows the user to select the trump when they choose to select the trump.
@@ -415,17 +419,15 @@ public class GamePage extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("TAG", "Inside on click : " + trump);
                         if (trump == null || trump.isEmpty()) {
                             Toast.makeText(getApplicationContext(), Message.getToastChooseTrump(),
                                     Toast.LENGTH_SHORT).show();
-                            Log.d("TAG", "The Trump Selected: " + trump);
                             selectTrump();
+
                         } else {
                             dialog.dismiss();
                             cardTouch(true);
                         }
-
                     }
                 });
 
@@ -437,7 +439,7 @@ public class GamePage extends AppCompatActivity {
 
     }
 
-    //Passes an int because of on checked item.
+    //Passes trump to interface using int because of on checked item selected by human player.
     private void passTrumpToTheInterface(int which) {
 
         Game game = Game.getInstance();
@@ -449,30 +451,27 @@ public class GamePage extends AppCompatActivity {
             case 0:
                 trump = "spades".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Spades Selected: " + trump);
                 textViewTrump.setText("♠");
                 break;
             case 1:
                 trump = "hearts".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Hearts Selected: " + trump);
                 textViewTrump.setText("♥");
                 break;
             case 2:
                 trump = "clubs".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Clubs Selected" + trump);
                 textViewTrump.setText("♣");
                 break;
             case 3:
                 trump = "diamonds".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Diamonds Selected" + trump);
                 textViewTrump.setText("♦");
                 break;
         }
     }
 
+    // Passes trump to interface using String ( when computer players select the trump).
     private void passTrumpToTheInterface(String which) {
 
         Game game = Game.getInstance();
@@ -484,25 +483,21 @@ public class GamePage extends AppCompatActivity {
             case "spades":
                 trump = "spades".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Spades Selected: " + trump);
                 textViewTrump.setText("♠");
                 break;
             case "hearts":
                 trump = "hearts".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Hearts Selected: " + trump);
                 textViewTrump.setText("♥");
                 break;
             case "clubs":
                 trump = "clubs".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Clubs Selected" + trump);
                 textViewTrump.setText("♣");
                 break;
             case "diamonds":
                 trump = "diamonds".toLowerCase();
                 Game.setTrumps(trump);
-                Log.d("TAG", "Diamonds Selected" + trump);
                 textViewTrump.setText("♦");
                 break;
         }

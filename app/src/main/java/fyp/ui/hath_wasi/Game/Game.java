@@ -291,13 +291,12 @@ public class Game {
     }
 
     //this method displays the round number text view on screen.
-    public void updateRoundNumber() {
+    private void updateRoundNumber() {
 
         final TextView roundNumber = getActivity().findViewById(R.id.textViewRoundTag);
         roundNumber.setText(ScoreBoard.getNumberOfScores() + 1 + "/10 Rounds");
-
-
     }
+
 
     public void playNextMove(Card selectedCard) {
 
@@ -309,9 +308,6 @@ public class Game {
         final ImageView com2 = activity.findViewById(R.id.com2Card);
         final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
 
-        Log.println(Log.ERROR, "TAG", "startPlayer.getName() -------------------------------------------->>>>>>>>>>>> :" + startPlayer.getName());
-        Log.println(Log.ERROR, "TAG", "Human selected card -------------------------------------------->>>>>>>>>>>> :" + selectedCard.getCategory() + selectedCard.getNumber());
-        Log.println(Log.ERROR, "TAG", "this.numberOfRoundsPlayed :" + numberOfRoundsPlayed);
 
         // If it is the first round of the game and the start player is not an abstract com player
         // Or the last round winner is not Com Player 1 and last round player is not Com Player 2.
@@ -320,16 +316,10 @@ public class Game {
                         && playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() != "Computer Player 2"))) {
 
             try {
-
                 GamePage.cardTouch(false);
 
-                Log.println(Log.ERROR, "TAG", "Try block 1..");
-                Log.println(Log.ERROR, "TAG", "passing trumps in block 1 : " + trumps);
-
-                Card card2 = cpu2.selectCard(selectedCard); //Card card2 = this.cpu2.selectCard(selectedCard) //changed
-                Card card1 = cpu1.selectCard(selectedCard, card2); //Card card1 = this.cpu1.selectCard(selectedCard,card2); //changed
-
-                Log.println(Log.ERROR, "TAG", "right after selecting card 1 and 2 -------------------------------------------->>>>>>>>>>>> :");
+                Card card2 = cpu2.selectCard(selectedCard);
+                Card card1 = cpu1.selectCard(selectedCard, card2);
 
                 GameRound gameRound = new GameRound(cpu1, card1,
                         cpu2, card2,
@@ -354,12 +344,6 @@ public class Game {
 
                 setRemainingAndRemoveComPlayerCards(cpu1, cpu2, card1, card2);
 
-//                cpu1.getCardDeck().remove(card1);
-//                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
-//
-//                cpu2.getCardDeck().remove(card2);
-//                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
-
                 //cpu1.displayDetails();
                 //cpu2.displayDetails();
 
@@ -367,12 +351,10 @@ public class Game {
                 final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
-
                 // Allows to delay the animations associated with the particular card.
                 GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
 
                 gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
-
 
                 // Update score on the score bar with a delay.
                 Handler handler = new Handler();
@@ -392,41 +374,18 @@ public class Game {
                 // Else, make all the played cards invisible (from the last round)
                 // and set cardTouch true.
                 else {
-
-
                     GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
-
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            sounds.cardCollect();
-//
-//                            com1.setVisibility(View.INVISIBLE);
-//                            com2.setVisibility(View.INVISIBLE);
-//                            playerPlaceholder.setVisibility(View.INVISIBLE);
-                            //GamePage.cardTouch(true);
-//
-//                        }
-//                    }, 6000);
-                    //GamePage.cardTouch(true);
                 }
-
-                //GamePage.cardTouch(true);
-
-                Log.println(Log.ERROR, "TAG", "inside the try 1, at the very end");
 
             } catch (Exception e) {
 
                 // decrement the added number of played.
                 numberOfRoundsPlayed--;
-
-                Log.println(Log.ERROR, "TAG", "on the first catch block");
                 popUpDialog(Message.getMessageSelectValidCard(), "Card Selection");
 
                 // human player played an invalid card, so allow to play again.
                 invalidCardByHuman = true;
                 GamePage.cardTouch(true);
-
             }
         }
 
@@ -435,27 +394,19 @@ public class Game {
         else if (((numberOfRoundsPlayed == 0 && (startPlayer.getName() == "Computer Player 1")) ||
                 ((numberOfRoundsPlayed > 0 && playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() == "Computer Player 1")))) {
 
-            Log.println(Log.ERROR, "TAG", "LAST ROUND'S WINNER IS -------------------------------------------->>>>>>>>>>>>  COMPUTER 1");
             try {
 
                 // If human player card is valid.
                 if (invalidCardByHuman == false) {
-                    // Com Player 2 (right side)
-                    // Play the smallest card from the category
-                    com2Card = cpu2.selectCard(c1, selectedCard); //com2Card = this.cpu2.selectCard(c1,selectedCard); //changed
-                    Log.println(Log.ERROR, "TAG", "inside the if condition");
+                    // Com Player 2 (right side). Play the smallest card from the category.
+                    com2Card = cpu2.selectCard(c1, selectedCard);
                 }
-
-                Log.println(Log.ERROR, "TAG", "outside if condition");
 
                 // Start game round from Com Player 2.
                 // Creates new game round object.
                 GameRound gameRound = new GameRound(cpu1, c1,
                         cpu2, com2Card,
                         humanPlayer, selectedCard, c1.getCategory(), trumps);
-
-
-                Log.println(Log.ERROR, "TAG", "after game round object");
 
                 invalidCardByHuman = false;
 
@@ -470,22 +421,14 @@ public class Game {
 
                 GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 2500);
 
-                Handler handler = new Handler();
-
-
                 // remove the played cards from the card decks of computer player 1 & 2.
                 // update the number of remaining card for both players.
                 setRemainingAndRemoveComPlayerCards(cpu1, cpu2, c1, com2Card);
 
-//                cpu1.getCardDeck().remove(c1);
-//                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
-//
-//                cpu2.getCardDeck().remove(com2Card);
-//                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
-
                 // get winner of the round.
                 final Player winner = playedRounds[numberOfRoundsPlayed - 1].getWinner();
 
+                Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -493,42 +436,27 @@ public class Game {
                     }
                 }, 2500);
 
-                Log.println(Log.ERROR, "TAG", "inside try block 2");
-
-
                 if (playedRounds[numberOfRoundsPlayed - 1].getWinner() instanceof AbComputerPlayer) {
 
                     moveForwardWithCpuWin();
 
                 } else {
-
                     GameHandlers.collectCards(com1, com2, playerPlaceholder, 4000);
-                    //GamePage.cardTouch(true);
                 }
 
-                Log.println(Log.ERROR, "TAG", "inside the try 2, at the very end");
-
-
             } catch (Exception e) {
-                Log.d("TAG", "on the second catch block");
 
                 popUpDialog(Message.getMessageSelectValidCard(), "Card Selection");
                 invalidCardByHuman = true;
                 GamePage.cardTouch(true);
             }
-
-
         }
+
         // If neither the start of the game and the start player is neither Com Player 1 or Com Player 2
         // Or neither the last round winner is Com Player 1 or Com Player 2.
         else {
 
-            //Log.println(Log.ERROR, "TAG", "LAST ROUND'S WINNER IS -------------------------REAL WINNER------------------->>>>>>>>>>>>  " + playedRounds[numberOfRoundsPlayed - 1].getWinner().getName());
-            Log.println(Log.ERROR, "TAG", "LAST ROUND'S WINNER IS -------------------------------------------->>>>>>>>>>>>  COMPUTER 2");
             try {
-
-                Log.println(Log.ERROR, "TAG", "Try block 3..");
-                Log.println(Log.ERROR, "TAG", "passing trumps in block 1 : " + trumps);
 
                 // Create new game round object.
                 GameRound gameRound = new GameRound(cpu1, c1,
@@ -536,7 +464,6 @@ public class Game {
                         humanPlayer, selectedCard, c2.getCategory(), trumps);
 
                 invalidCardByHuman = false;
-
                 playedRounds[numberOfRoundsPlayed++] = gameRound;
 
                 if (numberOfRoundsPlayed == 0) {
@@ -545,12 +472,6 @@ public class Game {
                 }
 
                 setRemainingAndRemoveComPlayerCards(cpu1, cpu2, c1, c2);
-
-//                cpu1.getCardDeck().remove(c1);
-//                cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
-//
-//                cpu2.getCardDeck().remove(c2);
-//                cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
 
                 // Get winner of this round.
                 final Player winner = playedRounds[numberOfRoundsPlayed - 1].getWinner();
@@ -563,55 +484,25 @@ public class Game {
                     }
                 }, 2500);
 
-                //GameHandlers.collectCardsWithWinner(com1, com2, playerPlaceholder, 3000, winner);
-
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        Sounds.cardCollect();
-//
-//                        com1.setVisibility(View.INVISIBLE);
-//                        com2.setVisibility(View.INVISIBLE);
-//                        playerPlaceholder.setVisibility(View.INVISIBLE);
-//
-//                        if (winner.getName() != "Computer Player 1" && winner.getName() != "Computer Player 2") {
-//                            GamePage.cardTouch(true);
-//                        }
-//
-//                    }
-//                }, 3000);
-
-                Log.println(Log.ERROR, "TAG", "inside try block 3");
-
                 // If this round's winner is a Computer Player.
                 if (playedRounds[numberOfRoundsPlayed - 1].getWinner() instanceof AbComputerPlayer) {
 
                     moveForwardWithCpuWin();
 
                 } else {
-
                     GameHandlers.collectCards(com1, com2, playerPlaceholder, 4000);
-                    //GamePage.cardTouch(true);
-
                 }
 
-                Log.println(Log.ERROR, "TAG", "inside the try 3, at the very end");
-
             } catch (Exception e) {
-                Log.d("TAG", "on the third catch block");
                 popUpDialog(Message.getMessageSelectValidCard(), "Card Selection");
-
                 invalidCardByHuman = true;
                 GamePage.cardTouch(true);
             }
-
         }
-
     }
 
     // Set or remove com player cards.
-    public void setRemainingAndRemoveComPlayerCards(AbComputerPlayer cpu1, AbComputerPlayer cpu2, Card card1, Card card2){
+    private void setRemainingAndRemoveComPlayerCards(AbComputerPlayer cpu1, AbComputerPlayer cpu2, Card card1, Card card2){
         cpu1.getCardDeck().remove(card1);
         cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
 
@@ -635,7 +526,7 @@ public class Game {
     }
 
     // This method plays the game for CPU players.
-    public void moveForwardWithCpuWin() {
+    private void moveForwardWithCpuWin() {
 
         GamePage.cardTouch(false);
 
@@ -648,8 +539,6 @@ public class Game {
             final ImageView com2 = activity.findViewById(R.id.com2Card);
             final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
 
-            Log.println(Log.ERROR, "TAG", "Late night testing2 ");
-
             // Get the last game round to a variable.
             final GameRound pr = playedRounds[numberOfRoundsPlayed - 1];
 
@@ -661,23 +550,16 @@ public class Game {
                     @Override
                     public void run() {
 
-                        //GamePage.cardTouch(false);
                         Sounds.cardCollect();
 
                         if (gameFinish == false) {
 
                             // set the image views of com player 2 and human player to invisible.
-
-                            //Sounds.cardCollect();
-
                             playerPlaceholder.setVisibility(View.INVISIBLE);
                             com2.setVisibility(View.INVISIBLE);
 
                             // Play the card for this round, map it to the image view and make it visible.
-                            Log.println(Log.ERROR, "TAG", "--------------- just before c1 --------------------------------------------------------------------");
-                            c1 = ((AbComputerPlayer) pr.getWinner()).selectCard(); //c1 = ((HimashaPlayer) pr.getWinner()).selectCard() //method changed, change the string
-                            Log.println(Log.ERROR, "Tag", "------ c1 selected card is -------" + c1.getNumber() + c1.getCategory());
-                            Log.println(Log.ERROR, "TAG", "--------------- just AFTER c1 --------------------------------------------------------------------");
+                            c1 = ((AbComputerPlayer) pr.getWinner()).selectCard();
                             com1.setImageResource(c1.getImageSource());
                             com1.setVisibility(View.VISIBLE);
 
@@ -696,27 +578,20 @@ public class Game {
 
                                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                                 @Override
-                                public void onAnimationEnd(Animation animation) {
-                                }
+                                public void onAnimationEnd(Animation animation) { }
 
                                 @Override
-                                public void onAnimationRepeat(Animation animation) {
-                                }
+                                public void onAnimationRepeat(Animation animation) { }
 
                             });
                         }
 
                         // Next player is Human Player.
                         // Set cardTouch to true.
-                        //GameHandlers.setCardTouchOnDelay();
                         GamePage.cardTouch(true);
                     }
 
                 }, 6000);
-
-                // Next player is Human Player.
-                // Set cardTouch to true.
-                //GamePage.cardTouch(true);
 
 
                 // Else if the player is Com Player 2.
@@ -731,23 +606,19 @@ public class Game {
 
                         if (gameFinish == false) {
 
-                            //Sounds.cardCollect();
-
                             playerPlaceholder.setVisibility(View.INVISIBLE);
                             // Play the card for com player 2.
                             Log.println(Log.ERROR, "TAG", "--------------- just before c2 --------------------------------------------------------------------");
-                            c2 = ((AbComputerPlayer) pr.getWinner()).selectCard(); //c2 = ((HimashaPlayer) pr.getWinner()).selectCard(); //method changed, change the string
+                            c2 = ((AbComputerPlayer) pr.getWinner()).selectCard();
                             Log.println(Log.ERROR, "Tag", "------ c2 selected card is -------" + c2.getNumber() + c2.getCategory());
                             // Play the card for com player 1.
-                            c1 = cpu1.selectCard(c2); //c1 =  cpu1.selectCard(c2); //method changed
+                            c1 = cpu1.selectCard(c2);
 
                             // Set image resources of the cards played and make them invisible. Play sounds.
                             com2.setImageResource(c2.getImageSource());
                             com1.setImageResource(c1.getImageSource());
                             com2.setVisibility(View.INVISIBLE);
                             com1.setVisibility(View.INVISIBLE);
-
-                            //Sounds.cardCollect();
 
                             // Set animations for the played cards.
                             final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
@@ -756,66 +627,10 @@ public class Game {
 
                             GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
 
-//                            Handler handler = new Handler();
-//                            handler.postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    com2.startAnimation(animationRl);
-//                                    animationRl.setAnimationListener(new Animation.AnimationListener() {
-//                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//                                        @Override
-//                                        public void onAnimationStart(Animation animation) {
-//                                            Sounds.cardClick();
-//                                            ComputerPlayerCardViews.hideCardFromPlayer2();
-//
-//                                            com2.setVisibility(View.VISIBLE);
-//                                            com2.setImageAlpha(1000);
-//                                        }
-//
-//                                        @Override
-//                                        public void onAnimationEnd(Animation animation) {
-//                                        }
-//
-//                                        @Override
-//                                        public void onAnimationRepeat(Animation animation) {
-//                                        }
-//                                    });
-//                                }
-//                            }, 1500);
-
                             gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 
-//                            handler.postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    com1.startAnimation(animationLr);
-//                                    animationLr.setAnimationListener(new Animation.AnimationListener() {
-//                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//                                        @Override
-//                                        public void onAnimationStart(Animation animation) {
-//                                            Sounds.cardClick();
-//
-//                                            com1.setVisibility(View.VISIBLE);
-//                                            com1.setImageAlpha(1000);
-//                                            ComputerPlayerCardViews.hideCardFromPlayer1();
-//                                        }
-//
-//                                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//                                        @Override
-//                                        public void onAnimationEnd(Animation animation) {
-//                                        }
-//
-//                                        @Override
-//                                        public void onAnimationRepeat(Animation animation) {
-//                                        }
-//                                    });
-//
-                                    //Let Human player play. (initial)
-                                    GamePage.cardTouch(true);
-//
-//                                }
-//                            }, 3000);
-
+                            //Let Human player play. (initial)
+                            GamePage.cardTouch(true);
                         }
                     }
                 }, 6000);
@@ -826,6 +641,7 @@ public class Game {
 
 
     // This method checks for the player and proceeds playing.
+    // For this method the CPU Player is passed.
     public void moveForwardWithCpuWin(Player player) {
 
         if (numberOfRoundsPlayed < 12) {
@@ -833,8 +649,6 @@ public class Game {
             final ImageView com1 = activity.findViewById(R.id.com1Card);
             final ImageView com2 = activity.findViewById(R.id.com2Card);
             final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
-
-            Log.println(Log.ERROR, "TAG", "Late night testing2 ");
 
             // If the player is computer player 1.
             if (player.getName() == cpu1.getName()) {
@@ -847,7 +661,7 @@ public class Game {
                         playerPlaceholder.setVisibility(View.INVISIBLE);
                         com2.setVisibility(View.INVISIBLE);
 
-                        c1 = cpu1.selectCard(); //c1 = cpu1.selectCard(); //method changed
+                        c1 = cpu1.selectCard();
                         com1.setImageResource(c1.getImageSource());
                         com1.setVisibility(View.VISIBLE);
 
@@ -865,12 +679,10 @@ public class Game {
 
                             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                             @Override
-                            public void onAnimationEnd(Animation animation) {
-                            }
+                            public void onAnimationEnd(Animation animation) { }
 
                             @Override
-                            public void onAnimationRepeat(Animation animation) {
-                            }
+                            public void onAnimationRepeat(Animation animation) { }
                         });
 
                         GamePage.cardTouch(true);
@@ -886,8 +698,8 @@ public class Game {
                     public void run() {
                         playerPlaceholder.setVisibility(View.INVISIBLE);
 
-                        c2 = cpu2.selectCard(); //c2 = cpu2.selectCard(); //method changed
-                        c1 = cpu1.selectCard(c2); //c1 = cpu1.selectCard(c2); //method changed
+                        c2 = cpu2.selectCard();
+                        c1 = cpu1.selectCard(c2);
 
                         com2.setImageResource(c2.getImageSource());
                         com1.setImageResource(c1.getImageSource());
@@ -914,12 +726,10 @@ public class Game {
                                     }
 
                                     @Override
-                                    public void onAnimationEnd(Animation animation) {
-                                    }
+                                    public void onAnimationEnd(Animation animation) { }
 
                                     @Override
-                                    public void onAnimationRepeat(Animation animation) {
-                                    }
+                                    public void onAnimationRepeat(Animation animation) { }
                                 });
                             }
                         }, 1500);
@@ -941,12 +751,11 @@ public class Game {
 
                                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                                     @Override
-                                    public void onAnimationEnd(Animation animation) {
-                                    }
+                                    public void onAnimationEnd(Animation animation) { }
 
                                     @Override
-                                    public void onAnimationRepeat(Animation animation) {
-                                    }
+                                    public void onAnimationRepeat(Animation animation) { }
+
                                 });
                                 GamePage.cardTouch(true);
 
@@ -962,7 +771,7 @@ public class Game {
 
     // This method updates the score on the score bar of the game page during the game.
     //Also if a team wins the game, or if the game is draw, an animation will be displayed in the perspective of the human player.
-    public void updateScore(Player winningPlayer) {
+    private void updateScore(Player winningPlayer) {
 
         //if single player is the winning player.
         if (singlePlayer.getName() == winningPlayer.getName()) {
@@ -977,23 +786,7 @@ public class Game {
 
             // handler to delay the time of setting the score on the score bar
             GameHandlers.handlerForScoreUpdate(playerScorePlaceHolder, score);
-//            Handler handler = new Handler();
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    playerScorePlaceHolder.setText(score);
-//                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
-//
-//                    Handler subHandler = new Handler();
-//                    subHandler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
-//                        }
-//                    }, 2000);
-//
-//                }
-//            }, 3000);
+
 
             if (singlePlayerScore == 7) {
 
@@ -1035,22 +828,7 @@ public class Game {
 
             // handler to delay the time of setting the score on the score bar
             GameHandlers.handlerForScoreUpdate(playerScorePlaceHolder, score);
-//            Handler handler = new Handler();
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    playerScorePlaceHolder.setText(score);
-//                    playerScorePlaceHolder.setTypeface(Typeface.DEFAULT_BOLD);
-//
-//                    Handler subHandler = new Handler();
-//                    subHandler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            playerScorePlaceHolder.setTypeface(Typeface.DEFAULT);
-//                        }
-//                    }, 2000);
-//                }
-//            }, 3000);
+
 
             if (teamScore == 7) {
 
@@ -1082,7 +860,7 @@ public class Game {
     }
 
     // This method is used to switch on animations and off animations as required.
-    public void winningOrLoosingAnimationOff() {
+    private void winningOrLoosingAnimationOff() {
         LottieAnimationView anim1 = activity.findViewById(R.id.confetti1);
         anim1.setVisibility(LottieAnimationView.INVISIBLE);
 
@@ -1096,7 +874,7 @@ public class Game {
         anim.setVisibility(LottieAnimationView.INVISIBLE);
     }
 
-    public void winningAnimation() {
+    private void winningAnimation() {
         gameFinish = true;
         Sounds.playWin();
         LottieAnimationView anim1 = activity.findViewById(R.id.confetti1);
@@ -1106,14 +884,14 @@ public class Game {
         anim2.setVisibility(LottieAnimationView.VISIBLE);
     }
 
-    public void losingAnimation() {
+    private void losingAnimation() {
         gameFinish = true;
         LottieAnimationView anim1 = activity.findViewById(R.id.sadface);
         anim1.setVisibility(LottieAnimationView.VISIBLE);
         Sounds.playLost();
     }
 
-    public void drawAnimation()
+    private void drawAnimation()
     {
         gameFinish = true;
         LottieAnimationView anim = activity.findViewById(R.id.draw);
@@ -1121,7 +899,7 @@ public class Game {
         Sounds.playDraw();
     }
 
-    public void getToastMessage(boolean result) {
+    private void getToastMessage(boolean result) {
         if (result == true) {
             Toast.makeText(activity.getApplicationContext(), Message.getToastWinGame(), Toast.LENGTH_LONG).show();
         } else {
@@ -1129,8 +907,8 @@ public class Game {
         }
     }
 
-    // Pop up dialog box
-    public void popUpDialog(String message, String title) {
+    // Pop up dialog box for player selecting an invalid card.
+    private void popUpDialog(String message, String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
         builder.setMessage(message)
                 .setTitle(title)
@@ -1149,13 +927,13 @@ public class Game {
 
     }
 
-    public void createNewGame(Player human, AbComputerPlayer comPlayer1, AbComputerPlayer comPlayer2) {
+    // This method creates a new game after a game is finished.
+    // Goal: Pass the trump to the next player on anti-clockwise.
+    private void createNewGame(Player human, AbComputerPlayer comPlayer1, AbComputerPlayer comPlayer2) {
 
-        //first turn off any winning or loosing animations
-        //then set the score labels to 0
-        winningOrLoosingAnimationOff();
+        winningOrLoosingAnimationOff();     // Turn off animations.
 
-
+        // Reset Scores on top panel.
         final TextView scoreLabel1 = activity.findViewById(R.id.textViewMyScore);
         final TextView scoreLabel2 = activity.findViewById(R.id.textViewOpponentScore);
         scoreLabel1.setText("0");
@@ -1164,32 +942,24 @@ public class Game {
         final TextView scoreLabel = activity.findViewById(R.id.textViewMyTeam);
         final TextView myLabel = activity.findViewById(R.id.textViewOpponent);
 
-        Log.println(Log.ERROR, "TAG", "Player turn index : " + playerTurnIndex);
-
         // Increment the playerTurnIndex and set it to checkIndex.
         int checkIndex = ++playerTurnIndex;
-
-        Log.println(Log.ERROR, "TAG", "Check index index : " + checkIndex);
 
         // Make all the cards visible.
         ComputerPlayerCardViews.makeAllCardsVisible();
 
-        //create new card-deck and player instances for the new game.
+        //create new instance for the new game.
         GamePage.startGame(beginnerSwitch, intermediateSwitch, expertSwitch);
-
         Game game = new Game();
 
-        //for player two (CPU) given the chance first
+        //for player (CPU 2) given the chance first.
         if (checkIndex % 3 == 1) {
-            if (SelectingTrumpComPlayer.getChances(cpu2)) {
 
-                Log.println(Log.ERROR, "TAG", "Player 2 Before selecting trumps" + trumps);
+            if (SelectingTrumpComPlayer.getChances(cpu2)) {
 
                 trumps = SelectingTrumpComPlayer.getTrump(cpu2);
                 // pass trump to the interface as string.
                 passTrumpToTheInterface(trumps);
-
-                Log.println(Log.ERROR, "TAG", "Player 2 After selecting trumps: " + trumps);
 
                 Toast.makeText(activity.getApplicationContext(), Message.getToastComPlayer2SelectedTrump() + trumps,
                         Toast.LENGTH_LONG).show();
@@ -1199,31 +969,24 @@ public class Game {
                 //alter game instance and move forward with cpu2 player as the start player.
                 game.alterInstance(cpu2, humanPlayer, cpu1, humanPlayer, cpu1, cpu2, cpu2, trumps);
 
-                Log.println(Log.ERROR, "TAG", "in the new instance trumps: " + trumps);
-
                 GamePage.cardTouch(false);
-                Log.println(Log.ERROR, "TAG", "right after player card touch false CPU2" + trumps);
-
                 moveForwardWithCpuWin(cpu2);
             } else {
+
                 // increment the variable checkIndex.
                 checkIndex++;
             }
 
         }
 
-        //for player one (CPU) given the chance
+        //for player (CPU 1) given the chance
         if (checkIndex % 3 == 2) {
 
             // if com player 1 selects the trump, get the trump selected.
             if (SelectingTrumpComPlayer.getChances(cpu1)) {
 
-                //Log.println(Log.ERROR, "TAG", "Player 1 Before selecting trumps: " + this.trumps);
-
                 trumps = SelectingTrumpComPlayer.getTrump(cpu1);
                 passTrumpToTheInterface(trumps);
-
-                //Log.println(Log.ERROR, "TAG", "Player 1 After selecting trumps: " + this.trumps);
 
                 Toast.makeText(activity.getApplicationContext(), Message.getToastComPlayer1SelectedTrump() + trumps,
                         Toast.LENGTH_LONG).show();
@@ -1232,10 +995,7 @@ public class Game {
 
                 game.alterInstance(cpu1, humanPlayer, cpu2, humanPlayer, cpu1, cpu2, cpu1, trumps);
 
-                Log.println(Log.ERROR, "TAG", "in the new instance trumps: " + trumps);
-
                 GamePage.cardTouch(false);
-                Log.println(Log.ERROR, "TAG", "right after player card touch false CPU2" + trumps);
                 moveForwardWithCpuWin(cpu1);
 
             } else {
@@ -1257,7 +1017,7 @@ public class Game {
     }
 
     // This methods allows the player to check if he/she can win 7 chances from this game.
-    public void chooseWinningPossibilityDialog(final Player human, final AbComputerPlayer comPlayer1, final AbComputerPlayer comPlayer2) {
+    private void chooseWinningPossibilityDialog(final Player human, final AbComputerPlayer comPlayer1, final AbComputerPlayer comPlayer2) {
         AlertDialog.Builder getChances = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
         getChances.setMessage(Message.getMessageWinSevenChances())
                 .setTitle("♠ ♥ ♣ ♦")
@@ -1301,12 +1061,10 @@ public class Game {
                     public void onClick(DialogInterface dialog, int which) {
                         if (trumps == null || trumps.isEmpty()) {
                             Toast.makeText(activity.getApplicationContext(), Message.getToastChooseTrump(), Toast.LENGTH_SHORT).show();
-                            Log.d("TAG", "the trump selected: " + trumps);
                             selectTrump();
                         } else {
                             dialog.dismiss();
                         }
-
                     }
                 });
 
@@ -1318,7 +1076,7 @@ public class Game {
     }
 
     // This method is used to set the card visibility to the interface.
-    public void setCardVisibility(boolean visibility) {
+    private void setCardVisibility(boolean visibility) {
         final ImageView com1 = activity.findViewById(R.id.com1Card);
         final ImageView com2 = activity.findViewById(R.id.com2Card);
         final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
@@ -1335,7 +1093,7 @@ public class Game {
     }
 
     // This dialog box allows user to select the user to select if he/she wants to play the next round of the game.
-    public void openDialog() {
+    private void openDialog() {
 
         if (ScoreBoard.getInstance().gameFinish()) {
             ourInstance = null;
@@ -1343,8 +1101,6 @@ public class Game {
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         } else {
-
-            Log.println(Log.ERROR, "TAG", "Inside openDialog");
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -1377,64 +1133,57 @@ public class Game {
                     dialog.show();
                 }
             }, 3000);
-            Log.println(Log.ERROR, "TAG", "Exiting openDialog");
         }
 
     }
 
     // This method will pass the selected trump to the game interface (using string).
-    public void passTrumpToTheInterface(String which) {
+    // When Computer Players select.
+    private void passTrumpToTheInterface(String which) {
 
         final TextView textViewTrump = activity.findViewById(R.id.trumpSelected);
         textViewTrump.setVisibility(View.VISIBLE);
         switch (which) {
             case "spades":
                 trumps = "spades";
-                Log.d("TAG", "Spades Selected: " + trumps);
                 textViewTrump.setText("♠");
                 break;
             case "hearts":
                 trumps = "hearts";
-                Log.d("TAG", "Hearts Selected: " + trumps);
                 textViewTrump.setText("♥");
                 break;
             case "clubs":
                 trumps = "clubs";
-                Log.d("TAG", "Clubs Selected: " + trumps);
                 textViewTrump.setText("♣");
                 break;
             case "diamonds":
                 trumps = "diamonds";
-                Log.d("TAG", "Diamonds Selected: " + trumps);
                 textViewTrump.setText("♦");
                 break;
         }
     }
 
     // This method will pass the selected trump to the game interface (using int).
-    public void passTrumpToTheInterface(int which) {
+    // Called for check Buttons. (when human player selects)
+    private void passTrumpToTheInterface(int which) {
 
         final TextView textViewTrump = activity.findViewById(R.id.trumpSelected);
         textViewTrump.setVisibility(View.VISIBLE);
         switch (which) {
             case 0:
                 trumps = "spades";
-                Log.d("TAG", "Spades Selected: " + trumps);
                 textViewTrump.setText("♠");
                 break;
             case 1:
                 trumps = "hearts";
-                Log.d("TAG", "Hearts Selected: " + trumps);
                 textViewTrump.setText("♥");
                 break;
             case 2:
                 trumps = "clubs";
-                Log.d("TAG", "Clubs Selected: " + trumps);
                 textViewTrump.setText("♣");
                 break;
             case 3:
                 trumps = "diamonds";
-                Log.d("TAG", "Diamonds Selected: " + trumps);
                 textViewTrump.setText("♦");
                 break;
         }

@@ -41,7 +41,6 @@ public class ComputerPlayerCardViews {
                 activity.findViewById(R.id.comPlayer1Card12),
         };
 
-
         comPlayer2CardArray = new ImageView[]{
                 activity.findViewById(R.id.comPlayer2Card1),
                 activity.findViewById(R.id.comPlayer2Card2),

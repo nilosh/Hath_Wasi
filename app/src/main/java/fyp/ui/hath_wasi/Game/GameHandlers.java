@@ -1,26 +1,29 @@
 package fyp.ui.hath_wasi.Game;
 
+import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.ComputerPlayerCardViews;
 import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
+import fyp.ui.hath_wasi.Players.AbComputerPlayer;
+import fyp.ui.hath_wasi.Players.Player;
+import fyp.ui.hath_wasi.R;
 import fyp.ui.hath_wasi.Screens.GamePage;
 
 public class GameHandlers {
 
     private String player;
-    private ImageView cardImage;
-    private Integer imageAlpha;
-    private Integer delayMilliseconds;
 
     public GameHandlers(final String player, final ImageView cardImage, final Animation animation,
                         final Integer imageAlpha, Integer delayMilliseconds) {
@@ -53,21 +56,19 @@ public class GameHandlers {
                     public void onAnimationEnd(Animation animation) {
                         if(player.toLowerCase() == "com1"){
                             handlerForCardTouch(1500 );
-                            //GamePage.cardTouch(true);
                         }
-                        else{
-                            GamePage.cardTouch(false);
-                        }
+
+                        else{ GamePage.cardTouch(false); }
                     }
 
                     @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
+                    public void onAnimationRepeat(Animation animation) { }
                 });
             }
         }, delayMilliseconds);
     }
 
+    // This method handles the collecting of cards played.
     public static void collectCards(final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
                                     Integer delayMilliseconds) {
 
@@ -77,19 +78,17 @@ public class GameHandlers {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.println(Log.ERROR, "TAG", "Inside Collect Cards in Handler right before collect sound");
                 Sounds.cardCollect();
 
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);
                 playerPlaceholder.setVisibility(View.INVISIBLE);
-
                 handlerForCardTouch(4100);
-
             }
         }, delayMilliseconds);
     }
 
+    // This method delays the card touch setting on or off.
     private static void handlerForCardTouch(Integer delay){
 
         Handler handler = new Handler();
@@ -97,11 +96,12 @@ public class GameHandlers {
             @Override
             public void run() {
                 GamePage.cardTouch(true);
-                Log.println(Log.ERROR, "TAG", "++++++++++++++++++++++++NOW SWITCHED ON +++++++++++++++++++++++++++++++++++");
             }
         }, delay);
     }
 
+    // This method controls the update of the score panel on the game page
+    // Where the text becomes highlighted when updated.
     public static void handlerForScoreUpdate(final TextView placeholder, final String score){
 
         Handler handler = new Handler();
@@ -122,5 +122,13 @@ public class GameHandlers {
         }, 3000);
     }
 
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
+    }
 
 }
