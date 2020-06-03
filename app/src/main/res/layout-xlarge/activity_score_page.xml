@@ -7,31 +7,17 @@
     android:background="#053D37"
     tools:context=".Screens.ScoresPage">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation"
-        android:layout_width="match_parent"
-        android:layout_height="3000dp"
-        android:alpha="0.08"
-        android:gravity="center_horizontal|center_vertical"
-        android:scaleType="center"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/background"
-        tools:layout_editor_absoluteX="-360dp" />
-
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="304dp"
-        android:layout_height="121dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="516dp"
+        android:layout_height="75dp"
         android:gravity="center"
         android:text="Score Board"
         android:textColor="#F1F3F3"
-        android:textSize="50dp"
+        android:textSize="45sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -42,11 +28,14 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:columnCount="8"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.24000001">
 
         <TextView
 
@@ -54,20 +43,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="18dip"
+            android:padding="30dip"
             android:text="Player"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1" />
+            app:layout_column="2" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/playerMedal"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
             android:gravity="center"
             android:scaleType="fitCenter"
             android:visibility="invisible"
+            app:layout_column="3"
             app:layout_gravity="fill_vertical"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
@@ -79,19 +69,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="18dip"
+            android:padding="30dip"
             android:text="Computer Player 1"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_column="4" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/cpu1Medal"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
             android:gravity="center"
             android:scaleType="fitCenter"
             android:visibility="invisible"
+            app:layout_column="5"
             app:layout_gravity="fill_vertical"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
@@ -103,23 +95,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="18dip"
+            android:padding="30dip"
             android:text="Computer Player 2"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_column="6" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/cpu2Medal"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
             android:gravity="center"
             android:scaleType="fitCenter"
             android:visibility="invisible"
+            app:layout_column="7"
             app:layout_gravity="fill_vertical"
+            app:layout_row="0"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/medal" />
+
+        <TextView
+            android:id="@+id/g1_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="1" />
 
         <TextView
 
@@ -127,12 +138,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 01"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="1" />
 
         <TextView
@@ -141,11 +152,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="1" />
 
@@ -155,11 +166,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="1" />
 
@@ -169,13 +180,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="1" />
+
+        <TextView
+            android:id="@+id/g2_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="2" />
 
         <TextView
 
@@ -183,12 +209,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 02"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="2" />
 
         <TextView
@@ -197,11 +223,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="2"
             tools:layout_editor_absoluteX="0dp"
@@ -213,11 +239,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="2"
             tools:layout_editor_absoluteX="169dp"
@@ -229,13 +255,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="2" />
+
+        <TextView
+            android:id="@+id/g3_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="3" />
 
         <TextView
 
@@ -243,12 +284,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 03"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="3" />
 
         <TextView
@@ -257,11 +298,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="3" />
 
@@ -271,11 +312,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="3" />
 
@@ -285,13 +326,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="3" />
+
+        <TextView
+            android:id="@+id/g4_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="4" />
 
         <TextView
 
@@ -299,12 +355,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 04"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="4" />
 
         <TextView
@@ -313,11 +369,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="4" />
 
@@ -327,11 +383,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="4" />
 
@@ -341,13 +397,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="4" />
+
+        <TextView
+            android:id="@+id/g5_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="5" />
 
         <TextView
 
@@ -355,12 +426,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 05"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="5" />
 
         <TextView
@@ -369,11 +440,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="5" />
 
@@ -383,11 +454,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="5" />
 
@@ -397,13 +468,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="5" />
+
+        <TextView
+            android:id="@+id/g6_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="6" />
 
         <TextView
 
@@ -411,12 +497,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 06"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="6" />
 
         <TextView
@@ -425,11 +511,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="6" />
 
@@ -439,11 +525,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="6" />
 
@@ -453,13 +539,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="6" />
+
+        <TextView
+            android:id="@+id/g7_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="7" />
 
         <TextView
 
@@ -467,12 +568,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 07"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="7" />
 
         <TextView
@@ -481,11 +582,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="7" />
 
@@ -495,11 +596,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="7" />
 
@@ -509,13 +610,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="7" />
+
+        <TextView
+            android:id="@+id/g8_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="8" />
 
         <TextView
 
@@ -523,12 +639,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 08"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="8"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="20dp" />
@@ -539,11 +655,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="8" />
 
@@ -553,11 +669,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="8" />
 
@@ -567,13 +683,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="8" />
+
+        <TextView
+            android:id="@+id/g9_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="9" />
 
         <TextView
 
@@ -581,12 +712,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 09"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="9" />
 
         <TextView
@@ -595,11 +726,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="9" />
 
@@ -609,11 +740,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="9" />
 
@@ -623,13 +754,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="9" />
+
+        <TextView
+            android:id="@+id/g10_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textAlignment="center"
+            android:textColor="#F1F3F3"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            app:layout_column="0"
+            app:layout_gravity="fill_horizontal"
+            app:layout_row="10" />
 
         <TextView
 
@@ -637,12 +783,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="1.5dip"
+            android:padding="6dip"
             android:text="Game 10"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_column="0"
+            app:layout_column="1"
             app:layout_row="10" />
 
         <TextView
@@ -651,11 +797,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="1"
+            app:layout_column="2"
             app:layout_gravity="fill_horizontal"
             app:layout_row="10" />
 
@@ -665,11 +811,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="3"
+            app:layout_column="4"
             app:layout_gravity="fill_horizontal"
             app:layout_row="10" />
 
@@ -679,11 +825,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="0dip"
+            android:padding="3dip"
             android:textColor="#F1F3F3"
-            android:textSize="24dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_column="5"
+            app:layout_column="6"
             app:layout_gravity="fill_horizontal"
             app:layout_row="10" />
 
@@ -693,7 +839,7 @@
             android:layout_height="match_parent"
             android:background="#032420"
             android:backgroundTint="#032420"
-            android:paddingTop="5dp"
+            android:paddingTop="10dp"
             app:layout_column="0"
             app:layout_columnSpan="8"
             app:layout_gravity="fill_horizontal|fill_vertical"
@@ -707,7 +853,7 @@
             android:backgroundTint="#032420"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_column="2"
             app:layout_gravity="fill_horizontal|fill_vertical"
@@ -722,7 +868,7 @@
             android:backgroundTint="#032420"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_column="4"
             app:layout_gravity="fill_horizontal|fill_vertical"
@@ -737,7 +883,7 @@
             android:backgroundTint="#032420"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_column="6"
             app:layout_gravity="fill_horizontal|fill_vertical"
