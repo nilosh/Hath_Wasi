@@ -38,8 +38,9 @@ public class ScoreBoard {
     }
 
     public static int getNumberOfScores() {
-        return numberOfScores;
+            return numberOfScores;
     }
+
 
     public GameScore[] getScores() {
         return scores;
@@ -49,6 +50,10 @@ public class ScoreBoard {
     public void setScores(GameScore score) {
         if (numberOfScores < 10) {
             scores[numberOfScores++] = score;
+        }
+        else{
+            ScoreBoard scoreBoard = new ScoreBoard();
+
         }
 
     }
