@@ -24,9 +24,6 @@ import fyp.ui.hath_wasi.Screens.GamePage;
 public class GameHandlers {
 
     private String player;
-    private ImageView cardImage;
-    private Integer imageAlpha;
-    private Integer delayMilliseconds;
 
     public GameHandlers(final String player, final ImageView cardImage, final Animation animation,
                         final Integer imageAlpha, Integer delayMilliseconds) {
@@ -59,21 +56,19 @@ public class GameHandlers {
                     public void onAnimationEnd(Animation animation) {
                         if(player.toLowerCase() == "com1"){
                             handlerForCardTouch(1500 );
-                            //GamePage.cardTouch(true);
                         }
-                        else{
-                            GamePage.cardTouch(false);
-                        }
+
+                        else{ GamePage.cardTouch(false); }
                     }
 
                     @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
+                    public void onAnimationRepeat(Animation animation) { }
                 });
             }
         }, delayMilliseconds);
     }
 
+    // This method handles the collecting of cards played.
     public static void collectCards(final ImageView com1, final ImageView com2, final ImageView playerPlaceholder,
                                     Integer delayMilliseconds) {
 
@@ -83,19 +78,17 @@ public class GameHandlers {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.println(Log.ERROR, "TAG", "Inside Collect Cards in Handler right before collect sound");
                 Sounds.cardCollect();
 
                 com1.setVisibility(View.INVISIBLE);
                 com2.setVisibility(View.INVISIBLE);
                 playerPlaceholder.setVisibility(View.INVISIBLE);
-
                 handlerForCardTouch(4100);
-                Log.println(Log.ERROR, "TAG", "Inside Collect Cards NOW SWITCHED ONNNNN");
             }
         }, delayMilliseconds);
     }
 
+    // This method delays the card touch setting on or off.
     private static void handlerForCardTouch(Integer delay){
 
         Handler handler = new Handler();
@@ -103,11 +96,12 @@ public class GameHandlers {
             @Override
             public void run() {
                 GamePage.cardTouch(true);
-                Log.println(Log.ERROR, "TAG", "++++++++++++++++++++++++NOW SWITCHED ON +++++++++++++++++++++++++++++++++++");
             }
         }, delay);
     }
 
+    // This method controls the update of the score panel on the game page
+    // Where the text becomes highlighted when updated.
     public static void handlerForScoreUpdate(final TextView placeholder, final String score){
 
         Handler handler = new Handler();
@@ -137,27 +131,4 @@ public class GameHandlers {
         this.player = player;
     }
 
-    public ImageView getCardImage() {
-        return cardImage;
-    }
-
-    public void setCardImage(ImageView cardImage) {
-        this.cardImage = cardImage;
-    }
-
-    public Integer getImageAlpha() {
-        return imageAlpha;
-    }
-
-    public void setImageAlpha(Integer imageAlpha) {
-        this.imageAlpha = imageAlpha;
-    }
-
-    public Integer getDelayMilliseconds() {
-        return delayMilliseconds;
-    }
-
-    public void setDelayMilliseconds(Integer delayMilliseconds) {
-        this.delayMilliseconds = delayMilliseconds;
-    }
 }
