@@ -1,24 +1,18 @@
 package fyp.ui.hath_wasi.Game;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
-import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Cards.ComputerPlayerCardViews;
 import fyp.ui.hath_wasi.Game.GameSounds.Sounds;
-import fyp.ui.hath_wasi.Players.AbComputerPlayer;
-import fyp.ui.hath_wasi.Players.Player;
-import fyp.ui.hath_wasi.R;
 import fyp.ui.hath_wasi.Screens.GamePage;
 
 public class GameHandlers {
@@ -91,12 +85,12 @@ public class GameHandlers {
                 playerPlaceholder.setVisibility(View.INVISIBLE);
 
                 handlerForCardTouch(4100);
-                Log.println(Log.ERROR, "TAG", "Inside Collect Cards NOW SWITCHED ONNNNN");
+
             }
         }, delayMilliseconds);
     }
 
-    public static void handlerForCardTouch(Integer delay){
+    private static void handlerForCardTouch(Integer delay){
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -129,35 +123,4 @@ public class GameHandlers {
     }
 
 
-    public String getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(String player) {
-        this.player = player;
-    }
-
-    public ImageView getCardImage() {
-        return cardImage;
-    }
-
-    public void setCardImage(ImageView cardImage) {
-        this.cardImage = cardImage;
-    }
-
-    public Integer getImageAlpha() {
-        return imageAlpha;
-    }
-
-    public void setImageAlpha(Integer imageAlpha) {
-        this.imageAlpha = imageAlpha;
-    }
-
-    public Integer getDelayMilliseconds() {
-        return delayMilliseconds;
-    }
-
-    public void setDelayMilliseconds(Integer delayMilliseconds) {
-        this.delayMilliseconds = delayMilliseconds;
-    }
 }

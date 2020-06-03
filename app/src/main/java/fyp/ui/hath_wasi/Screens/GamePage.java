@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,22 +42,22 @@ import fyp.ui.hath_wasi.R;
 public class GamePage extends AppCompatActivity {
 
     // Variable declaration.
-    static HashMap<Integer, Card> imageToCardMap;
-    static AbComputerPlayer comPlayer1;
-    static AbComputerPlayer comPlayer2;
-    static Player human;
-    private static ImageView[] cardArray = new ImageView[12];
+    private static HashMap<Integer, Card> imageToCardMap;
+    private static AbComputerPlayer comPlayer1;
+    private static AbComputerPlayer comPlayer2;
+    private static Player human;
+    private static final ImageView[] cardArray = new ImageView[12];
     private static ComputerPlayerCardViews comPlayerCardViews;
     private static int roundNumber = 0;
     private static Sounds sounds;
-    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-    Switch expertSwitch = ChooseLevel.getExpertLevel();
-    String trump;
+    private final Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    private final Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
+    private final Switch expertSwitch = ChooseLevel.getExpertLevel();
+    private String trump;
     private boolean playerAsking = false;
 
     // This method moves the position of player's cards at the start of the game.
-    public static void moveUpPlayerCards() {
+    private static void moveUpPlayerCards() {
 
         for (int i = 0; i < 12; i++) {
             cardArray[i].setY(cardArray[i].getY() - 100f);
@@ -78,7 +77,7 @@ public class GamePage extends AppCompatActivity {
         //comPlayer2.displayDetails();
 
         AnimatorSet s = new AnimatorSet();
-        ArrayList<Animator> animations = new ArrayList<Animator>();
+        ArrayList<Animator> animations = new ArrayList<>();
 
         moveUpPlayerCards();
         ComputerPlayerCardViews.openAnimation();
@@ -143,7 +142,7 @@ public class GamePage extends AppCompatActivity {
     }
 
     // Create two instances of players according to the player type(for Computer Players).
-    public static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
+    private static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
         if (beginnerSwitch.isChecked()) {
             comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
@@ -284,7 +283,7 @@ public class GamePage extends AppCompatActivity {
     }
 
     // This method creates and allows the players to choose allow or decline selecting the trump.
-    public void openDialog() {
+    private void openDialog() {
 
         Game game = Game.getInstance();
 
@@ -305,7 +304,7 @@ public class GamePage extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        //Toast.makeText(getApplicationContext(), "Yoohooo" + trump, Toast.LENGTH_SHORT).show();
+
 
                         final TextView scoreLabel1 = findViewById(R.id.textViewMyTeam);
                         final TextView scoreLabel2 = findViewById(R.id.textViewOpponent);
@@ -364,7 +363,7 @@ public class GamePage extends AppCompatActivity {
                                 // create animation for player cards.
 
                                 AnimatorSet animatorSet = new AnimatorSet();
-                                ArrayList<Animator> animations = new ArrayList<Animator>();
+                                ArrayList<Animator> animations = new ArrayList<>();
 
                                 for (int i = 0; i < 12; i++) {
                                     cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
@@ -399,7 +398,7 @@ public class GamePage extends AppCompatActivity {
 
 
 
-    public void selectTrump() {
+    private void selectTrump() {
 
         // This method allows the user to select the trump when they choose to select the trump.
         AlertDialog.Builder chooseTrump = new AlertDialog.Builder(GamePage.this, R.style.AlertDialogStyle);
@@ -439,7 +438,7 @@ public class GamePage extends AppCompatActivity {
     }
 
     //Passes an int because of on checked item.
-    public void passTrumpToTheInterface(int which) {
+    private void passTrumpToTheInterface(int which) {
 
         Game game = Game.getInstance();
 
@@ -474,7 +473,7 @@ public class GamePage extends AppCompatActivity {
         }
     }
 
-    public void passTrumpToTheInterface(String which) {
+    private void passTrumpToTheInterface(String which) {
 
         Game game = Game.getInstance();
 

@@ -11,10 +11,11 @@ public class GameRound {
     private Card compPlayer2Card;
     private Card playerCard;
     private Player winner;
-    private String trump;
 
-    public GameRound(Player human, Card humanSelectedCard, Card cpu1, Card cpu2, String trumps) {
-    }
+// --Commented out by Inspection START (6/3/20, 17:54):
+//    public GameRound(Player human, Card humanSelectedCard, Card cpu1, Card cpu2, String trumps) {
+//    }
+// --Commented out by Inspection STOP (6/3/20, 17:54)
 
     // throws an exception if the human selected card is not a card from the play type
     // when the human player have cards of the play type in the deck.
@@ -25,7 +26,7 @@ public class GameRound {
         this.compPlayer2Card = cpu2;
         this.playerCard = humanSelectedCard;
 
-        trump = trumps.toLowerCase();
+        String trump = trumps.toLowerCase();
         Log.println(Log.ERROR, "TAG", "inside the constructor game round");
 
         //String playType = cpu1.getCategory();
@@ -92,7 +93,7 @@ public class GameRound {
 
     // this method chooses the winner depending on the cards played.
     // the player who has played the highest card wins the round.
-    public void chooseWinner(int card1, int card2, int card3, Player cpuPlayer1, Player cpuPlayer2, Player human) {
+    private void chooseWinner(int card1, int card2, int card3, Player cpuPlayer1, Player cpuPlayer2, Player human) {
 
         Log.println(Log.ERROR, "TAG", "card1: " + card1 + " card2: " + card2 + " card3: " + card3);
 
@@ -114,31 +115,12 @@ public class GameRound {
         return compPlayer1Card;
     }
 
-    public void setCompPlayer1Card(Card compPlayer1Card) {
-        this.compPlayer1Card = compPlayer1Card;
-    }
-
     public Card getCompPlayer2Card() {
         return compPlayer2Card;
-    }
-
-    public void setCompPlayer2Card(Card compPlayer2Card) {
-        this.compPlayer2Card = compPlayer2Card;
-    }
-
-    public Card getPlayerCard() {
-        return playerCard;
-    }
-
-    public void setPlayerCard(Card playerCard) {
-        this.playerCard = playerCard;
     }
 
     public Player getWinner() {
         return winner;
     }
 
-    public void setWinner(Player winner) {
-        this.winner = winner;
-    }
 }

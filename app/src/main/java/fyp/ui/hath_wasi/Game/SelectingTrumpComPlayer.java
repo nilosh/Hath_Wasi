@@ -14,7 +14,7 @@ public class SelectingTrumpComPlayer {
     //This method will check whether the com player can bid the trump.
     public static Boolean getChances(Player computerPlayer) {
 
-        Integer definiteChances = 0, number = 0, mediumChances = 0;
+        int definiteChances = 0, number, mediumChances = 0;
         String category;
 
         //The arrayList will store the player card deck.
@@ -22,12 +22,11 @@ public class SelectingTrumpComPlayer {
 
         //Check if the card is a definite chance or a medium chance.
         for (int i = 0; i < cardSet.size(); i++) {
-            category = cardSet.get(i).getCategory();
             number = cardSet.get(i).getNumber();
 
             if (number > 10) {
                 definiteChances += 1;
-            } else if (number >= 8 && number <= 10) {
+            } else if (number >= 8) {
                 mediumChances += 1;
             }
         }
@@ -36,19 +35,18 @@ public class SelectingTrumpComPlayer {
 
     //Computer Player Selecting the trump.
     public static String getTrump(Player player) {
-        Integer countSpades = 0, countHeart = 0, countClubs = 0, countDiamonds = 0;
+        int countSpades = 0, countHeart = 0, countClubs = 0, countDiamonds = 0;
         String trump = "";
         ArrayList<Card> cards = player.getCardDeck();
 
         //Store the number of cards of the suits separately.
-        HashMap<String, Integer> chances = new HashMap<String, Integer>();
+        HashMap<String, Integer> chances = new HashMap<>();
         //Store the highest number of suits and the count.
-        HashMap<String, Integer> maximumSuit = new HashMap<String, Integer>();
+        HashMap<String, Integer> maximumSuit = new HashMap<>();
 
 
         for (int i = 0; i < cards.size(); i++) {
             String category = cards.get(i).getCategory();
-            Integer number = cards.get(i).getNumber();
 
             if (category.toLowerCase() == "spades") {
                 countSpades += 1;
