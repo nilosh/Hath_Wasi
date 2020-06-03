@@ -96,7 +96,7 @@ public class GameHandlers {
         }, delayMilliseconds);
     }
 
-    public static void handlerForCardTouch(Integer delay){
+    private static void handlerForCardTouch(Integer delay){
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
