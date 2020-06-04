@@ -99,13 +99,13 @@ public class Game {
     // returns a new game if the instance is null
     public static Game getInstance(Activity _activity, Player singlePlayer, Player teamPlayer1, Player teamPlayer2, Player humanPlayer, AbComputerPlayer cpu1, AbComputerPlayer cpu2, Player startPlayer, String trumps) {
 
-
         if (ourInstance == null) {
             ourInstance = new Game(_activity, singlePlayer, teamPlayer1, teamPlayer2, humanPlayer, cpu1, cpu2, startPlayer, trumps);
         }
         return ourInstance;
     }
 
+    // returns current instance of game.
     public static Game getInstance() {
 
         return ourInstance;
@@ -298,23 +298,21 @@ public class Game {
         if(ScoreBoard.getNumberOfScores() < 10){
             roundNumber.setText(ScoreBoard.getNumberOfScores() + 1 + "/10 Rounds");
         }
-
     }
 
-
+    // This method plays the card selected by the HUMAN PLAYER.
     public void playNextMove(Card selectedCard) {
 
         GamePage.cardTouch(false);
 
-        // declare three variables to hold the imageViews of the playing cards
-        // of the three players.
+        // declare three variables to hold the imageViews of the playing cards of the three players.
         final ImageView com1 = activity.findViewById(R.id.com1Card);
         final ImageView com2 = activity.findViewById(R.id.com2Card);
         final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
 
 
-        // If it is the first round of the game and the start player is not an abstract com player
-        // Or the last round winner is not Com Player 1 and last round player is not Com Player 2.
+        // If it is the first round of the game and the start player is Human Player.
+        // or is not the first round and last round winner is Human Player.
         if ((numberOfRoundsPlayed == 0 && startPlayer.getName() != "Computer Player 1" && startPlayer.getName() != "Computer Player 2") ||
                 ((numberOfRoundsPlayed > 0 && playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() != "Computer Player 1"
                         && playedRounds[numberOfRoundsPlayed - 1].getWinner().getName() != "Computer Player 2"))) {
@@ -322,6 +320,7 @@ public class Game {
             try {
                 GamePage.cardTouch(false);
 
+                // Select the playing card for comPlayers and pass it to the Game round.
                 Card card2 = cpu2.selectCard(selectedCard);
                 Card card1 = cpu1.selectCard(selectedCard, card2);
 
@@ -333,8 +332,6 @@ public class Game {
                 playedRounds[numberOfRoundsPlayed++] = gameRound;
 
                 invalidCardByHuman = false;
-
-                // Store the round winner in a variable.
                 final Player winner = playedRounds[numberOfRoundsPlayed - 1].getWinner();
 
                 // Set the image resource of the selected cards to the cards that are being played and make them invisible
@@ -360,7 +357,7 @@ public class Game {
 
                 gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 
-                // Update score on the score bar with a delay.
+                // Update score on the score bar.
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -375,19 +372,16 @@ public class Game {
                     moveForwardWithCpuWin();
 
                 }
-                // Else, make all the played cards invisible (from the last round)
-                // and set cardTouch true.
+                // if the round's winner is a human player.
                 else {
                     GameHandlers.collectCards(com1, com2, playerPlaceholder, 6000);
                 }
 
             } catch (Exception e) {
 
-                // decrement the added number of played.
-                numberOfRoundsPlayed--;
+                numberOfRoundsPlayed--;             // decrement the added number of played.
                 popUpDialog(Message.getMessageSelectValidCard(), "Card Selection");
 
-                // human player played an invalid card, so allow to play again.
                 invalidCardByHuman = true;
                 GamePage.cardTouch(true);
             }
@@ -456,8 +450,8 @@ public class Game {
             }
         }
 
-        // If neither the start of the game and the start player is neither Com Player 1 or Com Player 2
-        // Or neither the last round winner is Com Player 1 or Com Player 2.
+        // Else if the first round of the game and the start player is ComPlayer 2
+        // Or the last round's winner is ComPlayer 2.
         else {
 
             try {
@@ -505,7 +499,7 @@ public class Game {
         }
     }
 
-    // Set or remove com player cards.
+    // Removes Com Players cards from their card array and updates the remaining number of cards.
     private void setRemainingAndRemoveComPlayerCards(AbComputerPlayer cpu1, AbComputerPlayer cpu2, Card card1, Card card2){
         cpu1.getCardDeck().remove(card1);
         cpu1.setNumberOfCardsRemaining(cpu1.getNumberOfCardsRemaining() - 1);
@@ -514,7 +508,7 @@ public class Game {
         cpu2.setNumberOfCardsRemaining(cpu2.getNumberOfCardsRemaining() - 1);
     }
 
-    // This method sets the images to the image views and makes them visible.
+    // This method hides computer players cards from their decks (Image Views), sets the playing area and makes them visible.
     public void setComputerCardsToImageView(Card cardLeft, Card cardRight, final ImageView leftView, final ImageView rightView) {
 
         // hide the card from the computer player's card deck.
@@ -534,7 +528,7 @@ public class Game {
 
         GamePage.cardTouch(false);
 
-        //move forward only if the current game is not finished
+        //move forward only if the current game is not finished and rounds played is less than 12.
         if (numberOfRoundsPlayed < 12 && gameFinish == false) {
 
             final AnimatorSet animatorSet = new AnimatorSet();
@@ -590,15 +584,14 @@ public class Game {
                             });
                         }
 
-                        // Next player is Human Player.
-                        // Set cardTouch to true.
+                        // Next player is Human Player. Set cardTouch to TRUE.
                         GamePage.cardTouch(true);
                     }
 
                 }, 6000);
 
 
-                // Else if the player is Com Player 2.
+                // Else if the player is CPU Player 2.
             } else {
 
                 Handler handler = new Handler();
@@ -611,11 +604,8 @@ public class Game {
                         if (gameFinish == false) {
 
                             playerPlaceholder.setVisibility(View.INVISIBLE);
-                            // Play the card for com player 2.
-                            Log.println(Log.ERROR, "TAG", "--------------- just before c2 --------------------------------------------------------------------");
+                            // Play the card for com player 2 and Com Player 2.
                             c2 = ((AbComputerPlayer) pr.getWinner()).selectCard();
-                            Log.println(Log.ERROR, "Tag", "------ c2 selected card is -------" + c2.getNumber() + c2.getCategory());
-                            // Play the card for com player 1.
                             c1 = cpu1.selectCard(c2);
 
                             // Set image resources of the cards played and make them invisible. Play sounds.
@@ -624,16 +614,14 @@ public class Game {
                             com2.setVisibility(View.INVISIBLE);
                             com1.setVisibility(View.INVISIBLE);
 
-                            // Set animations for the played cards.
+                            // Set animations for the played cards and call them.
                             final Animation animationLr = AnimationUtils.loadAnimation(activity, R.anim.lefttoright);
                             final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
-
                             gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
-
                             gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 
-                            //Let Human player play. (initial)
+                            //Let Human player play.
                             GamePage.cardTouch(true);
                         }
                     }
@@ -762,7 +750,6 @@ public class Game {
 
                                 });
                                 GamePage.cardTouch(true);
-
                             }
                         }, 3000);
 

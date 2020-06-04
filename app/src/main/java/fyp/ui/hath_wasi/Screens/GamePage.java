@@ -65,20 +65,18 @@ public class GamePage extends AppCompatActivity {
         }
     }
 
+    // This method initializes the Game
     public static void startGame(Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
 
         // Create an instance of card and an instance of Player(for human player).
         DeckOfCards card = new DeckOfCards();
         human = new Player("Human Player", card);
 
-        // Create two instances of players (for Computer Players).
+        // Create instances of Computer Players.
         createComputerPlayer(card, beginnerSwitch, intermediateSwitch, expertSwitch);
 
         //comPlayer1.displayDetails();
         //comPlayer2.displayDetails();
-
-//        AnimatorSet s = new AnimatorSet();
-//        ArrayList<Animator> animations = new ArrayList<Animator>();
 
         moveUpPlayerCards();
         ComputerPlayerCardViews.openAnimation();
