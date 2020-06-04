@@ -25,6 +25,8 @@ public class GameHandlers {
 
     private String player;
 
+    public GameHandlers(){};
+
     public GameHandlers(final String player, final ImageView cardImage, final Animation animation,
                         final Integer imageAlpha, Integer delayMilliseconds) {
 

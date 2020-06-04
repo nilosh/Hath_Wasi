@@ -64,6 +64,7 @@ public class Game {
     Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
     Switch expertSwitch = ChooseLevel.getExpertLevel();
     Card c1, c2;
+    GameHandlers gameHandler;
 
     // Game constructors.
     private Game(Activity _activity, Player singlePlayer, Player teamPlayer1, Player teamPlayer2, Player humanPlayer,
@@ -355,7 +356,7 @@ public class Game {
                 final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
                 // Allows to delay the animations associated with the particular card.
-                GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
+                gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
 
                 gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 
@@ -628,7 +629,7 @@ public class Game {
                             final Animation animationRl = AnimationUtils.loadAnimation(activity, R.anim.righttoleft);
 
 
-                            GameHandlers gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
+                            gameHandler = new GameHandlers("com2".toLowerCase(), com2, animationRl, 1000, 1500);
 
                             gameHandler = new GameHandlers("com1".toLowerCase(), com1, animationLr, 1000, 3000);
 

@@ -52,11 +52,7 @@ public class ScoreBoard {
             scores[numberOfScores++] = score;
         }
         else{
-            if(gameFinish()){
-                ScoreBoard scoreBoard = new ScoreBoard();
-            }
-
-
+            ScoreBoard scoreBoard = new ScoreBoard();
         }
     }
 }
