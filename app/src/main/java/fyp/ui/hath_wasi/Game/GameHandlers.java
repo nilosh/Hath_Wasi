@@ -25,8 +25,6 @@ public class GameHandlers {
 
     private String player;
 
-    public GameHandlers(){};
-
     public GameHandlers(final String player, final ImageView cardImage, final Animation animation,
                         final Integer imageAlpha, Integer delayMilliseconds) {
 
@@ -86,6 +84,7 @@ public class GameHandlers {
                 com2.setVisibility(View.INVISIBLE);
                 playerPlaceholder.setVisibility(View.INVISIBLE);
                 handlerForCardTouch(4100);
+
             }
         }, delayMilliseconds);
     }
