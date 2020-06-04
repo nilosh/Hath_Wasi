@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void exit_game(View view) {
 
-        //Log.println( Log.ERROR, "TAG", "Inside openDialog exit game" );
 
         // Use an alert dialog box to confirm exit game.
 
@@ -72,6 +71,5 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogSlide;
         dialog.show();
 
-        Log.println(Log.ERROR, "TAG", "Inside openDialog exit game in the end");
     }
 }

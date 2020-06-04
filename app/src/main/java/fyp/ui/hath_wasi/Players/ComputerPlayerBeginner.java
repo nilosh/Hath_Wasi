@@ -69,7 +69,6 @@ public class ComputerPlayerBeginner extends AbComputerPlayer {
     //this method is used to select a card when you're the second player in the game round
     @Override
     public Card selectCard(Card card) {
-        Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of Beginner PLAYER -------");
         //derive the play type of the round
         String category = card.getCategory();
         return selectSmallestCardFromCategory(category);

@@ -12,10 +12,9 @@ public class GameRound {
     private Card playerCard;
     private Player winner;
 
-// --Commented out by Inspection START (6/3/20, 17:54):
-//    public GameRound(Player human, Card humanSelectedCard, Card cpu1, Card cpu2, String trumps) {
-//    }
-// --Commented out by Inspection STOP (6/3/20, 17:54)
+
+    public GameRound(Player human, Card humanSelectedCard, Card cpu1, Card cpu2, String trumps) {
+    }
 
     // throws an exception if the human selected card is not a card from the play type
     // when the human player have cards of the play type in the deck.
@@ -27,20 +26,17 @@ public class GameRound {
         this.playerCard = humanSelectedCard;
 
         String trump = trumps.toLowerCase();
-        Log.println(Log.ERROR, "TAG", "inside the constructor game round");
 
         //String playType = cpu1.getCategory();
 
         //validate the human players card
         if (humanSelectedCard.getCategory() != playType) {
 
-            Log.println(Log.ERROR, "TAG", "Human selected card is not the play type.");
             //check if the human has any cards of the play type
             //if so thrown an error
 
             if (human.CheckForCardType(playType)) {
 
-                Log.println(Log.ERROR, "TAG", "throwing");
                 throw new GameExceptions("Card Type" + playType + "Exist");
             }
 
@@ -49,8 +45,6 @@ public class GameRound {
         // initialize three integer type variables to store the number of the card played.
         // Get the number of the card played if the category of the card is of play type.
         int cardNo1 = 0, cardNo2 = 0, cardNo3 = 0;
-
-        Log.println(Log.ERROR, "TAG", "-----------------------------      human card category " + humanSelectedCard.getCategory() + "     trump category ------" + trump);
 
         if (cpu1.getCategory() == trump || cpu2.getCategory() == trump || humanSelectedCard.getCategory() == trump) {
 
@@ -95,17 +89,11 @@ public class GameRound {
     // the player who has played the highest card wins the round.
     private void chooseWinner(int card1, int card2, int card3, Player cpuPlayer1, Player cpuPlayer2, Player human) {
 
-        Log.println(Log.ERROR, "TAG", "card1: " + card1 + " card2: " + card2 + " card3: " + card3);
-
-
         if (card1 > card2 && card1 > card3) {
-            Log.println(Log.ERROR, "Tag", "CPU1 ============================> winner");
             this.winner = cpuPlayer1;
         } else if (card2 > card1 && card2 > card3) {
-            Log.println(Log.ERROR, "Tag", "CPU2 ============================> winner");
             this.winner = cpuPlayer2;
         } else if (card3 > card1 && card3 > card2) {
-            Log.println(Log.ERROR, "Tag", "human ============================> winner");
             this.winner = human;
         }
     }

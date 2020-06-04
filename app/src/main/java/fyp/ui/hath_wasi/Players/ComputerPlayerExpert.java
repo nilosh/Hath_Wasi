@@ -105,7 +105,6 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     @Override
     public Card selectCard(Card Player1Card) {
 
-        Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER -------");
         //get the playing type of the round using the first player's card type
         String Category = Player1Card.getCategory();
         String trumpCategory = getTrumps();
@@ -152,7 +151,6 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     @Override
     public Card selectCard(Card player1Card, Card player2Card) {
 
-        Log.println(Log.ERROR, "Tag", "------- inside selectCard(card, card) of EXPERT PLAYER -------");
         //get the playing type of the round using the first player's card type
 
         Player singlePlayer = getSinglePlayer();
@@ -160,19 +158,14 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         Player cpu2Player = getCpu2();
         Player humanPlayer = getHumanPlayer();
         String Category = player1Card.getCategory();
-        Log.println(Log.ERROR, "Tag", "------- category is " + Category);
-        Log.println(Log.ERROR, "Tag", "------- this player = " + this.getName() + " ------- single player =  " + singlePlayer.getName());
-        Log.println(Log.ERROR, "Tag", " ------- get Trumps in this round --> trump category =  " + trumpCategory);
 
         //check if this player is the single player
         if (this.getName() == singlePlayer.getName()) {
-            Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER ------- inside single player if");
             return selectBestCardSinglePlayer(Category, player1Card, player2Card);
 
         }
         //if this player is not the single player
         else {
-            Log.println(Log.ERROR, "Tag", "------- inside selectCard(card) of EXPERT PLAYER ------- inside single player else");
             //check if either this player is cpu1 player and cpu2 player is the single player
             //or if the this player is the cpu2 player and human player is the single player
             if ((((this.getName() == Game.getCpu1().getName()) && (cpu2Player == singlePlayer)) || ((this.getName() == cpu2Player.getName()) && (humanPlayer == singlePlayer)))) {
