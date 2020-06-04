@@ -104,18 +104,21 @@ public class ComputerPlayerCardViews {
 
     }
 
+    // Hides the selected card from ComPlayer 1's deck.
     public static void hideCardFromPlayer1() {
         int indexOfComPlayer1 = randomNumber.nextInt(comPlayer1Indexes.size());
         int position = comPlayer1Indexes.remove(indexOfComPlayer1);
         comPlayer1CardArray[position].setVisibility(View.INVISIBLE);
     }
 
+    // Hides the selected card from ComPlayer 2's deck.
     public static void hideCardFromPlayer2() {
         int indexOfComPlayer2 = randomNumber.nextInt(comPlayer2Indexes.size());
         int position = comPlayer2Indexes.remove(indexOfComPlayer2);
         comPlayer2CardArray[position].setVisibility(View.INVISIBLE);
     }
 
+    // Makes all Com Player cards visible.
     public static void makeAllCardsVisible() {
         for (int i = 0; i < 12; i++) {
 
@@ -127,6 +130,7 @@ public class ComputerPlayerCardViews {
     }
 
 
+    // creates an array list with a set of indexes.
     private static void initializeIndexes() {
         comPlayer1Indexes = new ArrayList<>(
                 Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)

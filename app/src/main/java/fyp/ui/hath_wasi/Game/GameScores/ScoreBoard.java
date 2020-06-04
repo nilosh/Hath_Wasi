@@ -54,8 +54,6 @@ public class ScoreBoard {
         if (numberOfScores < 10) {
             scores[numberOfScores++] = score;
         }
-//        else{
-//            ScoreBoard scoreBoard = new ScoreBoard();
-//        }
+
     }
 }
