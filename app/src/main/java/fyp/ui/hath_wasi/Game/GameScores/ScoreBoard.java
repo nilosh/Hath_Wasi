@@ -48,11 +48,14 @@ public class ScoreBoard {
 
     // sets the number of scores recorded in the previous round.
     public void setScores(GameScore score) {
+        if (numberOfScores == 10){
+            ScoreBoard scoreBoard = new ScoreBoard();
+        }
         if (numberOfScores < 10) {
             scores[numberOfScores++] = score;
         }
-        else{
-            ScoreBoard scoreBoard = new ScoreBoard();
-        }
+//        else{
+//            ScoreBoard scoreBoard = new ScoreBoard();
+//        }
     }
 }
