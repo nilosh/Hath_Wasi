@@ -10,7 +10,7 @@ public class Player {
     protected int numberOfCardsRemaining;
     ArrayList<Card> CardDeck = new ArrayList();
     //Attributes of Player
-    private String name;
+    private final String name;
     private final int score;
     private final boolean trumpCalled;
 
@@ -39,26 +39,19 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
     public boolean isTrumpCalled() {
         return trumpCalled;
     }
 
-    // returns an arrayList of 12 cards
-    public ArrayList<Card> getPlayerCards() {
-        return CardDeck;
-    }
 
+    //returns the number of cards in hand
     public int getNoOfCards() {
         return this.CardDeck.size();
     }
 
 
-    //take a card type as an input and return true if the given card type exist within the players cards
+    //take a card type as an input and returns true if the given card type exist within the player's hand of cards
     public boolean CheckForCardType(String checkType) {
         for (int i = 0; i < this.numberOfCardsRemaining; i++) {
             if (CardDeck.get(i).getCategory() == checkType) {
@@ -77,6 +70,7 @@ public class Player {
         this.numberOfCardsRemaining = numberOfCardsRemaining;
     }
 
+    //returns an arrayList of cards
     public ArrayList<Card> getCardDeck() {
         return CardDeck;
     }

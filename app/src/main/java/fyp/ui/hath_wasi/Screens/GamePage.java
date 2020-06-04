@@ -273,7 +273,7 @@ public class GamePage extends AppCompatActivity {
                 public void onAnimationRepeat(Animation animation) { }
             });
 
-            human.getPlayerCards().remove(selectedCard);
+            human.getCardDeck().remove(selectedCard);
             human.setNumberOfCardsRemaining(human.getNumberOfCardsRemaining() - 1);
 
             //remove the card from the user card deck

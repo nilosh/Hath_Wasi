@@ -47,7 +47,7 @@ public class ComputerPlayerBeginner extends AbComputerPlayer {
 
     }
 
-    //this method returns the highest card from the hand irrespective of the category
+    //this method returns the highest card according to the card id from the hand irrespective of the category
     @Override
     public Card selectHighestCard() {
 
