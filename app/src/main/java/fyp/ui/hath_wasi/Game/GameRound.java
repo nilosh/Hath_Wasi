@@ -1,7 +1,5 @@
 package fyp.ui.hath_wasi.Game;
 
-import android.util.Log;
-
 import fyp.ui.hath_wasi.Cards.Card;
 import fyp.ui.hath_wasi.Players.Player;
 
@@ -26,8 +24,6 @@ public class GameRound {
         this.playerCard = humanSelectedCard;
 
         String trump = trumps.toLowerCase();
-
-        //String playType = cpu1.getCategory();
 
         //validate the human players card
         if (humanSelectedCard.getCategory() != playType) {

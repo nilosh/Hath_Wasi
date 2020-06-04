@@ -1,7 +1,5 @@
 package fyp.ui.hath_wasi.Players;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -63,6 +61,7 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     @Override
     public Card selectCard() {
 
+        //derive the trump type of the game
         String trumpCategory = getTrumps();
         //gets all cards of trump category to an array list
         ArrayList<Card> trumpCards = getCategoryOfCards(trumpCategory);
@@ -105,8 +104,9 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
     @Override
     public Card selectCard(Card Player1Card) {
 
-        //get the playing type of the round using the first player's card type
+        //derive the playing type of the round using the first player's card type
         String Category = Player1Card.getCategory();
+        //derive the trump type of the game
         String trumpCategory = getTrumps();
 
         //check if this player has bid the trump for the game
@@ -154,7 +154,6 @@ public class ComputerPlayerExpert extends AbComputerPlayer {
         //get the playing type of the round using the first player's card type
 
         Player singlePlayer = getSinglePlayer();
-        String trumpCategory = getTrumps();
         Player cpu2Player = getCpu2();
         Player humanPlayer = getHumanPlayer();
         String Category = player1Card.getCategory();

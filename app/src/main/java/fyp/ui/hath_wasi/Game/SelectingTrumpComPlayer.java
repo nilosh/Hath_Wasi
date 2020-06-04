@@ -77,7 +77,7 @@ public class SelectingTrumpComPlayer {
             }
         }
 
-        //if there is more than 1 suit with same number of cards.
+        //if there is only 1 suit with same number of cards.
         if (maximumSuit.size() == 1) {
             for (Map.Entry<String, Integer> entry : maximumSuit.entrySet()) {
                 trump = entry.getKey();
