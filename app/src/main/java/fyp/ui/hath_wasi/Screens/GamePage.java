@@ -81,29 +81,14 @@ public class GamePage extends AppCompatActivity {
         moveUpPlayerCards();
         ComputerPlayerCardViews.openAnimation();
 
-        // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
-        // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the GamePage.
-
         // uses Animations to sequentially send the cards.
         translateCardsSequentially();
-//        for (int i = 0; i < 12; i++) {
-//
-//            cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
-//            cardArray[i].setVisibility(View.VISIBLE);
-//            final int j = i;
-//
-//            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
-//            animations.add(animator);
-//        }
-//
-//        s.setDuration(200);
-//        s.playSequentially(animations);
-//        s.start();
 
         // Set round number to zero.
         roundNumber = 0;
 
-        //Map the correct card image to the human player's card deck.
+        // for all the 12 cards of the human player, set the image resource (taken from the drawables folder)
+        // using the getCardImagePathFromIndex method of Player class and map it to the imageView of the GamePage.
         imageToCardMap = imageViewToCardMap(human, cardArray);
 
 
@@ -116,7 +101,7 @@ public class GamePage extends AppCompatActivity {
 
     private static void translateCardsSequentially(){
 
-        // uses Animations to sequentially send the cards.
+        // uses Animations to sequentially send the cards to its original position.
         AnimatorSet s = new AnimatorSet();
         ArrayList<Animator> animations = new ArrayList<Animator>();
 
@@ -151,9 +136,9 @@ public class GamePage extends AppCompatActivity {
         return imageToCardMap;
     }
 
+    //This method sets the cards of the user clickable or un-clickable.
     public static void cardTouch(boolean onOrOff) {
 
-        //This method sets the cards of the user un-clickable.
         for (int i = 0; i < 12; i++) {
             cardArray[i].setClickable(onOrOff);
         }
@@ -186,7 +171,6 @@ public class GamePage extends AppCompatActivity {
 
         setContentView(R.layout.activity_game_page);
 
-
         // Add the player card Image View to an array (to initialize).
         cardArray[0] = findViewById(R.id.playerCard1);
         cardArray[1] = findViewById(R.id.playerCard2);
@@ -202,34 +186,31 @@ public class GamePage extends AppCompatActivity {
         cardArray[11] = findViewById(R.id.playerCard12);
 
         sounds = new Sounds(this);
-
         cardTouch(false);
-
         comPlayerCardViews = new ComputerPlayerCardViews(this);
 
         // Start the Game.
         startGame(beginnerSwitch, intermediateSwitch, expertSwitch);
 
+        //Open dialog box to select the trump.
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Open dialog box to select the trump.
                 openDialog();
             }
         }, 3000);
 
-        //create the game with the starting player set as human
+        //create the game with the starting player set as human.
         Game game = Game.getInstance(this, human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
 
     }
 
+    // This method handles the user selected card. It removes the user selected card from the user's card view
+    // and doesn't allow the cards to be pressed when one card has been already placed.
     public void cardSelected(View v) {
 
         cardTouch(false);
-
-        // This method removes the user selected card from the user's card view
-        // and doesn't allow the cards to be pressed when one card has been already placed.
 
         final Card selectedCard = imageToCardMap.get(v.getId());
 
@@ -274,7 +255,7 @@ public class GamePage extends AppCompatActivity {
             human.getPlayerCards().remove(selectedCard);
             human.setNumberOfCardsRemaining(human.getNumberOfCardsRemaining() - 1);
 
-            //remove the card from the user card deck
+            //remove the card from the user card deck.
             v.setVisibility(View.INVISIBLE);
 
         }
@@ -366,24 +347,9 @@ public class GamePage extends AppCompatActivity {
                                 // create animation for player cards.
                                 translateCardsSequentially();
 
-//                                AnimatorSet animatorSet = new AnimatorSet();
-//                                ArrayList<Animator> animations = new ArrayList<Animator>();
-//
-//                                for (int i = 0; i < 12; i++) {
-//                                    cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
-//
-//                                    final int j = i;
-//                                    ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
-//                                    animations.add(animator);
-//                                }
-//
-//                                animatorSet.setDuration(200);
-//                                animatorSet.playSequentially(animations);
-//                                animatorSet.start();
-
                                 imageToCardMap = imageViewToCardMap(human, cardArray);
 
-                                //create the game with the starting player set as human
+                                //create the game with the starting player set as human.
                                 game.alterInstance(human, comPlayer1, comPlayer2, human, comPlayer1, comPlayer2, human, trump);
                             }
                         }
