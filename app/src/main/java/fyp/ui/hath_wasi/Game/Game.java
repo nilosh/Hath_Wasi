@@ -294,7 +294,10 @@ public class Game {
     private void updateRoundNumber() {
 
         final TextView roundNumber = getActivity().findViewById(R.id.textViewRoundTag);
-        roundNumber.setText(ScoreBoard.getNumberOfScores() + 1 + "/10 Rounds");
+        if(ScoreBoard.getNumberOfScores() < 10){
+            roundNumber.setText(ScoreBoard.getNumberOfScores() + 1 + "/10 Rounds");
+        }
+
     }
 
 

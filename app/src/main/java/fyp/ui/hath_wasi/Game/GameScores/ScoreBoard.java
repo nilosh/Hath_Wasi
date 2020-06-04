@@ -51,5 +51,12 @@ public class ScoreBoard {
         if (numberOfScores < 10) {
             scores[numberOfScores++] = score;
         }
+        else{
+            if(gameFinish()){
+                ScoreBoard scoreBoard = new ScoreBoard();
+            }
+
+
+        }
     }
 }
