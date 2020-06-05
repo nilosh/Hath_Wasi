@@ -2,13 +2,11 @@ package fyp.ui.hath_wasi.Game;
 
 import android.animation.AnimatorSet;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -60,11 +58,12 @@ public class Game {
     private static Sounds sounds;
     private static String trumps;
     private static Activity activity;
-    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-    Switch expertSwitch = ChooseLevel.getExpertLevel();
-    Card c1, c2;
-    GameHandlers gameHandler;
+    private final Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    private final Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
+    private final Switch expertSwitch = ChooseLevel.getExpertLevel();
+    private Card c1;
+    private Card c2;
+    private GameHandlers gameHandler;
 
     // Game constructors.
     private Game(Activity _activity, Player singlePlayer, Player teamPlayer1, Player teamPlayer2, Player humanPlayer,
@@ -111,36 +110,12 @@ public class Game {
         return ourInstance;
     }
 
-    public static Game getOurInstance() {
-        return ourInstance;
-    }
-
     public static void setOurInstance(Game ourInstance) {
         Game.ourInstance = ourInstance;
     }
 
     public static Player getSinglePlayer() {
         return singlePlayer;
-    }
-
-    public static void setSinglePlayer(Player singlePlayer) {
-        Game.singlePlayer = singlePlayer;
-    }
-
-    public static Player getTeamPlayer1() {
-        return teamPlayer1;
-    }
-
-    public static void setTeamPlayer1(Player teamPlayer1) {
-        Game.teamPlayer1 = teamPlayer1;
-    }
-
-    public static Player getTeamPlayer2() {
-        return teamPlayer2;
-    }
-
-    public static void setTeamPlayer2(Player teamPlayer2) {
-        Game.teamPlayer2 = teamPlayer2;
     }
 
     public static Player getHumanPlayer() {
@@ -167,60 +142,8 @@ public class Game {
         Game.cpu2 = cpu2;
     }
 
-    public static int getSinglePlayerScore() {
-        return singlePlayerScore;
-    }
-
-    public static void setSinglePlayerScore(int singlePlayerScore) {
-        Game.singlePlayerScore = singlePlayerScore;
-    }
-
-    public static int getTeamScore() {
-        return teamScore;
-    }
-
-    public static void setTeamScore(int teamScore) {
-        Game.teamScore = teamScore;
-    }
-
-    public static GameRound[] getPlayedRounds() {
-        return playedRounds;
-    }
-
-    public static void setPlayedRounds(GameRound[] playedRounds) {
-        Game.playedRounds = playedRounds;
-    }
-
-    public static int getNumberOfRoundsPlayed() {
-        return numberOfRoundsPlayed;
-    }
-
-    public static void setNumberOfRoundsPlayed(int numberOfRoundsPlayed) {
-        Game.numberOfRoundsPlayed = numberOfRoundsPlayed;
-    }
-
-    public static Player getStartPlayer() {
-        return startPlayer;
-    }
-
-    public static void setStartPlayer(Player startPlayer) {
-        Game.startPlayer = startPlayer;
-    }
-
     public static boolean isInvalidCardByHuman() {
         return invalidCardByHuman;
-    }
-
-    public static void setInvalidCardByHuman(boolean invalidCardByHuman) {
-        Game.invalidCardByHuman = invalidCardByHuman;
-    }
-
-    public static Card getCom2Card() {
-        return com2Card;
-    }
-
-    public static void setCom2Card(Card com2Card) {
-        Game.com2Card = com2Card;
     }
 
     public static Player[] getPlayers() {
@@ -231,30 +154,6 @@ public class Game {
         Game.players = players;
     }
 
-    public static int getPlayerTurnIndex() {
-        return playerTurnIndex;
-    }
-
-    public static void setPlayerTurnIndex(int playerTurnIndex) {
-        Game.playerTurnIndex = playerTurnIndex;
-    }
-
-    public static boolean isGameFinish() {
-        return gameFinish;
-    }
-
-    public static void setGameFinish(boolean gameFinish) {
-        Game.gameFinish = gameFinish;
-    }
-
-    public static Sounds getSounds() {
-        return sounds;
-    }
-
-    public static void setSounds(Sounds sounds) {
-        Game.sounds = sounds;
-    }
-
     public static String getTrumps() {
         return trumps;
     }
@@ -263,7 +162,7 @@ public class Game {
         Game.trumps = trumps;
     }
 
-    public static Activity getActivity() {
+    private static Activity getActivity() {
         return activity;
     }
 
@@ -395,7 +294,7 @@ public class Game {
             try {
 
                 // If human player card is valid.
-                if (invalidCardByHuman == false) {
+                if (!invalidCardByHuman) {
                     // Com Player 2 (right side). Play the smallest card from the category.
                     com2Card = cpu2.selectCard(c1, selectedCard);
                 }
@@ -509,7 +408,7 @@ public class Game {
     }
 
     // This method hides computer players cards from their decks (Image Views), sets the playing area and makes them visible.
-    public void setComputerCardsToImageView(Card cardLeft, Card cardRight, final ImageView leftView, final ImageView rightView) {
+    private void setComputerCardsToImageView(Card cardLeft, Card cardRight, final ImageView leftView, final ImageView rightView) {
 
         // hide the card from the computer player's card deck.
         ComputerPlayerCardViews.hideCardFromPlayer1();
@@ -529,7 +428,7 @@ public class Game {
         GamePage.cardTouch(false);
 
         //move forward only if the current game is not finished and rounds played is less than 12.
-        if (numberOfRoundsPlayed < 12 && gameFinish == false) {
+        if (numberOfRoundsPlayed < 12 && !gameFinish) {
 
             final AnimatorSet animatorSet = new AnimatorSet();
 
@@ -550,7 +449,7 @@ public class Game {
 
                         Sounds.cardCollect();
 
-                        if (gameFinish == false) {
+                        if (!gameFinish) {
 
                             // set the image views of com player 2 and human player to invisible.
                             playerPlaceholder.setVisibility(View.INVISIBLE);
@@ -601,7 +500,7 @@ public class Game {
 
                         Sounds.cardCollect();
 
-                        if (gameFinish == false) {
+                        if (!gameFinish) {
 
                             playerPlaceholder.setVisibility(View.INVISIBLE);
                             // Play the card for com player 2 and Com Player 2.
@@ -891,7 +790,7 @@ public class Game {
     }
 
     private void getToastMessage(boolean result) {
-        if (result == true) {
+        if (result) {
             Toast.makeText(activity.getApplicationContext(), Message.getToastWinGame(), Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(activity.getApplicationContext(), Message.getToastLostGame(), Toast.LENGTH_LONG).show();
@@ -1072,7 +971,7 @@ public class Game {
         final ImageView com2 = activity.findViewById(R.id.com2Card);
         final ImageView playerPlaceholder = activity.findViewById(R.id.playCard);
 
-        if (visibility == false) {
+        if (!visibility) {
             com1.setVisibility(View.INVISIBLE);
             com2.setVisibility(View.INVISIBLE);
             playerPlaceholder.setVisibility(View.INVISIBLE);
@@ -1180,16 +1079,8 @@ public class Game {
         }
     }
 
-    public Card getC1() {
-        return c1;
-    }
-
     public void setC1(Card c1) {
         this.c1 = c1;
-    }
-
-    public Card getC2() {
-        return c2;
     }
 
     public void setC2(Card c2) {

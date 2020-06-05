@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,18 +41,18 @@ import fyp.ui.hath_wasi.R;
 public class GamePage extends AppCompatActivity {
 
     // Variable declaration.
-    static HashMap<Integer, Card> imageToCardMap;
-    static AbComputerPlayer comPlayer1;
-    static AbComputerPlayer comPlayer2;
-    static Player human;
-    private static ImageView[] cardArray = new ImageView[12];
+    private static HashMap<Integer, Card> imageToCardMap;
+    private static AbComputerPlayer comPlayer1;
+    private static AbComputerPlayer comPlayer2;
+    private static Player human;
+    private static final ImageView[] cardArray = new ImageView[12];
     private static ComputerPlayerCardViews comPlayerCardViews;
     private static int roundNumber = 0;
     private static Sounds sounds;
-    Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-    Switch expertSwitch = ChooseLevel.getExpertLevel();
-    String trump;
+    private final Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
+    private final Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
+    private final Switch expertSwitch = ChooseLevel.getExpertLevel();
+    private String trump;
     private boolean playerAsking = false;
 
     // This method moves the position of player's cards at the start of the game.
@@ -93,7 +91,6 @@ public class GamePage extends AppCompatActivity {
 
 
         // Get Game Instance and set cards.
-        Game game = Game.getInstance();
         Game.setCpu1(comPlayer1);
         Game.setCpu2(comPlayer2);
         Game.setHumanPlayer(human);
@@ -103,15 +100,14 @@ public class GamePage extends AppCompatActivity {
 
         // uses Animations to sequentially send the cards to its original position.
         AnimatorSet s = new AnimatorSet();
-        ArrayList<Animator> animations = new ArrayList<Animator>();
+        ArrayList<Animator> animations = new ArrayList<>();
 
         for (int i = 0; i < 12; i++) {
 
             cardArray[i].setImageResource(human.getCardImagePathFromIndex(i));
             cardArray[i].setVisibility(View.VISIBLE);
-            final int j = i;
 
-            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[j], "translationY", 100f);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(cardArray[i], "translationY", 100f);
             animations.add(animator);
         }
 
@@ -145,7 +141,7 @@ public class GamePage extends AppCompatActivity {
     }
 
     // Create two instances of players according to the player type(for Computer Players).
-    public static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
+    private static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
         if (beginnerSwitch.isChecked()) {
             comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
@@ -219,7 +215,7 @@ public class GamePage extends AppCompatActivity {
         game.playNextMove(selectedCard);
 
         // If player selects a valid card.
-        if (Game.isInvalidCardByHuman() == false) {
+        if (!Game.isInvalidCardByHuman()) {
 
             final ImageView image = findViewById(R.id.playCard);
             image.setImageResource(selectedCard.getImageSource());
@@ -272,8 +268,6 @@ public class GamePage extends AppCompatActivity {
     // This method creates and allows the players to choose allow or decline selecting the trump.
     private void openDialog() {
 
-        Game game = Game.getInstance();
-
         AlertDialog.Builder getChances = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         getChances.setMessage(Message.getMessageWinSevenChances())
                 .setTitle("♠ ♥ ♣ ♦")
@@ -297,7 +291,7 @@ public class GamePage extends AppCompatActivity {
 
                         // if human player passed the trump selection to a computer player, let the com player 2 select the trump.
                         Game game = Game.getInstance();
-                        if (playerAsking == false) {
+                        if (!playerAsking) {
 
                             if (SelectingTrumpComPlayer.getChances(comPlayer2)) {
 
@@ -406,8 +400,6 @@ public class GamePage extends AppCompatActivity {
     //Passes trump to interface using int because of on checked item selected by human player.
     private void passTrumpToTheInterface(int which) {
 
-        Game game = Game.getInstance();
-
         final TextView textViewTrump = findViewById(R.id.trumpSelected);
         textViewTrump.setVisibility(View.VISIBLE);
 
@@ -437,8 +429,6 @@ public class GamePage extends AppCompatActivity {
 
     // Passes trump to interface using String ( when computer players select the trump).
     private void passTrumpToTheInterface(String which) {
-
-        Game game = Game.getInstance();
 
         final TextView textViewTrump = findViewById(R.id.trumpSelected);
         textViewTrump.setVisibility(View.VISIBLE);
