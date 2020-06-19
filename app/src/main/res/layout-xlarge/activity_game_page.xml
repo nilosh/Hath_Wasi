@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#053D37"
+    android:background="@color/bgColor"
     tools:context=".Screens.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#032420"
+        android:background="@color/header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="My Team"
             android:textAlignment="center"
-            android:textColor="#F1F3F3"
+            android:textColor="@color/headerText"
             app:layout_constraintEnd_toStartOf="@+id/trumpSelected"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
             android:layout_marginTop="8dp"
             android:textSize="20dp"
             android:text="0"
-            android:textColor="#F1F3F3"
+            android:textColor="@color/headerText"
             app:layout_constraintEnd_toEndOf="@+id/textViewMyTeam"
             app:layout_constraintStart_toStartOf="@+id/textViewMyTeam"
             app:layout_constraintTop_toBottomOf="@+id/textViewMyTeam" />
@@ -51,7 +51,7 @@
             android:layout_height="75dp"
             android:gravity="center|center_horizontal|center_vertical"
             android:text="No Trump"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/headerText"
             android:textSize="35sp"
             android:textStyle="bold"
             android:visibility="invisible"
@@ -69,7 +69,7 @@
             android:gravity="center"
             android:text="Opponent"
             android:textAlignment="center"
-            android:textColor="#F1F3F3"
+            android:textColor="@color/headerText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/trumpSelected"
             app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +81,7 @@
             android:layout_marginTop="8dp"
             android:textSize="20dp"
             android:text="0"
-            android:textColor="#F1F3F3"
+            android:textColor="@color/headerText"
             app:layout_constraintEnd_toEndOf="@+id/textViewOpponent"
             app:layout_constraintStart_toStartOf="@+id/textViewOpponent"
             app:layout_constraintTop_toBottomOf="@+id/textViewOpponent" />
