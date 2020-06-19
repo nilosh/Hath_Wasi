@@ -111,12 +111,15 @@ public class GameHandlers {
             public void run() {
                 placeholder.setText(score);
                 placeholder.setTypeface(Typeface.DEFAULT_BOLD);
+                placeholder.setTextSize(17);
+
 
                 Handler subHandler = new Handler();
                 subHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         placeholder.setTypeface(Typeface.DEFAULT);
+                        placeholder.setTextSize(14);
                     }
                 }, 2000);
             }
