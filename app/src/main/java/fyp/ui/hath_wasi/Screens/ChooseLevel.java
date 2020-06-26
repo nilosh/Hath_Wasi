@@ -6,27 +6,29 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import fyp.ui.hath_wasi.R;
 
 public class ChooseLevel extends AppCompatActivity {
 
-    private static Switch beginnerLevel;
-    private static Switch intermediateLevel;
-    private static Switch expertLevel;
+    private static RadioButton beginnerLevel;
+    private static RadioButton intermediateLevel;
+    private static RadioButton expertLevel;
 
-    public static Switch getBeginnerLevel() {
+    public static RadioButton getBeginnerLevel() {
         return beginnerLevel;
     }
 
-    public static Switch getIntermediateLevel() {
+    public static RadioButton getIntermediateLevel() {
         return intermediateLevel;
     }
 
-    public static Switch getExpertLevel() {
+    public static RadioButton getExpertLevel() {
         return expertLevel;
     }
 
@@ -41,11 +43,11 @@ public class ChooseLevel extends AppCompatActivity {
         setContentView(R.layout.activity_choose_level);
 
         // Map the switches in the XML to the switch objects created.
-        beginnerLevel = findViewById(R.id.switchBeginner);
+        beginnerLevel = findViewById(R.id.radioBeginner);
 
-        intermediateLevel = findViewById(R.id.switchIntermediate);
+        intermediateLevel = findViewById(R.id.radioIntermediate);
 
-        expertLevel = findViewById(R.id.switchExpert);
+        expertLevel = findViewById(R.id.radioExpert);
 
         // Sets listeners to the switches to check which one is checked.
         beginnerLevel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -89,7 +91,6 @@ public class ChooseLevel extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 

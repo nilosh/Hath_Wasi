@@ -92,13 +92,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <Switch
-        android:id="@+id/switchBeginner"
-        android:layout_width="200dp"
+    <RadioButton
+        android:id="@+id/radioBeginner"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:checked="true"
-        android:text="Beginner"
+        android:text="    Beginner"
         android:textColor="@color/darkText"
         android:textAlignment="textStart"
         android:textColorHighlight="@color/darkText"
@@ -108,13 +108,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <Switch
-        android:id="@+id/switchIntermediate"
-        android:layout_width="200dp"
+    <RadioButton
+        android:id="@+id/radioIntermediate"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:checked="false"
-        android:text="Intermediate"
+        android:text="    Intermediate"
         android:textColor="@color/darkText"
         android:textAlignment="textStart"
         android:textColorHighlight="@color/darkText"
@@ -122,15 +122,16 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchBeginner" />
+        app:layout_constraintTop_toBottomOf="@+id/radioBeginner"
+        />
 
-    <Switch
-        android:id="@+id/switchExpert"
-        android:layout_width="200dp"
+    <RadioButton
+        android:id="@+id/radioExpert"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:checked="false"
-        android:text="Expert"
+        android:text="    Expert"
         android:textColor="@color/darkText"
         android:textAlignment="textStart"
         android:textColorHighlight="@color/darkText"
@@ -139,7 +140,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchIntermediate" />
+        app:layout_constraintTop_toBottomOf="@+id/radioIntermediate"
+        />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/doneAnim"
@@ -149,13 +151,15 @@
         android:gravity="center"
         android:onClick="play_game"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="@+id/switchExpert"
+        app:layout_constraintEnd_toEndOf="@+id/radioExpert"
         app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="@+id/switchExpert"
-        app:layout_constraintTop_toBottomOf="@+id/switchExpert"
+        app:layout_constraintStart_toStartOf="@+id/radioExpert"
+        app:layout_constraintTop_toBottomOf="@+id/radioExpert"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/done" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,9 +50,9 @@ public class GamePage extends AppCompatActivity {
     private static ComputerPlayerCardViews comPlayerCardViews;
     private static int roundNumber = 0;
     private static Sounds sounds;
-    private final Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    private final Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-    private final Switch expertSwitch = ChooseLevel.getExpertLevel();
+    private final RadioButton beginnerRadioButton = ChooseLevel.getBeginnerLevel();
+    private final RadioButton intermediateRadioButton = ChooseLevel.getIntermediateLevel();
+    private final RadioButton expertRadioButton = ChooseLevel.getExpertLevel();
     private String trump;
     private boolean playerAsking = false;
 
@@ -64,14 +65,14 @@ public class GamePage extends AppCompatActivity {
     }
 
     // This method initializes the Game
-    public static void startGame(Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
+    public static void startGame(RadioButton beginnerRadioButton, RadioButton intermediateRadioButton, RadioButton expertRadioButton) {
 
         // Create an instance of card and an instance of Player(for human player).
         DeckOfCards card = new DeckOfCards();
         human = new Player("Human Player", card);
 
         // Create instances of Computer Players.
-        createComputerPlayer(card, beginnerSwitch, intermediateSwitch, expertSwitch);
+        createComputerPlayer(card, beginnerRadioButton, intermediateRadioButton, expertRadioButton);
 
         //comPlayer1.displayDetails();
         //comPlayer2.displayDetails();
@@ -141,16 +142,16 @@ public class GamePage extends AppCompatActivity {
     }
 
     // Create two instances of players according to the player type(for Computer Players).
-    private static void createComputerPlayer(DeckOfCards card, Switch beginnerSwitch, Switch intermediateSwitch, Switch expertSwitch) {
-        if (beginnerSwitch.isChecked()) {
+    private static void createComputerPlayer(DeckOfCards card, RadioButton beginnerRadioButton, RadioButton intermediateRadioButton, RadioButton expertRadioButton) {
+        if (beginnerRadioButton.isChecked()) {
             comPlayer1 = new ComputerPlayerBeginner("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerBeginner("Computer Player 2", card);
 
-        } else if (expertSwitch.isChecked()) {
+        } else if (expertRadioButton.isChecked()) {
             comPlayer1 = new ComputerPlayerExpert("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerExpert("Computer Player 2", card);
 
-        } else if (intermediateSwitch.isChecked()) {
+        } else if (intermediateRadioButton.isChecked()) {
             comPlayer1 = new ComputerPlayerIntermediate("Computer Player 1", card);
             comPlayer2 = new ComputerPlayerIntermediate("Computer Player 2", card);
         }
@@ -186,7 +187,7 @@ public class GamePage extends AppCompatActivity {
         comPlayerCardViews = new ComputerPlayerCardViews(this);
 
         // Start the Game.
-        startGame(beginnerSwitch, intermediateSwitch, expertSwitch);
+        startGame(beginnerRadioButton, intermediateRadioButton, expertRadioButton);
 
         //Open dialog box to select the trump.
         Handler handler = new Handler();
@@ -336,7 +337,7 @@ public class GamePage extends AppCompatActivity {
                                 DeckOfCards card = new DeckOfCards();
                                 human = new Player("Human Player", card);
 
-                                createComputerPlayer(card, beginnerSwitch, intermediateSwitch, expertSwitch);
+                                createComputerPlayer(card, beginnerRadioButton, intermediateRadioButton, expertRadioButton);
 
                                 // create animation for player cards.
                                 translateCardsSequentially();

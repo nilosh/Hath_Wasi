@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,9 +59,9 @@ public class Game {
     private static Sounds sounds;
     private static String trumps;
     private static Activity activity;
-    private final Switch beginnerSwitch = ChooseLevel.getBeginnerLevel();
-    private final Switch intermediateSwitch = ChooseLevel.getIntermediateLevel();
-    private final Switch expertSwitch = ChooseLevel.getExpertLevel();
+    private final RadioButton beginnerRadioButton = ChooseLevel.getBeginnerLevel();
+    private final RadioButton intermediateRadioButton = ChooseLevel.getIntermediateLevel();
+    private final RadioButton expertRadioButton = ChooseLevel.getExpertLevel();
     private Card c1;
     private Card c2;
     private GameHandlers gameHandler;
@@ -839,7 +840,7 @@ public class Game {
         ComputerPlayerCardViews.makeAllCardsVisible();
 
         //create new instance for the new game.
-        GamePage.startGame(beginnerSwitch, intermediateSwitch, expertSwitch);
+        GamePage.startGame(beginnerRadioButton, intermediateRadioButton, expertRadioButton);
         Game game = new Game();
 
         //for player (CPU 2) given the chance first.
