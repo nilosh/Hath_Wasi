@@ -9,10 +9,4 @@
     <color name="headerText">#F1F3F3</color>
     <color name="darkText">#000000</color>
 
-    <color name="colorPrimaryNight">#012722</color>
-    <color name="colorPrimaryDarkNight">#152321</color>
-    <color name="colorAccentNight">#660629</color>
-    <color name="whiteNight">#FFFFFF</color>
-    <color name="bgColorNight">#02201C</color>
-    <color name="headerNight">#4A4F4F</color>
 </resources>
